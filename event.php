@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title></title>
+      <link rel="stylesheet" href="css/slider.css">
+      <link rel="stylesheet" href="css/event.css">
+      <link rel="stylesheet" type="text/css" href="../css/bulma.css">
+      <link rel="stylesheet" type="text/css" href="../css/aside.css">
+      <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
+      <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+      <script async type="text/javascript" src="../js/bulma.js"></script>
+      <script src="js/event.js" charset="utf-8"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+      <script src="js/responsiveslides.min.js"></script>
+  </head>
+  <body>
+    <nav class="nav is-dark has-shadow is-hidden-tablet" id="top">
+      <div class="container">
+        <span class="nav-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <div class="nav-right nav-menu is-hidden-tablet">
+          <a class="nav-item is-tab is-active">
+            Events
+          </a>
+          <a class="nav-item is-tab">
+            My meetings
+          </a>
+          <a class="nav-item is-tab">
+            My events
+          </a>
+          <a class="nav-item is-tab">
+            Newsfeed
+          </a>
+        </div>
+      </div>
+    </nav>
+    <div class="columns">
+      <aside class="column is-3 aside hero is-fullheight is-hidden-mobile">
+        <div>
+          <div class="account has-text-centered">
+            <a href="#">
+              <figure class="avatar">
+                <img src="images/avatar.png">
+              </figure>
+            </a>
+          </div>
+          <div class="main scroll">
+            <div class="title">Main</div>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
+            <br>
+            <br>
+            <div class="title">Event management</div>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Make an event</span></a>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My events</span></a>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">Finished events</span></a>
+            <br>
+            <br>
+            <a href="admin.php" class="title"><i class="fa fa-cog"></i>  Admin </a>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">Event management</span></a>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Admin newsfeed</span></a>
+          </div>
+        </div>
+      </aside>
+      <div class="column is-9">
+        <div class="tile is-ancestor">
+          <div class="tile is-vertical is-8">
+            <div class="tile">
+              <div class="tile is-parent is-vertical">
+                <article class="tile is-child box">
+                  <div class="button right">
+                    Participate
+                  </div>
+                  <p class="title">Name event</p>
+                  <p class="subtitle">By name creator</p>
+                  <p class="subtitle">Date</p>
+                </article>
+                <article class="tile is-child box">
+                  <ul class="rslides">
+                    <li><img src="img/001.jpg" alt=""></li>
+                    <li><img src="img/002.jpg" alt=""></li>
+                    <li><img src="img/003.jpg" alt=""></li>
+                  </ul>
+                  <script>
+                    $(function() {
+                      $(".rslides").responsiveSlides({
+                        auto: true,             // Boolean: Animate automatically, true or false
+                        speed: 500,            // Integer: Speed of the transition, in milliseconds
+                        timeout: 4000,          // Integer: Time between slide transitions, in milliseconds
+                        pager: true,           // Boolean: Show pager, true or false
+                        nav: true,             // Boolean: Show navigation, true or false
+                        random: false,          // Boolean: Randomize the order of the slides, true or false
+                        pause: false,           // Boolean: Pause on hover, true or false
+                        pauseControls: false,    // Boolean: Pause when hovering controls, true or false
+                        prevText: "",   // String: Text for the "previous" button
+                        nextText: "",       // String: Text for the "next" button
+                        maxwidth: "",           // Integer: Max-width of the slideshow, in pixels
+                        navContainer: "",       // Selector: Where controls should be appended to, default is after the 'ul'
+                        manualControls: "",     // Selector: Declare custom pager navigation
+                        namespace: "centered-btns",   // String: Change the default namespace used
+                        before: function(){},   // Function: Before callback
+                        after: function(){}     // Function: After callback
+                      });
+                    });
+                  </script>
+                </article>
+              </div>
+            </div>
+          </div>
+          <div class="tile is-vertical">
+            <div class="tile">
+              <div class="tile is-parent is-vertical">
+                <article class="tile is-child box">
+                  <p class="title">Location</p>
+                  <div id="map" style="width:100%;height:250px;"></div>
+                  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvbFr_xsKp828ki4MZj5mM_VUVtyjGmWk&callback=myMap"></script>
+                </article>
+                <article class="tile is-child box">
+                  <p class="title">Participants</p>
+                  <p class="subtitle">amount participants</p>
+                  <div class="content participants">
+                    <ul>
+                      <li>Participant 1</li>
+                      <li class="is-light">Participant 2</li>
+                      <li>Participant 1</li>
+                      <li class="is-light">Participant 2</li>
+                      <li>Participant 1</li>
+                      <li class="is-light">Participant 2</li>
+                      <li>Participant 1</li>
+                      <li class="is-light">Participant 2</li>
+                      <li>Participant 1</li>
+                      <li class="is-light">Participant 2</li>
+                      <li>Participant 1</li>
+                      <li class="is-light">Participant 2</li>
+                      <li>Participant 1</li>
+                      <li class="is-light">Participant 2</li>
+                      <li>Participant 1</li>
+                      <li class="is-light">Participant 2</li>
+                      <li>Participant 1</li>
+                      <li class="is-light">Participant 2</li>
+                      <li>Participant 1</li>
+                      <li class="is-light">Participant 2</li>
+                    </ul>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="tile is-ancestor">
+          <div class="tile is-parent is-6">
+            <article class="tile is-child box">
+              <p class="title">Description</p>
+              <div class="content">
+                hiucoehiouivgchyruibczbcyuvecuy
+              </div>
+            </article>
+            </div>
+          <div class="tile is-parent">
+            <article class="tile is-child box">
+              <p class="title">Necessities</p>
+              <div class="content">
+                iucheicehuieghcuieicgeiciuiyuoheu
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

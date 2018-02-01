@@ -1,0 +1,7 @@
+div.content.participants{
+  max-height: 150px;
+  overflow-y: auto;
+}
+div.button.right{
+  float: right;
+}
