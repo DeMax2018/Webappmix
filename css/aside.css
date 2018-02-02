@@ -11,8 +11,9 @@ body {
 .aside .account {
   background-color: #2EB398;
   height: 95px;
-  margin:0 -10px;
+
   padding: 25px 30px;
+  width: 100%;
 }
 .aside .account .button {
   background-color: transparent;
@@ -21,7 +22,7 @@ body {
   color: #F6F7F7;
 }
 .aside .main {
-  padding: 40px;
+  padding: 1em;
   color: #6F7B7E;
 }
 .aside .title {
@@ -35,12 +36,8 @@ body {
   padding: 10px 0;
   color: #6F7B7E;
 }
-.aside .main .active {
+.aside .main .item.active {
   color: #F6F7F7;
-}
-.aside .main .item:hover {
-  color: white;
-  transition: 0.5s;
 }
 .aside .main .icon {
   font-size: 19px;
@@ -53,12 +50,17 @@ body {
 .content {
   display: block;
   background-color: #fff;
-  padding: 40px 20px;
+  padding: 40px;
+  padding-bottom: 0;
 }
 .nav.menu {
   background-color: #fff;
   border-bottom: 1px solid #e1e1e1;
   z-index: 1;
+  justify-content: center;
+}
+.center_placing{
+  text-align: center;
 }
 .nav.menu .nav-item .icon-btn {
   border: 3px solid #B7C6C9;
@@ -122,6 +124,7 @@ a.file:not(.button) {
 .
 .scroll{
   overflow-y: scroll;
+  max-height: 45em;
 }
 .filter{
   margin-right: 1em;
@@ -142,7 +145,4 @@ a.file:not(.button) {
 p img{
   width: 100%;
 }
-a.title:hover{
-  color: white;
-  transition: 0.5s;
-}
+#success_message{ display: none;}
