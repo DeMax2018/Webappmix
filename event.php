@@ -9,6 +9,7 @@
       <link rel="stylesheet" href="css/event.css">
       <link rel="stylesheet" type="text/css" href="../css/bulma.css">
       <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
+      <link rel="stylesheet" href="css/nav.css">
       <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
       <script src="js/event.js" charset="utf-8"></script>
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>

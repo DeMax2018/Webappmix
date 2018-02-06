@@ -9,6 +9,7 @@
 
   <link rel="stylesheet" type="text/css" href="../css/bulma.css">
   <link rel="stylesheet" type="text/css" href="../css/aside.css">
+  <link rel="stylesheet" type="text/css" href="../css/nav.css">
   <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
   <link rel="stylesheet" href="css/eventcreate.css">
   <!-- Latest compiled and minified CSS -->

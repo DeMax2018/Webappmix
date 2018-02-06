@@ -10,13 +10,13 @@ tr.headcol{
 th{
   width: 8.3%;
 }
-th.account{
+th.accounta{
   width: 49%;
 }
 th.mrg{
   width: 16.8px;
 }
-.account{
+.accounta{
   text-align: left;
 }
 div.scrollacc{

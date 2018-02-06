@@ -9,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="../css/bulma.css">
   <link rel="stylesheet" type="text/css" href="../css/aside.css">
   <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
+  <link rel="stylesheet" type="text/css" href="css/nav.css">
   <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
 </head>
 <body>
@@ -80,6 +81,7 @@
           <a href="#" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
           <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
           <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Make an event</span></a>
           <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">Event management</span></a>
         </div>
         <div class="main">
