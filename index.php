@@ -6,9 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Events</title>
-
   <link rel="stylesheet" type="text/css" href="../css/bulma.css">
-  <link rel="stylesheet" type="text/css" href="../css/bulma2.css">
   <link rel="stylesheet" type="text/css" href="../css/aside.css">
   <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
   <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
@@ -67,8 +65,8 @@
       </div>
     </div>
   </nav>
-  <div class="columns">
-    <aside class="column is-2 aside hero is-fullheight is-hidden-mobile">
+  <div class="columns columnsaside">
+    <aside class="column is-3 aside hero is-fullheight is-hidden-mobile">
       <div class="fixleft">
         <div class="account has-text-centered">
           <a href="#">
@@ -93,7 +91,7 @@
         </div>
       </div>
     </aside>
-    <div class="content column is-10">
+    <div class="content column is-9">
       <ul class="ulsearch nobullets isflex justify_stuff is-hidden-mobile">
         <div class="search">
     <span class="fa fa-search"></span>
@@ -102,14 +100,14 @@
       </ul>
 
       <div class="section scroll">
-        <div class="columns"> <!--  Max 2 items -->
+        <div class="columns columnsaside"> <!--  Max 2 items -->
           <div class="column is-6">
             <div class="panel">
               <p class="is-marginless">
                 <img src="https://placehold.it/600x300">
               </p>
               <div class="panel-block">
-                <div class="columns">
+                <div class="columns columnsaside">
                   <div class="column">
                     <div class="panel-block-item">Eventname als het lang is fucked het</div>
                   </div>
@@ -127,7 +125,7 @@
                 <img src="https://placehold.it/600x300">
               </p>
               <div class="panel-block">
-                <div class="columns">
+                <div class="columns columnsaside">
                   <div class="column">
                     <div class="panel-block-item">Eventname</div>
                   </div>
@@ -140,14 +138,14 @@
             </div>
           </div>
         </div>
-        <div class="columns">
+        <div class="columns columnsaside">
           <div class="column is-6">
             <div class="panel">
               <p class="is-marginless">
                 <img src="https://placehold.it/600x300">
               </p>
               <div class="panel-block">
-                <div class="columns">
+                <div class="columns columnsaside">
                   <div class="column">
                     <div class="panel-block-item">Eventname</div>
                   </div>
@@ -165,7 +163,7 @@
                 <img src="https://placehold.it/600x300">
               </p>
               <div class="panel-block">
-                <div class="columns">
+                <div class="columns columnsaside">
                   <div class="column">
                     <div class="panel-block-item">Eventname</div>
                   </div>
@@ -178,14 +176,14 @@
             </div>
           </div>
         </div>
-        <div class="columns"> <!--  Max 2 items -->
+        <div class="columns columnsaside"> <!--  Max 2 items -->
           <div class="column is-6">
             <div class="panel">
               <p class="is-marginless">
                 <img src="https://placehold.it/600x300">
               </p>
               <div class="panel-block">
-                <div class="columns">
+                <div class="columns columnsaside">
                   <div class="column">
                     <div class="panel-block-item">Eventname</div>
                   </div>
@@ -203,7 +201,7 @@
                 <img src="https://placehold.it/600x300">
               </p>
               <div class="panel-block">
-                <div class="columns">
+                <div class="columns columnsaside">
                   <div class="column">
                     <div class="panel-block-item">Eventname</div>
                   </div>

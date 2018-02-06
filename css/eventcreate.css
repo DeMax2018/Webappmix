@@ -1,0 +1,11 @@
+
+.fb{
+  font-size: 35px;
+  transition: 0.2s;
+}
+.content .fb:not(.button) {
+    border-bottom: 0;
+}
+.fb:hover{
+  color: #3B5998;
+}
