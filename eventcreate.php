@@ -8,26 +8,19 @@
   <title>Events</title>
 
   <link rel="stylesheet" type="text/css" href="../css/bulma.css">
-  <link rel="stylesheet" type="text/css" href="../css/bulma2.css">
   <link rel="stylesheet" type="text/css" href="../css/aside.css">
   <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
+  <link rel="stylesheet" href="css/eventcreate.css">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-
-<!-- (Optional) Latest compiled and minified JavaScript translation files -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script>
 
   <script
     src="https://code.jquery.com/jquery-2.0.2.js"
     integrity="sha256-0u0HIBCKddsNUySLqONjMmWAZMQYlxTRbA8RfvtCAW0="
     crossorigin="anonymous"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
-  <script type="text/javascript" src="js/slider.js">
-  </script>
+  <script type="text/javascript" src="js/sliderdate.js"></script>
 </head>
 <body>
   <nav class="nav is-dark has-shadow is-hidden-tablet" id="top">
@@ -39,14 +32,7 @@
           <span></span>
         </span>
       </div>
-      <div class="secondsubcontainer">
-        <ul class="ulsearch nobullets isflex justify_stuff">
-          <div class="search">
-      <span class="fa fa-search"></span>
-      <input placeholder="Search term">
-    </div>
-        </ul>
-      </div>
+
 
       <div class="nav-right nav-menu is-hidden-tablet">
         <div class="fixit">
@@ -84,7 +70,7 @@
     </div>
   </nav>
   <div class="columns">
-    <aside class="column is-2 aside hero is-fullheight is-hidden-mobile">
+    <aside class="column is-3 aside hero is-fullheight is-hidden-mobile">
       <div class="fixleft">
         <div class="account has-text-centered">
           <a href="#">
@@ -109,7 +95,7 @@
         </div>
       </div>
     </aside>
-    <div class="content column is-10">
+    <div class="content column is-9">
 
 
         <form class="is-fullwidth">
@@ -152,7 +138,7 @@
                     <div id="slider-range"></div>
                 </div>
             </div>
-<script src="js/slider.js" type="text/javascript"></script>
+<script src="js/sliderdate.js" type="text/javascript"></script>
       			<div class="form-group">
       			<p>Adress <span>*</span></p>
       			<span class="icon-case"><i class="fa fa-map-marker"></i></span>
@@ -177,12 +163,28 @@
       			<div class="form-group">
       			<p>Theme <span>*</span></p>
       			<span class="icon-case"><i class="fa fa-info"></i></span>
-            <select class="selectpicker" multiple>
-            <option>Mustard</option>
-            <option>Ketchup</option>
-            <option>Relish</option>
-            </select>
+              <select class="selectpicker" data-live-search="true" multiple>
+                <option>Mustard</option>
+                <option>Ketchup</option>
+                <option>Relish</option>
+              </select>
+              <!-- Latest compiled and minified JavaScript -->
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 
+              <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script>
+              <script type="text/javascript">
+              $('.selectpicker').selectpicker({
+              style: 'btn-info',
+              size: 4
+              });
+              </script>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js" charset="utf-8"></script>
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+              <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+              <script src="https://silviomoreto.github.io/bootstrap-select/dist/js/bootstrap-select.min.js" charset="utf-8"></script>
+              <script src="https://silviomoreto.github.io/bootstrap-select/js/highlight.pack.js" charset="utf-8"></script>
+              <script src="https://silviomoreto.github.io/bootstrap-select/js/base.js" charset="utf-8"></script>
                       <div class="validation"></div>
       			</div>
 
@@ -199,12 +201,15 @@
                       <textarea name="message" rows="14" data-rule="required" data-msg="Vérifiez votre saisie sur les champs : Le champ 'Message' doit être renseigné."></textarea>
                       <div class="validation"></div>
       			</div>
+            <div class="form-group">
+              Share on Facebook
+              <a href="#" class="fb"><i class="fab fa-facebook"></i></a>
+            </div>
 
       	</div>
       <button type="submit" class="bouton-contact">Send</button>
 
       </form>
-
     </div>
   </div>
 

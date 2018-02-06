@@ -10,6 +10,10 @@
   <!-- Bulma Version 0.6.0 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css" integrity="sha256-HEtF7HLJZSC3Le1HcsWbz1hDYFPZCqDhZa9QsCgVUdw=" crossorigin="anonymous" />
   <link rel="stylesheet" type="text/css" href="../css/login.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/color/jquery.color.plus-names-2.1.2.js"></script>
+  <script async type="text/javascript" src="../js/bulma.js"></script>
+  <script async type="text/javascript" src="../js/login.js"></script>
 </head>
 <body>
   <section class="hero is-success is-fullheight">
@@ -105,9 +109,6 @@
       </div>
     </div>
   </section>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://code.jquery.com/color/jquery.color.plus-names-2.1.2.js"></script>
-  <script async type="text/javascript" src="../js/bulma.js"></script>
-  <script async type="text/javascript" src="../js/login.js"></script>
+
 </body>
 </html>
