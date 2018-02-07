@@ -130,22 +130,10 @@ a.title:hover{
 .pagination > a:not(:first-child) {
   margin-left: 0px !important;
 }
-.hero.is-fullheight{
-  min-height: 101% !important;
-  position: fixed !important;
-}
-.section{
-  padding: 40px 0 !important;
-}
+
 .fixit{
   width: 100%;
   text-align: left;
-}
-
-.sectionfix{
-  width: 100%;
-  display: block;
-  margin-bottom: 1%;
 }
 .ulsearch{
   max-width: 100%;
@@ -510,17 +498,4 @@ i {
 
 #sendmessage.show,.show  {
   display:block;
-}
-@media screen and (min-width: 769px){
-  div.column.is-9{
-    margin-left: 25%;
-    z-index: 3;
-    padding-left: 2%;
-  }
-}
-@media screen and (max-width: 769px){
-  div.column.is-9{
-    padding-left: 4% !important;
-    width: 100%;
-  }
 }

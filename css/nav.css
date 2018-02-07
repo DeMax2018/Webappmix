@@ -4,7 +4,7 @@
 .aside .account {
   background-color: #2EB398;
   height: 95px;
-  margin:0 -10px;
+  width: 100%;
   padding: 25px 30px;
 }
 .aside .account .button {
@@ -106,4 +106,61 @@ a.file:not(.button) {
   -webkit-box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
   box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
   height: 80px;
+}
+.hero.is-fullheight{
+  min-height: 102% !important;
+  position: fixed !important;
+}
+.section{
+  padding: 40px 0 !important;
+}
+
+.sectionfix{
+  width: 100%;
+  display: block;
+  margin-bottom: 1%;
+}
+@media screen and (min-width: 769px){
+  div.column.is-9{
+    margin-left: 25%;
+    z-index: 3;
+    padding-left: 2%;
+  }
+}
+@media screen and (max-width: 769px){
+  div.column.is-9{
+    padding-left: 4% !important;
+    width: 100%;
+  }
+}
+.column {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 10px;
+  padding-bottom: 15px;
+}
+.columns.is-mobile > .column.is-narrow {
+  width: 100%;
+}
+.column.is-6, .column.is-6-tablet{
+  padding-bottom: 3em;
+}
+.columns.columnsaside{
+  margin-top: -10px;
+  width: 100%;
+}
+.columns:last-child{
+  display: flex !important;
+}
+.columns:not(:last-child){
+  margin-bottom: 0 !important;
+}
+@media screen and (min-width: 769px) {
+  .columns:not(.is-desktop) {
+    width: 100%;
+  }
+}
+.nav > .container {
+  position: fixed !important;
+  background: white;
 }
