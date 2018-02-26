@@ -8,6 +8,7 @@ $sql->bindValue(1, "%".$_GET['search']."%", PDO::PARAM_STR);
 
 $sql->execute();
 $first = true;
+
 while($rows = $sql->fetch(PDO::FETCH_ASSOC)){
   if($first === true){ ?>
     <div class="columns columnsaside"> <!--  Max 2 items -->
