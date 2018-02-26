@@ -95,6 +95,21 @@
         </div>
       </aside>
       <div class="content column is-9">
+        <div class="content column is-9-nav nav-aside">
+
+          <span class="aside-toggle is-marginless">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <ul class="ulsearch nobullets isflex justify_stuff">
+
+            <div class="search">
+              <span class="fa fa-search"></span>
+              <input placeholder="Search term">
+            </div>
+          </ul>
+        </div>
         <div class="tile is-ancestor">
           <div class="tile is-parent">
             <article class="tile is-child box">
@@ -137,12 +152,10 @@
                 <table>
                   <tr class="headcol">
                     <th class="accounta">Account</th>
-                    <th>right 1</th>
-                    <th>right 2</th>
-                    <th>right 3</th>
-                    <th>right 4</th>
-                    <th>right 5</th>
-                    <th>right 6</th>
+                    <th>NORNFORINFOER</th>
+                    <th>OEHFHIFIEiuiuzieufh</th>
+                    <th>oazhiazdniza</th>
+
                     <th class="mrg"></th>
                   </tr>
                 </table>

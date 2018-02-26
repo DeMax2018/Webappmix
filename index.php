@@ -97,20 +97,26 @@
       </div>
     </aside>
     <div class="content column is-9">
-      <ul class="ulsearch nobullets isflex justify_stuff is-hidden-mobile">
-        <div class="search">
-    <span class="fa fa-search"></span>
-    <input placeholder="Search term">
-  </div>
-      </ul>
+      <div class="content column is-9-nav nav-aside">
 
-      <div class="section scroll">
+        <span class="aside-toggle is-marginless">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <ul class="ulsearch nobullets isflex justify_stuff is-hidden-mobile">
+
+          <div class="search">
+            <span class="fa fa-search"></span>
+            <input placeholder="Search term">
+          </div>
+        </ul>
+      </div>
+      <div class="section scroll things">
         <div class="columns columnsaside"> <!--  Max 2 items -->
           <div class="column is-6">
             <div class="panel">
-              <p class="is-marginless">
                 <img src="https://placehold.it/600x300">
-              </p>
               <div class="panel-block">
                 <div class="columns columnsaside">
                   <div class="column">
@@ -126,9 +132,7 @@
           </div>
           <div class="column is-6">
             <div class="panel">
-              <p class="is-marginless">
                 <img src="https://placehold.it/600x300">
-              </p>
               <div class="panel-block">
                 <div class="columns columnsaside">
                   <div class="column">

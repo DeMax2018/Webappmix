@@ -499,3 +499,8 @@ i {
 #sendmessage.show,.show  {
   display:block;
 }
+
+.panel{
+  margin-left: 5px;
+  margin-right: 5px;
+}
