@@ -9,6 +9,7 @@
 
   <link rel="stylesheet" type="text/css" href="../css/bulma.css">
   <link rel="stylesheet" type="text/css" href="../css/aside.css">
+  <link rel="stylesheet" type="text/css" href="../css/nav.css">
   <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
   <link rel="stylesheet" href="css/eventcreate.css">
   <!-- Latest compiled and minified CSS -->
@@ -81,14 +82,15 @@
         </div>
         <div class="main">
           <div class="title">Main</div>
-          <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
+          <a href="#" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
           <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
-          <a href="#" class="item active"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+          <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+          <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Make an event</span></a>
           <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">Event management</span></a>
         </div>
         <div class="main">
           <div class="title"><i class="fa fa-cog"></i>  Admin</div>
-          <a href="#" class="item"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
+          <a href="#" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
           <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
           <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
           <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Admin newsfeed</span></a>
@@ -98,7 +100,7 @@
     <div class="content column is-9">
 
 
-        <form class="is-fullwidth">
+        <form method="post" action="eventcreatefunctions.php" class="is-fullwidth">
       	    <h1 class="eventh1">Create a new event or cours</h1>
 
           <div class="contentform">
@@ -109,7 +111,7 @@
       			      <div class="form-group">
       			        <p>Event creator<span>*</span></p>
       			        <span class="icon-case"><i class="fa fa-male"></i></span>
-      				        <input type="text" name="nom" id="nom" data-rule="required" data-msg="Vérifiez votre saisie sur les champs : Le champ 'Nom' doit être renseigné."/>
+      				        <input type="text" name="name" id="nom" data-rule="required" data-msg="Vérifiez votre saisie sur les champs : Le champ 'Nom' doit être renseigné."/>
                       <div class="validation"></div>
              </div>
 

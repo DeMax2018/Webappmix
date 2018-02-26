@@ -8,3 +8,15 @@
         menu.classList.toggle('is-active');
     });
 })();
+(function() {
+    var burger = document.querySelector('.aside-toggle');
+    var menu = document.querySelector('aside');
+    var page = document.querySelector('.is-9');
+    var fixed = document.querySelector('.is-9-nav');
+    burger.addEventListener('click', function() {
+        burger.classList.toggle('is-active');
+        menu.classList.toggle('is-active');
+        page.classList.toggle('is-active');
+        fixed.classList.toggle('is-active');
+    });
+})();

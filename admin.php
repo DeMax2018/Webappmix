@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<?php
+include"conn.php";
+//include "auth.php";
+session_start();
+echo $_SESSION["checked"]."dit is checked";
+
+ ?>
 <html>
   <head>
     <meta charset="utf-8">
@@ -6,39 +12,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin</title>
     <link rel="stylesheet" type="text/css" href="../css/bulma.css">
-    <link rel="stylesheet" type="text/css" href="../css/aside.css">
+    <link rel="stylesheet" type="text/css" href="css/nav.css">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="js1.js"></script>
+
     <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
-    <script async type="text/javascript" src="../js/bulma.js"></script>
+
     <link rel="stylesheet" href="css/admin.css">
   </head>
   <body>
+        <script async type="text/javascript" src="../js/bulma.js"></script>
     <nav class="nav is-dark has-shadow is-hidden-tablet" id="top">
       <div class="container">
-        <span class="nav-toggle">
-          <span></span>
-          <span></span>
-          <span></span>
-        </span>
+        <div class="subcontainer">
+          <span class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div class="secondsubcontainer">
+          <ul class="ulsearch nobullets isflex justify_stuff">
+            <div class="search">
+        <span class="fa fa-search"></span>
+        <input placeholder="Search term">
+      </div>
+          </ul>
+        </div>
+
         <div class="nav-right nav-menu is-hidden-tablet">
-          <a class="nav-item is-tab is-active">
-            Events
-          </a>
-          <a class="nav-item is-tab">
-            My meetings
-          </a>
-          <a class="nav-item is-tab">
-            My events
-          </a>
-          <a class="nav-item is-tab">
-            Newsfeed
-          </a>
+          <div class="fixit">
+          <div class="sectionfix">
+          <a href="#" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
+          </div>
+          <div class="sectionfix">
+          <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
+          </div>
+          <div class="sectionfix">
+          <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+          </div>
+          </div>
+          <div class="fixit">
+            <div class="sectionfix">
+          <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
+            </div>
+            <div class="sectionfix">
+          <a href="#" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
+            </div>
+            <div class="sectionfix">
+          <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
+            </div>
+          </div>
+          <div class="fixit">
+            <div class="sectionfix">
+          <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">Event management</span></a>
+            </div>
+            <div class="sectionfix">
+          <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Admin newsfeed</span></a>
+            </div>
+          </div>
+
         </div>
       </div>
     </nav>
-    <div class="columns">
+    <div class="columns columnsaside">
       <aside class="column is-3 aside hero is-fullheight is-hidden-mobile">
-        <div>
+        <div class="fixleft">
           <div class="account has-text-centered">
             <a href="#">
               <figure class="avatar">
@@ -46,29 +89,39 @@
               </figure>
             </a>
           </div>
-          <div class="main scroll">
+          <div class="main">
             <div class="title">Main</div>
-            <a href="index.php" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
+            <a href="#" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
             <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
             <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
-  <br>
-  <br>
-            <div class="title">Event management</div>
             <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Make an event</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My events</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">Finished events</span></a>
-  <br>
-  <br>
-            <a href="admin.php" class="title active"><i class="fa fa-cog"></i>  Admin </a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
             <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">Event management</span></a>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
+          </div>
+          <div class="main">
+            <div class="title"><i class="fa fa-cog"></i>  Admin</div>
+            <a href="#" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
             <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Admin newsfeed</span></a>
           </div>
         </div>
       </aside>
       <div class="content column is-9">
+        <div class="content column is-9-nav nav-aside">
+
+          <span class="aside-toggle is-marginless">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <ul class="ulsearch nobullets isflex justify_stuff">
+
+            <div class="search">
+              <span class="fa fa-search"></span>
+              <input placeholder="Search term">
+            </div>
+          </ul>
+        </div>
         <div class="tile is-ancestor">
           <div class="tile is-parent">
             <article class="tile is-child box">
@@ -90,7 +143,7 @@
                       <div class="level-item is-fullwidth">
                         <div class="field has-addons is-fullwidth">
                           <p class="control">
-                            <input class="input is-fullwidth" type="text" placeholder="Find an account">
+                            <input class="input is-fullwidth" id="filter" onkeyup="rights();" type="text" placeholder="Find an account">
                           </p>
 
                         </div>
@@ -110,162 +163,57 @@
                 </div>
                 <table>
                   <tr class="headcol">
-                    <th class="account">Account</th>
-                    <th>right 1</th>
-                    <th>right 2</th>
-                    <th>right 3</th>
-                    <th>right 4</th>
-                    <th>right 5</th>
-                    <th>right 6</th>
+                    <th class="accounta">Account</th>
+                    <?php
+                    $numright = $dbh->prepare("SELECT * FROM `Right`");
+                    $numright->execute();
+                    while($record = $numright->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <th><?php echo $record["fldName"] ?></th>
+                    <?php } ?>
                     <th class="mrg"></th>
                   </tr>
                 </table>
-                <div class="scrollacc">
+                <div class="scrollacc" id="scrollaccr">
                  <table>
-                   <tr>
-                     <td class="account">Account 1</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr class="is-light">
-                     <td class="account">Account 2</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr>
-                     <td class="account">Account 1</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr class="is-light">
-                     <td class="account">Account 2</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr>
-                     <td class="account">Account 1</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr class="is-light">
-                     <td class="account">Account 2</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr>
-                     <td class="account">Account 1</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr class="is-light">
-                     <td class="account">Account 2</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr>
-                     <td class="account">Account 1</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr class="is-light">
-                     <td class="account">Account 2</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr>
-                     <td class="account">Account 1</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr class="is-light">
-                     <td class="account">Account 2</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr>
-                     <td class="account">Account 1</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr class="is-light">
-                     <td class="account">Account 2</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr>
-                     <td class="account">Account 1</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr class="is-light">
-                     <td class="account">Account 2</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
+
+
+                     <?php
+                     $sth = $dbh->prepare("SELECT * from User");
+                       $sth->execute();
+                     while($record = $sth->fetch(PDO::FETCH_ASSOC)){ ?>
+                       <tr class="is-light">
+                         <td id="names"class="accounta"><?php echo $record["fldName"]." ".$record["fldLastname"] ?></td>
+                         <?php
+                         $num = $numright->rowCount();
+                         $checkbox = $dbh->prepare("SELECT * FROM PrivateRights WHERE UserID = ".$record["UserID"]);
+                         $checkbox->execute();
+                         while ($rows = $checkbox->fetch(PDO::FETCH_ASSOC)) {
+                           if($rows["Create_events"] == 1){
+                              echo "<td><input checked id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name);' type='checkbox'></td>";
+                           }
+                           else{
+                             echo "<td><input id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name);' type='checkbox'></td>";
+                           }
+                           if($rows["Delete_Events"] == 1){
+                              echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' checked type='checkbox'></td>";
+                           }
+                           else{
+                             echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' type='checkbox'></td>";
+                           }
+                           if($rows["Acces_Rights_System"] == 1){
+                              echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' checked type='checkbox'></td>";
+                           }
+                           else{
+                             echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' type='checkbox'></td>";
+                           }
+                         }
+                         ?>
+                       </tr>
+
+
+                   <?php }?>
+
+
                  </table>
                </div>
               </div>

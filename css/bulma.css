@@ -77,9 +77,10 @@ th {
 
 td {
   font-weight: normal;
-  vertical-align: top;
+
+  vertical-align: middle !important;
 }
-tr.is-light{
+tr.is-light:nth-child(even){
   background-color: #f5f7fa;
   border-color: transparent;
   color: #69707a;
@@ -738,7 +739,9 @@ table th {
 .is-marginless {
   margin: 0 !important;
 }
-
+.is-paddingless{
+  padding-left: 0 !important;
+}
 .box {
   background-color: #fff;
   border-radius: 5px;
@@ -2793,7 +2796,7 @@ a.box:active {
   width: 48px;
 }
 
-.hamburger, .nav-toggle {
+.hamburger, .nav-toggle, .aside-toggle {
   cursor: pointer;
   display: block;
   height: 50px;
@@ -2801,7 +2804,12 @@ a.box:active {
   width: 50px;
 }
 
-.hamburger span, .nav-toggle span {
+.aside-toggle{
+  float: left;
+  margin-left: -2em;
+  position: fixed;
+}
+.hamburger span, .nav-toggle span{
   background-color: #69707a;
   display: block;
   height: 1px;
@@ -2817,12 +2825,31 @@ a.box:active {
   transition-property: background, left, opacity, transform, -webkit-transform;
   width: 15px;
 }
-
-.hamburger span:nth-child(1), .nav-toggle span:nth-child(1) {
+.aside-toggle span{
+  background-color: #69707a;
+  display: block;
+  height: 1px;
+  left: 50%;
+  margin-left: -10px;
+  position: absolute;
+  top: 50%;
+  -webkit-transition: none 86ms ease-out;
+  transition: none 86ms ease-out;
+  -webkit-transition-property: background, left, opacity, -webkit-transform;
+  transition-property: background, left, opacity, -webkit-transform;
+  transition-property: background, left, opacity, transform;
+  transition-property: background, left, opacity, transform, -webkit-transform;
+   width: 20px;
+ }
+.hamburger span:nth-child(1), .nav-toggle span:nth-child(1){
   margin-top: -6px;
 }
 
-.hamburger span:nth-child(2), .nav-toggle span:nth-child(2) {
+.aside-toggle span:nth-child(1) {
+  margin-top: -8px;
+}
+
+.hamburger span:nth-child(2), .nav-toggle span:nth-child(2), .aside-toggle span:nth-child(2) {
   margin-top: -1px;
 }
 
@@ -2830,15 +2857,19 @@ a.box:active {
   margin-top: 4px;
 }
 
-.hamburger:hover, .nav-toggle:hover {
+.aside-toggle span:nth-child(3) {
+  margin-top: 5px;
+}
+
+.hamburger:hover, .nav-toggle:hover, .aside-toggle:hover {
   background-color: #f5f7fa;
 }
 
-.hamburger.is-active span, .is-active.nav-toggle span {
+.hamburger.is-active span, .is-active.nav-toggle span, .is-active.aside-toggle span {
   background-color: #1fc8db;
 }
 
-.hamburger.is-active span:nth-child(1), .is-active.nav-toggle span:nth-child(1) {
+.hamburger.is-active span:nth-child(1), .is-active.nav-toggle span:nth-child(1), .is-active.aside-toggle span:nth-child(1) {
   margin-left: -5px;
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
@@ -2846,11 +2877,11 @@ a.box:active {
           transform-origin: left top;
 }
 
-.hamburger.is-active span:nth-child(2), .is-active.nav-toggle span:nth-child(2) {
+.hamburger.is-active span:nth-child(2), .is-active.nav-toggle span:nth-child(2), .is-active.aside-toggle span:nth-child(2) {
   opacity: 0;
 }
 
-.hamburger.is-active span:nth-child(3), .is-active.nav-toggle span:nth-child(3) {
+.hamburger.is-active span:nth-child(3), .is-active.nav-toggle span:nth-child(3), .is-active.aside-toggle span:nth-child(3) {
   margin-left: -5px;
   -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
@@ -4162,6 +4193,14 @@ a.box:active {
   }
 }
 
+aside{
+  margin-left: -25%;
+  transition: 0.5s;
+}
+aside.is-active{
+  transition: 0.5s;
+  margin-left: 0;
+}
 .columns.is-mobile {
   display: -webkit-box;
   display: -webkit-flex;
@@ -4223,7 +4262,6 @@ a.box:active {
 }
 
 .tile.is-ancestor {
-  margin-left: -10px;
   margin-right: -10px;
   margin-top: -10px;
 }
@@ -5121,7 +5159,11 @@ a.box:active {
     display: none;
   }
 }
-
+@media screen and (max-width: 769px) {
+  .aside-toggle {
+    display: none;
+  }
+}
 .nav-item {
   -webkit-box-align: center;
   -webkit-align-items: center;
@@ -5452,6 +5494,7 @@ a.nav-item.is-tab.is-active {
 .panel-icon .fa {
   font-size: inherit;
   line-height: inherit;
+  margin-left: 25px;
 }
 
 .panel-heading {

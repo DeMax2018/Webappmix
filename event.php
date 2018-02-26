@@ -9,6 +9,7 @@
       <link rel="stylesheet" href="css/event.css">
       <link rel="stylesheet" type="text/css" href="../css/bulma.css">
       <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
+      <link rel="stylesheet" href="css/nav.css">
       <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
       <script src="js/event.js" charset="utf-8"></script>
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -76,13 +77,14 @@
             <a href="#" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
             <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
             <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Make an event</span></a>
             <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">Event management</span></a>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
           </div>
           <div class="main">
             <div class="title"><i class="fa fa-cog"></i>  Admin</div>
             <a href="#" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
             <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
             <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Admin newsfeed</span></a>
           </div>
         </div>
