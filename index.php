@@ -102,8 +102,22 @@ include"conn.php";
       </div>
     </aside>
     <div class="content column is-9">
-      <div class="content column is-9-nav nav-aside">
 
+      <div class="content column is-9-nav nav-aside">
+        <span class="aside-toggle is-marginless">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <ul class="ulsearch nobullets isflex justify_stuff is-hidden-mobile">
+
+          <div class="search">
+            <span class="fa fa-search"></span>
+            <input placeholder="Search term">
+          </div>
+        </ul>
+      </div>
+        <?php
         $sql = $dbh->prepare("SELECT * FROM Event WHERE Active = 1;");
         $sql->execute();
         $first = true;
@@ -124,22 +138,9 @@ include"conn.php";
                       </div>
                     </div>
 
-        <span class="aside-toggle is-marginless">
-          <span></span>
-          <span></span>
-          <span></span>
-        </span>
-        <ul class="ulsearch nobullets isflex justify_stuff is-hidden-mobile">
 
-          <div class="search">
-            <span class="fa fa-search"></span>
-            <input placeholder="Search term">
-          </div>
-        </ul>
-      </div>
                   </div>
                 </div>
-              </div>
 
 
 
@@ -161,14 +162,15 @@ include"conn.php";
               </div>
             </div>
           </div>
-        </div>
-      <?php  $first = true; }
-         }
-        ?>
-
-
-
           </div>
+          <?php  $first = true; }
+             }
+            ?>
+
+
+
+
+
         </div>
 
         <nav class="pagination nobullets" role="navigation" aria-label="pagination">
