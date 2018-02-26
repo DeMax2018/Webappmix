@@ -1,12 +1,21 @@
-<!DOCTYPE html>
+<?php
+include"conn.php";
+//include "auth.php";
+ ?>
 <html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin</title>
+    <script type="text/javascript" src="js1.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/bulma.css">
     <link rel="stylesheet" type="text/css" href="css/nav.css">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.12.1/jquery-ui.js"></script>
+
     <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
 
@@ -116,7 +125,7 @@
                       <div class="level-item is-fullwidth">
                         <div class="field has-addons is-fullwidth">
                           <p class="control">
-                            <input class="input is-fullwidth" type="text" placeholder="Find an account">
+                            <input class="input is-fullwidth" id="filter" onkeyup="rights();" type="text" placeholder="Find an account">
                           </p>
 
                         </div>
@@ -137,161 +146,56 @@
                 <table>
                   <tr class="headcol">
                     <th class="accounta">Account</th>
-                    <th>right 1</th>
-                    <th>right 2</th>
-                    <th>right 3</th>
-                    <th>right 4</th>
-                    <th>right 5</th>
-                    <th>right 6</th>
+                    <?php
+                    $numright = $dbh->prepare("SELECT * FROM `Right`");
+                    $numright->execute();
+                    while($record = $numright->fetch(PDO::FETCH_ASSOC)){ ?>
+                    <th><?php echo $record["fldName"] ?></th>
+                    <?php } ?>
                     <th class="mrg"></th>
                   </tr>
                 </table>
-                <div class="scrollacc">
+                <div class="scrollacc" id="scrollaccr">
                  <table>
-                   <tr>
-                     <td class="accounta">Account 1</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr class="is-light">
-                     <td class="accounta">Account 2</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr>
-                     <td class="accounta">Account 1</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr class="is-light">
-                     <td class="accounta">Account 2</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr>
-                     <td class="accounta">Account 1</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr class="is-light">
-                     <td class="accounta">Account 2</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr>
-                     <td class="accounta">Account 1</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr class="is-light">
-                     <td class="accounta">Account 2</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr>
-                     <td class="accounta">Account 1</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr class="is-light">
-                     <td class="accounta">Account 2</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr>
-                     <td class="accounta">Account 1</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr class="is-light">
-                     <td class="accounta">Account 2</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr>
-                     <td class="accounta">Account 1</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr class="is-light">
-                     <td class="accounta">Account 2</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr>
-                     <td class="accounta">Account 1</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
-                   <tr class="is-light">
-                     <td class="accounta">Account 2</td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                     <td><input type="checkbox"></td>
-                   </tr>
+
+
+                     <?php
+                     $sth = $dbh->prepare("SELECT * from User");
+                       $sth->execute();
+                     while($record = $sth->fetch(PDO::FETCH_ASSOC)){ ?>
+                       <tr class="is-light">
+                         <td class="accounta"><?php echo $record["fldName"]." ".$record["fldLastname"] ?></td>
+                         <?php
+                         $num = $numright->rowCount();
+                         $checkbox = $dbh->prepare("SELECT * FROM PrivateRights WHERE UserID = ".$record["UserID"]);
+                         $checkbox->execute();
+                         while ($rows = $checkbox->fetch(PDO::FETCH_ASSOC)) {
+                           if($rows["Create_events"] == 1){
+                              echo "<td><input checked type='checkbox'></td>";
+                           }
+                           else{
+                             echo "<td><input type='checkbox'></td>";
+                           }
+                           if($rows["Delete_Events"] == 1){
+                              echo "<td><input checked type='checkbox'></td>";
+                           }
+                           else{
+                             echo "<td><input type='checkbox'></td>";
+                           }
+                           if($rows["Acces_Rights_System"] == 1){
+                              echo "<td><input checked type='checkbox'></td>";
+                           }
+                           else{
+                             echo "<td><input type='checkbox'></td>";
+                           }
+                         }
+                         ?>
+                       </tr>
+
+
+                   <?php }?>
+
+
                  </table>
                </div>
               </div>

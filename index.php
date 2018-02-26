@@ -1,4 +1,6 @@
-
+<?php
+include"conn.php";
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +9,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Events</title>
   <link rel="stylesheet" type="text/css" href="../css/bulma.css">
+  <script type="text/javascript" src="js1.js"></script>
   <link rel="stylesheet" type="text/css" href="../css/aside.css">
   <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
   <link rel="stylesheet" type="text/css" href="css/nav.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js"></script>
+
   <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
 </head>
 <body>
@@ -100,50 +105,43 @@
       <ul class="ulsearch nobullets isflex justify_stuff is-hidden-mobile">
         <div class="search">
     <span class="fa fa-search"></span>
-    <input placeholder="Search term">
+    <input placeholder="Search term" id="search" onkeyup="eventsearch();">
   </div>
       </ul>
 
-      <div class="section scroll">
-        <div class="columns columnsaside"> <!--  Max 2 items -->
-          <div class="column is-6">
-            <div class="panel">
-              <p class="is-marginless">
-                <img src="https://placehold.it/600x300">
-              </p>
-              <div class="panel-block">
-                <div class="columns columnsaside">
-                  <div class="column">
-                    <div class="panel-block-item">Eventname als het lang is fucked het</div>
-                  </div>
-                  <div class="column has-text-right">
-                    <div class="panel-block-item">2 <i class="fa fa-user"></i></div>
-                    <div class="panel-block-item">21/02/2018 <i class="fa fa-calendar"></i></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="column is-6">
-            <div class="panel">
-              <p class="is-marginless">
-                <img src="https://placehold.it/600x300">
-              </p>
-              <div class="panel-block">
-                <div class="columns columnsaside">
-                  <div class="column">
-                    <div class="panel-block-item">Eventname</div>
-                  </div>
-                  <div class="column has-text-right">
-                    <div class="panel-block-item">2 <i class="fa fa-user"></i></div>
-                    <div class="panel-block-item">21/02/2018 <i class="fa fa-calendar"></i></div>
+      <div class="section scroll" id="events">
+
+
+        <?php
+        $sql = $dbh->prepare("SELECT * FROM Event WHERE Active = 1;");
+        $sql->execute();
+        $first = true;
+        while($rows = $sql->fetch(PDO::FETCH_ASSOC)){
+          if($first === true){ ?>
+            <div class="columns columnsaside"> <!--  Max 2 items -->
+              <div class="column is-6">
+                <div class="panel">
+                  <p class="is-marginless">
+                    <img src="https://placehold.it/600x300">
+                  </p>
+                  <div class="panel-block">
+                    <div class="columns columnsaside">
+                      <div class="column">
+                        <div class="panel-block-item"><?php echo $rows["eventname"]; ?></div>
+                      </div>
+                      <div class="column has-text-right">
+                        <div class="panel-block-item"><?php echo $rows["date_event"] ?><i class="fa fa-user"></i></div>
+                        <div class="panel-block-item"><?php echo $rows["date_event"] ?><i class="fa fa-calendar"></i></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="columns columnsaside">
+
+
+
+        <?php  $first = false; }
+        else{ ?>
           <div class="column is-6">
             <div class="panel">
               <p class="is-marginless">
@@ -152,71 +150,23 @@
               <div class="panel-block">
                 <div class="columns columnsaside">
                   <div class="column">
-                    <div class="panel-block-item">Eventname</div>
+                    <div class="panel-block-item"><?php echo $rows["eventname"]; ?></div>
                   </div>
                   <div class="column has-text-right">
-                    <div class="panel-block-item">2 <i class="fa fa-user"></i></div>
-                    <div class="panel-block-item">21/02/2018 <i class="fa fa-calendar"></i></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="column is-6">
-            <div class="panel">
-              <p class="is-marginless">
-                <img src="https://placehold.it/600x300">
-              </p>
-              <div class="panel-block">
-                <div class="columns columnsaside">
-                  <div class="column">
-                    <div class="panel-block-item">Eventname</div>
-                  </div>
-                  <div class="column has-text-right">
-                    <div class="panel-block-item">2 <i class="fa fa-user"></i></div>
-                    <div class="panel-block-item">21/02/2018 <i class="fa fa-calendar"></i></div>
+                    <div class="panel-block-item"><?php echo $rows["date_event"] ?> <i class="fa fa-user"></i></div>
+                    <div class="panel-block-item"><?php echo $rows["date_event"] ?> <i class="fa fa-calendar"></i></div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="columns columnsaside"> <!--  Max 2 items -->
-          <div class="column is-6">
-            <div class="panel">
-              <p class="is-marginless">
-                <img src="https://placehold.it/600x300">
-              </p>
-              <div class="panel-block">
-                <div class="columns columnsaside">
-                  <div class="column">
-                    <div class="panel-block-item">Eventname</div>
-                  </div>
-                  <div class="column has-text-right">
-                    <div class="panel-block-item">2 <i class="fa fa-user"></i></div>
-                    <div class="panel-block-item">21/02/2018 <i class="fa fa-calendar"></i></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="column is-6">
-            <div class="panel">
-              <p class="is-marginless">
-                <img src="https://placehold.it/600x300">
-              </p>
-              <div class="panel-block">
-                <div class="columns columnsaside">
-                  <div class="column">
-                    <div class="panel-block-item">Eventname</div>
-                  </div>
-                  <div class="column has-text-right">
-                    <div class="panel-block-item">2 <i class="fa fa-user"></i></div>
-                    <div class="panel-block-item">21/02/2018 <i class="fa fa-calendar"></i></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <?php  $first = true; }
+         }
+        ?>
+
+
+
           </div>
         </div>
 

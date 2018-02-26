@@ -33,10 +33,10 @@
             <figure class="avatar">
               <img src="images/avatar.png">
             </figure>
-            <form>
+            <form action="loginacces.php" method="post">
               <div class="field">
                 <div class="control has-icons-left has-icons-right">
-                  <input class="input is-success is-large" type="email" id="mail" placeholder="Email" autofocus required>
+                  <input class="input is-success is-large" type="email" name="maillog" id="mail" placeholder="Email" autofocus required>
                   <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
                   </span>
@@ -47,7 +47,7 @@
               </div>
               <div class="field">
                 <div class="control has-icons-left has-icons-right">
-                  <input class="input is-danger is-large" type="password" id="password" placeholder="Password">
+                  <input class="input is-danger is-large" name="passlogin" type="password" id="password" placeholder="Password">
                   <span class="icon is-small is-left">
                     <i class="fas fa-lock"></i>
                   </span>
@@ -62,7 +62,7 @@
                   Remember me
                 </label>
               </div>
-              <a class="button is-block is-info is-large">Login</a>
+              <button type="submit" style="width:100%;" class="button is-block is-info is-large">Login</button>
             </form>
           </div>
           <p>
@@ -74,32 +74,32 @@
 
 
         <div class="column is-4 is-offset-4 register" id="register">
-          <p class="subtitle">Don't have an acoount yet? Please, register here.</p>
+          <p class="subtitle">Don't have an account yet? Please, register here.</p>
           <div class="box">
-            <form>
+            <form method="post" action="loginfunctions.php">
 
                 <div class="field">
                   <p class="grey">Who are you?</p>
                   <div class="names">
-                  <input class="input is-large" type="text" name="First Name" placeholder="First Name*" autofocus required>
-                  <input class="input is-large" type="text" name="Last Name" placeholder="Last Name*" required>
+                  <input class="input is-large" type="text" name="First_Name" placeholder="First Name*" autofocus required>
+                  <input class="input is-large" type="text" name="Last_Name" placeholder="Last Name*" required>
                 </div>
               </div>
               <div class="field">
                 <p class="grey">What are your credentials?</p>
                 <div class="control">
-                  <input class="input is-large" type="email" placeholder="Your Email*" autofocus="" required>
+                  <input class="input is-large" type="email" name="email" placeholder="Your Email*" autofocus="" required>
                 </div>
               </div>
               <div class="field">
                 <div class="control">
-                  <input class="input is-large" type="password" placeholder="Your Password*" required>
+                  <input class="input is-large" type="password" name="password" placeholder="Your Password*" required>
                 </div>
                 <div class="control">
                   <input class="input is-large" type="password" placeholder="Confirm Password*" required>
                 </div>
               </div>
-              <a class="button is-block is-info is-large">Register</a>
+              <button style="width:100%;"class="button is-block is-info is-large" type="submit">Register</button>
             </form>
           </div>
           <p>

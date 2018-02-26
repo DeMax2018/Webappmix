@@ -77,9 +77,10 @@ th {
 
 td {
   font-weight: normal;
-  vertical-align: top;
+
+  vertical-align: middle !important;
 }
-tr.is-light{
+tr.is-light:nth-child(even){
   background-color: #f5f7fa;
   border-color: transparent;
   color: #69707a;

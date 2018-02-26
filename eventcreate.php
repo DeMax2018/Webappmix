@@ -100,7 +100,7 @@
     <div class="content column is-9">
 
 
-        <form class="is-fullwidth">
+        <form method="post" action="eventcreatefunctions.php" class="is-fullwidth">
       	    <h1 class="eventh1">Create a new event or cours</h1>
 
           <div class="contentform">
@@ -111,7 +111,7 @@
       			      <div class="form-group">
       			        <p>Event creator<span>*</span></p>
       			        <span class="icon-case"><i class="fa fa-male"></i></span>
-      				        <input type="text" name="nom" id="nom" data-rule="required" data-msg="Vérifiez votre saisie sur les champs : Le champ 'Nom' doit être renseigné."/>
+      				        <input type="text" name="name" id="nom" data-rule="required" data-msg="Vérifiez votre saisie sur les champs : Le champ 'Nom' doit être renseigné."/>
                       <div class="validation"></div>
              </div>
 
