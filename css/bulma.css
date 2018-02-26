@@ -5494,6 +5494,7 @@ a.nav-item.is-tab.is-active {
 .panel-icon .fa {
   font-size: inherit;
   line-height: inherit;
+  margin-left: 25px;
 }
 
 .panel-heading {
