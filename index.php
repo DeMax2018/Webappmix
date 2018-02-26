@@ -117,6 +117,8 @@ include"conn.php";
           </div>
         </ul>
       </div>
+
+
         <?php
         $sql = $dbh->prepare("SELECT * FROM Event WHERE Active = 1;");
         $sql->execute();
@@ -126,25 +128,22 @@ include"conn.php";
             <div class="columns columnsaside"> <!--  Max 2 items -->
               <div class="column is-6">
                 <div class="panel">
-                  <p class="is-marginless">
-                  </p>
+                    <img src="https://placehold.it/600x300">
+                  <div class="panel-block">
                     <div class="columns columnsaside">
                       <div class="column">
                         <div class="panel-block-item"><?php echo $rows["eventname"]; ?></div>
                       </div>
                       <div class="column has-text-right">
-                        <div class="panel-block-item"><?php echo $rows["date_event"] ?><i class="fa fa-user"></i></div>
+                        <div class="panel-block-item"><?php echo $rows["Sold_Ticket"] ?><i class="fa fa-user"></i></div>
                         <div class="panel-block-item"><?php echo $rows["date_event"] ?><i class="fa fa-calendar"></i></div>
                       </div>
                     </div>
-
-
                   </div>
                 </div>
-
-
-
+              </div>
         <?php  $first = false; }
+
         else{ ?>
           <div class="column is-6">
             <div class="panel">
@@ -163,6 +162,7 @@ include"conn.php";
             </div>
           </div>
           </div>
+
           <?php  $first = true; }
              }
             ?>
