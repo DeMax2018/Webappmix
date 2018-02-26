@@ -1,6 +1,9 @@
 <?php
 include"conn.php";
 //include "auth.php";
+session_start();
+echo $_SESSION["checked"]."dit is checked";
+
  ?>
 <html>
   <head>
@@ -8,13 +11,13 @@ include"conn.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin</title>
-    <script type="text/javascript" src="js1.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/bulma.css">
     <link rel="stylesheet" type="text/css" href="css/nav.css">
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="js1.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
@@ -164,29 +167,29 @@ include"conn.php";
                        $sth->execute();
                      while($record = $sth->fetch(PDO::FETCH_ASSOC)){ ?>
                        <tr class="is-light">
-                         <td class="accounta"><?php echo $record["fldName"]." ".$record["fldLastname"] ?></td>
+                         <td id="names"class="accounta"><?php echo $record["fldName"]." ".$record["fldLastname"] ?></td>
                          <?php
                          $num = $numright->rowCount();
                          $checkbox = $dbh->prepare("SELECT * FROM PrivateRights WHERE UserID = ".$record["UserID"]);
                          $checkbox->execute();
                          while ($rows = $checkbox->fetch(PDO::FETCH_ASSOC)) {
                            if($rows["Create_events"] == 1){
-                              echo "<td><input checked type='checkbox'></td>";
+                              echo "<td><input checked id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name);' type='checkbox'></td>";
                            }
                            else{
-                             echo "<td><input type='checkbox'></td>";
+                             echo "<td><input id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name);' type='checkbox'></td>";
                            }
                            if($rows["Delete_Events"] == 1){
-                              echo "<td><input checked type='checkbox'></td>";
+                              echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' checked type='checkbox'></td>";
                            }
                            else{
-                             echo "<td><input type='checkbox'></td>";
+                             echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' type='checkbox'></td>";
                            }
                            if($rows["Acces_Rights_System"] == 1){
-                              echo "<td><input checked type='checkbox'></td>";
+                              echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' checked type='checkbox'></td>";
                            }
                            else{
-                             echo "<td><input type='checkbox'></td>";
+                             echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' type='checkbox'></td>";
                            }
                          }
                          ?>

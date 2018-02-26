@@ -130,7 +130,7 @@ include"conn.php";
                         <div class="panel-block-item"><?php echo $rows["eventname"]; ?></div>
                       </div>
                       <div class="column has-text-right">
-                        <div class="panel-block-item"><?php echo $rows["date_event"] ?><i class="fa fa-user"></i></div>
+                        <div class="panel-block-item"><?php echo $rows["Sold_Ticket"] ?><i class="fa fa-user"></i></div>
                         <div class="panel-block-item"><?php echo $rows["date_event"] ?><i class="fa fa-calendar"></i></div>
                       </div>
                     </div>
@@ -153,7 +153,7 @@ include"conn.php";
                     <div class="panel-block-item"><?php echo $rows["eventname"]; ?></div>
                   </div>
                   <div class="column has-text-right">
-                    <div class="panel-block-item"><?php echo $rows["date_event"] ?> <i class="fa fa-user"></i></div>
+                    <div class="panel-block-item"><?php echo $rows["Sold_Ticket"] ?> <i class="fa fa-user"></i></div>
                     <div class="panel-block-item"><?php echo $rows["date_event"] ?> <i class="fa fa-calendar"></i></div>
                   </div>
                 </div>
@@ -164,9 +164,6 @@ include"conn.php";
       <?php  $first = true; }
          }
         ?>
-
-
-
           </div>
         </div>
 
