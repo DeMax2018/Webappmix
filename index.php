@@ -9,12 +9,12 @@ include"conn.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Events</title>
   <link rel="stylesheet" type="text/css" href="../css/bulma.css">
-  <script type="text/javascript" src="js1.js"></script>
+
   <link rel="stylesheet" type="text/css" href="../css/aside.css">
   <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
   <link rel="stylesheet" type="text/css" href="css/nav.css">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js"></script>
-
+<script type="text/javascript" src="js1.js"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
 </head>
 <body>
@@ -113,11 +113,11 @@ include"conn.php";
 
           <div class="search">
             <span class="fa fa-search"></span>
-            <input placeholder="Search term">
+            <input onkeyup="eventsearch();" id="search" placeholder="Search term">
           </div>
         </ul>
       </div>
-      <div class="section scroll things">
+      <div id="events" class="section scroll things">
 
 
         <?php

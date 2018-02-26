@@ -20,7 +20,7 @@ echo $_SESSION["checked"]."dit is checked";
     <script type="text/javascript" src="js1.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+
 
     <link rel="stylesheet" href="css/admin.css">
   </head>
