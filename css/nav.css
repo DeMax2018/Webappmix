@@ -112,7 +112,7 @@ a.file:not(.button) {
   position: fixed !important;
 }
 .section{
-  padding: 40px 0 !important;
+  padding: 40px 2% !important;
 }
 
 .sectionfix{
@@ -121,10 +121,24 @@ a.file:not(.button) {
   margin-bottom: 1%;
 }
 @media screen and (min-width: 769px){
-  div.column.is-9{
+  div.column.is-9.is-active{
     margin-left: 25%;
+    width: 75%;
+    transition: 0.5s
+  }
+  div.column.is-9{
+    width: 100%;
     z-index: 3;
-    padding-left: 2%;
+    transition: 0.5s
+  }
+  div.column.is-9-nav.is-active{
+    z-index: 3;
+    width: 75%;
+    transition: 0.5s
+  }
+  div.column.is-9-nav{
+    width: 100%;
+    transition: 0.5s
   }
 }
 @media screen and (max-width: 769px){
@@ -163,4 +177,16 @@ a.file:not(.button) {
 .nav > .container {
   position: fixed !important;
   background: white;
+}
+.is-9 .nav-aside{
+  position: fixed;
+  background-color: white;
+  padding-left: 2%;
+}
+
+.things{
+  margin-top: 5em;
+}
+.panel img{
+  width: 100%;
 }

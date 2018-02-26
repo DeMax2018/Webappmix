@@ -102,17 +102,8 @@ include"conn.php";
       </div>
     </aside>
     <div class="content column is-9">
-      <ul class="ulsearch nobullets isflex justify_stuff is-hidden-mobile">
-        <div class="search">
-    <span class="fa fa-search"></span>
-    <input placeholder="Search term" id="search" onkeyup="eventsearch();">
-  </div>
-      </ul>
+      <div class="content column is-9-nav nav-aside">
 
-      <div class="section scroll" id="events">
-
-
-        <?php
         $sql = $dbh->prepare("SELECT * FROM Event WHERE Active = 1;");
         $sql->execute();
         $first = true;
@@ -122,9 +113,7 @@ include"conn.php";
               <div class="column is-6">
                 <div class="panel">
                   <p class="is-marginless">
-                    <img src="https://placehold.it/600x300">
                   </p>
-                  <div class="panel-block">
                     <div class="columns columnsaside">
                       <div class="column">
                         <div class="panel-block-item"><?php echo $rows["eventname"]; ?></div>
@@ -134,6 +123,20 @@ include"conn.php";
                         <div class="panel-block-item"><?php echo $rows["date_event"] ?><i class="fa fa-calendar"></i></div>
                       </div>
                     </div>
+
+        <span class="aside-toggle is-marginless">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <ul class="ulsearch nobullets isflex justify_stuff is-hidden-mobile">
+
+          <div class="search">
+            <span class="fa fa-search"></span>
+            <input placeholder="Search term">
+          </div>
+        </ul>
+      </div>
                   </div>
                 </div>
               </div>
@@ -144,9 +147,7 @@ include"conn.php";
         else{ ?>
           <div class="column is-6">
             <div class="panel">
-              <p class="is-marginless">
                 <img src="https://placehold.it/600x300">
-              </p>
               <div class="panel-block">
                 <div class="columns columnsaside">
                   <div class="column">
