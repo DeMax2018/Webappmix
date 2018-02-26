@@ -102,14 +102,22 @@ include"conn.php";
       </div>
     </aside>
     <div class="content column is-9">
-      <ul class="ulsearch nobullets isflex justify_stuff is-hidden-mobile">
-        <div class="search">
-    <span class="fa fa-search"></span>
-    <input placeholder="Search term" id="search" onkeyup="eventsearch();">
-  </div>
-      </ul>
+      <div class="content column is-9-nav nav-aside">
 
-      <div class="section scroll" id="events">
+        <span class="aside-toggle is-marginless">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <ul class="ulsearch nobullets isflex justify_stuff is-hidden-mobile">
+
+          <div class="search">
+            <span class="fa fa-search"></span>
+            <input placeholder="Search term">
+          </div>
+        </ul>
+      </div>
+      <div class="section scroll things">
 
 
         <?php
@@ -121,9 +129,7 @@ include"conn.php";
             <div class="columns columnsaside"> <!--  Max 2 items -->
               <div class="column is-6">
                 <div class="panel">
-                  <p class="is-marginless">
                     <img src="https://placehold.it/600x300">
-                  </p>
                   <div class="panel-block">
                     <div class="columns columnsaside">
                       <div class="column">
@@ -137,33 +143,34 @@ include"conn.php";
                   </div>
                 </div>
               </div>
-
-
-
         <?php  $first = false; }
+
         else{ ?>
           <div class="column is-6">
             <div class="panel">
-              <p class="is-marginless">
                 <img src="https://placehold.it/600x300">
-              </p>
               <div class="panel-block">
                 <div class="columns columnsaside">
                   <div class="column">
                     <div class="panel-block-item"><?php echo $rows["eventname"]; ?></div>
                   </div>
                   <div class="column has-text-right">
-                    <div class="panel-block-item"><?php echo $rows["Sold_Ticket"] ?> <i class="fa fa-user"></i></div>
+                    <div class="panel-block-item"><?php echo $rows["Sold_Ticket"] ?><i class="fa fa-user"></i></div>
                     <div class="panel-block-item"><?php echo $rows["date_event"] ?> <i class="fa fa-calendar"></i></div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      <?php  $first = true; }
-         }
-        ?>
+          </div>
+
+          <?php  $first = true; }
+             }
+            ?>
+
+
+
+
           </div>
         </div>
 
