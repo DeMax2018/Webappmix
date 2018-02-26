@@ -102,8 +102,8 @@ include"conn.php";
       </div>
     </aside>
     <div class="content column is-9">
-
       <div class="content column is-9-nav nav-aside">
+
         <span class="aside-toggle is-marginless">
           <span></span>
           <span></span>
@@ -117,6 +117,7 @@ include"conn.php";
           </div>
         </ul>
       </div>
+      <div class="section scroll things">
 
 
         <?php
@@ -154,7 +155,7 @@ include"conn.php";
                     <div class="panel-block-item"><?php echo $rows["eventname"]; ?></div>
                   </div>
                   <div class="column has-text-right">
-                    <div class="panel-block-item"><?php echo $rows["date_event"] ?> <i class="fa fa-user"></i></div>
+                    <div class="panel-block-item"><?php echo $rows["Sold_Ticket"] ?><i class="fa fa-user"></i></div>
                     <div class="panel-block-item"><?php echo $rows["date_event"] ?> <i class="fa fa-calendar"></i></div>
                   </div>
                 </div>
@@ -170,7 +171,7 @@ include"conn.php";
 
 
 
-
+          </div>
         </div>
 
         <nav class="pagination nobullets" role="navigation" aria-label="pagination">
