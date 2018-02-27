@@ -2,8 +2,6 @@
 include"conn.php";
 //include "auth.php";
 session_start();
-echo $_SESSION["checked"]."dit is checked";
-
  ?>
 <html>
   <head>
@@ -18,14 +16,17 @@ echo $_SESSION["checked"]."dit is checked";
     <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="jquery-ui-1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="js1.js"></script>
-
+<script src="js/noframework.waypoints.min.js" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
 
     <link rel="stylesheet" href="css/admin.css">
   </head>
   <body>
+
+
         <script async type="text/javascript" src="../js/bulma.js"></script>
+
     <nav class="nav is-dark has-shadow is-hidden-tablet" id="top">
       <div class="container">
         <div class="subcontainer">
@@ -91,18 +92,18 @@ echo $_SESSION["checked"]."dit is checked";
           </div>
           <div class="main">
             <div class="title">Main</div>
-            <a href="#" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
+            <a href="index.php" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
             <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
             <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
             <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Make an event</span></a>
             <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">Event management</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
           </div>
           <div class="main">
             <div class="title"><i class="fa fa-cog"></i>  Admin</div>
-            <a href="#" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Admin newsfeed</span></a>
+            <a href="admin.php#account" class="item link1"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
+            <a href="#" class="item link2"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
+            <a href="#" class="item link3"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
+            <a href="#" class="item link4"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Admin newsfeed</span></a>
           </div>
         </div>
       </aside>
@@ -114,15 +115,8 @@ echo $_SESSION["checked"]."dit is checked";
             <span></span>
             <span></span>
           </span>
-          <ul class="ulsearch nobullets isflex justify_stuff">
-
-            <div class="search">
-              <span class="fa fa-search"></span>
-              <input placeholder="Search term">
-            </div>
-          </ul>
         </div>
-        <div class="tile is-ancestor">
+        <div class="tile is-ancestor things">
           <div class="tile is-parent">
             <article class="tile is-child box">
               <p class="title">Hello Admin!</p>
@@ -145,7 +139,6 @@ echo $_SESSION["checked"]."dit is checked";
                           <p class="control">
                             <input class="input is-fullwidth" id="filter" onkeyup="rights();" type="text" placeholder="Find an account">
                           </p>
-
                         </div>
                       </div>
                     </div>
@@ -220,6 +213,7 @@ echo $_SESSION["checked"]."dit is checked";
             </article>
           </div>
         </div>
-      </div>
+    </div>
   </body>
+
 </html>

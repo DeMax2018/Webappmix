@@ -138,7 +138,8 @@ a.file:not(.button) {
   }
   div.column.is-9-nav{
     width: 100%;
-    transition: 0.5s
+    transition: 0.5s;
+    height: 5em;
   }
 }
 @media screen and (max-width: 769px){
@@ -179,13 +180,13 @@ a.file:not(.button) {
   background: white;
 }
 .is-9 .nav-aside{
+  width: 100%;
   position: fixed;
   background-color: white;
   padding-left: 2%;
 }
-
 .things{
-  margin-top: 5em;
+  margin-top: 5em !important;
 }
 .panel img{
   width: 100%;
