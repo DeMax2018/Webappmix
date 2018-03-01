@@ -5,7 +5,6 @@ tr.headcol{
   background-color: white;
   width: 100%;
   padding-bottom: 2em;
-
 }
 th{
   width: 8.3%;
@@ -26,4 +25,7 @@ div.scrollacc{
 tr{
   height: 2em;
   font-size: 1.2em;
+}
+.tile{
+  width: 100%;
 }
