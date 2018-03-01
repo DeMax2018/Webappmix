@@ -1,19 +1,26 @@
+<?php
+session_start();
+
+
+?>
 <!DOCTYPE html>
 <html>
   <head>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title></title>
+      <title>event</title>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+      <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="jquery-ui-1.12.1/jquery-ui.js"></script>
+      <script type="text/javascript" src="js1.js"></script>
       <link rel="stylesheet" href="css/slider.css">
       <link rel="stylesheet" href="css/event.css">
       <link rel="stylesheet" type="text/css" href="../css/bulma.css">
       <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
       <link rel="stylesheet" href="css/nav.css">
-      <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
-      <script src="js/event.js" charset="utf-8"></script>
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-      <script src="js/responsiveslides.min.js"></script>
+
+
   </head>
   <body>
     <nav class="nav is-dark has-shadow is-hidden-tablet" id="top">
@@ -95,10 +102,10 @@
             <div class="tile">
               <div class="tile is-parent is-vertical">
                 <article class="tile is-child box">
-                  <div class="button right">
+                  <div onclick="mailevent();" class="button right">
                     Participate
                   </div>
-                  <p class="title">Name event</p>
+                  <p name="1" class="title">Name event</p>
                   <p class="subtitle">By name creator</p>
                   <p class="subtitle">Date</p>
                 </article>

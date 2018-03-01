@@ -182,22 +182,22 @@ session_start();
                          $checkbox->execute();
                          while ($rows = $checkbox->fetch(PDO::FETCH_ASSOC)) {
                            if($rows["Create_events"] == 1){
-                              echo "<td><input checked id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name);' type='checkbox'></td>";
+                              echo "<td><input checked id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,1);' type='checkbox'></td>";
                            }
                            else{
-                             echo "<td><input id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name);' type='checkbox'></td>";
+                             echo "<td><input id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,1);' type='checkbox'></td>";
                            }
                            if($rows["Delete_Events"] == 1){
-                              echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' checked type='checkbox'></td>";
+                              echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' checked type='checkbox'></td>";
                            }
                            else{
-                             echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' type='checkbox'></td>";
+                             echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' type='checkbox'></td>";
                            }
                            if($rows["Acces_Rights_System"] == 1){
-                              echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' checked type='checkbox'></td>";
+                              echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' checked type='checkbox'></td>";
                            }
                            else{
-                             echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' type='checkbox'></td>";
+                             echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' type='checkbox'></td>";
                            }
                          }
                          ?>

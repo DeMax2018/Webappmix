@@ -13,17 +13,20 @@ function passwchecker(){
     //hier moeten nog toggles komen
   }
 }
-function create_event(names){
+function create_event(names,type){
+  alert(names);
   if(document.getElementById('create').checked == 1){
     var box = {
-      checked: "yes",
-      name: names
+      checked: 1,
+      name: names,
+      type: type
     }
   }
   else{
     var box = {
-      checked: "no",
-      name: names
+      checked: 0,
+      name: names,
+      type: type
     }
   }
   console.log(box);
@@ -31,6 +34,20 @@ function create_event(names){
     type: "POST",
     url: "adminfunctionscreate.php",
     data: JSON.stringify(box),
+    contentType: "application/json",
+    dataType: "json",
+  });
+}
+
+function mailevent(){
+  var x = document.getElementsByTagName("p")[0].getAttribute("name");
+  var parameters = {
+    "id": x
+  }
+  $.ajax({
+    type: "POST",
+    url: "mail.php",
+    data: JSON.stringify(parameters),
     contentType: "application/json",
     dataType: "json",
   });
