@@ -2,7 +2,7 @@
 include"conn.php";
 //include "auth.php";
 session_start();
-echo $_SESSION["checked"]."dit is checked";
+
 
  ?>
 <html>
@@ -154,8 +154,8 @@ echo $_SESSION["checked"]."dit is checked";
                     <div class="level-right">
                       <i class="fa fa-filter filter"></i>
                       <p class="control">
-                        <button class="button">
-                          Search
+                        <button onclick="switch();" class="button">
+                          Switch
                         </button>
                       </p>
                     </div>
@@ -189,22 +189,22 @@ echo $_SESSION["checked"]."dit is checked";
                          $checkbox->execute();
                          while ($rows = $checkbox->fetch(PDO::FETCH_ASSOC)) {
                            if($rows["Create_events"] == 1){
-                              echo "<td><input checked id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name);' type='checkbox'></td>";
+                              echo "<td><input checked id='create' name='".$record["UserID"]."' onchange='create_event(this.name);' type='checkbox'></td>";
                            }
                            else{
-                             echo "<td><input id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name);' type='checkbox'></td>";
+                             echo "<td><input id='create' name='".$record["UserID"]."' onchange='create_event(this.name);' type='checkbox'></td>";
                            }
                            if($rows["Delete_Events"] == 1){
-                              echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' checked type='checkbox'></td>";
+                              echo "<td><input name='".$record["UserID"]."' checked type='checkbox'></td>";
                            }
                            else{
-                             echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' type='checkbox'></td>";
+                             echo "<td><input name='".$record["UserID"]."' type='checkbox'></td>";
                            }
                            if($rows["Acces_Rights_System"] == 1){
-                              echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' checked type='checkbox'></td>";
+                              echo "<td><input name='".$record["UserID"]."' checked type='checkbox'></td>";
                            }
                            else{
-                             echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' type='checkbox'></td>";
+                             echo "<td><input name='".$record["UserID"]."' type='checkbox'></td>";
                            }
                          }
                          ?>
@@ -218,6 +218,7 @@ echo $_SESSION["checked"]."dit is checked";
                </div>
               </div>
             </article>
+            <a href="http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=http://www.me.com/me.asp?i=1%26n=2">click</a>
           </div>
         </div>
       </div>

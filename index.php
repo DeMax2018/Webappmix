@@ -1,5 +1,6 @@
 <?php
 include"conn.php";
+session_start();
  ?>
 <!DOCTYPE html>
 <html>
@@ -27,6 +28,7 @@ include"conn.php";
           <span></span>
         </span>
       </div>
+
       <div class="secondsubcontainer">
         <ul class="ulsearch nobullets isflex justify_stuff">
           <div class="search">
@@ -121,7 +123,7 @@ include"conn.php";
 
 
         <?php
-        $sql = $dbh->prepare("SELECT * FROM Event WHERE Active = 1;");
+        $sql = $dbh->prepare("SELECT * FROM Event WHERE Active = 1 LIMIT 10 OFFSET 0;");
         $sql->execute();
         $first = true;
         while($rows = $sql->fetch(PDO::FETCH_ASSOC)){
@@ -173,11 +175,18 @@ include"conn.php";
 
           </div>
         </div>
+      <div id="giveme">
 
+      </div>
         <nav class="pagination nobullets" role="navigation" aria-label="pagination">
-          <a class="pagination-previous nobullets">Previous</a>
           <a class="pagination-next nobullets">Next page</a>
+          <a class="pagination-previous nobullets">Previous</a>
           <ul class="pagination-list nobullets">
+            <?php
+
+
+
+            ?>
             <li>
               <a class="pagination-link" aria-label="Goto page 1">1</a>
             </li>

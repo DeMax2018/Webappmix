@@ -27,16 +27,31 @@ class classes
       else if( $action == 'd' ){
           $output = openssl_decrypt( base64_decode( $string ), $encrypt_method, $key, 0, $iv );
       }
-      echo $output;
+
       return $output;
   }
-
-  public function add_user()
-  {
-  
+  public function qrcode($code){
+    include "BarcodeQR.php";
+    $qr = new BarcodeQR();
+    $hash = hash('ripemd160', $code);
+    $hashish = hash('tiger192,3',$hash);
+    echo $hashish;
+    $qr->url("https://swfactory.be/testingarea?code=".$hashish);
+    $qr->draw(300,"jaa");
+  }
+  public function hashish($text){
+    $hash = hash('ripemd160', $text);
+    $hashish = hash('tiger192,3',$hash);
+    return $hashish;
+  }
+  public function changeprofile(){
+    $sql = $dbh->prepare("UPDATE user set fldName = ? and fldLastname = ? and fldMail = ?");
+    $sql->bindValue(1,$_POST["name"],PDO::PARAM_STR);
+    $sql->bindValue(2,$_POST["lastname"],PDO::PARAM_STR);
+    $sql->bindValue(3,$_POST["mail"],PDO::PARAM_STR);
+    $sql->execute();
   }
 }
-
 
 
 ?>
