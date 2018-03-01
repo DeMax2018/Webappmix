@@ -123,9 +123,8 @@ a.title:hover{
   left: 10px;
 }
 .pagination {
-  margin: auto;
+  margin: 0px 20px 0px 20px;
   height: 10em;
-  width: 100%;
 }
 .pagination > a:not(:first-child) {
   margin-left: 0px !important;
@@ -197,9 +196,8 @@ a.title:hover{
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
-            margin: auto;
+            margin: 0px 20px 0px 20px;
             height: 10em;
-            width: 100%;
   }
   .pagination.is-centered .pagination-previous {
     -webkit-box-ordinal-group: 2;
@@ -503,4 +501,10 @@ i {
 .panel{
   margin-left: 5px;
   margin-right: 5px;
+}
+.content:not(:last-child){
+  margin-bottom: 0;
+}
+.columns{
+  margin-left: 0px;
 }

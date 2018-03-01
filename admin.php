@@ -2,8 +2,6 @@
 include"conn.php";
 //include "auth.php";
 session_start();
-
-
  ?>
 <html>
   <head>
@@ -18,14 +16,17 @@ session_start();
     <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="jquery-ui-1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="js1.js"></script>
-
+<script src="js/noframework.waypoints.min.js" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
-
+    <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
 
     <link rel="stylesheet" href="css/admin.css">
   </head>
   <body>
+
+
         <script async type="text/javascript" src="../js/bulma.js"></script>
+
     <nav class="nav is-dark has-shadow is-hidden-tablet" id="top">
       <div class="container">
         <div class="subcontainer">
@@ -91,18 +92,18 @@ session_start();
           </div>
           <div class="main">
             <div class="title">Main</div>
-            <a href="#" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
+            <a href="index.php" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
             <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
             <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
             <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Make an event</span></a>
             <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">Event management</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
           </div>
           <div class="main">
             <div class="title"><i class="fa fa-cog"></i>  Admin</div>
-            <a href="#" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Admin newsfeed</span></a>
+            <a href="admin.php#account" class="item link1"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
+            <a href="#" class="item link2"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
+            <a href="#" class="item link3"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
+            <a href="#" class="item link4"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Admin newsfeed</span></a>
           </div>
         </div>
       </aside>
@@ -114,15 +115,8 @@ session_start();
             <span></span>
             <span></span>
           </span>
-          <ul class="ulsearch nobullets isflex justify_stuff">
-
-            <div class="search">
-              <span class="fa fa-search"></span>
-              <input placeholder="Search term">
-            </div>
-          </ul>
         </div>
-        <div class="tile is-ancestor">
+        <div class="tile is-ancestor things">
           <div class="tile is-parent">
             <article class="tile is-child box">
               <p class="title">Hello Admin!</p>
@@ -145,7 +139,6 @@ session_start();
                           <p class="control">
                             <input class="input is-fullwidth" id="filter" onkeyup="rights();" type="text" placeholder="Find an account">
                           </p>
-
                         </div>
                       </div>
                     </div>
@@ -154,8 +147,8 @@ session_start();
                     <div class="level-right">
                       <i class="fa fa-filter filter"></i>
                       <p class="control">
-                        <button onclick="switch();" class="button">
-                          Switch
+                        <button class="button">
+                          Search
                         </button>
                       </p>
                     </div>
@@ -189,22 +182,22 @@ session_start();
                          $checkbox->execute();
                          while ($rows = $checkbox->fetch(PDO::FETCH_ASSOC)) {
                            if($rows["Create_events"] == 1){
-                              echo "<td><input checked id='create' name='".$record["UserID"]."' onchange='create_event(this.name);' type='checkbox'></td>";
+                              echo "<td><input checked id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,1);' type='checkbox'></td>";
                            }
                            else{
-                             echo "<td><input id='create' name='".$record["UserID"]."' onchange='create_event(this.name);' type='checkbox'></td>";
+                             echo "<td><input id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,1);' type='checkbox'></td>";
                            }
                            if($rows["Delete_Events"] == 1){
-                              echo "<td><input name='".$record["UserID"]."' checked type='checkbox'></td>";
+                              echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' checked type='checkbox'></td>";
                            }
                            else{
-                             echo "<td><input name='".$record["UserID"]."' type='checkbox'></td>";
+                             echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' type='checkbox'></td>";
                            }
                            if($rows["Acces_Rights_System"] == 1){
-                              echo "<td><input name='".$record["UserID"]."' checked type='checkbox'></td>";
+                              echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' checked type='checkbox'></td>";
                            }
                            else{
-                             echo "<td><input name='".$record["UserID"]."' type='checkbox'></td>";
+                             echo "<td><input name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' type='checkbox'></td>";
                            }
                          }
                          ?>
@@ -218,9 +211,9 @@ session_start();
                </div>
               </div>
             </article>
-            <a href="http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=http://www.me.com/me.asp?i=1%26n=2">click</a>
           </div>
         </div>
-      </div>
+    </div>
   </body>
+
 </html>

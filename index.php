@@ -1,6 +1,5 @@
 <?php
 include"conn.php";
-session_start();
  ?>
 <!DOCTYPE html>
 <html>
@@ -10,12 +9,12 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Events</title>
   <link rel="stylesheet" type="text/css" href="../css/bulma.css">
-
+  <script type="text/javascript" src="js1.js"></script>
   <link rel="stylesheet" type="text/css" href="../css/aside.css">
   <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
   <link rel="stylesheet" type="text/css" href="css/nav.css">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js"></script>
-<script type="text/javascript" src="js1.js"></script>
+
   <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
 </head>
 <body>
@@ -28,7 +27,6 @@ session_start();
           <span></span>
         </span>
       </div>
-
       <div class="secondsubcontainer">
         <ul class="ulsearch nobullets isflex justify_stuff">
           <div class="search">
@@ -88,18 +86,18 @@ session_start();
         </div>
         <div class="main">
           <div class="title">Main</div>
-          <a href="#" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
+          <a href="index.php" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
           <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
           <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
-          <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Make an event</span></a>
-          <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">Event management</span></a>
+          <a href="eventcreate.php" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
+          <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Event management</span></a>
         </div>
         <div class="main">
           <div class="title"><i class="fa fa-cog"></i>  Admin</div>
-          <a href="#" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
-          <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
-          <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
-          <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Admin newsfeed</span></a>
+          <a href="admin.php#account" class="item link1"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
+          <a href="#" class="item link2"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
+          <a href="#" class="item link3"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
+          <a href="#" class="item link4"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Admin newsfeed</span></a>
         </div>
       </div>
     </aside>
@@ -115,15 +113,15 @@ session_start();
 
           <div class="search">
             <span class="fa fa-search"></span>
-            <input onkeyup="eventsearch();" id="search" placeholder="Search term">
+            <input placeholder="Search term">
           </div>
         </ul>
       </div>
-      <div id="events" class="section scroll things">
+      <div class="section scroll things">
 
 
         <?php
-        $sql = $dbh->prepare("SELECT * FROM Event WHERE Active = 1 LIMIT 10 OFFSET 0;");
+        $sql = $dbh->prepare("SELECT * FROM Event WHERE Active = 1;");
         $sql->execute();
         $first = true;
         while($rows = $sql->fetch(PDO::FETCH_ASSOC)){
@@ -165,51 +163,40 @@ session_start();
             </div>
           </div>
           </div>
-
           <?php  $first = true; }
-             }
-            ?>
-
-
-
-
+            }
+          ?>
           </div>
+          <nav class="pagination nobullets" role="navigation" aria-label="pagination">
+            <a class="pagination-previous nobullets">Previous</a>
+            <a class="pagination-next nobullets">Next page</a>
+            <ul class="pagination-list nobullets">
+              <li>
+                <a class="pagination-link" aria-label="Goto page 1">1</a>
+              </li>
+              <li>
+                <span class="pagination-ellipsis">&hellip;</span>
+              </li>
+              <li>
+                <a class="pagination-link" aria-label="Goto page 45">45</a>
+              </li>
+              <li>
+                <a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a>
+              </li>
+              <li>
+                <a class="pagination-link" aria-label="Goto page 47">47</a>
+              </li>
+              <li>
+                <span class="pagination-ellipsis">&hellip;</span>
+              </li>
+              <li>
+                <a class="pagination-link" aria-label="Goto page 86">86</a>
+              </li>
+            </ul>
+          </nav>
         </div>
-      <div id="giveme">
-
-      </div>
-        <nav class="pagination nobullets" role="navigation" aria-label="pagination">
-          <a class="pagination-next nobullets">Next page</a>
-          <a class="pagination-previous nobullets">Previous</a>
-          <ul class="pagination-list nobullets">
-            <?php
 
 
-
-            ?>
-            <li>
-              <a class="pagination-link" aria-label="Goto page 1">1</a>
-            </li>
-            <li>
-              <span class="pagination-ellipsis">&hellip;</span>
-            </li>
-            <li>
-              <a class="pagination-link" aria-label="Goto page 45">45</a>
-            </li>
-            <li>
-              <a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a>
-            </li>
-            <li>
-              <a class="pagination-link" aria-label="Goto page 47">47</a>
-            </li>
-            <li>
-              <span class="pagination-ellipsis">&hellip;</span>
-            </li>
-            <li>
-              <a class="pagination-link" aria-label="Goto page 86">86</a>
-            </li>
-          </ul>
-        </nav>
       </div>
     </div>
   </div>

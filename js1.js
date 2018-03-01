@@ -14,6 +14,7 @@ function passwchecker(){
   }
 }
 function create_event(names,type){
+  alert(names);
   if(document.getElementById('create').checked == 1){
     var box = {
       checked: 1,
