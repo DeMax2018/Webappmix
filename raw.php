@@ -6,7 +6,7 @@
 	echo "<p>[DATE]		05/05/2017</p>";
 	echo "<p>[ACTION]	Posting FB</p><br>";
 
-	$user_access_token 	= "EAACEdEose0cBABM32iRKcG166qDTstSap7ve9mxL5g2MiAdMiibZCHliQnmDGKfagFcVm314ICgZBbAq9bZCPBZC1oMJKvF30PCwqQTKFu9ZCaD1RD19dSochYhNMRItppTQJVrcZCY0s8VSVLMTFZCccZCye1qUEeGmUb8d3fSfAVnR5u2WoOT6ghkTL4WgJiG62rlSktmBqgZDZD";
+	$user_access_token 	= "EAADD6cQpyFIBAONxO8PmSRu3rJPEhDZCDvZBiMSnjbXZApDFOar1Yh1nPHjmuWfG8dJLTUf1ygkQbWDZBt86uwkKmYmGVSiPBHz6ElC1Fx8UiEeWp5tUi1F5ibP0mmXWr6ZAaegR7DEZCnzhSbXQA5Eg4BhfSStQDA0ctKrA4BOwZDZD";
 	$id_page			= "860909614081282";
 
 	// /* 1] You need an access_token for your page
@@ -40,7 +40,7 @@
 	print_r($result);
 	//
 
-	
+
 
 	$endpoint 				= "photos";
 	$url 					= "https://graph.facebook.com/".$id_page."/".$endpoint;

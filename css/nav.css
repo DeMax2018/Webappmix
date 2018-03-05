@@ -2,26 +2,26 @@
   background-color: #232B2D;
 }
 .aside .account {
-  background-color: #2EB398;
-  height: 95px;
-  width: 100%;
-  padding: 25px 30px;
+  background-color: #2EB398 !important;
+  height: 95px !important;
+  width: 100% !important;
+  padding: 25px 30px !important;
 }
 .aside .account .button {
-  background-color: transparent;
-  border: 3px dashed #F6F7F7;
-  padding: 20px 70px;
-  color: #F6F7F7;
+  background-color: transparent !important;
+  border: 3px dashed #F6F7F7 !important;
+  padding: 20px 70px !important;
+  color: #F6F7F7 !important;
 }
 .aside .main {
-  padding: 40px;
-  color: #6F7B7E;
+  padding: 40px !important;
+  color: #6F7B7E !important;
 }
 .aside .title {
-  color: #6F7B7E;
-  font-size: 12px;
-  font-weight: bold;
-  text-transform: uppercase;
+  color: #6F7B7E !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
 }
 .aside .main .item {
   display: block;
