@@ -51,7 +51,22 @@ class classes
     $sql->bindValue(3,$_POST["mail"],PDO::PARAM_STR);
     $sql->execute();
   }
+  public function eventdetails($id){
+    include "conn.php";
+    $data = $dbh->prepare("SELECT OwnerID FROM ticket WHERE EventID = ? ");
+    $data->bindValue(1,$id,PDO::PARAM_STR);
+    $num = 1;
+    $arr = array();
+    $data->execute();
+    while ($rows = $data->fetch(PDO::FETCH_ASSOC)) {
+      $user = $dbh->prepare("SELECT fldName, fldLastname FROM user Where UserID = ".$rows["OwnerID"]);
+      $user->execute();
+      $username = $user->fetch(PDO::FETCH_ASSOC);
+      array_push($arr," ".$num." => ".$username["fldName"]." ".$username["fldLastname"]);
+      $num++;
+    }
+    return json_encode($arr);
+  }
 }
-
 
 ?>

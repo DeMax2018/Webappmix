@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+include"dbclasses.php";
 
 ?>
 <!DOCTYPE html>
@@ -154,6 +155,13 @@ session_start();
                   <p class="subtitle">amount participants</p>
                   <div class="content participants">
                     <ul>
+                      <?php
+                      $data = new classes();
+                      $load = json_decode($data->eventdetails(1));
+                      foreach ($load as $value) {
+                        echo $value;
+                      }
+                                           ?>
                       <li>Participant 1</li>
                       <li class="is-light">Participant 2</li>
                       <li>Participant 1</li>
