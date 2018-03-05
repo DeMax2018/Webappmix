@@ -141,10 +141,10 @@ a.file:not(.button) {
     transition: 0.5s;
     height: 5em;
   }
+  div.nav
 }
 @media screen and (max-width: 769px){
   div.column.is-9{
-    padding-left: 4% !important;
     width: 100%;
   }
 }
@@ -184,6 +184,7 @@ a.file:not(.button) {
   position: fixed;
   background-color: white;
   padding-left: 2%;
+  z-index: 20;
 }
 .things{
   margin-top: 5em !important;
