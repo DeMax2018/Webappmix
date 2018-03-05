@@ -19,13 +19,11 @@ session_start();
 <script src="js/noframework.waypoints.min.js" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
-
     <link rel="stylesheet" href="css/admin.css">
   </head>
   <body>
 
-
-        <script async type="text/javascript" src="../js/bulma.js"></script>
+<script async type="text/javascript" src="../js/bulma.js"></script>
 
     <nav class="nav is-dark has-shadow is-hidden-tablet" id="top">
       <div class="container">
@@ -35,14 +33,6 @@ session_start();
             <span></span>
             <span></span>
           </span>
-        </div>
-        <div class="secondsubcontainer">
-          <ul class="ulsearch nobullets isflex justify_stuff">
-            <div class="search">
-        <span class="fa fa-search"></span>
-        <input placeholder="Search term">
-      </div>
-          </ul>
         </div>
 
         <div class="nav-right nav-menu is-hidden-tablet">
@@ -108,12 +98,11 @@ session_start();
         </div>
       </aside>
       <div class="content column is-9">
-        <div class="content column is-9-nav nav-aside">
-
+        <div class="content column is-9-nav nav-aside is-hidden-mobile">
           <span class="aside-toggle is-marginless">
-            <span></span>
-            <span></span>
-            <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
           </span>
         </div>
         <div class="tile is-ancestor things">
