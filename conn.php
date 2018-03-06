@@ -1,14 +1,9 @@
 <?php
-
-$dbname = "real_tenerife";
-$dbusern = "root";
-$dbhost = "localhost";
-$dbpass = "";
-$charset = "utf8";
-
+include "parameters.php";
+$db = new dbparameters();
 try {
 
-  $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbusern, $dbpass, array(PDO::ATTR_PERSISTENT => true));
+  $dbh = new PDO("mysql:host=$db->dbhost;dbname=$db->dbname", $db->dbusern, $db->dbpass, array(PDO::ATTR_PERSISTENT => true));
 } catch (PDOException $e) {
     echo "foutje!: " . $e->getMessage() . "<br/>";
     die();
