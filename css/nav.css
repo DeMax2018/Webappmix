@@ -2,26 +2,26 @@
   background-color: #232B2D;
 }
 .aside .account {
-  background-color: #2EB398 !important;
-  height: 95px !important;
-  width: 100% !important;
-  padding: 25px 30px !important;
+  background-color: #2EB398;
+  height: 95px;
+  width: 100%;
+  padding: 25px 30px;
 }
 .aside .account .button {
-  background-color: transparent !important;
-  border: 3px dashed #F6F7F7 !important;
-  padding: 20px 70px !important;
-  color: #F6F7F7 !important;
+  background-color: transparent;
+  border: 3px dashed #F6F7F7;
+  padding: 20px 70px;
+  color: #F6F7F7;
 }
 .aside .main {
-  padding: 40px !important;
-  color: #6F7B7E !important;
+  padding: 40px;
+  color: #6F7B7E;
 }
 .aside .title {
-  color: #6F7B7E !important;
-  font-size: 12px !important;
-  font-weight: bold !important;
-  text-transform: uppercase !important;
+  color: #6F7B7E;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 .aside .main .item {
   display: block;
@@ -141,10 +141,10 @@ a.file:not(.button) {
     transition: 0.5s;
     height: 5em;
   }
+  div.nav
 }
 @media screen and (max-width: 769px){
   div.column.is-9{
-    padding-left: 4% !important;
     width: 100%;
   }
 }
@@ -184,6 +184,7 @@ a.file:not(.button) {
   position: fixed;
   background-color: white;
   padding-left: 2%;
+  z-index: 20;
 }
 .things{
   margin-top: 5em !important;
