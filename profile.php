@@ -1,5 +1,8 @@
 <?php
 include"conn.php";
+include "dbclasses.php";
+$rekt = new classes();
+print_r(json_decode($rekt->userdetails(1)));
  ?>
 <!DOCTYPE html>
 <html>
