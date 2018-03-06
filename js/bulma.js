@@ -20,3 +20,19 @@
         fixed.classList.toggle('is-active');
     });
 })();
+function hover(){
+  var span1 = document.querySelector('.spans1');
+  var span2 = document.querySelector('.spans2');
+  var span3 = document.querySelector('.spans3');
+  span1.style.background= '#1fc8db';
+  span2.style.background= '#1fc8db';
+  span3.style.background= '#1fc8db';
+}
+function hoverout(){
+  var span1 = document.querySelector('.spans1');
+  var span2 = document.querySelector('.spans2');
+  var span3 = document.querySelector('.spans3');
+  span1.style.background= '#69707a';
+  span2.style.background= '#69707a';
+  span3.style.background= '#69707a';
+}

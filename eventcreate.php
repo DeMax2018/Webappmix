@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../css/nav.css">
     <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
     <link rel="stylesheet" href="css/eventcreate.css">
+    <link href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.css" rel="stylesheet" type="text/css" />
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
     <script async type="text/javascript" src="../js/bulma.js"></script>
@@ -80,11 +81,11 @@
           </div>
           <div class="main">
             <div class="title">Main</div>
-            <a href="index.php" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
+            <a href="index.php" class="item"><span class="icon"><i class="fas fa-calendar"></i></span><span class="name">Events</span></a>
             <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
             <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Make an event</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">Event management</span></a>
+            <a href="eventcreate.php" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Event management</span></a>
           </div>
           <div class="main">
             <div class="title"><i class="fa fa-cog"></i>  Admin</div>
@@ -97,10 +98,10 @@
       </aside>
       <div class="content column is-9">
         <div class="content column is-9-nav nav-aside is-hidden-mobile">
-          <span class="aside-toggle is-marginless">
-          <span></span>
-          <span></span>
-          <span></span>
+          <span class="aside-toggle is-marginless" onmouseover="hover()" onmouseout="hoverout()">
+            <span class="spans1"></span>
+            <span class="spans2"></span>
+            <span class="spans3"></span>
           </span>
         </div>
         <div class="back">
@@ -182,31 +183,13 @@
                 </div>
               </div>
               <div class="form-group">
-                <p>Event theme <span>*</span></p>
-                <span class="icon-case"><i class="fas fa-tags"></i></span>
-                <select class="selectpicker" data-live-search="true" multiple>
-                  <option>Mustard</option>
-                  <option>Ketchup</option>
-                  <option>Relish</option>
-                </select>
-                <!-- Latest compiled and minified JavaScript -->
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-
-                <!-- (Optional) Latest compiled and minified JavaScript translation files -->
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script>
-                <script type="text/javascript">
-                  $('.selectpicker').selectpicker({
-                  style: 'btn-info',
-                  size: 4
-                  });
-                </script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js" charset="utf-8"></script>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-                <script src="https://silviomoreto.github.io/bootstrap-select/dist/js/bootstrap-select.min.js" charset="utf-8"></script>
-                <script src="https://silviomoreto.github.io/bootstrap-select/js/highlight.pack.js" charset="utf-8"></script>
-                <script src="https://silviomoreto.github.io/bootstrap-select/js/base.js" charset="utf-8"></script>
-                <div class="validation"></div>
+                <legend>Choose Category/Sport:</legend>
+                    <select id="filter-menu" data-native-menu="false" multiple>
+                        <option value="SFO">Opt 1</option>
+                        <option value="LAX">Opt 2</option>
+                        <option value="YVR">Opt 3</option>
+                        <option value="YYZ">Opt 4</option>
+                    </select>
               </div>
               <div class="form-group">
                 <div class="form-group">
@@ -222,8 +205,6 @@
                   <textarea name="message" rows="14" data-rule="required" data-msg="Vérifiez votre saisie sur les champs : Le champ 'Message' doit être renseigné."></textarea>
                   <div class="validation"></div>
                 </div>
-
-
               </div>
               <button type="submit" class="bouton-contact">Send</button>
             </div>

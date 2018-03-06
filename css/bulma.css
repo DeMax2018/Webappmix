@@ -2861,9 +2861,6 @@ a.box:active {
   margin-top: 5px;
 }
 
-.hamburger:hover, .nav-toggle:hover, .aside-toggle:hover {
-  background-color: #f5f7fa;
-}
 
 .hamburger.is-active span, .is-active.nav-toggle span, .is-active.aside-toggle span {
   background-color: #1fc8db;

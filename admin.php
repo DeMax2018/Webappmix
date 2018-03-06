@@ -11,7 +11,7 @@ session_start();
     <title>Admin</title>
     <link rel="stylesheet" type="text/css" href="../css/bulma.css">
     <link rel="stylesheet" type="text/css" href="css/nav.css">
-
+    <script src="js/bulma.js" charset="utf-8"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="jquery-ui-1.12.1/jquery-ui.js"></script>
@@ -82,11 +82,11 @@ session_start();
           </div>
           <div class="main">
             <div class="title">Main</div>
-            <a href="index.php" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
+            <a href="index.php" class="item"><span class="icon"><i class="fas fa-calendar"></i></span><span class="name">Events</span></a>
             <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
             <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Make an event</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">Event management</span></a>
+            <a href="eventcreate.php" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Event management</span></a>
           </div>
           <div class="main">
             <div class="title"><i class="fa fa-cog"></i>  Admin</div>
@@ -99,10 +99,10 @@ session_start();
       </aside>
       <div class="content column is-9">
         <div class="content column is-9-nav nav-aside is-hidden-mobile">
-          <span class="aside-toggle is-marginless">
-          <span></span>
-          <span></span>
-          <span></span>
+          <span class="aside-toggle is-marginless" onmouseover="hover()" onmouseout="hoverout()">
+            <span class="spans1"></span>
+            <span class="spans2"></span>
+            <span class="spans3"></span>
           </span>
         </div>
         <div class="tile is-ancestor things">

@@ -86,7 +86,7 @@ include"conn.php";
         </div>
         <div class="main">
           <div class="title">Main</div>
-          <a href="index.php" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
+          <a href="index.php" class="item"><span class="icon"><i class="fas fa-calendar"></i></span><span class="name">Events</span></a>
           <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
           <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
           <a href="eventcreate.php" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
@@ -103,14 +103,12 @@ include"conn.php";
     </aside>
     <div class="content column is-9">
       <div class="content column is-9-nav nav-aside">
-
-        <span class="aside-toggle is-marginless">
-          <span></span>
-          <span></span>
-          <span></span>
+        <span class="aside-toggle is-marginless" onmouseover="hover()" onmouseout="hoverout()">
+          <span class="spans1"></span>
+          <span class="spans2"></span>
+          <span class="spans3"></span>
         </span>
         <ul class="ulsearch nobullets isflex justify_stuff is-hidden-mobile">
-
           <div class="search">
             <span class="fa fa-search"></span>
             <input placeholder="Search term">
