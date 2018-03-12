@@ -29,3 +29,10 @@ tr{
 .tile{
   width: 100%;
 }
+.percentage{
+  width: 25% !important;
+  margin-left: 6% !important;
+}
+.flexing{
+  display: flex;
+}

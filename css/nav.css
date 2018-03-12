@@ -129,7 +129,8 @@ a.file:not(.button) {
   div.column.is-9{
     width: 100%;
     z-index: 3;
-    transition: 0.5s
+    transition: 0.5s;
+    background: white;
   }
   div.column.is-9-nav.is-active{
     z-index: 3;

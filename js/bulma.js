@@ -20,3 +20,32 @@
         fixed.classList.toggle('is-active');
     });
 })();
+
+  function click(){
+
+//open popup
+
+
+  $('.popup').addClass('is-visible');
+
+}
+//close popup
+jQuery(document).ready(function($){
+$('.popup').on('click', function(event){
+  if( $(event.target).is('.popup-close') || $(event.target).is('.popup') ) {
+    event.preventDefault();
+    $(this).removeClass('is-visible');
+  }
+});
+//close popup when clicking the esc keyboard button
+$(document).keyup(function(event){
+    if(event.which=='27'){
+      $('.popup').removeClass('is-visible');
+    }
+  });
+});
+
+function show(){
+  var d = document.getElementById("showinfo");
+d.className += " is-active";
+}

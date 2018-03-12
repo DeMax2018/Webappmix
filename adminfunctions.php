@@ -16,6 +16,7 @@ if(isset($_GET["filter"]) === true){
 
         $checkbox = $dbh->prepare("SELECT * FROM PrivateRights WHERE UserID = ".$record["UserID"]);
         $checkbox->execute();
+        
         while ($rows = $checkbox->fetch(PDO::FETCH_ASSOC)) {
           if($rows["Create_events"] == 1){
              echo "<td><input checked id='create' name='create' onchange='create_event(this.value,1);' type='checkbox'></td>";
