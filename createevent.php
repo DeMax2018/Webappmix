@@ -295,7 +295,7 @@ if (e.target.id == "closeid" || e.target.id == "show" || $(e.target).parents("#c
 
           <v-app>
 
-            <v-content>
+            <v-content> 
 
         				<v-container>
                   <v-stepper v-model="step" vertical>
