@@ -36,3 +36,6 @@ tr{
 .flexing{
   display: flex;
 }
+.aside{
+  text-shadow: none;
+}

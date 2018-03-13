@@ -40,10 +40,10 @@ include "conn.php";
                 <div class="column has-text-right">
                   <div class="panel-block-item"><?php echo $building["fldName"] ?><i class="fa fa-user"></i></div>
                   <div class="panel-block-item"><?php echo $rows["RoomID"] ?><i class="fa fa-calendar"></i></div>
-                  <button type="button" id="show" onclick="show();" class="button" name="button">Info</button>
+
                 </div>
               </div>
-            </div>
+            <button type="button" id="show" onclick="show();" class="button" name="button">Info</button></div>
           </div>
         </div>
 
