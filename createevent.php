@@ -11,7 +11,7 @@ include"conn.php";
   <title>Events</title>
   <link rel="stylesheet" type="text/css" href="../css/bulma.css">
 
-  <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'><link rel='stylesheet prefetch' href='https://unpkg.com/vuetify/dist/vuetify.min.css'>
+  <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'><link rel='stylesheet prefetch' href='css/vuetify.css'>
 
     <link rel="stylesheet" href="/css/eventcreate.css">
   <link rel="stylesheet" type="text/css" href="css/nav.css">
@@ -123,7 +123,8 @@ transition:300ms all;
 }
 
 </style>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js"></script>
+<script type="text/javascript" src="js/ajaxjquery.js"></script>
+
 <link rel="stylesheet" href="/css/bulma.css">
   <link rel="stylesheet" type="text/css" href="../css/aside.css">
 <script type="text/javascript">
@@ -184,38 +185,16 @@ if (e.target.id == "closeid" || e.target.id == "show" || $(e.target).parents("#c
 
   }
   function loadrooms(){
-      $("#roomfilters").load("filterloading.php?fieldcreate=all",function(){});
+    //  $("#roomfilters").load("filterloading.php?fieldcreate=all",function(){});
       $("#roomevent").load("loadrooms.php?load=first",function(){});
 
 
   }
-  function click(){
 
-//open popup
-
-
-  $('.popup').addClass('is-visible');
-
-}
-//close popup
-jQuery(document).ready(function($){
-$('.popup').on('click', function(event){
-  if( $(event.target).is('.popup-close') || $(event.target).is('.popup') ) {
-    event.preventDefault();
-    $(this).removeClass('is-visible');
-  }
-});
-//close popup when clicking the esc keyboard button
-$(document).keyup(function(event){
-    if(event.which=='27'){
-      $('.popup').removeClass('is-visible');
-    }
-  });
-});
 
   </script>
 </script>
-  <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+
 </head>
 <body>
   <nav class="nav is-dark has-shadow is-hidden-tablet" id="top">
@@ -362,19 +341,47 @@ $(document).keyup(function(event){
                       </v-stepper-content>
                       <v-stepper-content step="2">
                         <div class="wrapper-room-filter">
-                        <div style="display: inline-grid !important;" id="roomfilters">
+                        <div style="display: block;float: left;min-height: 20em; width: 40%;" id="roomfilters">
+                          <?php
+                            $getall = $dbh->prepare("SELECT * FROM details;");
+                            $getall->execute();
+                            while($all = $getall->fetch(PDO::FETCH_ASSOC)){
+                              switch ($all["SortingID"]) {
+                                case 1: ?>
+                                  <v-text-field label="Name of <?php echo $all["fldname"]; ?>" v-model="registration.eventname" required></v-text-field>
+                          <?php  break;
+                                case 2: ?>
+                                <v-text-field label="how many <?php echo $all["fldname"]; ?>" type="number" v-model="registration.<?php echo $all["fldname"]; ?>" required></v-text-field>
+                          <?php  break;
+                                case 3: ?>
+                                  # code...
+                          <?php  break;
+                                case 4: ?>
+                                <label><?php echo $all["fldname"]."(Not available/available)" ?> </label><br>
+                                <label style="margin-left:0 !important" class="switch">
+                                  <input type="checkbox"id="<?php echo $all["fldname"];?>">
+                                  <span class="slider round"></span>
+                                </label>
+                          <?php  break;
+                                default: ?>
+                                  # code...
+                          <?php  break;
+                              }
+                            }
+
+
+                          ?>
+                        </div>
+                        <div style="float: right;width: 60%;min-height: 20em;" id="roomevent">
 
                         </div>
-                        <div style="float:right;" id="roomevent">
 
                         </div>
 
-                        </div>
-                        <div style="text-align:center;">
+                        <div class="buttonbottom" style="text-align:center;">
                           <v-btn flat @click.native="step = 1">Previous</v-btn>
                           <v-btn color="primary" @click.native="step = 3">Continue</v-btn>
                         </div>
-
                       </v-stepper-content>
                       <v-stepper-content step="3">
 
@@ -545,28 +552,7 @@ $(document).keyup(function(event){
             }
         });
 
-        //# sourceURL=pen.js
-        jQuery(document).ready(function($){
-      //open popup
-      $('.popup-trigger').on('click', function(event){
-        event.preventDefault();
-        $('.popup').addClass('is-visible');
-      });
 
-      //close popup
-      $('.popup').on('click', function(event){
-        if( $(event.target).is('.popup-close') || $(event.target).is('.popup') ) {
-          event.preventDefault();
-          $(this).removeClass('is-visible');
-        }
-      });
-      //close popup when clicking the esc keyboard button
-      $(document).keyup(function(event){
-          if(event.which=='27'){
-            $('.popup').removeClass('is-visible');
-          }
-        });
-      });
         </script>
     </div>
 

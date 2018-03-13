@@ -36,10 +36,8 @@ else{
         ?>
         <div  onchange="" class="percentage">
         <?php } ?>
-        
-          <v-text-field label="Name of<?php echo $type["fldname"] ?>" type="number"
-             v-model="registration.<?php echo $type["fldname"]; ?>" required></v-text-field>
-        <input type="text" style="width:20em !important;" class="input" placeholder="how many <?php echo $user[$start]?> are there available?" id="<?php echo $user[$start]?>" name="" value="">
+          <label>Name of<?php echo $type["fldname"] ?></label>
+        <input type="text" style="width:20em !important" class="input" placeholder="how many <?php echo $user[$start]?> are there available?" id="<?php echo $user[$start]?>" name="" value="">
     <?php if(!isset($_GET["fieldcreate"])){ ?>
       </div>
   <?php  }
@@ -57,7 +55,7 @@ else{
         <div  onchange="" class="percentage">
         <?php } ?>
           <label>Amount of <?php echo $type["fldname"] ?></label>
-        <input type="number" style="width:20em !important;" class="input" placeholder="how many <?php echo $user[$start]?> are there available?" id="<?php echo $user[$start]?>" name="" value="">
+        <input type="number" class="input" placeholder="how many <?php echo $user[$start]?> are there available?" id="<?php echo $user[$start]?>" name="" value="">
         <?php if(!isset($_GET["fieldcreate"])){ ?>
           </div>
       <?php  }
@@ -75,7 +73,7 @@ else{
         ?>
         <div  onchange="" class="percentage">
         <?php } ?>
-        <select type="text" style="width:20em !important;" class="input" placeholder="how many <?php echo $user[$start]?> are there available?" id="<?php echo $user[$start]?>" name="" value="">
+        <select type="text" class="input" placeholder="how many <?php echo $user[$start]?> are there available?" id="<?php echo $user[$start]?>" name="" value="">
         </select>
         <?php if(!isset($_GET["fieldcreate"])){ ?>
           </div>

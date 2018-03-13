@@ -6790,3 +6790,14 @@ a.panel-block:hover {
   border-bottom-color: #1fc8db;
 }
 /*# sourceMappingURL=bulma.css.map */
+.record{
+  float: right;
+  display: inline-grid;
+}
+.inforecord{
+  float: left;
+}
+.mainresults{
+  display: grid;
+  float: right;
+}
