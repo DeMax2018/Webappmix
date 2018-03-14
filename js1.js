@@ -4,7 +4,20 @@ function rights(){
 }
 function eventsearch(){
   var search = document.getElementById('search').value;
+
   $("#events").load("indexfunctions.php?search=" + search,function(){});
+}
+function paging(page){
+  var searching = document.getElementById('search').value;
+if(page === "no"){
+
+}
+else{
+  var url = "indexfunctions.php?page=" + page + "&search=" + searching;
+  $("#events").load(url,function(){});
+  $('html, body').animate({ scrollTop: 0 }, 'slow');
+}
+
 }
 function passwchecker(){
   var first = document.getElementById('password').value;
@@ -51,4 +64,17 @@ function mailevent(){
     contentType: "application/json",
     dataType: "json",
   });
+}
+function looking(){
+  var ids = [];
+  var url = "testingfilter.php?filters=";
+  var children = document.getElementById("filters").children;
+  for (var i = 0, len = children.length ; i < len; i++) {
+      children[i].className = 'new-class';
+      ids.push(children[i].id);
+  }
+  for (var i = 0, len = ids.length ; i < len; i++) {
+    url += "_" + ids[i];
+  }
+  $("#fill").load(url,function(){});
 }

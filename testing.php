@@ -1,21 +1,39 @@
-<?php
+<head>
+ <script type="text/javascript" src="js1.js">
 
-include "phpmail.php";
-$mail = new PHPMailer;
-$mail->setFrom('ggame968@gmail.com', 'Nick Langens');
-$mail->addAddress('nick.langens@gmail.com', 'Rob Langens');
-$mail->AddEmbeddedImage('jaa.png', 'logo_2u');
-$mail->Subject  = 'Your ticket has been processed';
-$mail->Body     = '<p>het is precies wel gelukt ni??</p>
-<img src="cid:logo_2u">';
-$mail->IsHTML(true);
-if(!$mail->send()) {
-  echo 'Message was not sent.';
-  echo 'Mailer error: ' . $mail->ErrorInfo;
-} else {
-  echo 'Message has been sent.';
+
+ </script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js"></script>
+</head>
+<div id="filters">
+
+
+<?php
+include"conn.php";
+
+$values = array(1 => "text", 2 => "number", 3 => "list", 4 => "yes/no");
+$alldetails = $dbh->prepare("SELECT * FROM details;");
+$alldetails->execute();
+while($details = $alldetails->fetch(PDO::FETCH_ASSOC)){
+  if($details["SortingID"] == 1){ ?>
+    <input type="text" id="<?php echo $details["fldname"]; ?>" placeholder="hoeveel <?php echo $details["fldname"]; ?> wil u?" id="<?php echo $values[$details["sortingID"]]; ?>" value="">
+  <?php }
+  elseif($details["SortingID"] == 2){ ?>
+    <input type="number" id="<?php echo $details["fldname"]; ?>" value="">
+  <?php }
+  elseif($details["SortingID"] == 3){ ?>
+    <select  id="<?php echo $details["fldname"]; ?>" value=""></select>
+  <?php }
+  elseif($details["SortingID"] == 4){ ?>
+    <input type="checkbox" id="<?php echo $details["fldname"]; ?>" value="">
+  <?php }
 }
 
 
 
 ?>
+</div>
+<button type="button" onclick="looking();" name="button">test</button>
+<div id="fill">
+
+</div>

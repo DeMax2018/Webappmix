@@ -17,7 +17,7 @@ include"conn.php";
 
   <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
 </head>
-<body>
+<body onload="eventsearch();">
   <nav class="nav is-dark has-shadow is-hidden-tablet" id="top">
     <div class="container">
       <div class="subcontainer">
@@ -31,7 +31,7 @@ include"conn.php";
         <ul class="ulsearch nobullets isflex justify_stuff">
           <div class="search">
       <span class="fa fa-search"></span>
-      <input placeholder="Search term">
+      <input id="searchmobile" onkeyup='eventsearch();' placeholder="Search term">
     </div>
         </ul>
       </div>
@@ -113,87 +113,14 @@ include"conn.php";
 
           <div class="search">
             <span class="fa fa-search"></span>
-            <input placeholder="Search term">
+            <input id="search" onkeyup='eventsearch();' placeholder="Search term">
+
           </div>
         </ul>
       </div>
-      <div class="section scroll things">
+      <div id="events" class="section scroll things">
 
 
-        <?php
-        $sql = $dbh->prepare("SELECT * FROM Event WHERE Active = 1;");
-        $sql->execute();
-        $first = true;
-        while($rows = $sql->fetch(PDO::FETCH_ASSOC)){
-          if($first === true){ ?>
-            <div class="columns columnsaside"> <!--  Max 2 items -->
-              <div class="column is-6">
-                <div class="panel">
-                    <img src="https://placehold.it/600x300">
-                  <div class="panel-block">
-                    <div class="columns columnsaside">
-                      <div class="column">
-                        <div class="panel-block-item"><?php echo $rows["eventname"]; ?></div>
-                      </div>
-                      <div class="column has-text-right">
-                        <div class="panel-block-item"><?php echo $rows["Sold_Ticket"] ?><i class="fa fa-user"></i></div>
-                        <div class="panel-block-item"><?php echo $rows["date_event"] ?><i class="fa fa-calendar"></i></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-        <?php  $first = false; }
-
-        else{ ?>
-          <div class="column is-6">
-            <div class="panel">
-                <img src="https://placehold.it/600x300">
-              <div class="panel-block">
-                <div class="columns columnsaside">
-                  <div class="column">
-                    <div class="panel-block-item"><?php echo $rows["eventname"]; ?></div>
-                  </div>
-                  <div class="column has-text-right">
-                    <div class="panel-block-item"><?php echo $rows["Sold_Ticket"] ?><i class="fa fa-user"></i></div>
-                    <div class="panel-block-item"><?php echo $rows["date_event"] ?> <i class="fa fa-calendar"></i></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          </div>
-          <?php  $first = true; }
-            }
-          ?>
-          </div>
-          <nav class="pagination nobullets" role="navigation" aria-label="pagination">
-            <a class="pagination-previous nobullets">Previous</a>
-            <a class="pagination-next nobullets">Next page</a>
-            <ul class="pagination-list nobullets">
-              <li>
-                <a class="pagination-link" aria-label="Goto page 1">1</a>
-              </li>
-              <li>
-                <span class="pagination-ellipsis">&hellip;</span>
-              </li>
-              <li>
-                <a class="pagination-link" aria-label="Goto page 45">45</a>
-              </li>
-              <li>
-                <a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a>
-              </li>
-              <li>
-                <a class="pagination-link" aria-label="Goto page 47">47</a>
-              </li>
-              <li>
-                <span class="pagination-ellipsis">&hellip;</span>
-              </li>
-              <li>
-                <a class="pagination-link" aria-label="Goto page 86">86</a>
-              </li>
-            </ul>
-          </nav>
         </div>
 
 

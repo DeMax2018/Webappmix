@@ -42,6 +42,7 @@ class classes
   public function hashish($text){
     $hash = hash('ripemd160', $text);
     $hashish = hash('tiger192,3',$hash);
+    echo $hashish;
     return $hashish;
   }
   public function changeprofile(){
@@ -67,6 +68,17 @@ class classes
     }
     return json_encode($arr);
   }
+  public function userdetails($id){
+    include "conn.php";
+    $data = $dbh->prepare("SELECT * FROM user WHERE UserID = ? ");
+    $data->bindValue(1,$id,PDO::PARAM_STR);
+    $num = 1;
+    $data->execute();
+    $rows = $data->fetch(PDO::FETCH_ASSOC);
+    $arr = array("firstname" => $rows["fldName"], "lastname" => $rows["fldLastname"], "mail" => $rows["fldMail"], "tele" => $rows["fldTele"], "city" => $rows["fldCity"], "street" => $rows["fldStreet"]
+    , "number" => $rows["fldNumber"]);
+    $num++;
+    return json_encode($arr);
+  }
 }
-
 ?>
