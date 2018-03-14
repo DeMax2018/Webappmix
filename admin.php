@@ -157,14 +157,7 @@ session_start();
             <span></span>
           </span>
         </div>
-        <div class="secondsubcontainer">
-          <ul class="ulsearch nobullets isflex justify_stuff">
-            <div class="search">
-        <span class="fa fa-search"></span>
-        <input placeholder="Search term">
-      </div>
-          </ul>
-        </div>
+
 
         <div class="nav-right nav-menu is-hidden-tablet">
           <div class="fixit">
@@ -252,7 +245,7 @@ session_start();
               <div class="content ">
                 <div class="container">
                   <!-- Main container -->
-                  <nav class="level is-fullwidth is-hidden-mobile">
+                  <nav class="level is-fullwidth">
                     <!-- Left side -->
                     <div class="level-left">
                       <div class="level-item is-fullwidth">
@@ -266,59 +259,55 @@ session_start();
 
                     <!-- Right side -->
                     <div class="level-right">
-                      <i class="fa fa-filter filter"></i>
                       <p class="control">
-                        <button class="button">
-                          Search
+                        <button class="button" data-role='none'>
+                          Switch to groups
                         </button>
                       </p>
                     </div>
                   </nav>
                 </div>
-                <table>
-                  <tr class="headcol">
-                    <th style="width:51%;"class="accounta">Account</th>
-                    <?php
-                    $numright = $dbh->prepare("SELECT * FROM `Right`");
-                    $numright->execute();
-                    while($record = $numright->fetch(PDO::FETCH_ASSOC)){ ?>
-                    <th style="width:16.6%;"><?php echo $record["fldName"] ?></th>
-                    <?php } ?>
-                    <th class="mrg"></th>
-                  </tr>
-                </table>
-                <div class="scrollacc" id="scrollaccr">
-                 <table>
-
+                <div class="tablescroll">
+                
+                 <table class="People">
+                   <tr class="headcol">
+                     <th class="accounta">Account</th>
+                     <?php
+                     $numright = $dbh->prepare("SELECT * FROM `Right`");
+                     $numright->execute();
+                     while($record = $numright->fetch(PDO::FETCH_ASSOC)){ ?>
+                     <th><?php echo $record["fldName"] ?></th>
+                     <?php } ?>
+                   </tr>
 
                      <?php
                      $sth = $dbh->prepare("SELECT * from User");
                        $sth->execute();
                      while($record = $sth->fetch(PDO::FETCH_ASSOC)){ ?>
                        <tr class="is-light">
-                         <td id="names"style="width:54%;"class="accounta"><?php echo $record["fldName"]." ".$record["fldLastname"] ?></td>
+                         <td id="names" class="accounta"><?php echo $record["fldName"]." ".$record["fldLastname"] ?></td>
                          <?php
                          $num = $numright->rowCount();
                          $checkbox = $dbh->prepare("SELECT * FROM PrivateRights WHERE UserID = ".$record["UserID"]);
                          $checkbox->execute();
                          while ($rows = $checkbox->fetch(PDO::FETCH_ASSOC)) {
                            if($rows["Create_events"] == 1){
-                              echo "<td style='width:16.6%;'><input checked id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,1);' type='checkbox'></td>";
+                              echo "<td><input data-role='none' checked id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,1);' type='checkbox'></td>";
                            }
                            else{
-                             echo "<td style='width:16.6%;'><input id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,1);' type='checkbox'></td>";
+                             echo "<td><input data-role='none' id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,1);' type='checkbox'></td>";
                            }
                            if($rows["Delete_Events"] == 1){
-                              echo "<td style='width:16.6%;'><input name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' checked type='checkbox'></td>";
+                              echo "<td><input data-role='none' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' checked type='checkbox'></td>";
                            }
                            else{
-                             echo "<td style='width:16.6%;'><input name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' type='checkbox'></td>";
+                             echo "<td><input data-role='none' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' type='checkbox'></td>";
                            }
                            if($rows["Acces_Rights_System"] == 1){
-                              echo "<td style='width:16.6%;'><input name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' checked type='checkbox'></td>";
+                              echo "<td><input data-role='none' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' checked type='checkbox'></td>";
                            }
                            else{
-                             echo "<td style='width:16.6%;'><input name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' type='checkbox'></td>";
+                             echo "<td><input data-role='none' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' type='checkbox'></td>";
                            }
                          }
                          ?>
@@ -370,7 +359,7 @@ session_start();
                                 </select>
                               </div>
 
-            </div><button type="button" onclick="addfielts();" name="button">generate fielts</button>
+            </div><button type="button" onclick="addfielts();" name="button">generate fields</button>
             <div id="filterresults" class="flexing">
 
             </div>
