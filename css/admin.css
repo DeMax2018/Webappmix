@@ -3,24 +3,20 @@ div.container{
 }
 tr.headcol{
   background-color: white;
-  width: 100%;
   padding-bottom: 2em;
 }
-th{
-  width: 8.3%;
-}
-th.accounta{
-  width: 49%;
+.accounta{
+  width: 25% !important;
 }
 th.mrg{
-  width: 16.8px;
+  width: 17px !important;
 }
 .accounta{
   text-align: left;
 }
 div.scrollacc{
-  overflow-y: scroll;
-  max-height: 20em;
+
+  max-width: 100%;
 }
 tr{
   height: 2em;
@@ -38,4 +34,16 @@ tr{
 }
 .aside{
   text-shadow: none;
+}
+div.tablescroll{
+  overflow-x: scroll;
+  margin: 0 auto;
+  max-width: 100%;
+  overflow-y: scroll;
+  max-height: 20em;
+}
+table.People{
+  width: auto;
+  min-width: 50em;
+  width: 100%;
 }
