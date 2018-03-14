@@ -128,10 +128,7 @@ transition:300ms all;
 <link rel="stylesheet" href="/css/bulma.css">
   <link rel="stylesheet" type="text/css" href="../css/aside.css">
 <script type="text/javascript">
-function show(){
-var d =  document.getElementById('showinfo');
-d.classList.add("is-active");
-}
+
 function closeshow(){
   var d = document.getElementById('showinfo');
   d.classList.remove("is-active");
@@ -187,10 +184,23 @@ if (e.target.id == "closeid" || e.target.id == "show" || $(e.target).parents("#c
   function loadrooms(){
     //  $("#roomfilters").load("filterloading.php?fieldcreate=all",function(){});
       $("#roomevent").load("loadrooms.php?load=first",function(){});
+$("#showinfo").load("loadinfobox.php?number=",function(){});
+
+  }
+  function loadfunctionsshow(){
+
+    $("#showinfo").load("loadinfobox.php?n=true&number=",function(){});
+    $("#jsVue").load("loadinfobox.php?n=true&number=",function(){});
+
+  }
+  function show(){
+
+  var d =  document.getElementById('showinfo');
+  d.classList.add("is-active");
+loadfunctionsshow();
 
 
   }
-
 
   </script>
 </script>
@@ -295,7 +305,7 @@ if (e.target.id == "closeid" || e.target.id == "show" || $(e.target).parents("#c
 
           <v-app>
 
-            <v-content> 
+            <v-content>
 
         				<v-container>
                   <v-stepper v-model="step" vertical>
@@ -336,7 +346,8 @@ if (e.target.id == "closeid" || e.target.id == "show" || $(e.target).parents("#c
                                          <div class='progress_outer'>
                                              <div id='_progress' class='progress'></div>
                                          </div>
-
+                                         <label>facebook</label><br>
+                                         <label class="switch" style="margin-left: 0px !important;"><input type="checkbox" id="internet"> <span class="slider round"></span></label><br>
                         <v-btn color="primary" onclick="loadrooms();" @click.native="step = 2">Continue</v-btn>
                       </v-stepper-content>
                       <v-stepper-content step="2">
@@ -354,7 +365,23 @@ if (e.target.id == "closeid" || e.target.id == "show" || $(e.target).parents("#c
                                 <v-text-field label="how many <?php echo $all["fldname"]; ?>" type="number" v-model="registration.<?php echo $all["fldname"]; ?>" required></v-text-field>
                           <?php  break;
                                 case 3: ?>
-                                  # code...
+                                <div class="sel sel--<?php echo $all["fldname"]; ?>">
+                                  <select name="<?php echo $all["fldname"]; ?>" id="<?php echo $all["fldname"]; ?>">
+                                    <option value="" disabled><?php echo $all["fldname"]; ?></option>
+                                    <?php
+                                      $getoptions = $dbh->prepare("SELECT * FROM details WHERE listoption = ".$_GET["DetailsID"])
+
+
+                                    ?>
+                                    <option value="hacker">Hacker</option>
+                                    <option value="gamer">Gamer</option>
+                                    <option value="developer">Developer</option>
+                                    <option value="programmer">Programmer</option>
+                                    <option value="designer">Designer</option>
+                                  </select>
+                                </div>
+
+                                <hr class="rule">
                           <?php  break;
                                 case 4: ?>
                                 <label><?php echo $all["fldname"]."(Not available/available)" ?> </label><br>
@@ -362,9 +389,6 @@ if (e.target.id == "closeid" || e.target.id == "show" || $(e.target).parents("#c
                                   <input type="checkbox"id="<?php echo $all["fldname"];?>">
                                   <span class="slider round"></span>
                                 </label>
-                          <?php  break;
-                                default: ?>
-                                  # code...
                           <?php  break;
                               }
                             }
@@ -409,20 +433,6 @@ if (e.target.id == "closeid" || e.target.id == "show" || $(e.target).parents("#c
 
         </div>
         <div id="showinfo" class="modal">
-           <div class="modal-background"></div>
-           <div id="closeid" class="modal-card">
-             <header class="modal-card-head">
-               <p class="modal-card-title">Modal title</p>
-               <button class="delete" onclick="closeshow();" aria-label="close"></button>
-             </header>
-             <section class="modal-card-body">
-               <!-- Content ... -->
-             </section>
-             <footer class="modal-card-foot">
-               <button class="button is-success">Save changes</button>
-               <button class="button">Cancel</button>
-             </footer>
-           </div>
          </div>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
@@ -471,27 +481,8 @@ if (e.target.id == "closeid" || e.target.id == "show" || $(e.target).parents("#c
     </script>
 <script src="js/sliderdate.js" type="text/javascript"></script>
         <script src='//static.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://unpkg.com/vue/dist/vue.js'></script><script src='https://unpkg.com/vuetify/dist/vuetify.min.js'></script>
-        <script >new Vue({
-          el: '#app',
-          data: () => ({
-              step:1,
-              registration:{
-                name:null,
-                email:null,
-                street:null,
-                city:null,
-                state:null,
-                numtickets:0,
-                shirtsize:'XL'
-              },
-              sizes:['S','M','L','XL']
-          }),
-          methods:{
-            submit() {
-              alert('This is the post. Blah');
-            }
-          }
-        })
+        <script >
+
         $("#slider-range").slider({
             range: true,
             min: 0,
@@ -557,7 +548,31 @@ if (e.target.id == "closeid" || e.target.id == "show" || $(e.target).parents("#c
     </div>
 
   </div>
-
+<div id="jsVue">
+  <script type="text/javascript">
+  new Vue({
+    el: '#app',
+    data: () => ({
+        step:1,
+        registration:{
+          name:null,
+          email:null,
+          street:null,
+          city:null,
+          state:null,
+          numtickets:0,
+          shirtsize:'XL'
+        },
+        sizes:['S','M','L','XL']
+    }),
+    methods:{
+      submit() {
+        alert('This is the post. Blah');
+      }
+    }
+  })
+  </script>
+</div>
   <script async type="text/javascript" src="../js/bulma.js"></script>
 
 </body>
