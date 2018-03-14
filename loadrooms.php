@@ -21,9 +21,9 @@ include "conn.php";
   $numie = $sql->RowCount();
   $first = true;
   while($rows = $sql->fetch(PDO::FETCH_ASSOC)){
-    $buildingname = $dbh->prepare("SELECT * FROM building WHERE BuildingID = ".$rows["BuildingID"]);
+  /*  $buildingname = $dbh->prepare("SELECT * FROM building WHERE BuildingID = ".$rows["BuildingID"]);
     $buildingname->execute();
-    $building = $buildingname->fetch(PDO::FETCH_ASSOC);
+    $building = $buildingname->fetch(PDO::FETCH_ASSOC);*/
 
     if($first === true){ ?>
       <div class="columns columnsaside"> <!--  Max 2 items -->
@@ -38,12 +38,12 @@ include "conn.php";
                   <div class="panel-block-item"><?php echo $rows["fldName"]; ?></div>
                 </div>
                 <div class="column has-text-right">
-                  <div class="panel-block-item"><?php echo $building["fldName"] ?><i class="fa fa-user"></i></div>
+                  <div class="panel-block-item"><?php echo 1 ?><i class="fa fa-user"></i></div>
                   <div class="panel-block-item"><?php echo $rows["RoomID"] ?><i class="fa fa-calendar"></i></div>
 
                 </div>
               </div>
-            <button type="button" id="show" onclick="show();" class="button" name="button">Info</button></div>
+            <button type="button" id="show" style="width:100%" onclick="show();" class="button" name="button">Info</button></div>
           </div>
         </div>
 
@@ -54,7 +54,7 @@ include "conn.php";
     <div class="column is-6">
       <div id="show" onclick="show();" class="panel">
         <p class="is-marginless">
-          <a onclick="show();"><img src="https://placehold.it/600x300"></a>
+          <img src="https://placehold.it/600x300">
         </p>
         <div class="panel-block">
           <div class="columns columnsaside">
@@ -62,13 +62,15 @@ include "conn.php";
               <div class="panel-block-item"><?php echo $rows["fldName"]; ?></div>
             </div>
             <div class="column has-text-right">
-              <div class="panel-block-item"><?php echo $building["fldName"] ?> <i class="fa fa-user"></i></div>
-              <div class="panel-block-item"><?php echo $rows["RoomID"] ?> <i class="fa fa-calendar"></i></div>
+              <div class="panel-block-item"><?php echo 1 ?><i class="fa fa-user"></i></div>
+              <div class="panel-block-item"><?php echo $rows["RoomID"] ?><i class="fa fa-calendar"></i></div>
+
             </div>
           </div>
-        </div>
+        <button type="button" style="width:100%" id="show" onclick="show();" class="button" name="button">Info</button></div>
       </div>
     </div>
+
   </div>
   <?php  $first = true; }
    }

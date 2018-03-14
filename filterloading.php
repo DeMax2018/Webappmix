@@ -91,7 +91,7 @@ else{
         ?>
         <div  onchange="" class="percentage">
         <?php } ?>
-          <label><?php echo $type["fldname"]."(Not available/available)" ?> </label>
+          <label><?php echo $type["fldname"]."(off/on)" ?> </label>
         <?php if(!isset($_GET["fieldcreate"])){ ?>
           <label class="switch">
           <?php }
@@ -117,7 +117,7 @@ else{
     else{
       $check = false;
     }
-  } ?><?php if(!isset($_GET["fieldcreate"])){ ?><button type="button" onclick="createroom('<?php echo $stringposting ?>');" id="sending"  name="button">Create room</button><?php } ?>
+  } ?><?php if(isset($_GET["fieldcreate"])){ ?><button type="button" onclick="createroom('<?php echo $stringposting ?>');" id="sending"  name="button">Create room</button><?php } ?>
 <?php }
 elseif(isset($_GET["createroom"])){
   $preroom = $dbh->prepare("INSERT INTO room (fldName, BuildingID) VALUES ('".$_GET["roomname"]."',".$_GET["buildingpick"].")");
