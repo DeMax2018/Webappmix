@@ -1,7 +1,7 @@
 <?php
 include"conn.php";
 
-$_GET["number"] = 5;
+
 $roomresult = $dbh->prepare("SELECT * FROM room_details WHERE RoomID = ? ");
 $roomresult->bindParam(1,$_GET["number"],PDO::PARAM_INT);
 $roomresult->execute();

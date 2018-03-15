@@ -1,5 +1,9 @@
 <?php
 include"conn.php";
+session_start();
+$selectboxes = array();
+$_SESSION["arrayfilter"] = array();
+
  ?>
 <!DOCTYPE html>
 <html>
@@ -129,6 +133,7 @@ transition:300ms all;
   <link rel="stylesheet" type="text/css" href="../css/aside.css">
 <script type="text/javascript">
 
+
 function closeshow(){
   var d = document.getElementById('showinfo');
   d.classList.remove("is-active");
@@ -187,21 +192,47 @@ if (e.target.id == "closeid" || e.target.id == "show" || $(e.target).parents("#c
 $("#showinfo").load("loadinfobox.php?number=",function(){});
 
   }
-  function loadfunctionsshow(){
+  function loadfunctionsshow(number){
 
-    $("#showinfo").load("loadinfobox.php?n=true&number=",function(){});
-    $("#jsVue").load("loadinfobox.php?n=true&number=",function(){});
+$("#showinfo").load("loadinfobox.php?number=" + number,function(){});
+
 
   }
-  function show(){
+  function show(number){
 
   var d =  document.getElementById('showinfo');
   d.classList.add("is-active");
-loadfunctionsshow();
 
 
   }
+function query(text){
+  var txt = text;
+  var url = "";
+  var res = txt.split("_");
+  for (i = 0; i < res.length; i++) {
 
+    var value = document.getElementById(res[i]).value;
+    if(value === "on"){
+      var value = document.getElementById(res[i]).checked;
+    }
+    if(value === ""){
+
+    }
+    else{
+      if(url === ""){
+        var url = url + res[i] + "-" + value;
+      }
+      else{
+        var url = url + "_" + res[i] + "-" + value;
+      }
+    }
+
+    console.log(url);
+}
+
+  var realurl = "loadrooms.php?variables=" + url;
+  $("#roomevent").load(realurl,function(){});
+}
   </script>
 </script>
 
@@ -270,6 +301,7 @@ loadfunctionsshow();
             </figure>
           </a>
         </div>
+
         <div class="main">
           <div class="title">Main</div>
           <a href="index.php" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
@@ -319,7 +351,7 @@ loadfunctionsshow();
                     <v-stepper-items>
                       <v-stepper-content step="1">
 
-                         <v-text-field label="Name of event" v-model="registration.eventname" required></v-text-field>
+                         <v-text-field id="namen" label="Name of event" v-model="registration.eventname" required></v-text-field>
                          <v-text-field label="Max-tickets" type="number"
                             v-model="registration.numtickets" required></v-text-field>
                           <v-text-field label="Date" type="date"
@@ -347,50 +379,66 @@ loadfunctionsshow();
                                              <div id='_progress' class='progress'></div>
                                          </div>
                                          <label>facebook</label><br>
-                                         <label class="switch" style="margin-left: 0px !important;"><input type="checkbox" id="internet"> <span class="slider round"></span></label><br>
+
                         <v-btn color="primary" onclick="loadrooms();" @click.native="step = 2">Continue</v-btn>
                       </v-stepper-content>
                       <v-stepper-content step="2">
                         <div class="wrapper-room-filter">
                         <div style="display: block;float: left;min-height: 20em; width: 40%;" id="roomfilters">
                           <?php
-                            $getall = $dbh->prepare("SELECT * FROM details;");
+                            $jscall = "";
+                            $prequery = $dbh->prepare("SELECT * FROM details WHERE listoption is null ;");
+                            $prequery->execute();
+                            while($pre = $prequery->fetch(PDO::FETCH_ASSOC)){
+                              if($jscall === ""){
+                                $jscall = $pre["fldname"];
+                              }
+                              else{
+                                $jscall .= "_".$pre["fldname"];
+                              }
+                            }
+                            $getall = $dbh->prepare("SELECT * FROM details WHERE listoption is null ;");
                             $getall->execute();
                             while($all = $getall->fetch(PDO::FETCH_ASSOC)){
+                              array_push($_SESSION["arrayfilter"], $all["fldname"]);
                               switch ($all["SortingID"]) {
                                 case 1: ?>
-                                  <v-text-field label="Name of <?php echo $all["fldname"]; ?>" v-model="registration.eventname" required></v-text-field>
+                                  <v-text-field label="Name of <?php echo $all["fldname"]; ?>" id="<?php echo $all["fldname"]; ?>" onchange="query(<?php echo "'".$jscall."'"; ?>);" v-model="registration.eventname" required></v-text-field>
                           <?php  break;
                                 case 2: ?>
-                                <v-text-field label="how many <?php echo $all["fldname"]; ?>" type="number" v-model="registration.<?php echo $all["fldname"]; ?>" required></v-text-field>
+                                <v-text-field label="how many <?php echo $all["fldname"]; ?>" id="<?php echo $all["fldname"]; ?>" onchange="query(<?php echo "'".$jscall."'"; ?>);" type="number" v-model="registration.<?php echo $all["fldname"]; ?>" required></v-text-field>
                           <?php  break;
                                 case 3: ?>
-                                <div class="sel sel--<?php echo $all["fldname"]; ?>">
-                                  <select name="<?php echo $all["fldname"]; ?>" id="<?php echo $all["fldname"]; ?>">
-                                    <option value="" disabled><?php echo $all["fldname"]; ?></option>
+                                <div onclick="query(<?php echo "'".$jscall."'"; ?>);" class="sel sel--<?php echo $all["fldname"]; ?>">
+                                  <select  name="<?php echo $all["fldname"]; ?>" id="<?php echo $all["fldname"]; ?>">
+                                    <option value="<?php echo $all["fldname"]; ?>" disabled><?php echo $all["fldname"]; ?></option>
                                     <?php
-                                      $getoptions = $dbh->prepare("SELECT * FROM details WHERE listoption = ".$_GET["DetailsID"])
+                                      $getoptions = $dbh->prepare("SELECT * FROM details WHERE listoption = ".$all["DetailsID"]);
+                                      $getoptions->execute();
+                                      while($options = $getoptions->fetch(PDO::FETCH_ASSOC)){ ?>
+                                        <option value="<?php echo $options["fldname"] ?>"><?php echo $options["fldname"] ?></option>
+                              <?php
+
+                                      }
 
 
                                     ?>
-                                    <option value="hacker">Hacker</option>
-                                    <option value="gamer">Gamer</option>
-                                    <option value="developer">Developer</option>
-                                    <option value="programmer">Programmer</option>
-                                    <option value="designer">Designer</option>
                                   </select>
                                 </div>
 
                                 <hr class="rule">
-                          <?php  break;
+                          <?php
+                                array_push($selectboxes, $all["fldname"]);
+                                break;
                                 case 4: ?>
                                 <label><?php echo $all["fldname"]."(Not available/available)" ?> </label><br>
                                 <label style="margin-left:0 !important" class="switch">
-                                  <input type="checkbox"id="<?php echo $all["fldname"];?>">
+                                  <input type="checkbox" onchange="query(<?php echo "'".$jscall."'"; ?>);" v-model="registration.check" id="<?php echo $all["fldname"] ?>">
                                   <span class="slider round"></span>
                                 </label>
                           <?php  break;
                               }
+
                             }
 
 
@@ -480,6 +528,7 @@ loadfunctionsshow();
 
     </script>
     <script src="js/sliderdate.js" type="text/javascript"></script>
+
             <script src='//static.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://unpkg.com/vue/dist/vue.js'></script><script src='https://unpkg.com/vuetify/dist/vuetify.min.js'></script>
             <script >new Vue({
               el: '#app',
@@ -561,14 +610,34 @@ loadfunctionsshow();
                     $('.slider-time2').html(hours2 + ':' + minutes2);
                 }
             });
-
-
+            $(document).ready(function(){
+                  $(".sel__box__options--").click(function(){
+                    query(<?php echo "'".$jscall."'"; ?>);
+                  });
+              });
             </script>
         </div>
 
       </div>
+      <div id="selectboxstyles">
+      <style media="screen">
+        <?php
+        $num = 500;
+        foreach($selectboxes as &$option){
+          echo ".sel--".$option."{
+            z-index:".$num."
+          }
+          ";
+          $num--;
+        }
+        ?>
+      </style>
+      </div>
 
+    <script type="text/javascript" src="js/event.js"></script>
       <script async type="text/javascript" src="../js/bulma.js"></script>
-
+<?php
+print_r($_SESSION["arrayfilter"]);
+ ?>
     </body>
     </html>

@@ -1,6 +1,7 @@
 <?php
 include"conn.php";
 //include "auth.php";
+
 session_start();
  ?>
 <html>
@@ -268,7 +269,7 @@ session_start();
                   </nav>
                 </div>
                 <div class="tablescroll">
-                
+
                  <table class="People">
                    <tr class="headcol">
                      <th class="accounta">Account</th>
@@ -416,6 +417,7 @@ session_start();
           </div>
         </div>
     </div>
+
   </body>
 
 </html>
