@@ -20,7 +20,7 @@ session_start();
 <script src="js/noframework.waypoints.min.js" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
-    <link href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.css" rel="stylesheet" type="text/css" />
+    <link href="css/jquerymobile.css" rel="stylesheet" type="text/css" />
     <link href="view_event.css" rel="stylesheet" type="text/css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -148,88 +148,89 @@ session_start();
 
         <script async type="text/javascript" src="../js/bulma.js"></script>
 
-    <nav class="nav is-dark has-shadow is-hidden-tablet" id="top">
-      <div class="container">
-        <div class="subcontainer">
-          <span class="nav-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
-        </div>
+        <nav class="nav is-dark has-shadow is-hidden-widescreen" id="top" >
+          <div class="container">
+            <div class="subcontainer">
+              <span class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
 
+            <div class="nav-right nav-menu is-hidden-widescreen" id="nav-menu">
+              <div class="fixit">
+                <div class="sectionfix" data-role="none">
+                  <a href="#" class="item active" data-ajax="false"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
+                </div>
+                <div class="sectionfix">
+                  <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
+                </div>
+                <div class="sectionfix">
+                  <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+                </div>
+                <div class="sectionfix">
+                  <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-plus"></i></span></a>
+                </div>
+                <div class="sectionfix">
+                  <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">Event management</span></a>
+                </div>
+              </div>
+              <div class="fixit">
+                <div class="sectionfix">
+                  <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
+                </div>
+                <div class="sectionfix">
+                  <a href="#" class="item active" data-ajax="false"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
+                </div>
+                <div class="sectionfix">
+                  <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
+                </div>
+              </div>
+              <div class="fixit">
+                <div class="sectionfix">
+                  <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Admin newsfeed</span></a>
+                </div>
+              </div>
 
-        <div class="nav-right nav-menu is-hidden-tablet">
-          <div class="fixit">
-          <div class="sectionfix">
-          <a href="index.php" data-ajax="false" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
-          </div>
-          <div class="sectionfix">
-          <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
-          </div>
-          <div class="sectionfix">
-          <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
-          </div>
-          </div>
-          <div class="fixit">
-            <div class="sectionfix">
-          <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
-            </div>
-            <div class="sectionfix">
-          <a href="#" data-ajax="false" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
-            </div>
-            <div class="sectionfix">
-          <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
             </div>
           </div>
-          <div class="fixit">
-            <div class="sectionfix">
-          <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">Event management</span></a>
+        </nav>
+        <div class="columns columnsaside">
+          <aside class="column is-3 aside hero is-fullheight is-hidden-touch is-hidden-desktop-only">
+            <div class="fixleft">
+              <div class="account has-text-centered">
+                <a href="#">
+                  <figure class="avatar">
+                    <img src="images/avatar.png">
+                  </figure>
+                </a>
+              </div>
+              <div class="main">
+                <div class="title">Main</div>
+                <a href="index.php" class="item active" data-ajax="false"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
+                <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
+                <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+                <a href="eventcreate.php" class="item" data-ajax="false"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
+                <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Event management</span></a>
+              </div>
+              <div class="main">
+                <div class="title"><i class="fa fa-cog"></i>  Admin</div>
+                <a href="admin.php#account" class="item link1" data-ajax="false"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
+                <a href="admin.php#selecting" class="item link2" data-ajax="false"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Room & building management</span></a>
+              </div>
             </div>
-            <div class="sectionfix">
-          <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Admin newsfeed</span></a>
-            </div>
-          </div>
+          </aside>
+          <div class="content column is-9">
+            <div class="content column is-9-nav nav-aside is-hidden-touch is-hidden-desktop-only">
 
-        </div>
-      </div>
-    </nav>
-    <div class="columns columnsaside">
-      <aside class="column is-3 aside hero is-fullheight is-hidden-mobile">
-        <div class="fixleft">
-          <div class="account has-text-centered">
-            <a href="#">
-              <figure class="avatar">
-                <img src="images/avatar.png">
-              </figure>
-            </a>
-          </div>
-          <div class="main">
-            <div class="title">Main</div>
-            <a href="index.php" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
-            <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
-            <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
-            <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Make an event</span></a>
-            <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">Event management</span></a>
-          </div>
-          <div class="main">
-            <div class="title"><i class="fa fa-cog"></i>Admin</div>
-            <a href="admin.php#account" data-ajax="false" class="item link1"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
-            <a href="#" data-ajax="false" class="item link2"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
-            <a href="#" data-ajax="false" class="item link3"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
-            <a href="#" data-ajax="false" class="item link4"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Admin newsfeed</span></a>
-          </div>
-        </div>
-      </aside>
-      <div class="content column is-9">
-        <div class="content column is-9-nav nav-aside">
+              <span class="aside-toggle is-marginless">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
 
-          <span class="aside-toggle is-marginless">
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
-        </div>
+            </div>
         <div class="tile is-ancestor things">
           <div class="tile is-parent">
             <article class="tile is-child box">
@@ -268,7 +269,7 @@ session_start();
                   </nav>
                 </div>
                 <div class="tablescroll">
-                
+
                  <table class="People">
                    <tr class="headcol">
                      <th class="accounta">Account</th>
@@ -326,13 +327,13 @@ session_start();
           <div id="selecting" class="tile is-parent">
 
               <article class="tile is-child box">
-                <p class="title">Create a new Room here!</p>
-                <p class="subtitle">you can create a room and give it certain objects</p>
+                <p class="title">Create a new room.</p>
+                <p class="subtitle">You can create a room and give it certain objects.</p>
                           <div id="addroomfilters">
                             <div class="flexing">
                               <div class="percentage">
                                 <label>Name of the room</label>
-                                <input type="text" class="input" placeholder="give the name of the room" id="nameroom" name="" value="">
+                                <input type="text" class="input" placeholder="Give the name of the room" id="nameroom" name="" value="">
                               </div>
                               <div  onchange="" class="percentage">
                                 <label>Objects available in the room</label>
@@ -373,8 +374,8 @@ session_start();
           <div id="selecting" class="tile is-parent">
 
               <article class="tile is-child box">
-                <p class="title">Create a new filter for a Room!</p>
-                <p class="subtitle">Give a room certain objects that people can filter on</p>
+                <p class="title">Create a new filter for a room.</p>
+                <p class="subtitle">Give a room certain objects that people can filter on.</p>
                 <div class="flexing">
                   <div class="percentage">
                     <label>Name of the filter</label>

@@ -81,8 +81,8 @@ if($pages == 1){ ?>
 <?php }
 elseif($pages == 2){ ?>
   <nav class="pagination nobullets" role="navigation" aria-label="pagination">
-    <a onclick="paging(<?php if($_GET["page"] != $pages){ echo $_GET["page"] + 1;}else{echo "no";} ?>);" class="pagination-next nobullets">Next page</a>
-    <a onclick="paging(<?php if($_GET["page"] != 1){ echo $_GET["page"] - 1;}else{echo "no";} ?>);" class="pagination-previous nobullets">Previous</a>
+    <a onclick="paging(<?php if($_GET["page"] != $pages){ echo $_GET["page"] + 1;}else{echo "no";} ?>);" class="pagination-next nobullets"><i class="fas fa-angle-right"></i></a>
+    <a onclick="paging(<?php if($_GET["page"] != 1){ echo $_GET["page"] - 1;}else{echo "no";} ?>);" class="pagination-previous nobullets"><i class="fas fa-angle-left"></i></a>
     <ul class="pagination-list nobullets">
       <li>
         <?php if($_GET["page"] == 1){ ?>
@@ -103,8 +103,8 @@ elseif($pages == 2){ ?>
 <?php }
 elseif($pages == 3){  ?>
   <nav class="pagination nobullets" role="navigation" aria-label="pagination">
-    <a onclick="paging(<?php if($_GET["page"] != $pages){ echo $_GET["page"] + 1;}else{echo "no";} ?>);" class="pagination-next nobullets">Next page</a>
-    <a onclick="paging(<?php if($_GET["page"] != 1){ echo $_GET["page"] - 1;}else{echo "no";} ?>);" class="pagination-previous nobullets">Previous</a>
+    <a onclick="paging(<?php if($_GET["page"] != $pages){ echo $_GET["page"] + 1;}else{echo "no";} ?>);" class="pagination-next nobullets"><i class="fas fa-angle-right"></i></a>
+    <a onclick="paging(<?php if($_GET["page"] != 1){ echo $_GET["page"] - 1;}else{echo "no";} ?>);" class="pagination-previous nobullets"><i class="fas fa-angle-left"></i></a>
     <ul class="pagination-list nobullets">
       <li>
         <?php if($_GET["page"] == 1){ ?>
@@ -134,8 +134,8 @@ elseif($pages == 3){  ?>
 <?php }
 elseif($pages > 3 AND $_GET["page"] > 3){  ?>
   <nav class="pagination nobullets" role="navigation" aria-label="pagination">
-    <a onclick="paging(<?php if($_GET["page"] != $pages){ echo $_GET["page"] + 1;}else{echo "no";} ?>);" class="pagination-next nobullets">Next page</a>
-    <a onclick="paging(<?php if($_GET["page"] != 1){ echo $_GET["page"] - 1;}else{echo "no";} ?>);" class="pagination-previous nobullets">Previous</a>
+    <a onclick="paging(<?php if($_GET["page"] != $pages){ echo $_GET["page"] + 1;}else{echo "no";} ?>);" class="pagination-next nobullets"><i class="fas fa-angle-right"></i></a>
+    <a onclick="paging(<?php if($_GET["page"] != 1){ echo $_GET["page"] - 1;}else{echo "no";} ?>);" class="pagination-previous nobullets"><i class="fas fa-angle-left"></i></a>
     <ul class="pagination-list nobullets">
       <li>
         <a class="pagination-link" onclick="paging(1);" aria-label="Goto page 1">1</a>
@@ -168,8 +168,8 @@ elseif($pages > 3 AND $_GET["page"] > 3){  ?>
 elseif($pages > 3 AND $_GET["page"] == 3){
   ?>
   <nav class="pagination nobullets" role="navigation" aria-label="pagination">
-    <a onclick="paging(<?php if($_GET["page"] != $pages){ echo $_GET["page"] + 1;}else{echo "no";} ?>);" class="pagination-next nobullets">Next page</a>
-    <a onclick="paging(<?php if($_GET["page"] != 1){ echo $_GET["page"] - 1;}else{echo "no";} ?>);" class="pagination-previous nobullets">Previous</a>
+    <a onclick="paging(<?php if($_GET["page"] != $pages){ echo $_GET["page"] + 1;}else{echo "no";} ?>);" class="pagination-next nobullets"><i class="fas fa-angle-right"></i></a>
+    <a onclick="paging(<?php if($_GET["page"] != 1){ echo $_GET["page"] - 1;}else{echo "no";} ?>);" class="pagination-previous nobullets"><i class="fas fa-angle-left"></i></a>
     <ul class="pagination-list nobullets">
       <li>
         <a class="pagination-link" onclick="paging(1);" aria-label="Goto page 1">1</a>
@@ -199,8 +199,8 @@ elseif($pages > 3 AND $_GET["page"] == 3){
 elseif($pages > 3 AND $_GET["page"] == 2){
   ?>
   <nav class="pagination nobullets" role="navigation" aria-label="pagination">
-    <a onclick="paging(<?php if($_GET["page"] != $pages){ echo $_GET["page"] + 1;}else{echo "no";} ?>);" class="pagination-next nobullets">Next page</a>
-    <a onclick="paging(<?php if($_GET["page"] != 1){ echo $_GET["page"] - 1;}else{echo "no";} ?>);" class="pagination-previous nobullets">Previous</a>
+    <a onclick="paging(<?php if($_GET["page"] != $pages){ echo $_GET["page"] + 1;}else{echo "no";} ?>);" class="pagination-next nobullets"><i class="fas fa-angle-right"></i></a>
+    <a onclick="paging(<?php if($_GET["page"] != 1){ echo $_GET["page"] - 1;}else{echo "no";} ?>);" class="pagination-previous nobullets"><i class="fas fa-angle-left"></i></a>
     <ul class="pagination-list nobullets">
       <li>
         <a class="pagination-link" onclick="paging(1);" aria-label="Goto page 1">1</a>
@@ -230,8 +230,8 @@ elseif($pages > 3 AND $_GET["page"] == 2){
 elseif($pages > 3 AND $_GET["page"] == 1){
   ?>
   <nav class="pagination nobullets" role="navigation" aria-label="pagination">
-    <a onclick="paging(<?php if($_GET["page"] != $pages){ echo $_GET["page"] + 1;}else{echo "no";} ?>);" class="pagination-next nobullets">Next page</a>
-    <a onclick="paging(<?php if($_GET["page"] != 1){ echo $_GET["page"] - 1;}else{echo "no";} ?>);" class="pagination-previous nobullets">Previous</a>
+    <a onclick="paging(<?php if($_GET["page"] != $pages){ echo $_GET["page"] + 1;}else{echo "no";} ?>);" class="pagination-next nobullets"><i class="fas fa-angle-right"></i></a>
+    <a onclick="paging(<?php if($_GET["page"] != 1){ echo $_GET["page"] - 1;}else{echo "no";} ?>);" class="pagination-previous nobullets"><i class="fas fa-angle-left"></i></a>
     <ul class="pagination-list nobullets">
       <li>
         <a class="pagination-link" onclick="paging(1);" aria-label="Goto page 1">1</a>

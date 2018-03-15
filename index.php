@@ -18,10 +18,10 @@ include"conn.php";
   <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
 </head>
 <body onload="eventsearch();">
-  <nav class="nav is-dark has-shadow is-hidden-tablet" id="top">
+  <nav class="nav is-dark has-shadow is-hidden-widescreen" id="top">
     <div class="container">
       <div class="subcontainer">
-        <span class="nav-toggle">
+        <span class="nav-toggle" id="nav-toggle">
           <span></span>
           <span></span>
           <span></span>
@@ -36,7 +36,7 @@ include"conn.php";
         </ul>
       </div>
 
-      <div class="nav-right nav-menu is-hidden-tablet">
+      <div class="nav-right nav-menu is-hidden-widescreen" id="nav-menu">
         <div class="fixit">
           <div class="sectionfix">
             <a href="#" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
@@ -75,7 +75,7 @@ include"conn.php";
     </div>
   </nav>
   <div class="columns columnsaside">
-    <aside class="column is-3 aside hero is-fullheight is-hidden-mobile">
+    <aside class="column is-3 aside hero is-fullheight is-hidden-touch is-hidden-desktop-only">
       <div class="fixleft">
         <div class="account has-text-centered">
           <a href="#">
@@ -85,7 +85,7 @@ include"conn.php";
           </a>
         </div>
         <div class="main">
-          <div class="title">Main</div>
+          <div class="title"><i class="fas fa-home"></i>   Main</div>
           <a href="index.php" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
           <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
           <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
@@ -95,21 +95,19 @@ include"conn.php";
         <div class="main">
           <div class="title"><i class="fa fa-cog"></i>  Admin</div>
           <a href="admin.php#account" class="item link1"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
-          <a href="#" class="item link2"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
-          <a href="#" class="item link3"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
-          <a href="#" class="item link4"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Admin newsfeed</span></a>
+          <a href="#" class="item link2"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Room & building management</span></a>
         </div>
       </div>
     </aside>
     <div class="content column is-9">
-      <div class="content column is-9-nav nav-aside">
+      <div class="content column is-9-nav nav-aside is-hidden-touch is-hidden-desktop-only">
 
         <span class="aside-toggle is-marginless">
           <span></span>
           <span></span>
           <span></span>
         </span>
-        <ul class="ulsearch nobullets isflex justify_stuff is-hidden-mobile">
+        <ul class="ulsearch nobullets isflex justify_stuff">
 
           <div class="search">
             <span class="fa fa-search"></span>
