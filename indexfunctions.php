@@ -5,7 +5,7 @@ include"conn.php";
 $count = $dbh->prepare("SELECT count(EventID) FROM Event WHERE Active = 1 and eventname like ? ;");
 $count->bindValue(1, "%".$_GET['search']."%", PDO::PARAM_STR);
 $count->execute();
-$userid = $count->fetchColumn();
+$countrows = $count->fetchColumn();
 if(isset($_GET["page"])){
   $pag = $_GET["page"] * 10 - 10;
   $sql = $dbh->prepare("SELECT * FROM Event WHERE Active = 1 and eventname like ? LIMIT 10 OFFSET ? ;");
@@ -71,7 +71,7 @@ else{ ?>
 ?>
 </div>
 <?php
-$pages = ceil($userid / 10);
+$pages = ceil($countrows / 10);
 if($pages == 1){ ?>
   <li>
     <nav class="pagination nobullets" role="navigation" aria-label="pagination">
@@ -258,33 +258,5 @@ elseif($pages > 3 AND $_GET["page"] == 1){
   </nav>
 <?php
 }
-/*
 
-<nav class="pagination nobullets" role="navigation" aria-label="pagination">
-  <a class="pagination-next nobullets">Next page</a>
-  <a class="pagination-previous nobullets">Previous</a>
-  <ul class="pagination-list nobullets">
-    <li>
-      <a class="pagination-link" aria-label="Goto page 1">1</a>
-    </li>
-    <li>
-      <span class="pagination-ellipsis">&hellip;</span>
-    </li>
-    <li>
-      <a class="pagination-link" aria-label="Goto page 45">45</a>
-    </li>
-    <li>
-      <a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a>
-    </li>
-    <li>
-      <a class="pagination-link" aria-label="Goto page 47">47</a>
-    </li>
-    <li>
-      <span class="pagination-ellipsis">&hellip;</span>
-    </li>
-    <li>
-      <a class="pagination-link" aria-label="Goto page 86">86</a>
-    </li>
-  </ul>
-</nav> */
 ?>
