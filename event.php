@@ -14,6 +14,7 @@ include"dbclasses.php";
       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
       <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="jquery-ui-1.12.1/jquery-ui.js"></script>
+      <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
       <script type="text/javascript" src="js1.js"></script>
       <link rel="stylesheet" href="css/slider.css">
       <link rel="stylesheet" href="css/event.css">
@@ -24,46 +25,50 @@ include"dbclasses.php";
 
   </head>
   <body>
-    <nav class="nav is-dark has-shadow is-hidden-tablet" id="top">
+    <script async type="text/javascript" src="../js/bulma.js"></script>
+
+    <nav class="nav is-dark has-shadow is-hidden-widescreen" id="top" >
       <div class="container">
         <div class="subcontainer">
-          <span class="nav-toggle">
+          <span class="nav-toggle" id="nav-toggle">
             <span></span>
             <span></span>
             <span></span>
           </span>
         </div>
 
-        <script async type="text/javascript" src="../js/bulma.js"></script>
-        <div class="nav-right nav-menu is-hidden-tablet">
+        <div class="nav-right nav-menu is-hidden-widescreen" id="nav-menu">
           <div class="fixit">
-          <div class="sectionfix">
-          <a href="#" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
-          </div>
-          <div class="sectionfix">
-          <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
-          </div>
-          <div class="sectionfix">
-          <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
-          </div>
-          </div>
-          <div class="fixit">
-            <div class="sectionfix">
-          <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
+            <div class="sectionfix" data-role="none">
+              <a href="#" class="item active" data-ajax="false"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
             </div>
             <div class="sectionfix">
-          <a href="#" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
+              <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
             </div>
             <div class="sectionfix">
-          <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
+              <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+            </div>
+            <div class="sectionfix">
+              <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-plus"></i></span></a>
+            </div>
+            <div class="sectionfix">
+              <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">Event management</span></a>
             </div>
           </div>
           <div class="fixit">
             <div class="sectionfix">
-          <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">Event management</span></a>
+              <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
             </div>
             <div class="sectionfix">
-          <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Admin newsfeed</span></a>
+              <a href="#" class="item active" data-ajax="false"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
+            </div>
+            <div class="sectionfix">
+              <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
+            </div>
+          </div>
+          <div class="fixit">
+            <div class="sectionfix">
+              <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Admin newsfeed</span></a>
             </div>
           </div>
 
@@ -71,7 +76,7 @@ include"dbclasses.php";
       </div>
     </nav>
     <div class="columns columnsaside">
-      <aside class="column is-3 aside hero is-fullheight is-hidden-mobile">
+      <aside class="column is-3 aside hero is-fullheight is-hidden-touch is-hidden-desktop-only">
         <div class="fixleft">
           <div class="account has-text-centered">
             <a href="#">
@@ -82,23 +87,30 @@ include"dbclasses.php";
           </div>
           <div class="main">
             <div class="title">Main</div>
-            <a href="#" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Make an event</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">Event management</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
+            <a href="index.php" class="item active" data-ajax="false"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
+            <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
+            <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+            <a href="eventcreate.php" class="item" data-ajax="false"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
+            <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Event management</span></a>
           </div>
           <div class="main">
             <div class="title"><i class="fa fa-cog"></i>  Admin</div>
-            <a href="#" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Admin newsfeed</span></a>
+            <a href="admin.php#account" class="item link1" data-ajax="false"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
+            <a href="#" class="item link2" data-ajax="false"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Room & building management</span></a>
           </div>
         </div>
       </aside>
-      <div class="column is-9">
-        <div class="tile is-ancestor">
+      <div class="content column is-9">
+        <div class="content column is-9-nav nav-aside is-hidden-touch is-hidden-desktop-only">
+
+          <span class="aside-toggle is-marginless">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+
+        </div>
+        <div class="tile is-ancestor things">
           <div class="tile is-vertical is-8">
             <div class="tile">
               <div class="tile is-parent is-vertical">

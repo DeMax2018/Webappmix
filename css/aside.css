@@ -11,8 +11,6 @@
   background-color: #fff;
   padding: 40px 20px;
 }
-
-.
 .scroll{
   overflow-y: scroll;
 }
@@ -66,9 +64,7 @@ a.title:hover{
 .control{
   display: flex;
 }
-.icon{
-  margin-right: 1em;
-}
+
 .column {
   padding-left: 0;
   padding-right: 0;
@@ -132,7 +128,6 @@ a.title:hover{
 
 .fixit{
   width: 100%;
-  text-align: left;
 }
 .ulsearch{
   max-width: 100%;
