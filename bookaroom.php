@@ -398,7 +398,7 @@ function takeroom(number){
                                          </div>
                                          <label>facebook</label><br>
                                          <label style="margin-left:0 !important" class="switch">
-                                           <input type="checkbox" onchange="query(<?php echo "'".$jscall."'"; ?>);" v-model="registration.facebook" id="facebook  ">
+                                           <input type="checkbox"  v-model="registration.facebookcheck" id="facebook">
                                            <span class="slider round"></span>
                                          </label>
                         <v-btn color="primary" style="float:right" onclick="loadrooms();"id='_submit' @click.native="step = 2">Continue</v-btn>
@@ -577,6 +577,7 @@ function takeroom(number){
                     discrip:discription,
                     imagename:image
                   }
+                  /*
                   $.ajax({
                     type: "POST",
                     url: "finalcreateroom.php?$createevent=true",
@@ -584,7 +585,22 @@ function takeroom(number){
                     contentType: "application/json",
                     dataType: "json",
                   });
+                  */
                   alert("Your event is created!");
+                  var facebook = document.getElementById('facebook').checked;
+                  if(facebook == false){
+
+                  }
+                  else{
+                    $
+                    $.ajax({
+                      type: "POST",
+                      url: "finalcreateroom.php?$createevent=true",
+                      data: JSON.stringify(info),
+                      contentType: "application/json",
+                      dataType: "json",
+                    });
+                  }
                 }
               }
             })

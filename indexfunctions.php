@@ -25,12 +25,27 @@ while($rows = $sql->fetch(PDO::FETCH_ASSOC)){
   if($first === true){ ?>
     <div class="columns columnsaside"> <!--  Max 2 items -->
       <div class="column is-6">
+         <?php if($rows["Limited_Ticket"] == $rows["Sold_Ticket"]){
+
+         }else{ ?>
+                 <a href="event.php?id=<?php echo $rows["EventID"] ?>">
+        <?php }
+         ?>
+
         <div class="panel">
-          <p class="is-marginless">
-            <img class="imageindex" src="upload/<?php echo $rows["Mainpicture"] ?>">
-          </p>
+
+            <div class="">
+              <img class="imgA1" src="upload/<?php echo $rows["Mainpicture"] ?>">
+              <?php
+              if($rows["Limited_Ticket"] == $rows["Sold_Ticket"]){ ?>
+                <img class="imgB1" src="img/unavailable.png" alt="">
+              <?php }
+              ?>
+            </div>
+
+
           <div class="panel-block">
-            <div class="columns columnsaside">
+            <div class="columns columnsaside" <?php if($rows["Limited_Ticket"] == $rows["Sold_Ticket"]){ ?>style="margin-top: -2em;"<?php } ?>>
               <div class="column">
                 <div class="panel-block-item"><?php echo $rows["eventname"]; ?></div>
               </div>
@@ -40,7 +55,12 @@ while($rows = $sql->fetch(PDO::FETCH_ASSOC)){
               </div>
             </div>
           </div>
-        </div>
+        </div><?php if($rows["Limited_Ticket"] == $rows["Sold_Ticket"]){
+
+        }else{ ?>
+              </a>
+       <?php }
+        ?>
       </div>
 
 
@@ -48,12 +68,25 @@ while($rows = $sql->fetch(PDO::FETCH_ASSOC)){
 <?php  $first = false; }
 else{ ?>
   <div class="column is-6">
+    <?php if($rows["Limited_Ticket"] == $rows["Sold_Ticket"]){
+
+    }else{ ?>
+            <a href="event.php?id=<?php echo $rows["EventID"] ?>">
+   <?php }
+    ?>
     <div class="panel">
-      <p class="is-marginless">
-        <img class="imageindex" src="upload/<?php echo $rows["Mainpicture"] ?>">
-      </p>
+
+        <div class="">
+          <img class="imgA1" src="upload/<?php echo $rows["Mainpicture"] ?>">
+          <?php
+          if($rows["Limited_Ticket"] == $rows["Sold_Ticket"]){ ?>
+            <img class="imgB1" src="img/unavailable.png" alt="">
+          <?php }
+          ?>
+        </div>
+
       <div class="panel-block">
-        <div class="columns columnsaside">
+        <div class="columns columnsaside" <?php if($rows["Limited_Ticket"] == $rows["Sold_Ticket"]){ ?>style="margin-top: -2em;"<?php } ?>>
           <div class="column">
             <div class="panel-block-item"><?php echo $rows["eventname"]; ?></div>
           </div>
@@ -63,7 +96,12 @@ else{ ?>
           </div>
         </div>
       </div>
-    </div>
+    </div><?php if($rows["Limited_Ticket"] == $rows["Sold_Ticket"]){
+
+    }else{ ?>
+          </a>
+   <?php }
+    ?>
   </div>
 </div>
 <?php  $first = true; }

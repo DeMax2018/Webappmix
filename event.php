@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "conn.php";
-$_GET["id"] = 44;
+
 include"dbclasses.php";
 $getalldata = $dbh->prepare("SELECT * FROM event WHERE EventID = ".$_GET["id"]);
 $getalldata->execute();
@@ -143,7 +143,6 @@ function myMap() {
                 <article class="tile is-child box">
                   <ul class="rslides">
                     <li><img src="upload/<?php echo $alldata["Mainpicture"] ?>" alt=""></li>
-
                   </ul>
                   <script>
                     $(function() {
@@ -184,13 +183,7 @@ function myMap() {
                   <p class="subtitle">amount participants</p>
                   <div class="content participants">
                     <ul>
-                      <?php
-                      $data = new classes();
-                      $load = json_decode($data->eventdetails(1));
-                      foreach ($load as $value) {
-                        echo $value;
-                      }
-                                           ?>
+
                       <li>Participant 1</li>
                       <li class="is-light">Participant 2</li>
                       <li>Participant 1</li>
@@ -224,7 +217,7 @@ function myMap() {
             <article class="tile is-child box">
               <p class="title">Description</p>
               <div class="content">
-                hiucoehiouivgchyruibczbcyuvecuy
+                <?php echo $alldata["Discription"] ?>
               </div>
             </article>
             </div>
