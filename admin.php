@@ -23,7 +23,15 @@ session_start();
     <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
     <link href="css/jquerymobile.css" rel="stylesheet" type="text/css" />
     <link href="view_event.css" rel="stylesheet" type="text/css" />
-
+<style media="screen">
+  .fullsize{
+    display: inline-flex;
+    width: 100%;
+  }
+  .newline{
+    text-align: center;
+  }
+</style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.js"></script>
     <script src="/js/room.js"></script>
@@ -65,7 +73,6 @@ session_start();
         function addfielts(){
           /*var sending = document.getElementById("sending");
           sending.style.display = sending.style.display === 'none' ? '' : ''; */
-
           var result = [];
           var url = "filterloading.php?fieldcreate=1&get=";
           var options = document.getElementById('filter-menu');
@@ -99,9 +106,7 @@ session_start();
               var url = url + "_" + res[i] + "-" + value;
             }
         }
-          var room = document.getElementById('nameroom').value;
-          var building = document.getElementById('buildingselect').value;
-          var realurl = "filterloading.php?createroom=true&&variables=" + url + "&roomname=" + room + "&buildingpick=" + building;
+          var realurl = "filterloading.php?createroom=true&&variables=" + url ;
 
           $("#testing").load(realurl,function(){});
         /*  $.ajax({
@@ -331,16 +336,12 @@ session_start();
                 <p class="title">Create a new room.</p>
                 <p class="subtitle">You can create a room and give it certain objects.</p>
                           <div id="addroomfilters">
-                            <div class="flexing">
-                              <div class="percentage">
-                                <label>Name of the room</label>
-                                <input type="text" class="input" placeholder="Give the name of the room" id="nameroom" name="" value="">
-                              </div>
+                            <div class="flexing" style="justify-content:center;">
                               <div  onchange="" class="percentage">
                                 <label>Objects available in the room</label>
                                 <select id="filter-menu"  placeholder="ja" data-native-menu="false" multiple>
                                     <?php
-                                    $all = $dbh->prepare("SELECT * FROM details;");
+                                    $all = $dbh->prepare("SELECT * FROM details WHERE SortingID != '';");
                                     $all->execute();
                                     while($records = $all->fetch(PDO::FETCH_ASSOC)){ ?>
                                       <option value="<?php echo $records["fldname"]; ?>"><?php echo $records["fldname"]; ?></option>
@@ -348,21 +349,10 @@ session_start();
                                     ?>
                                 </select>
                               </div>
-                              <div class="percentage">
-                                <label>In what building is this room?</label>
-                                <select id="buildingselect"  placeholder="ja" data-native-menu="false">
-                                    <?php
-                                    $all = $dbh->prepare("SELECT * FROM building;");
-                                    $all->execute();
-                                    while($records = $all->fetch(PDO::FETCH_ASSOC)){ ?>
-                                      <option value="<?php echo $records["BuildingID"]; ?>"><?php echo $records["fldName"]; ?></option>
-                                    <?php }
-                                    ?>
-                                </select>
-                              </div>
+
 
             </div><button type="button" onclick="addfielts();" name="button">generate fields</button>
-            <div id="filterresults" class="flexing">
+            <div id="filterresults" class="flexing" style="display: block;">
 
             </div>
 

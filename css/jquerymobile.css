@@ -1675,7 +1675,7 @@ button.ui-btn-icon-notext,
 /* Form labels */
 .ui-mobile label,
 .ui-controlgroup-label {
-	display: block;
+	display: contents;
 	margin: 0 0 .4em;
 }
 /* Accessible content hiding */

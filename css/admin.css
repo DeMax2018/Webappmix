@@ -18,6 +18,10 @@ div.scrollacc{
 
   max-width: 100%;
 }
+.imageindex{
+  width: 50em !important;
+  height: 20em !important;
+}
 tr{
   height: 2em;
   font-size: 1.2em;
@@ -26,6 +30,7 @@ tr{
   width: 100%;
 }
 .percentage{
+  text-align: center;
   width: 25% !important;
   margin-left: 6% !important;
 }

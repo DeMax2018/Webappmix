@@ -20,6 +20,12 @@ $_SESSION["arrayfilter"] = array();
     <link rel="stylesheet" href="/css/eventcreate.css">
   <link rel="stylesheet" type="text/css" href="css/nav.css">
 <style media="screen">
+.sel__box{
+  position: inherit;
+}
+.tdinfo{
+  border: 1px solid black;
+}
   .popup-trigger {
   display: block;
   width: 2em;
@@ -37,7 +43,9 @@ $_SESSION["arrayfilter"] = array();
   box-shadow: 0 3px 0 rgba(0, 0, 0, 0.07);
   transition:300ms all;
   }
-
+  .td{
+    border: 1px solid black;
+  }
 .popup-trigger:hover {
   opacity:.8;
 }
@@ -132,7 +140,11 @@ transition:300ms all;
 <link rel="stylesheet" href="/css/bulma.css">
   <link rel="stylesheet" type="text/css" href="../css/aside.css">
 <script type="text/javascript">
+function get_hour(){
 
+
+  return newdate;
+}
 
 function closeshow(){
   var d = document.getElementById('showinfo');
@@ -151,37 +163,7 @@ if (e.target.id == "closeid" || e.target.id == "show" || $(e.target).parents("#c
     _file = document.getElementById('_file'),
     _progress = document.getElementById('_progress');
 
-    var upload = function(){
 
-        if(_file.files.length === 0){
-            return;
-        }
-
-        var data = new FormData();
-        data.append('SelectedFile', _file.files[0]);
-
-        var request = new XMLHttpRequest();
-        request.onreadystatechange = function(){
-            if(request.readyState == 4){
-                try {
-                    var resp = JSON.parse(request.response);
-                } catch (e){
-                    var resp = {
-                        status: 'error',
-                        data: 'Unknown error occurred: [' + request.responseText + ']'
-                    };
-                }
-                console.log(resp.status + ': ' + resp.data);
-            }
-        };
-
-        request.upload.addEventListener('progress', function(e){
-            _progress.style.width = Math.ceil(e.loaded/e.total) * 100 + '%';
-        }, false);
-
-        request.open('POST', 'receive.php');
-        request.send(data);
-    }
 
     _submit.addEventListener('click', upload);
 
@@ -205,7 +187,33 @@ $("#showinfo").load("loadinfobox.php?number=" + number,function(){});
 
 
   }
+function safe(){
+  var date = document.getElementById('date').value;
+  var box = {
+    date:date
+  }
+
+$.ajax({
+  type: "POST",
+  url: "datasession.php",
+  data: JSON.stringify(box),
+  contentType: "application/json",
+  dataType: "json",
+});
+}
 function query(text){
+  var time = document.getElementById('firsttime').textContent;
+  var time2 = document.getElementById('secondtime').textContent;
+  var split1 = time.split(" ");
+  var realtime = "";
+  for (i = 0; i < split1.length; i++){
+      var realtime = realtime + split1[i];
+  }
+  var split2 = time2.split(" ");
+  var realtime2 = "";
+  for (i = 0; i < split1.length; i++){
+      var realtime2 = realtime2 + split2[i];
+  }
   var txt = text;
   var url = "";
   var res = txt.split("_");
@@ -230,8 +238,20 @@ function query(text){
     console.log(url);
 }
 
-  var realurl = "loadrooms.php?variables=" + url;
+  var realurl = "loadrooms.php?datestart=" + realtime + "&dataend=" + realtime2 + "&variables=" + url;
   $("#roomevent").load(realurl,function(){});
+}
+function takeroom(number){
+  var box = {
+    numberinput:number
+  }
+  $.ajax({
+    type: "POST",
+    url: "datasession.php",
+    data: JSON.stringify(box),
+    contentType: "application/json",
+    dataType: "json",
+  });
 }
   </script>
 </script>
@@ -332,7 +352,7 @@ function query(text){
 
         </ul>
       </div>
-      <div id="events" style="margin:auto;" class="section scroll things">
+      <div id="events" style="margin:auto;" class="section things">
           <div id="app">
 
           <v-app>
@@ -345,23 +365,21 @@ function query(text){
                       <v-stepper-step step="1" :complete="step > 1">Information event</v-stepper-step>
                       <v-divider></v-divider>
                       <v-stepper-step step="2" :complete="step > 2">Pick a room</v-stepper-step>
-                      <v-divider></v-divider>
-                      <v-stepper-step step="3">Confirm</v-stepper-step>
                     </v-stepper-header>
                     <v-stepper-items>
                       <v-stepper-content step="1">
 
                          <v-text-field id="namen" label="Name of event" v-model="registration.eventname" required></v-text-field>
-                         <v-text-field label="Max-tickets" type="number"
+                         <v-text-field label="Max-tickets" id="tickets" type="number"
                             v-model="registration.numtickets" required></v-text-field>
-                          <v-text-field label="Date" type="date"
-                                      v-model="registration.numtickets" required></v-text-field>
+                          <v-text-field label="Date" id="date" onchange="safe();" type="date"
+                                      v-model="registration.date" required></v-text-field>
 
                                       <div class="column">
 
                                     <div class="form-group" id="time-range">
                                     <p>
-                                    Time: <span class="slider-time">9:00 AM</span> - <span class="slider-time2">5:00 PM</span>
+                                    Time: <span id="firsttime" class="slider-time">9:00 AM</span> - <span id="secondtime" class="slider-time2">5:00 PM</span>
                                     </p>
                                       <div class="sliders_step1">
                                         <div id="slider-range"></div>
@@ -369,18 +387,21 @@ function query(text){
                                     </div>
 
                                   </div>
-                                  <v-text-field label="Discription" type="textarea"
+                                  <v-text-field id="discription" label="Discription" type="textarea"
                                      v-model="registration.discription" required></v-text-field>
 
                                          <p>
-                                            <input onchange="test()" type='file' id='_file'> <input type='button' id='_submit' value='Upload!'>
+                                            <input onchange="test()" type='file' id='_file'>
                                          </p>
                                          <div class='progress_outer'>
                                              <div id='_progress' class='progress'></div>
                                          </div>
                                          <label>facebook</label><br>
-
-                        <v-btn color="primary" onclick="loadrooms();" @click.native="step = 2">Continue</v-btn>
+                                         <label style="margin-left:0 !important" class="switch">
+                                           <input type="checkbox" onchange="query(<?php echo "'".$jscall."'"; ?>);" v-model="registration.facebook" id="facebook  ">
+                                           <span class="slider round"></span>
+                                         </label>
+                        <v-btn color="primary" style="float:right" onclick="loadrooms();"id='_submit' @click.native="step = 2">Continue</v-btn>
                       </v-stepper-content>
                       <v-stepper-content step="2">
                         <div class="wrapper-room-filter">
@@ -403,7 +424,7 @@ function query(text){
                               array_push($_SESSION["arrayfilter"], $all["fldname"]);
                               switch ($all["SortingID"]) {
                                 case 1: ?>
-                                  <v-text-field label="Name of <?php echo $all["fldname"]; ?>" id="<?php echo $all["fldname"]; ?>" onchange="query(<?php echo "'".$jscall."'"; ?>);" v-model="registration.eventname" required></v-text-field>
+                                  <v-text-field label="Name of <?php echo $all["fldname"]; ?>" id="<?php echo $all["fldname"]; ?>" onchange="query(<?php echo "'".$jscall."'"; ?>);" v-model="registration.<?php echo $all["fldname"] ?>" required></v-text-field>
                           <?php  break;
                                 case 2: ?>
                                 <v-text-field label="how many <?php echo $all["fldname"]; ?>" id="<?php echo $all["fldname"]; ?>" onchange="query(<?php echo "'".$jscall."'"; ?>);" type="number" v-model="registration.<?php echo $all["fldname"]; ?>" required></v-text-field>
@@ -412,6 +433,7 @@ function query(text){
                                 <div onclick="query(<?php echo "'".$jscall."'"; ?>);" class="sel sel--<?php echo $all["fldname"]; ?>">
                                   <select  name="<?php echo $all["fldname"]; ?>" id="<?php echo $all["fldname"]; ?>">
                                     <option value="<?php echo $all["fldname"]; ?>" disabled><?php echo $all["fldname"]; ?></option>
+                                    <option value="all">all</option>
                                     <?php
                                       $getoptions = $dbh->prepare("SELECT * FROM details WHERE listoption = ".$all["DetailsID"]);
                                       $getoptions->execute();
@@ -452,19 +474,8 @@ function query(text){
 
                         <div class="buttonbottom" style="text-align:center;">
                           <v-btn flat @click.native="step = 1">Previous</v-btn>
-                          <v-btn color="primary" @click.native="step = 3">Continue</v-btn>
+                          <v-btn color="primary" @click.prevent="submit">Book!</v-btn>
                         </div>
-                      </v-stepper-content>
-                      <v-stepper-content step="3">
-
-                        <v-text-field label="Number of Tickets" type="number"
-                                      v-model="registration.numtickets" required></v-text-field>
-                        <v-select label="Shirt Size" v-model="registration.shirtsize"
-                                  :items="sizes" required></v-select>
-
-                        <v-btn flat @click.native="step = 2">Previous</v-btn>
-                        <v-btn color="primary" @click.prevent="submit">Save</v-btn>
-
                       </v-stepper-content>
                     </v-stepper-items>
                   </v-stepper>
@@ -504,14 +515,16 @@ function query(text){
         request.onreadystatechange = function(){
             if(request.readyState == 4){
                 try {
+
                     var resp = JSON.parse(request.response);
+
                 } catch (e){
                     var resp = {
                         status: 'error',
                         data: 'Unknown error occurred: [' + request.responseText + ']'
                     };
                 }
-                console.log(resp.status + ': ' + resp.data);
+                alert(resp.status + ': ' + resp.data);
             }
         };
 
@@ -547,7 +560,31 @@ function query(text){
               }),
               methods:{
                 submit() {
-                  alert('This is the post. Blah');
+                  var nameeventget = document.getElementById('namen').value;
+                  var nameevent = nameeventget.split(' ').join('+');
+                  var tickets = document.getElementById("tickets").value;
+                  var time = document.getElementById('firsttime').textContent;
+                  var time2 = document.getElementById('secondtime').textContent;
+                  var discriptionget = document.getElementById('discription').value;
+                  var discription = discriptionget.split(' ').join('+');
+                  var imageget = document.getElementById('_file').value;
+                  var image = imageget.replace(/^.*[\\\/]/, '');
+                  var info = {
+                    name:nameevent,
+                    ticket:tickets,
+                    starttime:time,
+                    endtime:time2,
+                    discrip:discription,
+                    imagename:image
+                  }
+                  $.ajax({
+                    type: "POST",
+                    url: "finalcreateroom.php?$createevent=true",
+                    data: JSON.stringify(info),
+                    contentType: "application/json",
+                    dataType: "json",
+                  });
+                  alert("Your event is created!");
                 }
               }
             })

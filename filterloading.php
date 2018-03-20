@@ -1,10 +1,11 @@
+
 <?php
 include"conn.php";
 session_start();
 
 $_SESSION["ids"] = array();
 
-error_reporting(0);
+//error_reporting(0);
 if(isset($_GET["fieldcreate"])){
   if($_GET["fieldcreate"] != "all"){
   $stringposting = "";
@@ -22,107 +23,105 @@ else{
 
   $start = 0;
   $check = true;
+  $per4 = 0;
+  ?>
+  <div class="fullsize">
+    <?php
   while($check == true){
+
     $start++;
 
     if($user[$start] != ""){
       $gettype = $dbh->prepare("SELECT * FROM details WHERE fldname = '".$user[$start]."'");
-
       $gettype->execute();
       $type = $gettype->fetch(PDO::FETCH_ASSOC);
-
-      if($type["SortingID"] == 1){
-        if(!isset($_GET["fieldcreate"])){
-        ?>
-        <div  onchange="" class="percentage">
-        <?php } ?>
-          <label>Name of<?php echo $type["fldname"] ?></label>
-        <input type="text" style="width:20em !important" class="input" placeholder="how many <?php echo $user[$start]?> are there available?" id="<?php echo $user[$start]?>" name="" value="">
-    <?php if(!isset($_GET["fieldcreate"])){ ?>
+      if($per4 == 4){ ?>
       </div>
-  <?php  }
-
-      if($stringposting === ""){
-        $stringposting .= $user[$start];
-      }
-      else{
-        $stringposting .= "_".$user[$start];
-      }
+      <div class="fullsize">
+<?php
+        if($stringposting === ""){
+           $stringposting .= $user[$start];
         }
-      elseif($type["SortingID"] == 2){
-        if(!isset($_GET["fieldcreate"])){
-        ?>
-        <div  onchange="" class="percentage">
-        <?php } ?>
-          <label>Amount of <?php echo $type["fldname"] ?></label>
-        <input type="number" class="input" placeholder="how many <?php echo $user[$start]?> are there available?" id="<?php echo $user[$start]?>" name="" value="">
-        <?php if(!isset($_GET["fieldcreate"])){ ?>
+        else{
+           $stringposting .= "_".$user[$start];
+        }
+      }
+      if($type["SortingID"] == 1){ ?>
+          <div class="percentage">
+            <label><?php echo $user[$start] ?></label>
+            <input class="input" type="text" id="<?php echo $user[$start]; ?>" value="">
           </div>
-      <?php  }
-
-
-      if($stringposting === ""){
-        $stringposting .= $user[$start];
+<?php
+        if($stringposting === ""){
+           $stringposting .= $user[$start];
+        }
+        else{
+           $stringposting .= "_".$user[$start];
+        }
       }
-      else{
-        $stringposting .= "_".$user[$start];
-      }
-          }
-      elseif($type["SortingID"] == 3){
-        if(!isset($_GET["fieldcreate"])){
-        ?>
-        <div  onchange="" class="percentage">
-        <?php } ?>
-        <select type="text" class="input" placeholder="how many <?php echo $user[$start]?> are there available?" id="<?php echo $user[$start]?>" name="" value="">
-        </select>
-        <?php if(!isset($_GET["fieldcreate"])){ ?>
+      elseif($type["SortingID"] == 2){ ?>
+          <div class="percentage">
+            <label><?php echo $user[$start] ?></label>
+            <input class="input" type="number" id="<?php echo $user[$start]; ?>" value="">
           </div>
-      <?php  }
+<?php
+        if($stringposting === ""){
+           $stringposting .= $user[$start];
+        }
+        else{
+           $stringposting .= "_".$user[$start];
+        }
+      }
+      elseif($type["SortingID"] == 3){ ?>
+          <div class="percentage">
+            <label><?php echo $user[$start] ?></label>
+            <input type="text" class="input" id="<?php echo $user[$start]; ?>" value="">
+          </div>
+<?php
+        if($stringposting === ""){
+           $stringposting .= $user[$start];
+        }
+        else{
+           $stringposting .= "_".$user[$start];
+        }
+      }
+      elseif($type["SortingID"] == 4){ ?>
+          <div class="percentage">
+            <label><?php echo $user[$start];"(Not available/available)" ?> </label><br>
+            <label style="margin-left:0 !important; .ui-mobile label{display:contents}" class="switch">
+              <input type="checkbox" v-model="registration.check" id="<?php echo $user[$start]; ?>">
+              <span class="slider round"></span>
+            </label>
+          </div>
+<?php
+        if($stringposting === ""){
+           $stringposting .= $user[$start];
+        }
+        else{
+           $stringposting .= "_".$user[$start];
+        }
+      }
 
-      if($stringposting === ""){
-        $stringposting .= $user[$start];
-      }
-      else{
-        $stringposting .= "_".$user[$start];
-      }
-      }
-      elseif($type["SortingID"] == 4){
-        if(!isset($_GET["fieldcreate"])){
-        ?>
-        <div  onchange="" class="percentage">
-        <?php } ?>
-          <label><?php echo $type["fldname"]."(off/on)" ?> </label>
-        <?php if(!isset($_GET["fieldcreate"])){ ?>
-          <label class="switch">
-          <?php }
-          else{ ?>
-            <label style="margin-left:0 !important" class="switch">
-          <?php } ?>
-            <input type="checkbox"id="<?php echo $user[$start]?>">
-          <span class="slider round"></span>
-          </label>        <?php if(!isset($_GET["fieldcreate"])){ ?>
-                </div>
-            <?php  }
 
-      if($stringposting === ""){
-        $stringposting .= $user[$start];
-      }
-      else{
-        $stringposting .= "_".$user[$start];
-      }
-      }
-      ?>
-
-    <?php }
+    }
     else{
       $check = false;
     }
-  } ?><?php if(isset($_GET["fieldcreate"])){ ?><button type="button" onclick="createroom('<?php echo $stringposting ?>');" id="sending"  name="button">Create room</button><?php } ?>
+    $per4++;
+  } ?><?php if(isset($_GET["fieldcreate"])){ ?>
+
+    </div>
+
+    <div class="newline">
+      <button type="button" onclick="createroom('<?php echo $stringposting ?>');" id="sending" class="button"  name="button">Create room</button>
+    </div>
+
+  <?php } ?>
 <?php }
 elseif(isset($_GET["createroom"])){
-  $preroom = $dbh->prepare("INSERT INTO room (fldName, BuildingID) VALUES ('".$_GET["roomname"]."',".$_GET["buildingpick"].")");
+  $preroom = $dbh->prepare("INSERT INTO room () VALUES ()");
   $preroom->execute();
-  $getroom = $dbh->prepare("SELECT * FROM room WHERE fldName = '".$_GET["roomname"]."'");
+  $getroom = $dbh->prepare("SELECT * FROM room order by RoomID desc limit 1");
   $getroom->execute();
   $roomnumber = $getroom->fetch(PDO::FETCH_ASSOC);
   $addingarray = array();
@@ -149,18 +148,22 @@ elseif(isset($_GET["createroom"])){
     $resultcheck = $check->fetch(PDO::FETCH_ASSOC);
     echo $solo[0]."dit is de solo";
     if($resultcheck["SortingID"] == 1){
+      echo"inserted text";
       $insert = $dbh->prepare("INSERT INTO room_details (Textawn,RoomID,DetailsID) VALUES ('".$solo[1]."',".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
       $insert->execute();
     }
     if($resultcheck["SortingID"] == 2){
+      echo"inserted number";
       $insert = $dbh->prepare("INSERT INTO room_details (Numberawn,RoomID,DetailsID) VALUES (".$solo[1].",".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
       $insert->execute();
     }
     if($resultcheck["SortingID"] == 3){
+      echo"inserted select";
       $insert = $dbh->prepare("INSERT INTO room_details (Boolawn,RoomID,DetailsID) VALUES (1,".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
       $insert->execute();
     }
     if($resultcheck["SortingID"] == 4){
+      echo"inserted switch";
       if($solo[1] === "on"){
         $insert = $dbh->prepare("INSERT INTO room_details (Boolawn,RoomID,DetailsID) VALUES (1,".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
       }

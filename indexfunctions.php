@@ -27,7 +27,7 @@ while($rows = $sql->fetch(PDO::FETCH_ASSOC)){
       <div class="column is-6">
         <div class="panel">
           <p class="is-marginless">
-            <img src="https://placehold.it/600x300">
+            <img class="imageindex" src="upload/<?php echo $rows["Mainpicture"] ?>">
           </p>
           <div class="panel-block">
             <div class="columns columnsaside">
@@ -35,7 +35,7 @@ while($rows = $sql->fetch(PDO::FETCH_ASSOC)){
                 <div class="panel-block-item"><?php echo $rows["eventname"]; ?></div>
               </div>
               <div class="column has-text-right">
-                <div class="panel-block-item"><?php echo $rows["date_event"] ?><i class="fa fa-user"></i></div>
+                <div class="panel-block-item"><?php echo $rows["Sold_Ticket"] ?><i class="fa fa-user"></i></div>
                 <div class="panel-block-item"><?php echo $rows["date_event"] ?><i class="fa fa-calendar"></i></div>
               </div>
             </div>
@@ -50,7 +50,7 @@ else{ ?>
   <div class="column is-6">
     <div class="panel">
       <p class="is-marginless">
-        <img src="https://placehold.it/600x300">
+        <img class="imageindex" src="upload/<?php echo $rows["Mainpicture"] ?>">
       </p>
       <div class="panel-block">
         <div class="columns columnsaside">
@@ -58,7 +58,7 @@ else{ ?>
             <div class="panel-block-item"><?php echo $rows["eventname"]; ?></div>
           </div>
           <div class="column has-text-right">
-            <div class="panel-block-item"><?php echo $rows["date_event"] ?> <i class="fa fa-user"></i></div>
+            <div class="panel-block-item"><?php echo $rows["Sold_Ticket"] ?> <i class="fa fa-user"></i></div>
             <div class="panel-block-item"><?php echo $rows["date_event"] ?> <i class="fa fa-calendar"></i></div>
           </div>
         </div>

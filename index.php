@@ -14,7 +14,12 @@ include"conn.php";
   <link rel="stylesheet" type="text/css" href="../css/grid-gallery.css">
   <link rel="stylesheet" type="text/css" href="css/nav.css">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js"></script>
-
+<style media="screen">
+.imageindex{
+  width: 50em !important;
+  height: 20em !important;
+}
+</style>
   <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
 </head>
 <body onload="eventsearch();">

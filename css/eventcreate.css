@@ -1,4 +1,6 @@
-
+.td{
+  border: 1px solid black;
+}
 .fb{
   font-size: 35px;
   transition: 0.2s;
