@@ -1,4 +1,4 @@
-body {
+﻿body {
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
   height: 100%;
 }
@@ -11,8 +11,6 @@ body {
   background-color: #fff;
   padding: 40px 20px;
 }
-
-.
 .scroll{
   overflow-y: scroll;
 }
@@ -66,9 +64,7 @@ a.title:hover{
 .control{
   display: flex;
 }
-.icon{
-  margin-right: 1em;
-}
+
 .column {
   padding-left: 0;
   padding-right: 0;
@@ -132,7 +128,6 @@ a.title:hover{
 
 .fixit{
   width: 100%;
-  text-align: left;
 }
 .ulsearch{
   max-width: 100%;
@@ -341,97 +336,97 @@ textarea {
     color:#333;
 }
 .ui-slider-horizontal {
-    height: 8px;
-    background: #D7D7D7;
-    border: 1px solid #BABABA;
-    box-shadow: 0 1px 0 #FFF, 0 1px 0 #CFCFCF inset;
-    clear: both;
-    margin: 8px 0;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    -ms-border-radius: 6px;
-    -o-border-radius: 6px;
-    border-radius: 6px;
+    height: 8px !important;
+    background: #D7D7D7 !important;
+    border: 1px solid #BABABA !important;
+    box-shadow: 0 1px 0 #FFF, 0 1px 0 #CFCFCF inset !important;
+    clear: both !important;
+    margin: 8px 0 !important;
+    -webkit-border-radius: 6px !important;
+    -moz-border-radius: 6px !important;
+    -ms-border-radius: 6px !important;
+    -o-border-radius: 6px !important;
+    border-radius: 6px !important;
 }
 .ui-slider {
-    position: relative;
-    text-align: left;
+    position: relative !important;
+    text-align: left !important;
 }
 .ui-slider-horizontal .ui-slider-range {
-    top: -1px;
-    height: 100%;
+    top: -1px !important;
+    height: 100% !important;
 }
 .ui-slider .ui-slider-range {
-    position: absolute;
-    z-index: 1;
-    height: 8px;
-    font-size: .7em;
-    display: block;
-    border: 1px solid #2eb398;
-    box-shadow:0 1px 0 #3cd6b7 inset;
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    -khtml-border-radius: 6px;
-    border-radius: 6px;
+    position: absolute !important;
+    z-index: 1 !important;
+    height: 8px !important;
+    font-size: .7em !important;
+    display: block !important;
+    border: 1px solid #2eb398 !important;
+    box-shadow:0 1px 0 #3cd6b7 inset !important;
+    -moz-border-radius: 6px !important;
+    -webkit-border-radius: 6px !important;
+    -khtml-border-radius: 6px !important;
+    border-radius: 6px !important;
     background: #2eb398;
-    background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgi…pZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+    background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgi…pZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==') !important;
     background-size: 100%;
     background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0%, #2eb398), color-stop(100%, #81B8F3));
-    background-image: -webkit-linear-gradient(top, #2eb398, #34d6b5);
-    background-image: -moz-linear-gradient(top, #2eb398, #34d6b5);
-    background-image: -o-linear-gradient(top, #2eb398, #34d6b5);
-    background-image: linear-gradient(top, #2eb398, #34d6b5);
+    background-image: -webkit-linear-gradient(top, #2eb398, #34d6b5) !important;
+    background-image: -moz-linear-gradient(top, #2eb398, #34d6b5) !important;
+    background-image: -o-linear-gradient(top, #2eb398, #34d6b5) !important;
+    background-image: linear-gradient(top, #2eb398, #34d6b5) !important;
 }
 .ui-slider .ui-slider-handle {
-    border-radius: 50%;
-    background: #F9FBFA;
-    background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgi…pZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
-    background-size: 100%;
+    border-radius: 50% !important;
+    background: #F9FBFA !important;
+    background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgi…pZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==') !important;
+    background-size: 100% !important;
     background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0%, #C7CED6), color-stop(100%, #F9FBFA));
-    background-image: -webkit-linear-gradient(top, #C7CED6, #F9FBFA);
-    background-image: -moz-linear-gradient(top, #C7CED6, #F9FBFA);
-    background-image: -o-linear-gradient(top, #C7CED6, #F9FBFA);
-    background-image: linear-gradient(top, #C7CED6, #F9FBFA);
-    width: 22px;
-    height: 22px;
-    -webkit-box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.6), 0 -1px 0 1px rgba(0, 0, 0, 0.15) inset, 0 1px 0 1px rgba(255, 255, 255, 0.9) inset;
-    -moz-box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.6), 0 -1px 0 1px rgba(0, 0, 0, 0.15) inset, 0 1px 0 1px rgba(255, 255, 255, 0.9) inset;
-    box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.6), 0 -1px 0 1px rgba(0, 0, 0, 0.15) inset, 0 1px 0 1px rgba(255, 255, 255, 0.9) inset;
-    -webkit-transition: box-shadow .3s;
-    -moz-transition: box-shadow .3s;
-    -o-transition: box-shadow .3s;
-    transition: box-shadow .3s;
+    background-image: -webkit-linear-gradient(top, #C7CED6, #F9FBFA) !important;
+    background-image: -moz-linear-gradient(top, #C7CED6, #F9FBFA) !important;
+    background-image: -o-linear-gradient(top, #C7CED6, #F9FBFA) !important;
+    background-image: linear-gradient(top, #C7CED6, #F9FBFA) !important;
+    width: 22px !important;
+    height: 22px !important;
+    -webkit-box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.6), 0 -1px 0 1px rgba(0, 0, 0, 0.15) inset, 0 1px 0 1px rgba(255, 255, 255, 0.9) inset !important;
+    -moz-box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.6), 0 -1px 0 1px rgba(0, 0, 0, 0.15) inset, 0 1px 0 1px rgba(255, 255, 255, 0.9) inset !important;
+    box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.6), 0 -1px 0 1px rgba(0, 0, 0, 0.15) inset, 0 1px 0 1px rgba(255, 255, 255, 0.9) inset !important;
+    -webkit-transition: box-shadow .3s !important;
+    -moz-transition: box-shadow .3s !important;
+    -o-transition: box-shadow .3s !important;
+    transition: box-shadow .3s !important;
 }
 .ui-slider .ui-slider-handle {
-    position: absolute;
-    z-index: 2;
-    width: 22px;
-    height: 22px;
-    cursor: default;
-    border: none;
-    cursor: pointer;
+    position: absolute !important;
+    z-index: 2 !important;
+    width: 22px !important;
+    height: 22px !important;
+    cursor: default !important;
+    border: none !important;
+    cursor: pointer !important;
 }
 .ui-slider .ui-slider-handle:after {
-    content:"";
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    top: 50%;
-    margin-top: -4px;
-    left: 50%;
-    margin-left: -4px;
-    background: #13a587;
-    -webkit-box-shadow: 0 1px 1px 1px rgba(22, 73, 163, 0.7) inset, 0 1px 0 0 #FFF;
-    -moz-box-shadow: 0 1px 1px 1px rgba(22, 73, 163, 0.7) inset, 0 1px 0 0 white;
-    box-shadow: 0 1px 1px 1px rgba(22, 73, 163, 0.7) inset, 0 1px 0 0 #FFF;
+    content:"" !important;
+    position: absolute !important;
+    width: 8px !important;
+    height: 8px !important;
+    border-radius: 50% !important;
+    top: 50% !important;
+    margin-top: -4px !important;
+    left: 50% !important;
+    margin-left: -4px !important;
+    background: #13a587 !important;
+    -webkit-box-shadow: 0 1px 1px 1px rgba(22, 73, 163, 0.7) inset, 0 1px 0 0 #FFF !important;
+    -moz-box-shadow: 0 1px 1px 1px rgba(22, 73, 163, 0.7) inset, 0 1px 0 0 white !important;
+    box-shadow: 0 1px 1px 1px rgba(22, 73, 163, 0.7) inset, 0 1px 0 0 #FFF !important;
 }
 .ui-slider-horizontal .ui-slider-handle {
-    top: -.5em;
-    margin-left: -.6em;
+    top: -.5em !important;
+    margin-left: -.6em !important;
 }
 .ui-slider a:focus {
-    outline:none;
+    outline:none !important;
 }
 .icon-case {
   width: 35px;
