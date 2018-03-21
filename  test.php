@@ -19,7 +19,7 @@
 <script type="text/javascript">
   function trying(){
   $("#import").load("testphp.php?",function(){});
-
+ 
   }
 </script>
   </head>
