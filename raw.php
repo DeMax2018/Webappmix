@@ -1,5 +1,25 @@
 <BODY style='background:black;color:green;'>
 <?php
+include"conn.php";
+/*var info = {
+	name:nameevent,
+	ticket:tickets,
+	starttime:time,
+	endtime:time2,
+	discrip:discription,
+	imagename:image
+}*/
+$box = json_decode(file_get_contents('php://input'), true);
+
+$nameev = str_replace("+"," ",$box["name"]);
+	$getlatestreservation = $dbh->prepare("SELECT Room_HoursID FROM roomhours order by Room_HoursID desc limit 1;");
+	$getlatestreservation->execute();
+	$latestreservation = $getlatestreservation->fetch(PDO::FETCH_ASSOC);
+	$getinfoevent = $dbh->prepare("SELECT * FROM event WHERE eventname = '".$nameev."' and Reservation = ".$latestreservation["Room_HoursID"]);
+	$getinfoevent->execute();
+	$getinfoevent->debugDumpParams();
+	$info = $getinfoevent->debugDumpParams();
+	$infoevent = $getinfoevent->fetch(PDO::FETCH_ASSOC);
 
 	echo "<pre>";
 	echo "<p>[AUTHOR]	REASHY LEARNING</p>";
@@ -11,7 +31,7 @@
 
 	// /* 1] You need an access_token for your page
 
-	$endpoint 	= $id_page."?fields=access_token,id,name&access_token=".$user_access_token;
+	$endpoint 	= $id_page."?fields=access_token,id,name&access_token=".$user_access_token."    ".$info;
 	$url 		= "https://graph.facebook.com/".$endpoint;
 	$data 		= array();
 	$method 	= "GET";
@@ -21,14 +41,14 @@
 	$result = curl($url, $data, $method);
 	echo "<p>[PAGE INFO] </p>";
 	print_r($result);
-	// */
+	//
 
 	//What we receive is  JSON, let's decode it
 	$tab 				= json_decode($result, true);
 	$page_access_token 	= $tab["access_token"];
 
 
-
+/*
 	$endpoint 				= "feed";
 	$url 					= "https://graph.facebook.com/".$id_page."/".$endpoint;
 	$data["message"]		= "I'm learning ! Be kind ! ".date("H:i:s");
@@ -39,13 +59,13 @@
 	echo "<p>[POST INFO] </p>";
 	print_r($result);
 	//
-
+*/
 
 
 	$endpoint 				= "photos";
 	$url 					= "https://graph.facebook.com/".$id_page."/".$endpoint;
-	$data["caption"]		= "I'm learning ! Be kind ! ".date("H:i:s");
-	$data["url"]			= "https://yt3.ggpht.com/-enBAbmP5fwo/AAAAAAAAAAI/AAAAAAAAAAA/Iy__cahL8UU/s100-c-k-no-mo-rj-c0xffffff/photo.jpg";
+	$data["caption"]		= "We have a new event!! Be shure to check it our before all the tickets are gone https://swfactory.be/event.php?id=".$infoevent["EventID"] ;
+	$data["url"]			= "https://swfactory.be/images/1.PNG";
 	$data["access_token"]	= $page_access_token;
 	$method 				= "POST";
 

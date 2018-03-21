@@ -168,6 +168,7 @@ if (e.target.id == "closeid" || e.target.id == "show" || $(e.target).parents("#c
     _submit.addEventListener('click', upload);
 
   }
+
   function loadrooms(){
     //  $("#roomfilters").load("filterloading.php?fieldcreate=all",function(){});
       $("#roomevent").load("loadrooms.php?load=first",function(){});
@@ -491,6 +492,9 @@ function takeroom(number){
             <br/><br/>Debug: {{registration}}
 
         </div>
+        <div id="testapi">
+          <p>jajajajajajajajajajajaj</p>
+        </div>
         <div id="showinfo" class="modal">
          </div>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
@@ -560,6 +564,7 @@ function takeroom(number){
               }),
               methods:{
                 submit() {
+
                   var nameeventget = document.getElementById('namen').value;
                   var nameevent = nameeventget.split(' ').join('+');
                   var tickets = document.getElementById("tickets").value;
@@ -577,30 +582,58 @@ function takeroom(number){
                     discrip:discription,
                     imagename:image
                   }
-                  /*
+                  console.log('done');
                   $.ajax({
                     type: "POST",
                     url: "finalcreateroom.php?$createevent=true",
                     data: JSON.stringify(info),
                     contentType: "application/json",
                     dataType: "json",
-                  });
-                  */
-                  alert("Your event is created!");
-                  var facebook = document.getElementById('facebook').checked;
-                  if(facebook == false){
+                    success: function (info) {
+                      alert("Your event is created!");
+                      var facebook = document.getElementById('facebook').checked;
+                      if(facebook == false){
+                      }
+                      else{
+                        var info = {
+                          name:"trythis"
+                        }
+                        console.log('ready');
+                        $.ajax({
+                          type: "POST",
+                          url: "raw.php",
+                          data: JSON.stringify(info),
+                          contentType: "application/json",
+                          dataType: "json",
+                        });
 
-                  }
-                  else{
-                    $
-                    $.ajax({
-                      type: "POST",
-                      url: "finalcreateroom.php?$createevent=true",
-                      data: JSON.stringify(info),
-                      contentType: "application/json",
-                      dataType: "json",
-                    });
-                  }
+                      }
+                    },
+                    error: function (info) {
+                      alert("Your event is created!");
+                      var facebook = document.getElementById('facebook').checked;
+                      if(facebook == false){
+                      }
+                      else{
+                        var info = {
+                          name:"trythis"
+                        }
+                        console.log('ready');
+                        $.ajax({
+                          type: "POST",
+                          url: "raw.php",
+                          data: JSON.stringify(info),
+                          contentType: "application/json",
+                          dataType: "json",
+                        });
+
+                      }
+                    }
+
+                  });
+
+
+
                 }
               }
             })
