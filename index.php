@@ -19,6 +19,23 @@ include"conn.php";
   width: 50em !important;
   height: 20em !important;
 }
+img {
+
+  top: 25px;
+  left: 25px;
+}
+.imgA1 {
+  float: left;
+      z-index: 1;
+      width: 50em !important;
+      height: 20em !important;
+}
+.imgB1 {
+  width: 50em !important;
+height: 20em !important;
+margin-top: -20em;
+z-index: 10000;
+}
 </style>
   <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
 </head>

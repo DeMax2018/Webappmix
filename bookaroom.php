@@ -168,6 +168,7 @@ if (e.target.id == "closeid" || e.target.id == "show" || $(e.target).parents("#c
     _submit.addEventListener('click', upload);
 
   }
+
   function loadrooms(){
     //  $("#roomfilters").load("filterloading.php?fieldcreate=all",function(){});
       $("#roomevent").load("loadrooms.php?load=first",function(){});
@@ -398,7 +399,7 @@ function takeroom(number){
                                          </div>
                                          <label>facebook</label><br>
                                          <label style="margin-left:0 !important" class="switch">
-                                           <input type="checkbox" onchange="query(<?php echo "'".$jscall."'"; ?>);" v-model="registration.facebook" id="facebook  ">
+                                           <input type="checkbox"  v-model="registration.facebookcheck" id="facebook">
                                            <span class="slider round"></span>
                                          </label>
                         <v-btn color="primary" style="float:right" onclick="loadrooms();"id='_submit' @click.native="step = 2">Continue</v-btn>
@@ -491,6 +492,9 @@ function takeroom(number){
             <br/><br/>Debug: {{registration}}
 
         </div>
+        <div id="testapi">
+          <p>jajajajajajajajajajajaj</p>
+        </div>
         <div id="showinfo" class="modal">
          </div>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
@@ -560,6 +564,7 @@ function takeroom(number){
               }),
               methods:{
                 submit() {
+
                   var nameeventget = document.getElementById('namen').value;
                   var nameevent = nameeventget.split(' ').join('+');
                   var tickets = document.getElementById("tickets").value;
@@ -577,14 +582,62 @@ function takeroom(number){
                     discrip:discription,
                     imagename:image
                   }
+                  console.log('done');
                   $.ajax({
                     type: "POST",
                     url: "finalcreateroom.php?$createevent=true",
                     data: JSON.stringify(info),
                     contentType: "application/json",
                     dataType: "json",
+                    success: function (info) {
+                      alert("Your event is created!");
+                      var facebook = document.getElementById('facebook').checked;
+                      if(facebook == false){
+                      }
+                      else{
+                        var nameeventget = document.getElementById('namen').value;
+                        var nameevent = nameeventget.split(' ').join('+');
+                        var info = {
+                          name:nameevent
+                        }
+                        console.log('ready');
+                        $.ajax({
+                          type: "POST",
+                          url: "raw.php",
+                          data: JSON.stringify(info),
+                          contentType: "application/json",
+                          dataType: "json",
+                        });
+
+                      }
+                    },
+                    error: function (info) {
+                      alert("Your event is created!");
+                      var facebook = document.getElementById('facebook').checked;
+                      if(facebook == false){
+                      }
+                      else{
+                        var nameeventget = document.getElementById('namen').value;
+                        var nameevent = nameeventget.split(' ').join('+');
+                        var info = {
+                          name:nameevent
+                        }
+                        console.log('ready');
+                        $.ajax({
+                          type: "POST",
+                          url: "raw.php",
+                          data: JSON.stringify(info),
+                          contentType: "application/json",
+                          dataType: "json",
+                        });
+
+                      }
+                    }
+
                   });
-                  alert("Your event is created!");
+
+
+
                 }
               }
             })

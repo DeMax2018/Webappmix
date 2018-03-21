@@ -1,8 +1,17 @@
 <?php
 session_start();
+include "conn.php";
 
 include"dbclasses.php";
-
+$getalldata = $dbh->prepare("SELECT * FROM event WHERE EventID = ".$_GET["id"]);
+$getalldata->execute();
+$alldata = $getalldata->fetch(PDO::FETCH_ASSOC);
+$getauthor = $dbh->prepare("SELECT * FROM user WHERE UserID = ".$alldata["CreatorID"]);
+$getauthor->execute();
+$author = $getauthor->fetch(PDO::FETCH_ASSOC);
+$gettimetable = $dbh->prepare("SELECT * FROM roomhours WHERE Room_HoursID = ".$alldata["Reservation"]);
+$gettimetable->execute();
+$timetable = $gettimetable->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html>
@@ -127,15 +136,13 @@ function myMap() {
                   <div onclick="mailevent();" class="button right">
                     Participate
                   </div>
-                  <p name="1" class="title">Name event</p>
-                  <p class="subtitle">By name creator</p>
-                  <p class="subtitle">Date</p>
+                  <p name="1" class="title"><?php echo $alldata["eventname"] ?></p>
+                  <p class="subtitle"><?php echo $author["fldName"] ?></p>
+                  <p class="subtitle"><?php echo $timetable["fldDate"] ?></p>
                 </article>
                 <article class="tile is-child box">
                   <ul class="rslides">
-                    <li><img src="img/001.jpg" alt=""></li>
-                    <li><img src="img/002.jpg" alt=""></li>
-                    <li><img src="img/003.jpg" alt=""></li>
+                    <li><img src="upload/<?php echo $alldata["Mainpicture"] ?>" alt=""></li>
                   </ul>
                   <script>
                     $(function() {
@@ -176,13 +183,7 @@ function myMap() {
                   <p class="subtitle">amount participants</p>
                   <div class="content participants">
                     <ul>
-                      <?php
-                      $data = new classes();
-                      $load = json_decode($data->eventdetails(1));
-                      foreach ($load as $value) {
-                        echo $value;
-                      }
-                                           ?>
+
                       <li>Participant 1</li>
                       <li class="is-light">Participant 2</li>
                       <li>Participant 1</li>
@@ -216,7 +217,7 @@ function myMap() {
             <article class="tile is-child box">
               <p class="title">Description</p>
               <div class="content">
-                hiucoehiouivgchyruibczbcyuvecuy
+                <?php echo $alldata["Discription"] ?>
               </div>
             </article>
             </div>
