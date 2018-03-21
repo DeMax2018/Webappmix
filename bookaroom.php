@@ -595,8 +595,10 @@ function takeroom(number){
                       if(facebook == false){
                       }
                       else{
+                        var nameeventget = document.getElementById('namen').value;
+                        var nameevent = nameeventget.split(' ').join('+');
                         var info = {
-                          name:"trythis"
+                          name:nameevent
                         }
                         console.log('ready');
                         $.ajax({
@@ -615,8 +617,10 @@ function takeroom(number){
                       if(facebook == false){
                       }
                       else{
+                        var nameeventget = document.getElementById('namen').value;
+                        var nameevent = nameeventget.split(' ').join('+');
                         var info = {
-                          name:"trythis"
+                          name:nameevent
                         }
                         console.log('ready');
                         $.ajax({
