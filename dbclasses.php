@@ -42,7 +42,7 @@ class classes
   public function hashish($text){
     $hash = hash('ripemd160', $text);
     $hashish = hash('tiger192,3',$hash);
-    echo $hashish;
+
     return $hashish;
   }
   public function changeprofile(){
@@ -81,4 +81,6 @@ class classes
     return json_encode($arr);
   }
 }
+$test = new classes();
+echo $test->hashish("Harraslangens!");
 ?>

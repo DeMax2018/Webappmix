@@ -12,7 +12,18 @@ $_SESSION["arrayfilter"] = array();
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Events</title>
+  <?php
+  if($_SESSION["bookaroom"] === "rent"){ ?>
+      <title>Rent</title>
+  <?php }
+  elseif($_SESSION["bookaroom"] === "event"){ ?>
+      <title>Events</title>
+  <?php }
+
+
+
+  ?>
+
   <link rel="stylesheet" type="text/css" href="../css/bulma.css">
 
   <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'><link rel='stylesheet prefetch' href='css/vuetify.css'>
@@ -20,119 +31,6 @@ $_SESSION["arrayfilter"] = array();
     <link rel="stylesheet" href="/css/eventcreate.css">
   <link rel="stylesheet" type="text/css" href="css/nav.css">
 <style media="screen">
-.sel__box{
-  position: inherit;
-}
-.tdinfo{
-  border: 1px solid black;
-}
-  .popup-trigger {
-  display: block;
-  width: 2em;
-  right: 2rem;
-  margin: 3em auto;
-  text-align: center;
-  color: #FFF;
-  font-size: 18px;
-  padding:1rem 2rem;
-  text-decoration:none;
-  font-weight: bold;
-  text-transform: uppercase;
-  border-radius: 50em;
-  background: #35a785;
-  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.07);
-  transition:300ms all;
-  }
-  .td{
-    border: 1px solid black;
-  }
-.popup-trigger:hover {
-  opacity:.8;
-}
-
-.popup {
-position: fixed;
-left: 0;
-top: 0;
-height: 100%;
-z-index: 1000;
-width: 100%;
-background-color: rgba(94, 110, 141, 0.9);
-opacity: 0;
-visibility: hidden;
-transition:500ms all;
-
-}
-
-.popup.is-visible {
-opacity: 1;
-visibility: visible;
-transition:1s all;
-}
-
-.popup-container {
-transform:translateY(-50%);
-transition:500ms all;
-position: relative;
-width: 40%;
-margin: 2em auto;
-top: 5%;
-padding:5rem;
-background: #FFF;
-border-radius: .25em .25em .4em .4em;
-text-align: center;
-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-}
-
-.is-visible .popup-container {
-transform:translateY(0);
-transition:500ms all;
-}
-
-.popup-container .popup-close {
-position: absolute;
-top: 8px;
-font-size:0;
-right: 8px;
-width: 30px;
-height: 30px;
-}
-
-
-.popup-container .popup-close::before,
-.popup-container .popup-close::after {
-content: '';
-position: absolute;
-top: 12px;
-width: 14px;
-height: 3px;
-background-color: #8f9cb5;
-}
-
-.popup-container .popup-close::before {
--webkit-transform: rotate(45deg);
--moz-transform: rotate(45deg);
--ms-transform: rotate(45deg);
--o-transform: rotate(45deg);
-transform: rotate(45deg);
-left: 8px;
-}
-
-.popup-container .popup-close::after {
--webkit-transform: rotate(-45deg);
--moz-transform: rotate(-45deg);
--ms-transform: rotate(-45deg);
--o-transform: rotate(-45deg);
-transform: rotate(-45deg);
-right: 8px;
-}
-
-
-.popup-container .popup-close:hover:before,
-.popup-container .popup-close:hover:after {
-background-color:#35a785;
-transition:300ms all;
-}
 
 </style>
 <script type="text/javascript" src="js/ajaxjquery.js"></script>
@@ -363,16 +261,27 @@ function takeroom(number){
         				<v-container>
                   <v-stepper v-model="step" vertical>
                     <v-stepper-header>
-                      <v-stepper-step step="1" :complete="step > 1">Information event</v-stepper-step>
+                      <?php
+                       if($_SESSION["bookaroom"] === "rent"){ ?>
+                      <v-stepper-step step="1" :complete="step > 1">Information Renting</v-stepper-step>
+                    <?php }elseif($_SESSION["bookaroom"] === "event"){ ?>
+                      <v-stepper-step step="1" :complete="step > 1">Information Event</v-stepper-step>
+                    <?php } ?>
                       <v-divider></v-divider>
                       <v-stepper-step step="2" :complete="step > 2">Pick a room</v-stepper-step>
                     </v-stepper-header>
                     <v-stepper-items>
                       <v-stepper-content step="1">
-
+                        <?php
+                         if($_SESSION["bookaroom"] === "event"){ ?>
                          <v-text-field id="namen" label="Name of event" v-model="registration.eventname" required></v-text-field>
+
                          <v-text-field label="Max-tickets" id="tickets" type="number"
                             v-model="registration.numtickets" required></v-text-field>
+                          <?php }elseif($_SESSION["bookaroom"] === "rent"){ ?>
+                            <v-text-field label="Amounth of people attending" id="attending" type="number"
+                               v-model="registration.attending" required></v-text-field>
+                          <?php } ?>
                           <v-text-field label="Date" id="date" onchange="safe();" type="date"
                                       v-model="registration.date" required></v-text-field>
 
@@ -388,21 +297,34 @@ function takeroom(number){
                                     </div>
 
                                   </div>
+                                  <?php
+                                   if($_SESSION["bookaroom"] === "event"){ ?>
                                   <v-text-field id="discription" label="Discription" type="textarea"
                                      v-model="registration.discription" required></v-text-field>
-
+                                   <?php }
+                                   if($_SESSION["bookaroom"] === "event"){ ?>
                                          <p>
                                             <input onchange="test()" type='file' id='_file'>
                                          </p>
                                          <div class='progress_outer'>
                                              <div id='_progress' class='progress'></div>
                                          </div>
+
                                          <label>facebook</label><br>
                                          <label style="margin-left:0 !important" class="switch">
                                            <input type="checkbox"  v-model="registration.facebookcheck" id="facebook">
                                            <span class="slider round"></span>
                                          </label>
+                                         <?php
+                                       }
+
+                                        if($_SESSION["bookaroom"] === "event"){ ?>
                         <v-btn color="primary" style="float:right" onclick="loadrooms();"id='_submit' @click.native="step = 2">Continue</v-btn>
+                        <?php
+                      }
+                       elseif($_SESSION["bookaroom"] === "rent"){ ?>
+                         <v-btn color="primary" style="float:right"onclick="loadrooms();" @click.native="step = 2">Continue</v-btn>
+                      <?php }  ?>
                       </v-stepper-content>
                       <v-stepper-content step="2">
                         <div class="wrapper-room-filter">
@@ -564,77 +486,138 @@ function takeroom(number){
               }),
               methods:{
                 submit() {
-
-                  var nameeventget = document.getElementById('namen').value;
-                  var nameevent = nameeventget.split(' ').join('+');
-                  var tickets = document.getElementById("tickets").value;
-                  var time = document.getElementById('firsttime').textContent;
-                  var time2 = document.getElementById('secondtime').textContent;
-                  var discriptionget = document.getElementById('discription').value;
-                  var discription = discriptionget.split(' ').join('+');
-                  var imageget = document.getElementById('_file').value;
-                  var image = imageget.replace(/^.*[\\\/]/, '');
-                  var info = {
-                    name:nameevent,
-                    ticket:tickets,
-                    starttime:time,
-                    endtime:time2,
-                    discrip:discription,
-                    imagename:image
-                  }
-                  console.log('done');
-                  $.ajax({
-                    type: "POST",
-                    url: "finalcreateroom.php?$createevent=true",
-                    data: JSON.stringify(info),
-                    contentType: "application/json",
-                    dataType: "json",
-                    success: function (info) {
-                      alert("Your event is created!");
-                      var facebook = document.getElementById('facebook').checked;
-                      if(facebook == false){
-                      }
-                      else{
-                        var nameeventget = document.getElementById('namen').value;
-                        var nameevent = nameeventget.split(' ').join('+');
-                        var info = {
-                          name:nameevent
-                        }
-                        console.log('ready');
-                        $.ajax({
-                          type: "POST",
-                          url: "raw.php",
-                          data: JSON.stringify(info),
-                          contentType: "application/json",
-                          dataType: "json",
-                        });
-
-                      }
-                    },
-                    error: function (info) {
-                      alert("Your event is created!");
-                      var facebook = document.getElementById('facebook').checked;
-                      if(facebook == false){
-                      }
-                      else{
-                        var nameeventget = document.getElementById('namen').value;
-                        var nameevent = nameeventget.split(' ').join('+');
-                        var info = {
-                          name:nameevent
-                        }
-                        console.log('ready');
-                        $.ajax({
-                          type: "POST",
-                          url: "raw.php",
-                          data: JSON.stringify(info),
-                          contentType: "application/json",
-                          dataType: "json",
-                        });
-
-                      }
+                  if(document.getElementById('attending') !== null){
+                    var attending = document.getElementById('attending').value;
+                    var time = document.getElementById('firsttime').textContent;
+                    var time2 = document.getElementById('secondtime').textContent;
+                    var info = {
+                      starttime:time,
+                      endtime:time2,
+                      attendingnum:attending
                     }
+                    $.ajax({
+                      type: "POST",
+                      url: "finalcreateroom.php?$createbooking=true",
+                      data: JSON.stringify(info),
+                      contentType: "application/json",
+                      dataType: "json",
+                      success: function () {
+                          var info = {
+                            create:"yes"
+                          }
+                          console.log('ready');
+                          $.ajax({
+                            type: "POST",
+                            url: "mail.php?roommail=true",
+                            data: JSON.stringify(info),
+                            contentType: "application/json",
+                            dataType: "json",
+                          });
 
-                  });
+
+                      },
+                      error: function () {
+                          var info = {
+                            create:"yes"
+                          }
+                          $.ajax({
+                            type: "POST",
+                            url: "mail.php?roommail=true",
+                            data: JSON.stringify(info),
+                            contentType: "application/json",
+                            dataType: "json",
+                          });
+                      }
+
+                    });
+
+
+
+
+
+
+
+
+
+
+
+
+                  }
+                  else{
+                    var nameeventget = document.getElementById('namen').value;
+                    var nameevent = nameeventget.split(' ').join('+');
+                    var tickets = document.getElementById("tickets").value;
+                    var time = document.getElementById('firsttime').textContent;
+                    var time2 = document.getElementById('secondtime').textContent;
+                    var discriptionget = document.getElementById('discription').value;
+                    var discription = discriptionget.split(' ').join('+');
+                    var imageget = document.getElementById('_file').value;
+                    var image = imageget.replace(/^.*[\\\/]/, '');
+                    var info = {
+                      name:nameevent,
+                      ticket:tickets,
+                      starttime:time,
+                      endtime:time2,
+                      discrip:discription,
+                      imagename:image
+                    }
+                    $.ajax({
+                      type: "POST",
+                      url: "finalcreateroom.php?$createevent=true",
+                      data: JSON.stringify(info),
+                      contentType: "application/json",
+                      dataType: "json",
+                      success: function (info) {
+                        alert("Your event is created!");
+                        var facebook = document.getElementById('facebook').checked;
+                        if(facebook == false){
+                        }
+                        else{
+                          var nameeventget = document.getElementById('namen').value;
+                          var nameevent = nameeventget.split(' ').join('+');
+                          var info = {
+                            name:nameevent
+                          }
+                          console.log('ready');
+                          $.ajax({
+                            type: "POST",
+                            url: "raw.php",
+                            data: JSON.stringify(info),
+                            contentType: "application/json",
+                            dataType: "json",
+                          });
+
+                        }
+                      },
+                      error: function (info) {
+                        alert("Your event is created!");
+                        var facebook = document.getElementById('facebook').checked;
+                        if(facebook == false){
+                        }
+                        else{
+                          var nameeventget = document.getElementById('namen').value;
+                          var nameevent = nameeventget.split(' ').join('+');
+                          var info = {
+                            name:nameevent
+                          }
+                          console.log('ready');
+                          $.ajax({
+                            type: "POST",
+                            url: "raw.php",
+                            data: JSON.stringify(info),
+                            contentType: "application/json",
+                            dataType: "json",
+                          });
+
+                        }
+                      }
+
+                    });
+                  }
+
+
+                  console.log('done');
+
 
 
 
