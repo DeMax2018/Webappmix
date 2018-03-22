@@ -95,7 +95,7 @@ z-index: 10000;
     <aside class="column is-3 aside hero is-fullheight is-hidden-touch is-hidden-desktop-only">
       <div class="fixleft">
         <div class="account has-text-centered">
-          <a href="#">
+          <a href="changeuserinfo.php">
             <figure class="avatar">
               <img src="images/avatar.png">
             </figure>
