@@ -104,7 +104,7 @@ a.title:hover{
 }
 .search input {
   width: 250px;
-  height: 32px;
+  height: 100%;
   background: #fcfcfc;
   border: 1px solid #aaa;
   border-radius: 5px;
@@ -134,7 +134,7 @@ a.title:hover{
 }
 .lisearch{
   width: 33%;
-  margin: 0 !important;
+  margin-top: 0 !important;
 }
 
 @media screen and (max-width: 768px) {
