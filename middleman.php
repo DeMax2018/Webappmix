@@ -2,7 +2,7 @@
 session_start();
 include"conn.php";
 $_GET["request"] = "rent";
-$_SESSION["userid"] = 1;
+
 $grandaccescreateevent = "false";
 $getcredentials = $dbh->prepare("SELECT * FROM privaterights WHERE UserID = ".$_SESSION["userid"]);
 $getcredentials->execute();
