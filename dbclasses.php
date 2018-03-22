@@ -33,16 +33,13 @@ class classes
   public function qrcode($code){
     include "BarcodeQR.php";
     $qr = new BarcodeQR();
-    $hash = hash('ripemd160', $code);
-    $hashish = hash('tiger192,3',$hash);
-    echo $hashish;
-    $qr->url("https://swfactory.be/testingarea?code=".$hashish);
+    $qr->url("https://swfactory.be/testingarea?code=".$code);
     $qr->draw(300,"jaa");
   }
   public function hashish($text){
     $hash = hash('ripemd160', $text);
     $hashish = hash('tiger192,3',$hash);
-    echo $hashish;
+
     return $hashish;
   }
   public function changeprofile(){
@@ -81,4 +78,6 @@ class classes
     return json_encode($arr);
   }
 }
+$test = new classes();
+echo $test->hashish("224f925591d8ae6b86cca37b665fe014579575803a18a");
 ?>

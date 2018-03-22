@@ -10,8 +10,11 @@ $ip = getHostByName(getHostName());
 $loginsql = $dbh->prepare("SELECT * FROM User");
 $loginsql->execute();
 while ($rows = $loginsql->fetch(PDO::FETCH_ASSOC)) {
-  if($rows["fldPassword"] === $safepass AND $rows["fldMail"] === $mail){
-    $_SESSION["auth"] = $rows["GroupID"];
+  if($rows["fldPassword"] === $hashpass AND $rows["fldMail"] === $mail){
+    $_SESSION["userid"] = $rows["UserID"];
+    $_SESSION["mail"] = $rows["fldMail"];
+    $_SESSION["name"] = $rows["fldName"];
+    $_SESSION["lastname"] = $rows["fldLastname"];
     header("location: index.php");
   }
 }
