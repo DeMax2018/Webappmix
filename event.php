@@ -57,39 +57,33 @@ function myMap() {
 
         <div class="nav-right nav-menu is-hidden-widescreen" id="nav-menu">
           <div class="fixit">
-            <div class="sectionfix" data-role="none">
-              <a href="#" class="item active" data-ajax="false"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
+            <div class="sectionfix">
+              <a href="#" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
             </div>
             <div class="sectionfix">
-              <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
+              <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
             </div>
             <div class="sectionfix">
-              <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+              <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
             </div>
             <div class="sectionfix">
-              <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-plus"></i></span></a>
+              <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
             </div>
             <div class="sectionfix">
-              <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">Event management</span></a>
+              <a href="#" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
+            </div>
+            <div class="sectionfix">
+              <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Event management</span></a>
             </div>
           </div>
           <div class="fixit">
             <div class="sectionfix">
-              <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
+              <a href="#" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
             </div>
             <div class="sectionfix">
-              <a href="#" class="item active" data-ajax="false"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
-            </div>
-            <div class="sectionfix">
-              <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
+              <a href="#" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Room & building management</span></a>
             </div>
           </div>
-          <div class="fixit">
-            <div class="sectionfix">
-              <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Admin newsfeed</span></a>
-            </div>
-          </div>
-
         </div>
       </div>
     </nav>
@@ -104,17 +98,18 @@ function myMap() {
             </a>
           </div>
           <div class="main">
-            <div class="title">Main</div>
-            <a href="index.php" class="item active" data-ajax="false"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
-            <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
-            <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
-            <a href="eventcreate.php" class="item" data-ajax="false"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
-            <a href="#" class="item" data-ajax="false"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Event management</span></a>
+            <div class="title"><i class="fas fa-home"></i>   Main</div>
+            <a href="index.php" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+            <a href="bookaroom.php" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
+            <a href="bookaroom.php" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Event management</span></a>
           </div>
           <div class="main">
             <div class="title"><i class="fa fa-cog"></i>  Admin</div>
-            <a href="admin.php#account" class="item link1" data-ajax="false"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
-            <a href="#" class="item link2" data-ajax="false"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Room & building management</span></a>
+            <a href="admin.php#account" class="item link1"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
+            <a href="#" class="item link2"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Room & building management</span></a>
           </div>
         </div>
       </aside>

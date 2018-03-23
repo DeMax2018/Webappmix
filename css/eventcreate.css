@@ -208,3 +208,9 @@ input:checked + .slider:before {
     opacity: 0;
   }
 }
+table{
+  width: 75%;
+}
+table td{
+  width: 50%;
+}
