@@ -14,14 +14,17 @@ html,body {
 .box {
   margin-top: 5rem;
 }
+.columns{
+  margin: 0 !important;
+}
 .register .box{
   margin-top: 2rem;
 }
-.avatar {
+.avatars {
   margin-top: -70px;
   padding-bottom: 20px;
 }
-.avatar img {
+.avatars img {
   padding: 5px;
   background: #fff;
   border-radius: 50%;
@@ -84,4 +87,115 @@ p.subtitle {
 .inputfile:focus + label {
 	outline: 1px dotted #000;
 	outline: -webkit-focus-ring-color auto 5px;
+}
+
+.content {
+  display: block !important;
+  background-color: #fff !important;
+  padding: 40px 20px !important;
+}
+.scroll{
+  overflow-y: scroll !important;
+}
+a.title:hover{
+  color: white !important;
+  transition: 0.5s !important;
+}
+.is-hidden-tablet a{
+  color: darkblue !important;
+}
+.isblock {
+  display: block !important;
+}
+.content a:not(.button):hover {
+  border-bottom-color: #2eb398 !important;
+}
+.isflex{
+  display: flex !important;
+}
+.justify_stuff{
+  justify-content: center !important;
+}
+.nobullets{
+  list-style-type: none !important;
+}
+.control{
+  display: flex !important;
+}
+
+.column {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-top: 10px !important;
+  padding-bottom: 15px !important;
+}
+.columns.is-mobile > .column.is-narrow {
+  width: 100% !important;
+}
+.column.is-6, .column.is-6-tablet{
+  padding-bottom: 3em !important;
+}
+.columns.columnsaside{
+  margin-top: -10px !important;
+  width: 100% !important;
+}
+.columns:last-child{
+  display: flex !important;
+}
+.columns:not(:last-child){
+  margin-bottom: 0 !important;
+}
+@media screen and (min-width: 769px) {
+  .columns:not(.is-desktop) {
+    width: 100% !important;
+  }
+}
+.nav > .container {
+  position: fixed !important;
+  background: white !important;
+}
+
+.fixit{
+  width: 100% !important;
+}
+
+.subcontainer{
+  width: 15% !important;
+}
+.secondsubcontainer{
+  width: 85% !important;
+  margin: auto !important;
+  padding-right: 15% !important;
+}
+a {
+  text-decoration:inherit !important;
+}
+span a{
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  font-style: normal !important;
+}
+.content:not(:last-child){
+  margin-bottom: 0 !important;
+}
+.columns{
+  margin-left: 0px !important;
+}
+@media screen and (min-width: 1024px){
+.container {
+    max-width: 100% !important;
+    width: 960px;
+}
+}
+nav {
+    position: fixed !important;
+    top: 0;
+    width: 100%;
+}
+div.field{
+  margin-left: 3px;
+  margin-right: 3px;
+}
+.control.has-icons-left .icon.is-left{
+  padding: 12px;
 }
