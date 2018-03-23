@@ -411,7 +411,7 @@ function takeroom(number){
           </v-app>
 
 
-            <br/><br/>Debug: {{registration}}
+            <br/><br/>
 
         </div>
         <div id="testapi">

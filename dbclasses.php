@@ -78,6 +78,5 @@ class classes
     return json_encode($arr);
   }
 }
-$test = new classes();
-echo $test->hashish("224f925591d8ae6b86cca37b665fe014579575803a18a");
+
 ?>

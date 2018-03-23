@@ -128,9 +128,18 @@ function myMap() {
             <div class="tile">
               <div class="tile is-parent is-vertical">
                 <article class="tile is-child box">
-                  <div onclick="mailevent();" class="button right">
-                    Participate
-                  </div>
+                  <?php
+                  if(!isset($_GET["view"])){ ?>
+                    <div onclick="mailevent();" class="button right">
+                      Participate
+                    </div>
+                  <?php }
+                  else{ ?>
+                    <h1 style="text-align:center">
+                      Reservation
+                    </h1>
+                  <?php }
+                  ?>
                   <p name="1" class="title"><?php echo $alldata["eventname"] ?></p>
                   <p class="subtitle"><?php echo $author["fldName"] ?></p>
                   <p class="subtitle"><?php echo $timetable["fldDate"] ?></p>
