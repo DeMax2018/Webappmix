@@ -29,7 +29,7 @@ embed {
 }
 
 html {
-  overflow-y: scroll;
+
 }
 
 ul {
@@ -193,13 +193,12 @@ input[type=button] {
 }
 
 html {
-  background-color: #f5f7fa;
+
   font-size: 14px;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   min-width: 300px;
-  overflow-x: hidden;
-  overflow-y: scroll;
+
   text-rendering: optimizeLegibility;
 }
 

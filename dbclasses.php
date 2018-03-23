@@ -33,10 +33,7 @@ class classes
   public function qrcode($code){
     include "BarcodeQR.php";
     $qr = new BarcodeQR();
-    $hash = hash('ripemd160', $code);
-    $hashish = hash('tiger192,3',$hash);
-    echo $hashish;
-    $qr->url("https://swfactory.be/testingarea?code=".$hashish);
+    $qr->url("https://swfactory.be/testingarea?code=".$code);
     $qr->draw(300,"jaa");
   }
   public function hashish($text){
@@ -81,6 +78,5 @@ class classes
     return json_encode($arr);
   }
 }
-$test = new classes();
-echo $test->hashish("Harraslangens!");
+
 ?>

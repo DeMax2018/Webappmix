@@ -39,17 +39,6 @@ session_start();
 
     <link rel="stylesheet" href="css/admin.css">
     <script>
-        $("#main").live("pageshow", function(event, data) {
-            //add icons to horizontal checkbox group
-            $("#twitterlbl").children("span").append("<span class='ui-icon ui-icon-shadow ui-icon-checkbox-off'>").trigger("create");
-            $("#twitterlbl").addClass("ui-btn-icon-left").trigger("refresh");
-            $("#facebooklbl").children("span").append("<span class='ui-icon ui-icon-shadow ui-icon-checkbox-off'>").trigger("create");
-            $("#facebooklbl").addClass("ui-btn-icon-left").trigger("refresh");
-            updatePosts();
-            updateComments();
-            $("#posts").bind("change", updatePosts);
-            $("#comments").bind("change", updateComments);
-        });
 
         //update checkbox styles on change event
         //add ui-btn-active style to vertical checkbox group
@@ -272,7 +261,7 @@ session_start();
                 </div>
                 <div class="tablescroll">
 
-                 <table class="People">
+                 <table id="scrollaccr" class="People">
                    <tr class="headcol">
                      <th class="accounta">Account</th>
                      <?php
@@ -312,17 +301,17 @@ session_start();
                              echo '<td><input type="checkbox" id="create" data-role="flipswitch" name="'.$record["fldName"].' '.$record["fldLastname"].'" onchange="create_event(this.name,1);" data-on-text="" data-off-text="" data-wrapper-class="custom-label-flipswitch"></td>';
                            }
                            if($rows["Delete_Events"] == 1){
-                             echo '<td><input type="checkbox" id="delete" data-role="flipswitch" name="'.$record["fldName"].' '.$record["fldLastname"].'" onchange="create_event(this.name,2);" data-on-text="" data-off-text="" data-wrapper-class="custom-label-flipswitch" checked></td>';
-                          }
-                          else{
-                            echo '<td><input type="checkbox" id="delete" data-role="flipswitch" name="'.$record["fldName"].' '.$record["fldLastname"].'" onchange="create_event(this.name,2);" data-on-text="" data-off-text="" data-wrapper-class="custom-label-flipswitch"></td>';
-                          }
+                              echo "<td><input data-role='none' id='delete' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' checked type='checkbox'></td>";
+                           }
+                           else{
+                             echo "<td><input data-role='none' id='delete' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' type='checkbox'></td>";
+                           }
                            if($rows["Acces_Rights_System"] == 1){
-                             echo '<td><input type="checkbox" data-role="flipswitch" name="'.$record["fldName"].' '.$record["fldLastname"].'" onchange="create_event(this.name,3);" data-on-text="" data-off-text="" data-wrapper-class="custom-label-flipswitch" checked></td>';
-                          }
-                          else{
-                            echo '<td><input type="checkbox" data-role="flipswitch" name="'.$record["fldName"].' '.$record["fldLastname"].'" onchange="create_event(this.name,3);" data-on-text="" data-off-text="" data-wrapper-class="custom-label-flipswitch"></td>';
-                          }
+                              echo "<td><input data-role='none' id='right' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' checked type='checkbox'></td>";
+                           }
+                           else{
+                             echo "<td><input data-role='none' id='right' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' type='checkbox'></td>";
+                           }
                          }
                          ?>
                        </tr>
