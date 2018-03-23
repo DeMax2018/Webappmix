@@ -96,16 +96,26 @@ z-index: 10000;
     <aside class="column is-3 aside hero is-fullheight is-hidden-touch is-hidden-desktop-only">
       <div class="fixleft">
         <div class="account has-text-centered">
-          <a href="changeuserinfo.php">
-            <figure class="avatar">
-              <img src="images/avatar.png">
+          <?php
+          if(isset($_SESSION["userid"])){ ?>
+            <a href="changeuserinfo.php">
+              <figure class="avatar">
+                <img src="images/avatar.png">
+      <?php    }
+          else{ ?>
+            <a href="login.php">
+              <figure class="avatar">
+                <img src="images/avatar.png">
+        <?php  }
+          ?>
+
             </figure>
           </a>
         </div>
         <div class="main">
           <div class="title"><i class="fas fa-home"></i>   Main</div>
           <a href="index.php" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
-          <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
+          <a href="mymeetings.php" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
           <a href="myevents.php" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
           <a href="middleman.php?request=event" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
           <a href="middleman.php" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>

@@ -85,3 +85,11 @@ p.subtitle {
 	outline: 1px dotted #000;
 	outline: -webkit-focus-ring-color auto 5px;
 }
+.hiddenfile{
+  position: absolute;
+    max-width: 168px;
+    max-height: 168px;
+    min-width: 168px;
+    min-height: 168px;
+    margin-left: -12.5%;
+}
