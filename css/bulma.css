@@ -3660,11 +3660,11 @@ a.box:active {
     margin-left: 16.66667%;
   }
   .column.is-3, .column.is-3-tablet {
-    -webkit-box-flex: 0;
-    -webkit-flex: none;
-        -ms-flex: none;
-            flex: none;
-    width: 25%;
+    -webkit-box-flex: 0 !important;
+    -webkit-flex: none !important;
+        -ms-flex: none !important;
+            flex: none !important;
+    width: 25% !important;
   }
   .column.is-offset-3, .column.is-offset-3-tablet {
     margin-left: 25%;

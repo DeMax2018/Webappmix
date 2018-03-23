@@ -111,6 +111,7 @@ z-index: 10000;
 
             </figure>
           </a>
+          <a href="#" style="float: right; font-size:50px;"><i class="fas fa-sign-out-alt" style="    position: absolute;font-size: 32px; margin-top: -1em; margin-left: -0.5em;"></i></a>
         </div>
         <div class="main">
           <div class="title"><i class="fas fa-home"></i>   Main</div>

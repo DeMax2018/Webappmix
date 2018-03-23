@@ -47,10 +47,8 @@ div.tablescroll{
   overflow-y: scroll;
   max-height: 20em;
 }
-table.People{
-  width: auto;
-  min-width: 50em;
-  width: 100%;
+table td, table th{
+  width: 25%;
 }
 .ui-popup-container{
   position: fixed !important;
@@ -62,9 +60,87 @@ table.People{
 
 span.aside-toggle{
   margin-left: 0;
-  margin-top: 10px !important;
   margin-bottom: 15px !important;
 }
 .column{
   padding-top: 0px;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 32px;
+  margin-left: 60%
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 24px;
+  width: 24px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2EB398;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.ui-flipswitch.ui-flipswitch-active {
+    padding-left: 2em;
+    width: 3.875em;
+}
+.ui-flipswitch{
+  width: 3.875em;
+}
+@media screen (min-width: 769px){
+  .mobilerights{
+    display: none;
+  }
+  .desktoprights{
+    display: inline-table;
+  }
+}
+@media screen (max-width: 769px){
+  .mobilerights{
+    display: inline-table;
+  }
+  .desktoprights{
+    display: none;
+  }
 }

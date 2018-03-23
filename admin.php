@@ -194,6 +194,7 @@ session_start();
                     <img src="images/avatar.png">
                   </figure>
                 </a>
+                <a href="#" style="float: right; font-size:50px;"><i class="fas fa-sign-out-alt" style="position: absolute; font-size: 32px; top: 40px; left: 275px;"></i></a>
               </div>
               <div class="main">
                 <div class="title"><i class="fas fa-home"></i>   Main</div>
@@ -267,8 +268,19 @@ session_start();
                      $numright = $dbh->prepare("SELECT * FROM `Right`");
                      $numright->execute();
                      while($record = $numright->fetch(PDO::FETCH_ASSOC)){ ?>
-                     <th><?php echo $record["fldName"] ?></th>
-                     <?php } ?>
+                     <th class="is-hidden-touch"><?php echo $record["fldName"] ?></th>
+
+                     <?php
+                      if($record["RightID"] == 1){
+                        echo "<th class='is-hidden-desktop'><i class='fas fa-calendar-plus'><i></th>";
+                      }
+                      elseif ($record["RightID"] == 2) {
+                        echo "<th class='is-hidden-desktop'><i class='fas fa-calendar-times'><i></th>";
+                      }
+                      elseif ($record["RightID"] == 3) {
+                        echo "<th class='is-hidden-desktop'><i class='fas fa-edit'><i></th>";
+                      }
+                    }; ?>
                    </tr>
 
                      <?php
@@ -283,10 +295,10 @@ session_start();
                          $checkbox->execute();
                          while ($rows = $checkbox->fetch(PDO::FETCH_ASSOC)) {
                            if($rows["Create_events"] == 1){
-                              echo "<td><input data-role='none' checked id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,1);' type='checkbox'></td>";
+                              echo '<td><input type="checkbox" id="create" data-role="flipswitch" name="'.$record["fldName"].' '.$record["fldLastname"].'" onchange="create_event(this.name,1);" data-on-text="" data-off-text="" data-wrapper-class="custom-label-flipswitch" checked></td>';
                            }
                            else{
-                             echo "<td><input data-role='none' id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,1);' type='checkbox'></td>";
+                             echo '<td><input type="checkbox" id="create" data-role="flipswitch" name="'.$record["fldName"].' '.$record["fldLastname"].'" onchange="create_event(this.name,1);" data-on-text="" data-off-text="" data-wrapper-class="custom-label-flipswitch"></td>';
                            }
                            if($rows["Delete_Events"] == 1){
                               echo "<td><input data-role='none' id='delete' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' checked type='checkbox'></td>";
