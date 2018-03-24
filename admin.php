@@ -153,8 +153,8 @@ session_start();
               </span>
             </div>
             <div class="thirdsubcontainer">
-              <a href=""><i class="fas fa-sign-out-alt"></i></a>
-              <a href="">Hi, *Stroenelinus*</a>
+              <a href="" data-ajax="false"><i class="fas fa-sign-out-alt"></i></a>
+              <a href="" data-ajax="false">Hi, *Stroenelinus*</a>
             </div>
 
             <div class="nav-right nav-menu is-hidden-widescreen" id="nav-menu">
@@ -193,7 +193,7 @@ session_start();
           <aside class="column is-3 aside hero is-fullheight is-hidden-touch is-hidden-desktop-only">
             <div class="fixleft">
               <div class="account has-text-centered">
-                <a href="changeuserinfo.php">
+                <a href="changeuserinfo.php" data-ajax="false">
                   <figure class="avatar">
                     <img src="images/avatar.png">
                   </figure>
