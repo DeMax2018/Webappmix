@@ -115,7 +115,7 @@ a.title:hover{
 }
 .search .fa-search {
   position: absolute;
-  top: 3px;
+  top: 10px;
   left: 10px;
 }
 .pagination {
@@ -232,14 +232,6 @@ a.title:hover{
   }
 }
 
-.subcontainer{
-  width: 15%;
-}
-.secondsubcontainer{
-  width: 85%;
-  margin: auto;
-  padding-right: 15%;
-}
 .info p {
   text-align:center;
   color: #999;

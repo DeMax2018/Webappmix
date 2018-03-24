@@ -198,10 +198,26 @@ a.file:not(.button) {
 .panel img{
   width: 100% !important;
 }
-nav{
-    z-index: 110 !important;
+nav.has-shadow{
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 110 !important;
 }
 .sectionfix a{
   color: #1fc8db !important;
   font-weight: normal !important;
+}
+.subcontainer{
+  width: 15%;
+}
+.thirdsubcontainer{
+  width: 85%;
+}
+.thirdsubcontainer a{
+  margin: 15px 2% 0 0;
+  float: right;
+}
+.thirdsubcontainer a svg{
+  font-size: 20px;
 }

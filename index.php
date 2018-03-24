@@ -51,13 +51,9 @@ z-index: 10000;
           <span></span>
         </span>
       </div>
-      <div class="secondsubcontainer">
-        <ul class="ulsearch nobullets isflex justify_stuff">
-          <div class="search">
-      <span class="fa fa-search"></span>
-      <input id="searchmobile" onkeyup='eventsearch();' placeholder="Search term">
-    </div>
-        </ul>
+      <div class="thirdsubcontainer">
+        <a href=""><i class="fas fa-sign-out-alt"></i></a>
+        <a href="">Hi, *name*</a>
       </div>
 
       <div class="nav-right nav-menu is-hidden-widescreen" id="nav-menu">
@@ -137,16 +133,17 @@ z-index: 10000;
           <span></span>
           <span></span>
         </span>
-        <ul class="ulsearch nobullets isflex justify_stuff">
 
-          <div class="search">
-            <span class="fa fa-search"></span>
-            <input id="search" onkeyup='eventsearch();' placeholder="Search term">
-
-          </div>
-        </ul>
       </div>
-      <div id="events" class="section scroll things">
+      <ul class="ulsearch nobullets isflex justify_stuff things">
+
+        <div class="search">
+          <span class="fa fa-search"></span>
+          <input id="search" onkeyup='eventsearch();' placeholder="Search term">
+
+        </div>
+      </ul>
+      <div id="events" class="section">
 
 
         </div>
