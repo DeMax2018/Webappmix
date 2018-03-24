@@ -137,7 +137,7 @@
               </div>
               <div class="field">
                 <div class="control has-icons-left">
-                  <input class="input is-large" type="tel" placeholder="Telephone number" autofocus="">
+                  <input class="input is-large" type="tel" placeholder="Phone number" autofocus="">
                   <span class="icon is-left">
                     <i class="fas fa-phone-square"></i>
                   </span>
@@ -174,6 +174,25 @@
                         <input class="input is-large" type="text" placeholder="Nr" autofocus="">
                       </div>
                   </div>
+                </div>
+              </div>
+              <div class="field">
+                <p class="control has-icons-left">
+                  <input class="input is-large" type="password" placeholder="Change password" autofocus="">
+                  <span class="icon is-left">
+                    <i class="fas fa-lock"></i>
+                  </span>
+                </p>
+              </div>
+              <div class="field">
+                <div class="control has-icons-left has-icons-right">
+                  <input class="input is-large" type="password" placeholder="Confirm password" autofocus="">
+                  <span class="icon is-left">
+                    <i class="fas fa-lock"></i>
+                  </span>
+                  <span class="icon is-small is-right">
+                    <i class="fas fa-check"></i>
+                  </span>
                 </div>
               </div>
 
