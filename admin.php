@@ -301,16 +301,16 @@ session_start();
                              echo '<td><input type="checkbox" id="create" data-role="flipswitch" name="'.$record["fldName"].' '.$record["fldLastname"].'" onchange="create_event(this.name,1);" data-on-text="" data-off-text="" data-wrapper-class="custom-label-flipswitch"></td>';
                            }
                            if($rows["Delete_Events"] == 1){
-                              echo "<td><input data-role='none' id='delete' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' checked type='checkbox'></td>";
+                              echo "<td><input  id='delete' data-role='flipswitch' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' checked type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'></td>";
                            }
                            else{
-                             echo "<td><input data-role='none' id='delete' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' type='checkbox'></td>";
+                             echo "<td><input  id='delete' data-role='flipswitch'  name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'></td>";
                            }
                            if($rows["Acces_Rights_System"] == 1){
-                              echo "<td><input data-role='none' id='right' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' checked type='checkbox'></td>";
+                              echo "<td><input  id='right' data-role='flipswitch'  name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' checked type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'></td>";
                            }
                            else{
-                             echo "<td><input data-role='none' id='right' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' type='checkbox'></td>";
+                             echo "<td><input  id='right' data-role='flipswitch'  name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'></td>";
                            }
                          }
                          ?>
@@ -331,6 +331,11 @@ session_start();
               <article class="tile is-child box">
                 <p class="title">Create a new room.</p>
                 <p class="subtitle">You can create a room and give it certain objects.</p>
+                <p class="subtitle">Or you can modify a room!</p>
+                <div class="">
+                  <label>Modify Room</label>
+                  <input  id='roomswitch' data-role='flipswitch' onchange='changeroomstate();'  type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'>
+                </div>
                           <div id="addroomfilters">
                             <div class="flexing" style="justify-content:center;">
                               <div  onchange="" class="percentage">
