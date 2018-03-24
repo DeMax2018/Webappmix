@@ -111,3 +111,12 @@ function looking(){
   }
   $("#fill").load(url,function(){});
 }
+function changeroomstate(){
+  var stateswitch = document.getElementById('roomswitch').checked;
+  if(stateswitch === true){
+    $("#addroomfilters").load("adminswitch.php?switch=true",function(){});
+  }
+  else if(stateswitch === false){
+    $("#addroomfilters").load("adminswitch.php?switch=false",function(){})
+  }
+}
