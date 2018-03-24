@@ -163,6 +163,10 @@ session_start();
                 <span></span>
               </span>
             </div>
+            <div class="thirdsubcontainer">
+              <a href=""><i class="fas fa-sign-out-alt"></i></a>
+              <a href="">Hi, *Stroenelinus*</a>
+            </div>
 
             <div class="nav-right nav-menu is-hidden-widescreen" id="nav-menu">
               <div class="fixit">
