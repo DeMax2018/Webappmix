@@ -184,6 +184,8 @@ a.file:not(.button) {
 .nav > .container {
   position: fixed !important;
   background: white !important;
+  max-width: 100%;
+  padding: 0;
 }
 .is-9 .nav-aside{
   width: 100% !important;

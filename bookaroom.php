@@ -8,171 +8,163 @@ $_SESSION["arrayfilter"] = array();
 <!DOCTYPE html>
 <html>
 <head>
-
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php
-  if($_SESSION["bookaroom"] === "rent"){ ?>
+    if($_SESSION["bookaroom"] === "rent"){
+  ?>
       <title>Rent</title>
-  <?php }
-  elseif($_SESSION["bookaroom"] === "event"){ ?>
+  <?php
+      }
+    elseif($_SESSION["bookaroom"] === "event"){ ?>
       <title>Events</title>
-  <?php }
-
-
-
+  <?php
+      }
   ?>
 
   <link rel="stylesheet" type="text/css" href="../css/bulma.css">
-
+  <script defer="" src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'><link rel='stylesheet prefetch' href='css/vuetify.css'>
-
-    <link rel="stylesheet" href="/css/eventcreate.css">
+  <link rel="stylesheet" href="/css/eventcreate.css">
   <link rel="stylesheet" type="text/css" href="css/nav.css">
-<style media="screen">
-
-</style>
-<script type="text/javascript" src="js/ajaxjquery.js"></script>
-
-<link rel="stylesheet" href="/css/bulma.css">
+  <script type="text/javascript" src="js/ajaxjquery.js"></script>
+  <link rel="stylesheet" href="/css/bulma.css">
   <link rel="stylesheet" type="text/css" href="../css/aside.css">
-<script type="text/javascript">
-function get_hour(){
+  <script type="text/javascript">
+    function get_hour(){
 
 
-  return newdate;
-}
-
-function closeshow(){
-  var d = document.getElementById('showinfo');
-  d.classList.remove("is-active");
-}
-$(function() {
-$("body").click(function(e) {
-if (e.target.id == "closeid" || e.target.id == "show" || $(e.target).parents("#closeid").length) {
-} else {
-  closeshow();
-}
-});
-})
-  function test(){
-    var _submit = document.getElementById('_submit'),
-    _file = document.getElementById('_file'),
-    _progress = document.getElementById('_progress');
-
-
-
-    _submit.addEventListener('click', upload);
-
-  }
-
-  function loadrooms(){
-    //  $("#roomfilters").load("filterloading.php?fieldcreate=all",function(){});
-      $("#roomevent").load("loadrooms.php?load=first",function(){});
-$("#showinfo").load("loadinfobox.php?number=",function(){});
-
-  }
-  function loadfunctionsshow(number){
-
-$("#showinfo").load("loadinfobox.php?number=" + number,function(){});
-
-
-  }
-  function show(number){
-
-  var d =  document.getElementById('showinfo');
-  d.classList.add("is-active");
-
-
-  }
-function safe(){
-  var date = document.getElementById('date').value;
-  var box = {
-    date:date
-  }
-
-$.ajax({
-  type: "POST",
-  url: "datasession.php",
-  data: JSON.stringify(box),
-  contentType: "application/json",
-  dataType: "json",
-});
-}
-function query(text){
-  var time = document.getElementById('firsttime').textContent;
-  var time2 = document.getElementById('secondtime').textContent;
-  var split1 = time.split(" ");
-  var realtime = "";
-  for (i = 0; i < split1.length; i++){
-      var realtime = realtime + split1[i];
-  }
-  var split2 = time2.split(" ");
-  var realtime2 = "";
-  for (i = 0; i < split1.length; i++){
-      var realtime2 = realtime2 + split2[i];
-  }
-  var txt = text;
-  var url = "";
-  var res = txt.split("_");
-  for (i = 0; i < res.length; i++) {
-
-    var value = document.getElementById(res[i]).value;
-    if(value === "on"){
-      var value = document.getElementById(res[i]).checked;
+      return newdate;
     }
-    if(value === ""){
 
+    function closeshow(){
+      var d = document.getElementById('showinfo');
+      d.classList.remove("is-active");
     }
-    else{
-      if(url === ""){
-        var url = url + res[i] + "-" + value;
+    $(function() {
+    $("body").click(function(e) {
+    if (e.target.id == "closeid" || e.target.id == "show" || $(e.target).parents("#closeid").length) {
+    } else {
+      closeshow();
+    }
+    });
+    })
+      function test(){
+        var _submit = document.getElementById('_submit'),
+        _file = document.getElementById('_file'),
+        _progress = document.getElementById('_progress');
+
+
+
+        _submit.addEventListener('click', upload);
+
       }
-      else{
-        var url = url + "_" + res[i] + "-" + value;
+
+      function loadrooms(){
+        //  $("#roomfilters").load("filterloading.php?fieldcreate=all",function(){});
+          $("#roomevent").load("loadrooms.php?load=first",function(){});
+    $("#showinfo").load("loadinfobox.php?number=",function(){});
+
       }
+      function loadfunctionsshow(number){
+
+    $("#showinfo").load("loadinfobox.php?number=" + number,function(){});
+
+
+      }
+      function show(number){
+
+      var d =  document.getElementById('showinfo');
+      d.classList.add("is-active");
+
+
+      }
+    function safe(){
+      var date = document.getElementById('date').value;
+      var box = {
+        date:date
+      }
+
+    $.ajax({
+      type: "POST",
+      url: "datasession.php",
+      data: JSON.stringify(box),
+      contentType: "application/json",
+      dataType: "json",
+    });
+    }
+    function query(text){
+      var time = document.getElementById('firsttime').textContent;
+      var time2 = document.getElementById('secondtime').textContent;
+      var split1 = time.split(" ");
+      var realtime = "";
+      for (i = 0; i < split1.length; i++){
+          var realtime = realtime + split1[i];
+      }
+      var split2 = time2.split(" ");
+      var realtime2 = "";
+      for (i = 0; i < split1.length; i++){
+          var realtime2 = realtime2 + split2[i];
+      }
+      var txt = text;
+      var url = "";
+      var res = txt.split("_");
+      for (i = 0; i < res.length; i++) {
+
+        var value = document.getElementById(res[i]).value;
+        if(value === "on"){
+          var value = document.getElementById(res[i]).checked;
+        }
+        if(value === ""){
+
+        }
+        else{
+          if(url === ""){
+            var url = url + res[i] + "-" + value;
+          }
+          else{
+            var url = url + "_" + res[i] + "-" + value;
+          }
+        }
+
+        console.log(url);
     }
 
-    console.log(url);
-}
-
-  var realurl = "loadrooms.php?datestart=" + realtime + "&dataend=" + realtime2 + "&variables=" + url;
-  $("#roomevent").load(realurl,function(){});
-}
-function takeroom(number){
-  var box = {
-    numberinput:number
-  }
-  $.ajax({
-    type: "POST",
-    url: "datasession.php",
-    data: JSON.stringify(box),
-    contentType: "application/json",
-    dataType: "json",
-  });
-}
+      var realurl = "loadrooms.php?datestart=" + realtime + "&dataend=" + realtime2 + "&variables=" + url;
+      $("#roomevent").load(realurl,function(){});
+    }
+    function takeroom(number){
+      var box = {
+        numberinput:number
+      }
+      $.ajax({
+        type: "POST",
+        url: "datasession.php",
+        data: JSON.stringify(box),
+        contentType: "application/json",
+        dataType: "json",
+      });
+    }
   </script>
-</script>
 
 </head>
 <body>
-  <nav class="nav is-dark has-shadow is-hidden-tablet" id="top">
+  <nav class="nav is-dark has-shadow is-hidden-widescreen" id="top">
     <div class="container">
       <div class="subcontainer">
-        <span class="nav-toggle">
+        <span class="nav-toggle" id="nav-toggle">
           <span></span>
           <span></span>
           <span></span>
         </span>
       </div>
-      <div class="secondsubcontainer">
-        <ul class="ulsearch nobullets isflex justify_stuff">
-
-        </ul>
+      <div class="thirdsubcontainer">
+        <a href=""><i class="fas fa-sign-out-alt"></i></a>
+        <a href="">Hi, *name*</a>
       </div>
 
-      <div class="nav-right nav-menu is-hidden-tablet">
+      <div class="nav-right nav-menu is-hidden-widescreen" id="nav-menu">
         <div class="fixit">
           <div class="sectionfix">
             <a href="#" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
@@ -184,74 +176,74 @@ function takeroom(number){
             <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
           </div>
           <div class="sectionfix">
-            <a href="#" class="item"><span class="icon"><i class="fa fa-plus"></i></span></a>
+            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
           </div>
           <div class="sectionfix">
-            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">Event management</span></a>
+            <a href="#" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
+          </div>
+          <div class="sectionfix">
+            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Event management</span></a>
           </div>
         </div>
         <div class="fixit">
-          <div class="sectionfix">
-            <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
-          </div>
           <div class="sectionfix">
             <a href="#" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
           </div>
           <div class="sectionfix">
-            <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
+            <a href="#" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Room & building management</span></a>
           </div>
         </div>
-        <div class="fixit">
-          <div class="sectionfix">
-            <a href="#" class="item"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Admin newsfeed</span></a>
-          </div>
-        </div>
-
       </div>
     </div>
   </nav>
   <div class="columns columnsaside">
-    <aside class="column is-3 aside hero is-fullheight is-hidden-mobile">
+    <aside class="column is-3 aside hero is-fullheight is-hidden-touch is-hidden-desktop-only">
       <div class="fixleft">
         <div class="account has-text-centered">
-          <a href="#">
-            <figure class="avatar">
-              <img src="images/avatar.png">
+          <?php
+          if(isset($_SESSION["userid"])){ ?>
+            <a href="changeuserinfo.php">
+              <figure class="avatar">
+                <img src="images/avatar.png">
+      <?php    }
+          else{ ?>
+            <a href="login.php">
+              <figure class="avatar">
+                <img src="images/avatar.png">
+        <?php  }
+          ?>
+
             </figure>
           </a>
+          <a href="#" class="logout"><i class="fas fa-sign-out-alt"></i></a>
         </div>
-
         <div class="main">
-          <div class="title">Main</div>
+          <div class="title"><i class="fas fa-home"></i>   Main</div>
           <a href="index.php" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
-          <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
-          <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
-          <a href="eventcreate.php" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
+          <a href="mymeetings.php" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
+          <a href="myevents.php" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+          <a href="middleman.php?request=event" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
+          <a href="middleman.php" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
           <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Event management</span></a>
         </div>
         <div class="main">
           <div class="title"><i class="fa fa-cog"></i>  Admin</div>
           <a href="admin.php#account" class="item link1"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
-          <a href="#" class="item link2"><span class="icon"><i class="fa fa-users"></i></span><span class="name">Meeting management</span></a>
-          <a href="#" class="item link3"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Newsfeed</span></a>
-          <a href="#" class="item link4"><span class="icon"><i class="fa fa-exclamation"></i></span><span class="name">Admin newsfeed</span></a>
+          <a href="#" class="item link2"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Room & building management</span></a>
         </div>
       </div>
     </aside>
     <div class="content column is-9">
-      <div class="content column is-9-nav nav-aside">
+      <div class="content column is-9-nav nav-aside is-hidden-touch is-hidden-desktop-only">
 
         <span class="aside-toggle is-marginless">
           <span></span>
           <span></span>
           <span></span>
         </span>
-        <ul class="ulsearch nobullets isflex justify_stuff is-hidden-mobile">
 
-
-        </ul>
       </div>
-      <div id="events" style="margin:auto;" class="section things">
+      <div id="events" class="section things">
           <div id="app">
 
           <v-app>
