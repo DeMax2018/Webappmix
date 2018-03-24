@@ -411,7 +411,7 @@ function takeroom(number){
           </v-app>
 
 
-            <br/><br/>Debug: {{registration}}
+            <br/><br/>
 
         </div>
         <div id="testapi">
@@ -497,7 +497,7 @@ function takeroom(number){
                     }
                     $.ajax({
                       type: "POST",
-                      url: "finalcreateroom.php?$createbooking=true",
+                      url: "finalcreateroom.php?createbooking=true",
                       data: JSON.stringify(info),
                       contentType: "application/json",
                       dataType: "json",
@@ -563,7 +563,7 @@ function takeroom(number){
                     }
                     $.ajax({
                       type: "POST",
-                      url: "finalcreateroom.php?$createevent=true",
+                      url: "finalcreateroom.php?createevent=true",
                       data: JSON.stringify(info),
                       contentType: "application/json",
                       dataType: "json",

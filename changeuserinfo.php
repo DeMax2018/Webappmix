@@ -103,7 +103,11 @@
           <div class="box">
             <figure class="avatars">
               <img src="https://scontent-bru2-1.xx.fbcdn.net/v/t1.0-0/c0.0.370.370/p370x247/17883869_1345363715543977_8571915909483184139_n.jpg?oh=ff6c75249174694d61a093f03ace7170&oe=5B3A9D7D" style="max-width: 168px; max-height: 168px; min-width: 168px; min-height: 168px;">
+              <div class="">
+                <input type="file" name="" class="hiddenfile" value="">
+              </div>
             </figure>
+
             <form>
               <!-- colums for showing name -->
               <div class="columns">

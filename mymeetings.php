@@ -1,7 +1,7 @@
 <?php
 include"conn.php";
 session_start();
-$_SESSION["eventtype"] = "index";
+$_SESSION["eventtype"] = "mymeetings";
  ?>
 <!DOCTYPE html>
 <html>
@@ -51,9 +51,13 @@ z-index: 10000;
           <span></span>
         </span>
       </div>
-      <div class="thirdsubcontainer">
-        <a href=""><i class="fas fa-sign-out-alt"></i></a>
-        <a href="">Hi, *name*</a>
+      <div class="secondsubcontainer">
+        <ul class="ulsearch nobullets isflex justify_stuff">
+          <div class="search">
+      <span class="fa fa-search"></span>
+      <input id="searchmobile" onkeyup='eventsearch();' placeholder="Search term">
+    </div>
+        </ul>
       </div>
 
       <div class="nav-right nav-menu is-hidden-widescreen" id="nav-menu">
@@ -92,28 +96,17 @@ z-index: 10000;
     <aside class="column is-3 aside hero is-fullheight is-hidden-touch is-hidden-desktop-only">
       <div class="fixleft">
         <div class="account has-text-centered">
-          <?php
-          if(isset($_SESSION["userid"])){ ?>
-            <a href="changeuserinfo.php">
-              <figure class="avatar">
-                <img src="images/avatar.png">
-      <?php    }
-          else{ ?>
-            <a href="login.php">
-              <figure class="avatar">
-                <img src="images/avatar.png">
-        <?php  }
-          ?>
-
+          <a href="changeuserinfo.php">
+            <figure class="avatar">
+              <img src="images/avatar.png">
             </figure>
           </a>
-          <a href="#" style="float: right; font-size:50px;"><i class="fas fa-sign-out-alt" style="    position: absolute;font-size: 32px; margin-top: -1em; margin-left: -0.5em;"></i></a>
         </div>
         <div class="main">
           <div class="title"><i class="fas fa-home"></i>   Main</div>
           <a href="index.php" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
-          <a href="mymeetings.php" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
-          <a href="myevents.php" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+          <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
+          <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
           <a href="middleman.php?request=event" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
           <a href="middleman.php" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
           <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Event management</span></a>
@@ -133,17 +126,16 @@ z-index: 10000;
           <span></span>
           <span></span>
         </span>
+        <ul class="ulsearch nobullets isflex justify_stuff">
 
+          <div class="search">
+            <span class="fa fa-search"></span>
+            <input id="search" onkeyup='eventsearch();' placeholder="Search term">
+
+          </div>
+        </ul>
       </div>
-      <ul class="ulsearch nobullets isflex justify_stuff things">
-
-        <div class="search">
-          <span class="fa fa-search"></span>
-          <input id="search" onkeyup='eventsearch();' placeholder="Search term">
-
-        </div>
-      </ul>
-      <div id="events" class="section">
+      <div id="events" class="section scroll things">
 
 
         </div>

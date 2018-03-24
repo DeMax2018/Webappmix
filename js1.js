@@ -27,7 +27,7 @@ function passwchecker(){
   }
 }
 function create_event(names,type){
-  alert(names);
+if(type == 1){
   if(document.getElementById('create').checked == 1){
     var box = {
       checked: 1,
@@ -42,6 +42,39 @@ function create_event(names,type){
       type: type
     }
   }
+}
+else if(type == 2){
+  if(document.getElementById('delete').checked == 1){
+    var box = {
+      checked: 1,
+      name: names,
+      type: type
+    }
+  }
+  else{
+    var box = {
+      checked: 0,
+      name: names,
+      type: type
+    }
+  }
+}
+else if (type == 3) {
+  if(document.getElementById('right').checked == 1){
+    var box = {
+      checked: 1,
+      name: names,
+      type: type
+    }
+  }
+  else{
+    var box = {
+      checked: 0,
+      name: names,
+      type: type
+    }
+  }
+}
   console.log(box);
   $.ajax({
     type: "POST",

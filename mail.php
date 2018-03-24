@@ -5,19 +5,19 @@ include "phpmail.php";
 session_start();
 if(isset($_GET["roommail"])){
   $qr = new classes();
-  $id = $dbh->prepare("SELECT * FROM ticket WHERE OwnerID = ? and EventID = ? ");
-  $id->bindValue(1,1,PDO::PARAM_STR);
-  $id->bindValue(2,1,PDO::PARAM_STR);
+  $rent = 0;
+  $id = $dbh->prepare("SELECT * FROM ticket WHERE OwnerID = ? ORDER BY TicketID DESC LIMIT 1");
+  $id->bindValue(1,$_SESSION["userid"],PDO::PARAM_STR);
   $id->execute();
   $rows = $id->fetch(PDO::FETCH_ASSOC);
   $_SESSION["test"] = $rows["Special_Number"];
   $qr->qrcode($rows["Special_Number"]);
   $mail = new PHPMailer;
   $mail->setFrom('ggame968@gmail.com', 'Nick Langens');
-  $mail->addAddress('nick.langens@gmail.com', 'Rob Langens');
+  $mail->addAddress($_SESSION["mail"], $_SESSION["name"]." ".$_SESSION["lastname"]);
   $mail->AddEmbeddedImage('jaa.png', 'logo_2u');
   $mail->Subject  = 'Your ticket has been processed';
-  $mail->Body     = '<p>het is precies wel gelukt ni??</p>
+  $mail->Body     = '<p>Bring this ticket with you</p>
   <img src="cid:logo_2u">';
   $mail->IsHTML(true);
   if(!$mail->send()) {

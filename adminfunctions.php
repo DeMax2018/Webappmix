@@ -3,7 +3,7 @@
 
     <?php
     include"conn.php";
-
+echo "iuezhifjb";
 
 if(isset($_GET["filter"]) === true){
     $sth = $dbh->prepare("SELECT * from User WHERE fldName like ? ");
@@ -16,25 +16,25 @@ if(isset($_GET["filter"]) === true){
 
         $checkbox = $dbh->prepare("SELECT * FROM PrivateRights WHERE UserID = ".$record["UserID"]);
         $checkbox->execute();
-        
+
         while ($rows = $checkbox->fetch(PDO::FETCH_ASSOC)) {
           if($rows["Create_events"] == 1){
-             echo "<td><input checked id='create' name='create' onchange='create_event(this.value,1);' type='checkbox'></td>";
+             echo "<td><input data-role='none' checked id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,1);' type='checkbox'></td>";
           }
           else{
-            echo "<td><input id='create' name='create' name='create' onchange='create_event(this.value,1);' type='checkbox'></td>";
+            echo "<td><input data-role='none' id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,1);' type='checkbox'></td>";
           }
           if($rows["Delete_Events"] == 1){
-             echo "<td><input id='create' checked name='create' onchange='create_event(this.value,2);' type='checkbox'></td>";
+             echo "<td><input data-role='none' id='delete' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' checked type='checkbox'></td>";
           }
           else{
-            echo "<td><input id='create' name='create' onchange='create_event(this.value,2);' type='checkbox'></td>";
+            echo "<td><input data-role='none' id='delete' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' type='checkbox'></td>";
           }
           if($rows["Acces_Rights_System"] == 1){
-             echo "<td><input id='create' name='create' onchange='create_event(this.value,3);' checked type='checkbox'></td>";
+             echo "<td><input data-role='none' id='right' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' checked type='checkbox'></td>";
           }
           else{
-            echo "<td><input id='create' name='create' onchange='create_event(this.value,3);' type='checkbox'></td>";
+            echo "<td><input data-role='none' id='right' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' type='checkbox'></td>";
           }
         }
         ?>

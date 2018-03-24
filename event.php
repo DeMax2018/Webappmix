@@ -132,12 +132,53 @@ function myMap() {
             <div class="tile">
               <div class="tile is-parent is-vertical">
                 <article class="tile is-child box">
-                  <div onclick="mailevent();" class="button right">
-                    Participate
-                  </div>
-                  <p name="1" class="title"><?php echo $alldata["eventname"] ?></p>
-                  <p class="subtitle"><?php echo $author["fldName"] ?></p>
-                  <p class="subtitle"><?php echo $timetable["fldDate"] ?></p>
+                  <?php
+                  if(!isset($_GET["view"])){ ?>
+                    <div onclick="mailevent();" class="button right">
+                      Participate
+                    </div>
+                    <p name="1" class="title"><?php echo $alldata["eventname"] ?></p>
+                    <p class="subtitle"><?php echo $author["fldName"] ?></p>
+                    <p class="subtitle"><?php echo $timetable["fldDate"] ?></p>
+                  <?php }
+                  else{
+                    $getroom = $dbh->prepare("SELECT * FROM room WHERE RoomID = ".$timetable["RoomID"]);
+                    $getroom->execute();
+                    $room = $getroom->fetch(PDO::FETCH_ASSOC);
+                    ?>
+                    <table style="width: 30%; margin: auto; border: none;">
+                      <tbody>
+                        <h1 style="text-align:center">Specifications</h1>
+                              <tr>
+                                <td>Owner</td>
+                                <td><?php echo $author["fldName"] ?></td>
+                              </tr>
+                              <tr>
+                                <td>Date</td>
+                                <td><?php echo $timetable["fldDate"] ?></td>
+                              </tr>
+                              <tr>
+                                <td>Start hour</td>
+                                <td><?php echo $timetable["fldStartTime"] ?></td>
+                              </tr>
+                              <tr>
+                                <td>End hour</td>
+                                <td><?php echo $timetable["fldEndTime"] ?></td>
+                              </tr>
+                              <tr>
+                                <td>End hour</td>
+                                <td><?php echo $timetable["fldEndTime"] ?></td>
+                              </tr>
+                              <tr>
+                                <td>Room name</td>
+                                <td><?php echo $timetable["fldEndTime"] ?></td>
+                              </tr>
+                            </tbody>
+                          </table>
+
+                <?php        }
+                        ?>
+
                 </article>
                 <article class="tile is-child box">
                   <ul class="rslides">
