@@ -1,6 +1,9 @@
 function rights(){
   var parameter = document.getElementById('filter').value;
-  $("#scrollaccr").load("adminfunctions.php?filter=" + parameter,function(){});
+  $("#scrollaccr").load("adminfunctions.php?filter=" + parameter,function(){
+    $("#scrollaccr").trigger("create");
+  });
+
 }
 function eventsearch(){
   var search = document.getElementById('search').value;
@@ -110,13 +113,4 @@ function looking(){
     url += "_" + ids[i];
   }
   $("#fill").load(url,function(){});
-}
-function changeroomstate(){
-  var stateswitch = document.getElementById('roomswitch').checked;
-  if(stateswitch === true){
-    $("#addroomfilters").load("adminswitch.php?switch=true",function(){});
-  }
-  else if(stateswitch === false){
-    $("#addroomfilters").load("adminswitch.php?switch=false",function(){})
-  }
 }
