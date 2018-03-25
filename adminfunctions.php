@@ -19,22 +19,22 @@ if(isset($_GET["filter"]) === true){
 
         while ($rows = $checkbox->fetch(PDO::FETCH_ASSOC)) {
           if($rows["Create_events"] == 1){
-             echo "<td><input data-role='none' checked id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,1);' type='checkbox'></td>";
+             echo '<td><input type="checkbox" id="create" data-role="flipswitch" name="'.$record["fldName"].' '.$record["fldLastname"].'" onchange="create_event(this.name,1);" data-on-text="" data-off-text="" data-wrapper-class="custom-label-flipswitch" checked></td>';
           }
           else{
-            echo "<td><input data-role='none' id='create' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,1);' type='checkbox'></td>";
+            echo '<td><input type="checkbox" id="create" data-role="flipswitch" name="'.$record["fldName"].' '.$record["fldLastname"].'" onchange="create_event(this.name,1);" data-on-text="" data-off-text="" data-wrapper-class="custom-label-flipswitch"></td>';
           }
           if($rows["Delete_Events"] == 1){
-             echo "<td><input data-role='none' id='delete' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' checked type='checkbox'></td>";
+             echo "<td><input  id='delete' data-role='flipswitch' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' checked type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'></td>";
           }
           else{
-            echo "<td><input data-role='none' id='delete' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' type='checkbox'></td>";
+            echo "<td><input  id='delete' data-role='flipswitch'  name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'></td>";
           }
           if($rows["Acces_Rights_System"] == 1){
-             echo "<td><input data-role='none' id='right' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' checked type='checkbox'></td>";
+             echo "<td><input  id='right' data-role='flipswitch'  name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' checked type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'></td>";
           }
           else{
-            echo "<td><input data-role='none' id='right' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' type='checkbox'></td>";
+            echo "<td><input  id='right' data-role='flipswitch'  name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'></td>";
           }
         }
         ?>

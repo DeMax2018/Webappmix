@@ -95,7 +95,7 @@ session_start();
               var url = url + "_" + res[i] + "-" + value;
             }
         }
-          var realurl = "filterloading.php?createroom=true&&variables=" + url ;
+          var realurl = "filterloading.php?createroom=true&variables=" + url ;
 
           $("#testing").load(realurl,function(){});
         /*  $.ajax({
@@ -136,9 +136,46 @@ session_start();
               dataType: "json",
             });
         }
+        function changeroomstate(){
+          var stateswitch = document.getElementById('roomswitch').checked;
+          if(stateswitch === true){
+            $("#addroomfilters").load("adminswitch.php?switch=true",function(){
+              $("#addroomfilters").trigger("create");
+            });
+          }
+          else if(stateswitch === false){
+            $("#addroomfilters").load("adminswitch.php?switch=false",function(){
+              $("#addroomfilters").trigger("create");
+            })
+          }
+        }
+        function showselect(){
+          var id = document.getElementById('room-menu').value;
+          $("#loadfilters").load("filterloading.php?showselects=" + id,function(){
+            $("#loadfilters").trigger("create");
+          });
+        }
+        function modifyroom(text){
+          var txt = text;
+          var url = "";
+          var res = txt.split("_");
+          for (i = 0; i < res.length; i++) {
+            var value = document.getElementById(res[i]).value;
+            if(url === ""){
+              var url = url + res[i] + "-" + value;
+            }
+            else{
+              var url = url + "_" + res[i] + "-" + value;
+            }
+        }
+          var realurl = "filterloading.php?createroom=true&modify=true&variables=" + url ;
+
+          $("#testing").load(realurl,function(){});
+          changeroomstate();
+        }
     </script>
   </head>
-  <body>
+  <body id=body>
 
 
         <script async type="text/javascript" src="../js/bulma.js"></script>
@@ -265,7 +302,7 @@ session_start();
                 </div>
                 <div class="tablescroll">
 
-                 <table id="scrollaccr" class="People">
+                 <table id="scrollaccr"data-role="listview" class="People">
                    <tr class="headcol">
                      <th class="accounta">Account</th>
                      <?php
@@ -343,7 +380,7 @@ session_start();
                           <div id="addroomfilters">
                             <div class="flexing" style="justify-content:center;">
                               <div  onchange="" class="percentage">
-                                <label>Objects available in the room</label>
+                                <label>Specifications</label>
                                 <select id="filter-menu"  placeholder="ja" data-native-menu="false" multiple>
                                     <?php
                                     $all = $dbh->prepare("SELECT * FROM details WHERE SortingID != '';");
