@@ -184,6 +184,8 @@ a.file:not(.button) {
 .nav > .container {
   position: fixed !important;
   background: white !important;
+  max-width: 100%;
+  padding: 0;
 }
 .is-9 .nav-aside{
   width: 100% !important;
@@ -220,4 +222,14 @@ nav.has-shadow{
 }
 .thirdsubcontainer a svg{
   font-size: 20px;
+}
+.account .logout{
+  float: right;
+  color: #1fc8db !important;
+}
+.account .logout svg{
+  position: absolute;
+  font-size: 32px;
+  margin-top: -1em;
+  margin-left: -0.5em;
 }
