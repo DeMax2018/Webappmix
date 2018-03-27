@@ -90,11 +90,11 @@ p.subtitle {
 }
 .hiddenfile{
   position: absolute;
-    max-width: 168px;
-    max-height: 168px;
-    min-width: 168px;
-    min-height: 168px;
-    margin-left: -12.5%;
+  width: 13em;
+  opacity: 0;
+  height: 12em;
+  margin-top: -12.3em;
+  margin-left: -6em;
 }
 
 .content {

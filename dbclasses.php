@@ -34,7 +34,7 @@ class classes
     include "BarcodeQR.php";
     $qr = new BarcodeQR();
     $qr->url("https://swfactory.be/testingarea?code=".$code);
-    $qr->draw(300,"jaa");
+    $qr->draw(300,"ticket");
   }
   public function hashish($text){
     $hash = hash('ripemd160', $text);

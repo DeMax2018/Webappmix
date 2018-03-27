@@ -31,3 +31,30 @@ Array.prototype.forEach.call( inputs, function( input )
 			label.innerHTML = labelVal;
 	});
 });
+
+function emailcheck(){
+  var mailregister = document.getElementById('mailregister').value;
+  var mailuse = mailregister.replace("@","_")
+  var dataValues = {
+    mail:mailuse
+  }
+  $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(dataValues),
+            url: 'succestest.php',
+            success: function(response){
+                 if(response.success) {
+                   element = document.getElementById("mailregister");
+                   element.classList.remove("is-danger");
+                   element.classList.add("is-success");
+                 }
+                 else {
+                   element = document.getElementById("mailregister");
+                   element.classList.add("is-danger");
+                   element.classList.remove("is-success");
+                   alert('this email is already used!');
+                 }
+            }
+        });
+}

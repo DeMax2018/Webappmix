@@ -29,9 +29,78 @@ function passwchecker(){
     //hier moeten nog toggles komen
   }
 }
+function group(names,type){
+
+  if(type == 1){
+    var search = "cifpcm" + names;
+    if(document.getElementById(search).checked == 1){
+      var box = {
+        checked: 1,
+        name: names,
+        type: type
+      }
+    }
+    else{
+      var box = {
+        checked: 0,
+        name: names,
+        type: type
+      }
+    }
+  }
+  else if(type == 2){
+    var search = "admin" + names;
+    if(document.getElementById(search).checked == 1){
+      var box = {
+        checked: 1,
+        name: names,
+        type: type
+      }
+    }
+    else{
+      var box = {
+        checked: 0,
+        name: names,
+        type: type
+      }
+    }
+  }
+  else if (type == 3) {
+    var search = "user" + names;
+    if(document.getElementById(search).checked == 1){
+      var box = {
+        checked: 1,
+        name: names,
+        type: type
+      }
+    }
+    else{
+      var box = {
+        checked: 0,
+        name: names,
+        type: type
+      }
+    }
+  }
+    console.log(box);
+    $.ajax({
+      type: "POST",
+      url: "adminfunctionscreate.php?group=true",
+      data: JSON.stringify(box),
+      contentType: "application/json",
+      dataType: "json",
+    });
+
+}
+
+
+
+
 function create_event(names,type){
+
 if(type == 1){
-  if(document.getElementById('create').checked == 1){
+  var search = "create" + names;
+  if(document.getElementById(search).checked == 1){
     var box = {
       checked: 1,
       name: names,
@@ -47,7 +116,8 @@ if(type == 1){
   }
 }
 else if(type == 2){
-  if(document.getElementById('delete').checked == 1){
+  var search = "delete" + names;
+  if(document.getElementById(search).checked == 1){
     var box = {
       checked: 1,
       name: names,
@@ -63,7 +133,8 @@ else if(type == 2){
   }
 }
 else if (type == 3) {
-  if(document.getElementById('right').checked == 1){
+  var search = "right" + names;
+  if(document.getElementById(search).checked == 1){
     var box = {
       checked: 1,
       name: names,
@@ -86,16 +157,16 @@ else if (type == 3) {
     contentType: "application/json",
     dataType: "json",
   });
+
 }
 
 function mailevent(){
-  var x = document.getElementsByTagName("p")[0].getAttribute("name");
   var parameters = {
-    "id": x
+    "id": "insession"
   }
   $.ajax({
     type: "POST",
-    url: "mail.php",
+    url: "mail.php?event=true",
     data: JSON.stringify(parameters),
     contentType: "application/json",
     dataType: "json",

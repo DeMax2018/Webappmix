@@ -3,6 +3,7 @@ session_start();
 include "conn.php";
 
 include"dbclasses.php";
+$_SESSION["eventid"] = $_GET["id"];
 $getalldata = $dbh->prepare("SELECT * FROM event WHERE EventID = ".$_GET["id"]);
 $getalldata->execute();
 $alldata = $getalldata->fetch(PDO::FETCH_ASSOC);
@@ -12,6 +13,9 @@ $author = $getauthor->fetch(PDO::FETCH_ASSOC);
 $gettimetable = $dbh->prepare("SELECT * FROM roomhours WHERE Room_HoursID = ".$alldata["Reservation"]);
 $gettimetable->execute();
 $timetable = $gettimetable->fetch(PDO::FETCH_ASSOC);
+$getroomname = $dbh->prepare('SELECT Textawn FROM room_details WHERE Details = 4 and RoomID = '.$timetable["RoomID"]);
+$getroomname->execute();
+$roomname = $getroomname->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,7 +49,7 @@ function myMap() {
   <body>
     <script async type="text/javascript" src="../js/bulma.js"></script>
 
-    <nav class="nav is-dark has-shadow is-hidden-widescreen" id="top" >
+    <nav class="nav is-dark has-shadow is-hidden-widescreen" id="top">
       <div class="container">
         <div class="subcontainer">
           <span class="nav-toggle" id="nav-toggle">
@@ -55,38 +59,42 @@ function myMap() {
           </span>
         </div>
         <div class="thirdsubcontainer">
-          <a href=""><i class="fas fa-sign-out-alt"></i></a>
-          <a href="">Hi, *name*</a>
+          <a href="logout.php"><i class="fas fa-sign-out-alt"></i></a>
+          <a href="<?php if(isset($_SESSION["name"])){echo "changeuserinfo.php";}else{echo "login.php";} ?>"><?php if(isset($_SESSION["name"])){echo $_SESSION["name"];}else{echo "login";} ?></a>
         </div>
 
         <div class="nav-right nav-menu is-hidden-widescreen" id="nav-menu">
           <div class="fixit">
             <div class="sectionfix">
-              <a href="#" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
+              <a href="index.php" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
             </div>
+            <?php if(isset($_SESSION["userid"])){ ?>
             <div class="sectionfix">
-              <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
+              <a href="mymeetings.php" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
             </div>
+            <?php } ?>
+            <?php if(isset($_SESSION["userid"])){ ?>
             <div class="sectionfix">
-              <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+              <a href="myevents.php" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
             </div>
+          <?php } ?>
+          <?php if(isset($_SESSION["create"]) and $_SESSION["create"] == 1){ ?>
             <div class="sectionfix">
-              <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
+              <a href="middleman.php?request=event" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
             </div>
+          <?php } ?>
+          <?php if(isset($_SESSION["userid"])){ ?>
             <div class="sectionfix">
-              <a href="#" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
+              <a href="middleman.php" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
             </div>
-            <div class="sectionfix">
-              <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Event management</span></a>
-            </div>
+            <?php } ?>
           </div>
           <div class="fixit">
+            <?php if(isset($_SESSION["create"]) and $_SESSION["create"] == 1){ ?>
             <div class="sectionfix">
-              <a href="#" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
+              <a href="admin.php" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
             </div>
-            <div class="sectionfix">
-              <a href="#" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Room & building management</span></a>
-            </div>
+            <?php } ?>
           </div>
         </div>
       </div>
@@ -95,26 +103,48 @@ function myMap() {
       <aside class="column is-3 aside hero is-fullheight is-hidden-touch is-hidden-desktop-only">
         <div class="fixleft">
           <div class="account has-text-centered">
-            <a href="#">
-              <figure class="avatar">
-                <img src="images/avatar.png">
+            <?php
+            if(isset($_SESSION["userid"])){ ?>
+              <a href="changeuserinfo.php">
+                <figure class="avatar">
+                  <img src="profilepics/<?php if(is_null($_SESSION["profilepic"])){ echo "avatar.png"; }else{ echo $_SESSION["profilepic"]; }?>">
+        <?php    }
+            else{ ?>
+              <a href="login.php">
+                <figure class="avatar">
+                  <img src="images/avatar.png">
+          <?php  }
+            ?>
+
               </figure>
             </a>
+            <?php
+            if(isset($_SESSION["userid"])){ ?>
+              <a href="logout.php" style="float: right; font-size:50px;"><i class="fas fa-sign-out-alt" style="    position: absolute;font-size: 32px; margin-top: -1em; margin-left: -0.5em;"></i></a>
+            <?php } ?>
           </div>
           <div class="main">
             <div class="title"><i class="fas fa-home"></i>   Main</div>
             <a href="index.php" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
-            <a href="bookaroom.php" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
-            <a href="bookaroom.php" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
-            <a href="#" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Event management</span></a>
+            <?php if(isset($_SESSION["userid"])){ ?>
+            <a href="mymeetings.php" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
+            <?php } ?>
+            <?php if(isset($_SESSION["userid"])){ ?>
+            <a href="myevents.php" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+            <?php } ?>
+            <?php if(isset($_SESSION["create"]) and $_SESSION["create"] == 1){ ?>
+            <a href="middleman.php?request=event" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
+            <?php } ?>
+            <?php if(isset($_SESSION["userid"])){ ?>
+            <a href="middleman.php" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
+            <?php } ?>
           </div>
+          <?php if(isset($_SESSION["create"]) and $_SESSION["create"] == 1){ ?>
           <div class="main">
             <div class="title"><i class="fa fa-cog"></i>  Admin</div>
-            <a href="admin.php#account" class="item link1"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
-            <a href="#" class="item link2"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Room & building management</span></a>
+            <a href="admin.php" class="item link1"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
           </div>
+          <?php } ?>
         </div>
       </aside>
       <div class="content column is-9">
@@ -137,9 +167,36 @@ function myMap() {
                     <div onclick="mailevent();" class="button right">
                       Participate
                     </div>
-                    <p name="1" class="title"><?php echo $alldata["eventname"] ?></p>
-                    <p class="subtitle"><?php echo $author["fldName"] ?></p>
-                    <p class="subtitle"><?php echo $timetable["fldDate"] ?></p>
+                    <table style="width: 30%; margin: auto; border: none;">
+                      <tbody>
+                        <h1 style="text-align:center">Specifications</h1>
+                              <tr>
+                                <td>Owner</td>
+                                <td><?php echo $author["fldName"] ?></td>
+                              </tr>
+                              <tr>
+                                <td>Date</td>
+                                <td><?php echo $timetable["fldDate"] ?></td>
+                              </tr>
+                              <tr>
+                                <td>Start hour</td>
+                                <td><?php echo $timetable["fldStartTime"] ?></td>
+                              </tr>
+                              <tr>
+                                <td>End hour</td>
+                                <td><?php echo $timetable["fldEndTime"] ?></td>
+                              </tr>
+                              <tr>
+                                <td>available tickets</td>
+                                <td><?php $ticketleft = $alldata["Limited_Ticket"] - $alldata["Sold_Ticket"]; echo $ticketleft ?></td>
+                              </tr>
+                              <tr>
+                                <td>Room name</td>
+                                <td><?php echo $roomname["Textawn"] ?></td>
+                              </tr>
+                            </tbody>
+                          </table>
+
                   <?php }
                   else{
                     $getroom = $dbh->prepare("SELECT * FROM room WHERE RoomID = ".$timetable["RoomID"]);
@@ -151,7 +208,7 @@ function myMap() {
                         <h1 style="text-align:center">Specifications</h1>
                               <tr>
                                 <td>Owner</td>
-                                <td><?php echo $author["fldName"] ?></td>
+                                <td><?php echo $author["fldName"]." ".$author["fldLastname"] ?></td>
                               </tr>
                               <tr>
                                 <td>Date</td>
@@ -182,7 +239,7 @@ function myMap() {
                 </article>
                 <article class="tile is-child box">
                   <ul class="rslides">
-                    <li><img src="upload/<?php echo $alldata["Mainpicture"] ?>" alt=""></li>
+                    <li style="justify-content:center;"><img src="upload/<?php echo $alldata["Mainpicture"] ?>" alt=""></li>
                   </ul>
                   <script>
                     $(function() {
@@ -220,32 +277,39 @@ function myMap() {
                 </article>
                 <article class="tile is-child box">
                   <p class="title">Participants</p>
-                  <p class="subtitle">amount participants</p>
-                  <div class="content participants">
-                    <ul>
 
-                      <li>Participant 1</li>
-                      <li class="is-light">Participant 2</li>
-                      <li>Participant 1</li>
-                      <li class="is-light">Participant 2</li>
-                      <li>Participant 1</li>
-                      <li class="is-light">Participant 2</li>
-                      <li>Participant 1</li>
-                      <li class="is-light">Participant 2</li>
-                      <li>Participant 1</li>
-                      <li class="is-light">Participant 2</li>
-                      <li>Participant 1</li>
-                      <li class="is-light">Participant 2</li>
-                      <li>Participant 1</li>
-                      <li class="is-light">Participant 2</li>
-                      <li>Participant 1</li>
-                      <li class="is-light">Participant 2</li>
-                      <li>Participant 1</li>
-                      <li class="is-light">Participant 2</li>
-                      <li>Participant 1</li>
-                      <li class="is-light">Participant 2</li>
-                    </ul>
-                  </div>
+
+                      <?php
+                      
+                      if($alldata["CreatorID"] == $_SESSION["userid"] or $_SESSION["admin"] == 1){ ?>
+                        <div class="content participants">
+                          <ul>
+                      <?php  $getallparticipants = $dbh->prepare("SELECT * FROM ticket WHERE EventID = ".$_SESSION["eventid"]);
+                        $getallparticipants->execute();
+                        $start = 0;
+                        while($participants = $getallparticipants->fetch(PDO::FETCH_ASSOC)){
+                          $getuser = $dbh->prepare("SELECT fldName,fldLastname FROM user WHERE UserID = ".$participants["OwnerID"]);
+                          $getuser->execute();
+                          $user = $getuser->fetch(PDO::FETCH_ASSOC);
+                          if($start == 0){ ?>
+                            <li><?php echo $user["fldName"]." ".$user["fldLastname"]; ?></li>
+                            <?php $start++;
+                          }
+                          else{ ?>
+                            <li class="is-light"><?php echo $user["fldName"]." ".$user["fldLastname"]; ?></li>
+                          <?php  $start--;
+                          }
+                        } ?>
+                        </ul>
+                      </div>
+                      <?php }
+                      else{ ?>
+                        <header>
+                          There are <?php echo $alldata["Sold_Ticket"] ?> people attending to this event!
+                        </header>
+                      <?php }
+                      ?>
+
                 </article>
               </div>
             </div>

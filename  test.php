@@ -1,10 +1,6 @@
-<?php
-session_start();
-include"conn.php";
-$_SESSION["userid"] = 1;
-$getcredentials = $dbh->prepare("SELECT * FROM privaterights WHERE Create_events = 1 or Create_events = 0 and UserID = ".$_SESSION["userid"]);
-$getcredentials->execute();
-if()
 
-
-?>
+<form action="upload.php" method="post" enctype="multipart/form-data">
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="submit" value="Upload Image" name="submit">
+</form>

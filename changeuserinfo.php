@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,9 +16,25 @@
   <link rel="stylesheet" type="text/css" href="../css/login.css">
   <script defer="" src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function () {
+  $('#passchecker').keyup(function () {
+      var pass = document.getElementById('pass').value;
+      var checkpass = document.getElementById('passchecker').value;
+      if(checkpass != pass){
+        element = document.getElementById("checkpass");
+        element.classList.add("is-danger");
+      }
+      else{
+        element = document.getElementById("checkpass");
+        element.classList.remove("is-danger");
+      }
+    });
+});
+  </script>
 </head>
 <body>
-  <nav class="nav is-dark has-shadow is-hidden-widescreen" id="top" >
+  <nav class="nav is-dark has-shadow is-hidden-widescreen" id="top">
     <div class="container">
       <div class="subcontainer">
         <span class="nav-toggle" id="nav-toggle">
@@ -24,34 +43,32 @@
           <span></span>
         </span>
       </div>
+      <div class="thirdsubcontainer">
+        <a href="logout.php"><i class="fas fa-sign-out-alt"></i></a>
+        <a href="<?php if(isset($_SESSION["name"])){echo "changeuserinfo.php";}else{echo "login.php";} ?>"><?php if(isset($_SESSION["name"])){echo $_SESSION["name"];}else{echo "login";} ?></a>
+      </div>
 
       <div class="nav-right nav-menu is-hidden-widescreen" id="nav-menu">
         <div class="fixit">
           <div class="sectionfix">
-            <a href="#" data-ajax="false" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
+            <a href="index.php" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
           </div>
           <div class="sectionfix">
-            <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
+            <a href="mymeetings.php" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
           </div>
           <div class="sectionfix">
-            <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+            <a href="myevents.php" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
           </div>
           <div class="sectionfix">
-            <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
+            <a href="middleman.php?request=event" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
           </div>
           <div class="sectionfix">
-            <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
-          </div>
-          <div class="sectionfix">
-            <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Event management</span></a>
+            <a href="middleman.php" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
           </div>
         </div>
         <div class="fixit">
           <div class="sectionfix">
-            <a href="#" data-ajax="false" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
-          </div>
-          <div class="sectionfix">
-            <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Room & building management</span></a>
+            <a href="admin.php" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
           </div>
         </div>
       </div>
@@ -61,26 +78,37 @@
     <aside class="column is-3 aside hero is-fullheight is-hidden-touch is-hidden-desktop-only">
       <div class="fixleft">
         <div class="account has-text-centered">
-          <a href="changeuserinfo.php">
-            <figure class="avatar">
-              <img src="images/avatar.png">
+          <?php
+          if(isset($_SESSION["userid"])){ ?>
+            <a href="changeuserinfo.php">
+              <figure class="avatar">
+                <img src="profilepics/<?php if(is_null($_SESSION["profilepic"])){ echo "avatar.png"; }else{ echo $_SESSION["profilepic"]; }?>">
+      <?php    }
+          else{ ?>
+            <a href="login.php">
+              <figure class="avatar">
+                <img src="images/avatar.png">
+        <?php  }
+          ?>
+
             </figure>
           </a>
-          <a href="#" class="logout"><i class="fas fa-sign-out-alt"></i></a>
+          <?php
+          if(isset($_SESSION["userid"])){ ?>
+            <a href="logout.php" style="float: right; font-size:50px;"><i class="fas fa-sign-out-alt" style="    position: absolute;font-size: 32px; margin-top: -1em; margin-left: -0.5em;"></i></a>
+          <?php } ?>
         </div>
         <div class="main">
           <div class="title"><i class="fas fa-home"></i>   Main</div>
-          <a href="index.php" data-ajax="false" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
-          <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
-          <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
-          <a href="bookaroom.php" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
-          <a href="bookaroom.php" data-ajax="false" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
-          <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Event management</span></a>
+          <a href="index.php" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
+          <a href="mymeetings.php" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
+          <a href="myevents.php" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+          <a href="middleman.php?request=event" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
+          <a href="middleman.php" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
         </div>
         <div class="main">
           <div class="title"><i class="fa fa-cog"></i>  Admin</div>
-          <a href="admin.php#account" data-ajax="false" class="item link1"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
-          <a href="#" data-ajax="false" class="item link2"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Room & building management</span></a>
+          <a href="admin.php" class="item link1"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
         </div>
       </div>
     </aside>
@@ -102,26 +130,28 @@
           <p class="subtitle has-text-grey">Nick Langens.</p>
           <div class="box">
             <figure class="avatars">
-              <img src="https://scontent-bru2-1.xx.fbcdn.net/v/t1.0-0/c0.0.370.370/p370x247/17883869_1345363715543977_8571915909483184139_n.jpg?oh=ff6c75249174694d61a093f03ace7170&oe=5B3A9D7D" style="max-width: 168px; max-height: 168px; min-width: 168px; min-height: 168px;">
+              <img src="profilepics/<?php if(is_null($_SESSION["profilepic"])){ echo "avatar.png"; }else{ echo $_SESSION["profilepic"]; }?>" style="max-width: 168px; max-height: 168px; min-width: 168px; min-height: 168px;">
               <div class="">
-                <input type="file" name="" class="hiddenfile" value="">
+                <form action="phpscripts/updateuser.php" method="post" enctype="multipart/form-data">
+
+                  <input type="file" name="fileToUpload" id="fileToUpload" class="hiddenfile" >
               </div>
             </figure>
 
-            <form>
+
               <!-- colums for showing name -->
               <div class="columns">
                 <div class="column is-half">
                   <div class="field">
                     <div class="control">
-                      <input class="input is-large" type="text" placeholder="Nick" autofocus="">
+                      <input class="input is-large" name="Name" type="text" value="<?php echo $_SESSION["name"]; ?>" placeholder="Nick" autofocus="">
                     </div>
                   </div>
                 </div>
                 <div class="column">
                   <div class="field">
                     <div class="control">
-                      <input class="input is-large" type="text" placeholder="Langens">
+                      <input class="input is-large" name="lastname" type="text"value="<?php echo $_SESSION["lastname"]; ?>" placeholder="Langens">
                     </div>
                   </div>
                 </div>
@@ -129,7 +159,7 @@
               <!-- colums for showing tel + email -->
               <div class="field">
                 <p class="control has-icons-left">
-                  <input class="input is-large" type="email" placeholder="Nicklangens@hotmail.com" autofocus="">
+                  <input class="input is-large" type="email" name="mail" placeholder="Nicklangens@hotmail.com" value="<?php echo $_SESSION["mail"]; ?>" autofocus="">
                   <span class="icon is-left">
                     <i class="fas fa-envelope"></i>
                   </span>
@@ -137,7 +167,7 @@
               </div>
               <div class="field">
                 <div class="control has-icons-left">
-                  <input class="input is-large" type="tel" placeholder="Phone number" autofocus="">
+                  <input class="input is-large" type="tel" name="number" value="<?php echo $_SESSION["number"]; ?>" placeholder="Phone number" autofocus="">
                   <span class="icon is-left">
                     <i class="fas fa-phone-square"></i>
                   </span>
@@ -148,14 +178,14 @@
                 <div class="column is-9">
                   <div class="field">
                     <div class="control">
-                      <input class="input is-large" type="text" placeholder="City" autofocus="">
+                      <input class="input is-large" type="text" name="city" placeholder="City" value="<?php echo $_SESSION["city"]; ?>" autofocus="">
                     </div>
                   </div>
                 </div>
                 <div class="column">
                   <div class="field">
                       <div class="control">
-                        <input class="input is-large" type="text" placeholder="Zipcode" autofocus="">
+                        <input class="input is-large" type="text" name="zipcode" value="<?php echo $_SESSION["zipcode"]; ?>" placeholder="Zipcode" autofocus="">
                       </div>
                   </div>
                 </div>
@@ -164,21 +194,21 @@
                 <div class="column is-10">
                   <div class="field">
                       <div class="control">
-                        <input class="input is-large" type="text" placeholder="Street" autofocus="">
+                        <input class="input is-large" type="text" name="street" placeholder="Street" value="<?php echo $_SESSION["street"]; ?>" autofocus="">
                       </div>
                   </div>
                 </div>
                 <div class="column">
                   <div class="field">
                       <div class="control">
-                        <input class="input is-large" type="text" placeholder="Nr" autofocus="">
+                        <input class="input is-large" type="text" name="housenumber" value="<?php echo $_SESSION["housenumber"]; ?>" placeholder="Nr" autofocus="">
                       </div>
                   </div>
                 </div>
               </div>
               <div class="field">
                 <p class="control has-icons-left">
-                  <input class="input is-large" type="password" placeholder="Change password" autofocus="">
+                  <input class="input is-large" type="password" id="pass" name="pass" placeholder="Change password" autofocus="">
                   <span class="icon is-left">
                     <i class="fas fa-lock"></i>
                   </span>
@@ -186,17 +216,15 @@
               </div>
               <div class="field">
                 <div class="control has-icons-left has-icons-right">
-                  <input class="input is-large" type="password" placeholder="Confirm password" autofocus="">
+                  <input class="input is-large"id="checkpass"  name="checkpass"type="password" placeholder="Confirm password" autofocus="">
                   <span class="icon is-left">
                     <i class="fas fa-lock"></i>
                   </span>
-                  <span class="icon is-small is-right">
-                    <i class="fas fa-check"></i>
-                  </span>
+
                 </div>
               </div>
 
-              <button class="button is-block is-info is-large is-fullwidth"> change </button>
+            <input type="submit" value="Upload Image" name="submit">
             </form>
           </div>
         </div>

@@ -1,5 +1,6 @@
 <?php
 include "conn.php";
+error_reporting(0);
 if(isset($_GET["variables"])){
   $ids = "WHERE Room_DetailsID is not null ";
   $filter = explode("_",$_GET["variables"]);
@@ -82,7 +83,7 @@ if(isset($_GET["variables"])){
 
     $firstoverwrite = 1;
     while($nids = $newids->fetch(PDO::FETCH_ASSOC)){
-      
+
       if($firstoverwrite == 1){
 
         $ids = "WHERE RoomID = ".$nids["RoomID"];
@@ -133,7 +134,7 @@ if(isset($_GET["variables"])){
     if($first === true){ ?>
       <div class="columns columnsaside"> <!--  Max 2 items -->
         <div class="column is-6">
-          <div id="show" onclick="show();" class="panel">
+          <div id="show" onclick="show();" style="height:100% !important"  class="panel">
             <p class="is-marginless">
               <img src="https://placehold.it/600x300">
             </p>
@@ -157,7 +158,7 @@ if(isset($_GET["variables"])){
   <?php  $first = false; }
   else{ ?>
     <div class="column is-6">
-      <div id="show" onclick="show();" class="panel">
+      <div id="show" onclick="show();" style="height:100% !important" class="panel">
         <p class="is-marginless">
           <img src="https://placehold.it/600x300">
         </p>

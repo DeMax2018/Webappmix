@@ -22,13 +22,14 @@
   position: relative;
   display: block;
   float: left;
+  margin-left: 30%;
   }
 
 .rslides img {
   display: block;
   height: auto;
   float: left;
-  width: 100%;
+  width: 42% !important;
   border: 0;
   }
 

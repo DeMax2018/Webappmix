@@ -14,6 +14,22 @@
   <script src="https://code.jquery.com/color/jquery.color.plus-names-2.1.2.js"></script>
   <script async type="text/javascript" src="../js/bulma.js"></script>
   <script async type="text/javascript" src="../js/login.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function () {
+  $('#checkpass').keyup(function () {
+      var pass = document.getElementById('pass').value;
+      var checkpass = document.getElementById('checkpass').value;
+      if(checkpass != pass){
+        element = document.getElementById("checkpass");
+        element.classList.add("is-danger");
+      }
+      else{
+        element = document.getElementById("checkpass");
+        element.classList.remove("is-danger");
+      }
+    });
+  });
+  </script>
 </head>
 <body>
   <section class="hero is-success is-fullheight">
@@ -88,15 +104,15 @@
               <div class="field">
                 <p class="grey">What are your credentials?</p>
                 <div class="control">
-                  <input class="input is-large" type="email" name="email" placeholder="Your Email*" autofocus="" required>
+                  <input class="input is-large" type="email" id="mailregister" onchange="emailcheck()" name="email" placeholder="Your Email*" autofocus="" required>
                 </div>
               </div>
               <div class="field">
                 <div class="control">
-                  <input class="input is-large" type="password" name="password" placeholder="Your Password*" required>
+                  <input class="input is-large" type="password" id="pass" name="password" placeholder="Your Password*" required>
                 </div>
                 <div class="control">
-                  <input class="input is-large" type="password" placeholder="Confirm Password*" required>
+                  <input class="input is-large" type="password" id="checkpass" name="checkpass" placeholder="Confirm Password*" required>
                 </div>
               </div>
               <button style="width:100%;"class="button is-block is-info is-large" type="submit">Register</button>

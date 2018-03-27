@@ -162,4 +162,5 @@ final class BarcodeQR {
 		$this->_data = "WIFI:S:{$ssid};T:{$type};P:{$password};;";
 	}
 }
+
 ?>

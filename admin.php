@@ -3,6 +3,7 @@ include"conn.php";
 //include "auth.php";
 
 session_start();
+$_SESSION["rightsearch"] = "user";
  ?>
 <html>
   <head>
@@ -149,6 +150,21 @@ session_start();
             })
           }
         }
+        function changerightstate(){
+          var stateswitch = document.getElementById('rightswitch').checked;
+          var parameter = document.getElementById('filter').value;
+          if(stateswitch === true){
+            $("#scrollaccr").load("adminswitch.php?switch=true&right=yes&filter=" + parameter,function(){
+              $("#scrollaccr").trigger("create");
+            });
+          }
+          else if(stateswitch === false){
+            var parameter = document.getElementById('filter').value;
+            $("#scrollaccr").load("adminfunctions.php?user=yes&filter=" + parameter,function(){
+              $("#scrollaccr").trigger("create");
+            });
+          }
+        }
         function showselect(){
           var id = document.getElementById('room-menu').value;
           $("#loadfilters").load("filterloading.php?showselects=" + id,function(){
@@ -180,7 +196,7 @@ session_start();
 
         <script async type="text/javascript" src="../js/bulma.js"></script>
 
-        <nav class="nav is-dark has-shadow is-hidden-widescreen" id="top" >
+        <nav class="nav is-dark has-shadow is-hidden-widescreen" id="top">
           <div class="container">
             <div class="subcontainer">
               <span class="nav-toggle" id="nav-toggle">
@@ -190,38 +206,42 @@ session_start();
               </span>
             </div>
             <div class="thirdsubcontainer">
-              <a href="" data-ajax="false"><i class="fas fa-sign-out-alt"></i></a>
-              <a href="" data-ajax="false">Hi, *Stroenelinus*</a>
+              <a data-ajax="false" href="logout.php"><i class="fas fa-sign-out-alt"></i></a>
+              <a data-ajax="false" href="<?php if(isset($_SESSION["name"])){echo "changeuserinfo.php";}else{echo "login.php";} ?>"><?php if(isset($_SESSION["name"])){echo $_SESSION["name"];}else{echo "login";} ?></a>
             </div>
 
             <div class="nav-right nav-menu is-hidden-widescreen" id="nav-menu">
               <div class="fixit">
                 <div class="sectionfix">
-                  <a href="#" data-ajax="false" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
+                  <a data-ajax="false" href="index.php" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
                 </div>
+                <?php if(isset($_SESSION["userid"])){ ?>
                 <div class="sectionfix">
-                  <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
+                  <a data-ajax="false" href="mymeetings.php" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
                 </div>
+                <?php } ?>
+                <?php if(isset($_SESSION["userid"])){ ?>
                 <div class="sectionfix">
-                  <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+                  <a data-ajax="false" href="myevents.php" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
                 </div>
+              <?php } ?>
+              <?php if(isset($_SESSION["create"]) and $_SESSION["create"] == 1){ ?>
                 <div class="sectionfix">
-                  <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
+                  <a data-ajax="false" href="middleman.php?request=event" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
                 </div>
+              <?php } ?>
+              <?php if(isset($_SESSION["userid"])){ ?>
                 <div class="sectionfix">
-                  <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
+                  <a data-ajax="false" href="middleman.php" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
                 </div>
-                <div class="sectionfix">
-                  <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Event management</span></a>
-                </div>
+                <?php } ?>
               </div>
               <div class="fixit">
+                <?php if(isset($_SESSION["create"]) and $_SESSION["create"] == 1){ ?>
                 <div class="sectionfix">
-                  <a href="#" data-ajax="false" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
+                  <a data-ajax="false" href="admin.php" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
                 </div>
-                <div class="sectionfix">
-                  <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Room & building management</span></a>
-                </div>
+                <?php } ?>
               </div>
             </div>
           </div>
@@ -230,27 +250,48 @@ session_start();
           <aside class="column is-3 aside hero is-fullheight is-hidden-touch is-hidden-desktop-only">
             <div class="fixleft">
               <div class="account has-text-centered">
-                <a href="changeuserinfo.php" data-ajax="false">
-                  <figure class="avatar">
-                    <img src="images/avatar.png">
+                <?php
+                if(isset($_SESSION["userid"])){ ?>
+                  <a data-ajax="false" href="changeuserinfo.php">
+                    <figure class="avatar">
+                      <img src="profilepics/<?php if(is_null($_SESSION["profilepic"])){ echo "avatar.png"; }else{ echo $_SESSION["profilepic"]; }?>">
+            <?php    }
+                else{ ?>
+                  <a data-ajax="false" href="login.php">
+                    <figure class="avatar">
+                      <img src="images/avatar.png">
+              <?php  }
+                ?>
+
                   </figure>
                 </a>
-                <a href="#" class="logout"><i class="fas fa-sign-out-alt"></i></a>
+                <?php
+                if(isset($_SESSION["userid"])){ ?>
+                  <a href="logout.php" data-ajax="false" style="float: right; font-size:50px;"><i class="fas fa-sign-out-alt" style="    position: absolute;font-size: 32px; margin-top: -1em; margin-left: -0.5em;"></i></a>
+                <?php } ?>
               </div>
               <div class="main">
                 <div class="title"><i class="fas fa-home"></i>   Main</div>
                 <a href="index.php" data-ajax="false" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
-                <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
-                <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
-                <a href="bookaroom.php" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
-                <a href="bookaroom.php" data-ajax="false" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
-                <a href="#" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Event management</span></a>
+                <?php if(isset($_SESSION["userid"])){ ?>
+                <a href="mymeetings.php" data-ajax="false" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
+                <?php } ?>
+                <?php if(isset($_SESSION["userid"])){ ?>
+                <a href="myevents.php" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+                <?php } ?>
+                <?php if(isset($_SESSION["create"]) and $_SESSION["create"] == 1){ ?>
+                <a href="middleman.php?request=event" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
+                <?php } ?>
+                <?php if(isset($_SESSION["userid"])){ ?>
+                <a href="middleman.php" data-ajax="false" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
+                <?php } ?>
               </div>
+              <?php if(isset($_SESSION["create"]) and $_SESSION["create"] == 1){ ?>
               <div class="main">
                 <div class="title"><i class="fa fa-cog"></i>  Admin</div>
-                <a href="admin.php#account" data-ajax="false" class="item link1"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
-                <a href="#" data-ajax="false" class="item link2"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Room & building management</span></a>
+                <a href="admin.php" data-ajax="false" class="item link1"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
               </div>
+              <?php } ?>
             </div>
           </aside>
           <div class="content column is-9">
@@ -292,11 +333,10 @@ session_start();
 
                     <!-- Right side -->
                     <div class="level-right">
-                      <p class="control">
-                        <button class="button" data-role='none'>
-                          Switch to groups
-                        </button>
-                      </p>
+
+                      <i class="fas fa-user"></i>
+                      <input  id='rightswitch' data-role='flipswitch' onchange='changerightstate();'  type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'>
+                      <i class="fas fa-users"></i>
                     </div>
                   </nav>
                 </div>
@@ -336,22 +376,22 @@ session_start();
                          $checkbox->execute();
                          while ($rows = $checkbox->fetch(PDO::FETCH_ASSOC)) {
                            if($rows["Create_events"] == 1){
-                              echo '<td><input type="checkbox" id="create" data-role="flipswitch" name="'.$record["fldName"].' '.$record["fldLastname"].'" onchange="create_event(this.name,1);" data-on-text="" data-off-text="" data-wrapper-class="custom-label-flipswitch" checked></td>';
+                              echo '<td><input type="checkbox" id="create'.$record["fldName"].' '.$record["fldLastname"].'" data-role="flipswitch" name="'.$record["fldName"].' '.$record["fldLastname"].'" onchange="create_event(this.name,1);" data-on-text="" data-off-text="" data-wrapper-class="custom-label-flipswitch" checked></td>';
                            }
                            else{
-                             echo '<td><input type="checkbox" id="create" data-role="flipswitch" name="'.$record["fldName"].' '.$record["fldLastname"].'" onchange="create_event(this.name,1);" data-on-text="" data-off-text="" data-wrapper-class="custom-label-flipswitch"></td>';
+                             echo '<td><input type="checkbox" id="create'.$record["fldName"].' '.$record["fldLastname"].'" data-role="flipswitch" name="'.$record["fldName"].' '.$record["fldLastname"].'" onchange="create_event(this.name,1);" data-on-text="" data-off-text="" data-wrapper-class="custom-label-flipswitch"></td>';
                            }
                            if($rows["Delete_Events"] == 1){
-                              echo "<td><input  id='delete' data-role='flipswitch' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' checked type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'></td>";
+                              echo "<td><input  id='delete".$record["fldName"]." ".$record["fldLastname"]."' data-role='flipswitch' name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' checked type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'></td>";
                            }
                            else{
-                             echo "<td><input  id='delete' data-role='flipswitch'  name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'></td>";
+                             echo "<td><input  id='delete".$record["fldName"]." ".$record["fldLastname"]."' data-role='flipswitch'  name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,2);' type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'></td>";
                            }
                            if($rows["Acces_Rights_System"] == 1){
-                              echo "<td><input  id='right' data-role='flipswitch'  name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' checked type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'></td>";
+                              echo "<td><input  id='right".$record["fldName"]." ".$record["fldLastname"]."' data-role='flipswitch'  name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' checked type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'></td>";
                            }
                            else{
-                             echo "<td><input  id='right' data-role='flipswitch'  name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'></td>";
+                             echo "<td><input  id='right".$record["fldName"]." ".$record["fldLastname"]."' data-role='flipswitch'  name='".$record["fldName"]." ".$record["fldLastname"]."' onchange='create_event(this.name,3);' type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'></td>";
                            }
                          }
                          ?>

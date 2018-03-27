@@ -16,9 +16,11 @@ $getuser->bindValue(1, $_POST["First_Name"], PDO::PARAM_STR);
 $getuser->bindValue(2, $_POST["Last_Name"], PDO::PARAM_STR);
 $getuser->execute();
 $record = $getuser->fetch(PDO::FETCH_ASSOC);
+echo $record["UserID"];
 $create_right = $dbh->prepare("INSERT INTO privaterights (UserID,Create_events,Delete_Events,Acces_Rights_System) VALUES (".$record["UserID"] .",0,0,0)");
 $create_right->execute();
-
+$insertgroups = $dbh->prepare("INSERT INTO user_group (UserID,cifpcm,admin,user) VALUES (".$record["UserID"].",0,0,1)");
+$insertgroups->execute();
 
 header("location: index.php");
 
