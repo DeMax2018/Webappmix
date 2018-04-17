@@ -172,6 +172,18 @@ function mailevent(){
     dataType: "json",
   });
 }
+function delmailevent(){
+  var parameters = {
+    "id": "insession"
+  }
+  $.ajax({
+    type: "POST",
+    url: "mail.php?eventdel=true",
+    data: JSON.stringify(parameters),
+    contentType: "application/json",
+    dataType: "json",
+  });
+}
 function looking(){
   var ids = [];
   var url = "testingfilter.php?filters=";

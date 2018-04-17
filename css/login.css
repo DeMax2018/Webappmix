@@ -55,6 +55,16 @@ p.subtitle {
   border-radius: 5px;
   padding: 1%;
 }
+.avatar{
+  margin-top: -1.2em !important;
+}
+.avatar img {
+  background: #fff !important;
+  border-radius: 50% !important;
+  -webkit-box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1) !important;
+  box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1) !important;
+  height: 10em !important;
+}
 .div-register{
   padding: 1%;
   text-align: center;

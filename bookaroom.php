@@ -191,7 +191,7 @@ $_SESSION["arrayfilter"] = array();
           <?php } ?>
         </div>
         <div class="fixit">
-          <?php if(isset($_SESSION["create"]) and $_SESSION["create"] == 1){ ?>
+          <?php if(isset($_SESSION["acces"]) and $_SESSION["acces"] == 1){ ?>
           <div class="sectionfix">
             <a href="admin.php" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
           </div>
@@ -240,7 +240,7 @@ $_SESSION["arrayfilter"] = array();
           <a href="middleman.php" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
           <?php } ?>
         </div>
-        <?php if(isset($_SESSION["create"]) and $_SESSION["create"] == 1){ ?>
+        <?php if(isset($_SESSION["acces"]) and $_SESSION["acces"] == 1){ ?>
         <div class="main">
           <div class="title"><i class="fa fa-cog"></i>  Admin</div>
           <a href="admin.php" class="item link1"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
@@ -259,7 +259,7 @@ $_SESSION["arrayfilter"] = array();
 
       </div>
       <div id="events" style="width: 70%;
-    margin: auto;" class="section things">
+    margin: auto;" class="section things is-hidden-event">
           <div id="app">
 
           <v-app>
@@ -307,6 +307,8 @@ $_SESSION["arrayfilter"] = array();
                                   </div>
                                   <?php
                                    if($_SESSION["bookaroom"] === "event"){ ?>
+                                     <v-text-field id="Necessities" label="Necessities" type="textarea"
+                                        v-model="registration.Necessities" required></v-text-field>
                                   <v-text-field id="discription" label="Discription" type="textarea"
                                      v-model="registration.discription" required></v-text-field>
                                    <?php }
@@ -386,7 +388,7 @@ $_SESSION["arrayfilter"] = array();
                                 case 4: ?>
                                 <label><?php echo $all["fldname"]."(Not available/available)" ?> </label><br>
                                 <label style="margin-left:0 !important" class="switch">
-                                  <input type="checkbox" onchange="query(<?php echo "'".$jscall."'"; ?>);" v-model="registration.check" id="<?php echo $all["fldname"] ?>">
+                                  <input type="checkbox" onchange="query(<?php echo "'".$jscall."'"; ?>);" v-model="registration.<?php echo $all["fldname"]; ?>" id="<?php echo $all["fldname"] ?>">
                                   <span class="slider round"></span>
                                 </label>
                           <?php  break;
@@ -556,6 +558,8 @@ $_SESSION["arrayfilter"] = array();
                     var time2 = document.getElementById('secondtime').textContent;
                     var discriptionget = document.getElementById('discription').value;
                     var discription = discriptionget.split(' ').join('+');
+                    var Necessitiesget = document.getElementById('Necessities').value;
+                    var Necessities = discriptionget.split(' ').join('+');
                     var imageget = document.getElementById('_file').value;
                     var image = imageget.replace(/^.*[\\\/]/, '');
                     var info = {
@@ -564,7 +568,8 @@ $_SESSION["arrayfilter"] = array();
                       starttime:time,
                       endtime:time2,
                       discrip:discription,
-                      imagename:image
+                      imagename:image,
+                      nessessit:Necessities
                     }
                     $.ajax({
                       type: "POST",

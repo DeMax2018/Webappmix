@@ -60,6 +60,10 @@ elseif(isset($_GET["event"])){
   }
 
 }
+elseif(isset($_GET["eventdel"])){
+  $delete = $dbh->prepare("DELETE FROM ticket WHERE OwnerID = ".$_SESSION["userid"]." AND EventID = ".$_SESSION["eventid"]);
+  $delete->execute();
+}
 
 
  ?>

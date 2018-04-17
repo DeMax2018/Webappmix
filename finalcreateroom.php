@@ -10,6 +10,7 @@ if(isset($_GET["createevent"])){
   $active = 1;
   $nameev = str_replace("+"," ",$data["name"]);
   $discriptionreal = str_replace("+"," ",$data["discrip"]);
+  $Necessitiesreal = str_replace("+"," ",$data["nessessit"]);
   $inserttimetable = $dbh->prepare("INSERT INTO roomhours (RoomID,fldDate,fldStartTime,fldEndTime) VALUES (?,?,?,?) ;");
   $inserttimetable->bindParam(1,$_SESSION["roomids"],PDO::PARAM_STR);
   $inserttimetable->bindParam(2,$_SESSION["date"],PDO::PARAM_STR);
@@ -19,7 +20,7 @@ if(isset($_GET["createevent"])){
   $gettimetable = $dbh->prepare("SELECT Room_HoursID FROM roomhours order by Room_HoursID desc limit 1;");
   $gettimetable->execute();
   $timetable = $gettimetable->fetch(PDO::FETCH_ASSOC);
-  $inserteventtable = $dbh->prepare("INSERT INTO event (eventname,CreatorID,Limited_Ticket,Discription,EventOrRent,Mainpicture,date_event,active,Sold_Ticket,Reservation) VALUES (?,?,?,?,?,?,?,?,?,?);");
+  $inserteventtable = $dbh->prepare("INSERT INTO event (eventname,CreatorID,Limited_Ticket,Discription,EventOrRent,Mainpicture,date_event,active,Sold_Ticket,Reservation,Necessities) VALUES (?,?,?,?,?,?,?,?,?,?,?);");
   $inserteventtable->bindParam(1,$nameev,PDO::PARAM_STR);
   $inserteventtable->bindParam(2,$_SESSION["userID"],PDO::PARAM_STR);
   $inserteventtable->bindParam(3,$data["ticket"],PDO::PARAM_INT);
@@ -30,6 +31,7 @@ if(isset($_GET["createevent"])){
   $inserteventtable->bindParam(8,$active,PDO::PARAM_STR);
   $inserteventtable->bindParam(9,$soldtickets,PDO::PARAM_STR);
   $inserteventtable->bindParam(10,$timetable["Room_HoursID"],PDO::PARAM_STR);
+  $inserteventtable->bindParam(11,$Necessitiesreal,PDO::PARAM_STR);
   $inserteventtable->execute();
   $inserteventtable->debugDumpParams();
 

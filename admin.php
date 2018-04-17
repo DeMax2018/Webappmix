@@ -1,9 +1,12 @@
 <?php
 include"conn.php";
 //include "auth.php";
-
 session_start();
 $_SESSION["rightsearch"] = "user";
+include"dbclasses.php";
+$pageauth = new classes;
+$admin = "admin";
+$pageauth->pageauth("admin");
  ?>
 <html>
   <head>
@@ -237,7 +240,7 @@ $_SESSION["rightsearch"] = "user";
                 <?php } ?>
               </div>
               <div class="fixit">
-                <?php if(isset($_SESSION["create"]) and $_SESSION["create"] == 1){ ?>
+                <?php if(isset($_SESSION["acces"]) and $_SESSION["acces"] == 1){ ?>
                 <div class="sectionfix">
                   <a data-ajax="false" href="admin.php" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
                 </div>
@@ -267,29 +270,29 @@ $_SESSION["rightsearch"] = "user";
                 </a>
                 <?php
                 if(isset($_SESSION["userid"])){ ?>
-                  <a href="logout.php" data-ajax="false" style="float: right; font-size:50px;"><i class="fas fa-sign-out-alt" style="    position: absolute;font-size: 32px; margin-top: -1em; margin-left: -0.5em;"></i></a>
+                  <a href="logout.php" style="float: right; font-size:50px;"><i class="fas fa-sign-out-alt" style="    position: absolute;font-size: 32px; margin-top: -1em; margin-left: -0.5em;"></i></a>
                 <?php } ?>
               </div>
               <div class="main">
                 <div class="title"><i class="fas fa-home"></i>   Main</div>
-                <a href="index.php" data-ajax="false" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
+                <a data-ajax="false" href="index.php" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
                 <?php if(isset($_SESSION["userid"])){ ?>
-                <a href="mymeetings.php" data-ajax="false" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
+                <a data-ajax="false" href="mymeetings.php" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
                 <?php } ?>
                 <?php if(isset($_SESSION["userid"])){ ?>
-                <a href="myevents.php" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+                <a data-ajax="false" href="myevents.php" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
                 <?php } ?>
                 <?php if(isset($_SESSION["create"]) and $_SESSION["create"] == 1){ ?>
-                <a href="middleman.php?request=event" data-ajax="false" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
+                <a data-ajax="false" href="middleman.php?request=event" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
                 <?php } ?>
                 <?php if(isset($_SESSION["userid"])){ ?>
-                <a href="middleman.php" data-ajax="false" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
+                <a data-ajax="false" href="middleman.php" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
                 <?php } ?>
               </div>
-              <?php if(isset($_SESSION["create"]) and $_SESSION["create"] == 1){ ?>
+              <?php if(isset($_SESSION["acces"]) and $_SESSION["acces"] == 1){ ?>
               <div class="main">
                 <div class="title"><i class="fa fa-cog"></i>  Admin</div>
-                <a href="admin.php" data-ajax="false" class="item link1"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
+                <a data-ajax="false" href="admin.php" class="item link1"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
               </div>
               <?php } ?>
             </div>
@@ -449,6 +452,9 @@ $_SESSION["rightsearch"] = "user";
               <article class="tile is-child box">
                 <p class="title">Create a new filter for a room.</p>
                 <p class="subtitle">Give a room certain objects that people can filter on.</p>
+                <i class="fas fa-plus"></i>
+                <input  id='filterswitch' data-role='flipswitch' onchange='changefilterstate();'  type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'>
+                <i class="fas fa-cogs"></i>
                 <div class="flexing">
                   <div class="percentage">
                     <label>Name of the filter</label>
@@ -477,6 +483,9 @@ $_SESSION["rightsearch"] = "user";
               <article class="tile is-child box">
                 <p class="title">Create a new Building!</p>
                 <p class="subtitle">Add a new building to your database!</p>
+                <i class="fas fa-plus"></i>
+                <input  id='buildingswitch' data-role='flipswitch' onchange='changebuildingstate();'  type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'>
+                <i class="fas fa-cogs"></i>
                 <div class="flexing">
                   <div class="percentage">
                     <label>Name of the building</label>

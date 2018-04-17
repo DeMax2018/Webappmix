@@ -90,7 +90,7 @@ function myMap() {
             <?php } ?>
           </div>
           <div class="fixit">
-            <?php if(isset($_SESSION["create"]) and $_SESSION["create"] == 1){ ?>
+            <?php if(isset($_SESSION["acces"]) and $_SESSION["acces"] == 1){ ?>
             <div class="sectionfix">
               <a href="admin.php" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
             </div>
@@ -139,7 +139,7 @@ function myMap() {
             <a href="middleman.php" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
             <?php } ?>
           </div>
-          <?php if(isset($_SESSION["create"]) and $_SESSION["create"] == 1){ ?>
+          <?php if(isset($_SESSION["acces"]) and $_SESSION["acces"] == 1){ ?>
           <div class="main">
             <div class="title"><i class="fa fa-cog"></i>  Admin</div>
             <a href="admin.php" class="item link1"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
@@ -164,9 +164,23 @@ function myMap() {
                 <article class="tile is-child box">
                   <?php
                   if(!isset($_GET["view"])){ ?>
-                    <div onclick="mailevent();" class="button right">
-                      Participate
-                    </div>
+                    <?php
+                    $checkforparticipation = $dbh->prepare("SELECT * FROM ticket WHERE EventID = ".$_SESSION["eventid"]." AND OwnerID = ".$_SESSION["userid"]);
+                    $checkforparticipation->execute();
+                    $count = $checkforparticipation->rowCount();
+                    if($count >= 1){ ?>
+                      <div onclick="delmailevent();" class="button right">
+                        Remove reservation
+                      </div>
+                    <?php }
+                    else{ ?>
+                      <div onclick="mailevent();" class="button right">
+                        Participate
+                      </div>
+                    <?php }
+
+                    ?>
+
                     <table style="width: 30%; margin: auto; border: none;">
                       <tbody>
                         <h1 style="text-align:center">Specifications</h1>
@@ -208,7 +222,7 @@ function myMap() {
                         <h1 style="text-align:center">Specifications</h1>
                               <tr>
                                 <td>Owner</td>
-                                <td><?php echo $author["fldName"]." ".$author["fldLastname"] ?></td>
+                                <td><?php echo $author["fldName"] ?></td>
                               </tr>
                               <tr>
                                 <td>Date</td>
@@ -223,16 +237,15 @@ function myMap() {
                                 <td><?php echo $timetable["fldEndTime"] ?></td>
                               </tr>
                               <tr>
-                                <td>End hour</td>
-                                <td><?php echo $timetable["fldEndTime"] ?></td>
+                                <td>available tickets</td>
+                                <td><?php $ticketleft = $alldata["Limited_Ticket"] - $alldata["Sold_Ticket"]; echo $ticketleft ?></td>
                               </tr>
                               <tr>
                                 <td>Room name</td>
-                                <td><?php echo $timetable["fldEndTime"] ?></td>
+                                <td><?php echo $roomname["Textawn"] ?></td>
                               </tr>
                             </tbody>
                           </table>
-
                 <?php        }
                         ?>
 
@@ -280,7 +293,7 @@ function myMap() {
 
 
                       <?php
-                      
+
                       if($alldata["CreatorID"] == $_SESSION["userid"] or $_SESSION["admin"] == 1){ ?>
                         <div class="content participants">
                           <ul>
@@ -329,7 +342,7 @@ function myMap() {
             <article class="tile is-child box">
               <p class="title">Necessities</p>
               <div class="content">
-                iucheicehuieghcuieicgeiciuiyuoheu
+                <?php echo $alldata["Necessities"] ?>
               </div>
             </article>
           </div>

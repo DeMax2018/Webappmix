@@ -53,23 +53,33 @@ session_start();
           <div class="sectionfix">
             <a href="index.php" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
           </div>
+          <?php if(isset($_SESSION["userid"])){ ?>
           <div class="sectionfix">
             <a href="mymeetings.php" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
           </div>
+          <?php } ?>
+          <?php if(isset($_SESSION["userid"])){ ?>
           <div class="sectionfix">
             <a href="myevents.php" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
           </div>
+        <?php } ?>
+        <?php if(isset($_SESSION["create"]) and $_SESSION["create"] == 1){ ?>
           <div class="sectionfix">
             <a href="middleman.php?request=event" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
           </div>
+        <?php } ?>
+        <?php if(isset($_SESSION["userid"])){ ?>
           <div class="sectionfix">
             <a href="middleman.php" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
           </div>
+          <?php } ?>
         </div>
         <div class="fixit">
+          <?php if(isset($_SESSION["acces"]) and $_SESSION["acces"] == 1){ ?>
           <div class="sectionfix">
             <a href="admin.php" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
           </div>
+          <?php } ?>
         </div>
       </div>
     </div>
@@ -101,15 +111,25 @@ session_start();
         <div class="main">
           <div class="title"><i class="fas fa-home"></i>   Main</div>
           <a href="index.php" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
+          <?php if(isset($_SESSION["userid"])){ ?>
           <a href="mymeetings.php" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
+          <?php } ?>
+          <?php if(isset($_SESSION["userid"])){ ?>
           <a href="myevents.php" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
+          <?php } ?>
+          <?php if(isset($_SESSION["create"]) and $_SESSION["create"] == 1){ ?>
           <a href="middleman.php?request=event" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
+          <?php } ?>
+          <?php if(isset($_SESSION["userid"])){ ?>
           <a href="middleman.php" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
+          <?php } ?>
         </div>
+        <?php if(isset($_SESSION["acces"]) and $_SESSION["acces"] == 1){ ?>
         <div class="main">
           <div class="title"><i class="fa fa-cog"></i>  Admin</div>
           <a href="admin.php" class="item link1"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
         </div>
+        <?php } ?>
       </div>
     </aside>
     <div class="content column is-9">

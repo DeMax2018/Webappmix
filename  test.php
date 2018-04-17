@@ -1,6 +1,12 @@
+<?php
+$array1 = array("ik","jij");
+$array2 = array("ik","ikke");
 
-<form action="upload.php" method="post" enctype="multipart/form-data">
-    Select image to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="Upload Image" name="submit">
-</form>
+if(!assert(array_intersect($array1, $array2))){
+  echo "yes";
+}
+else{
+  echo "false";
+}
+
+?>

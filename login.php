@@ -28,7 +28,52 @@
         element.classList.remove("is-danger");
       }
     });
+
   });
+$(document).ready(function () {
+  $('#maillogin').change(function () {
+      var mailcheck = document.getElementById('maillogin').value;
+      if(mailcheck != ""){
+        element = document.getElementById("maillogin");
+        element.classList.add("is-success");
+        element.classList.remove("is-danger");
+        $("#profilepreload").load("loginfunctions.php?profilepreload=" + mailcheck, function(){});
+        var info = {
+          mail:mailcheck
+        }
+        $.ajax({
+          type: "POST",
+          url: "loginfunctions.php?checkmail=true",
+          data: JSON.stringify(info),
+          contentType: "application/json",
+          dataType: "json",
+          success: function (resp) {
+            alert("succes");
+            if (resp.success === true){
+            element.classList.add("is-success");
+            element.classList.remove("is-danger");
+          }
+            else {
+              alert("danger");
+              element.classList.add("is-danger");
+              element.classList.remove("is-success");
+            }
+          },
+          error: function () {
+            alert("danger");
+            element.classList.add("is-danger");
+            element.classList.remove("is-success");
+          }
+
+        });
+      }
+      else{
+        element = document.getElementById("maillogin");
+        element.classList.add("is-danger");
+        element.classList.remove("is-success");
+      }
+  });
+});
   </script>
 </head>
 <body>
@@ -46,13 +91,16 @@
         <div class="column is-4 is-offset-4" id="login">
           <p class="subtitle">Please login to proceed.</p>
           <div class="box">
-            <figure class="avatar">
-              <img src="images/avatar.png">
-            </figure>
+            <div id="profilepreload">
+              <figure class="avatar">
+                <img src="images/avatar.png">
+              </figure>
+            </div>
+
             <form action="loginacces.php" method="post">
               <div class="field">
                 <div class="control has-icons-left has-icons-right">
-                  <input class="input is-success is-large" type="email" name="maillog" id="mail" placeholder="Email" autofocus required>
+                  <input class="input is-large" type="email" name="maillog" id="maillogin" placeholder="Email" autofocus required>
                   <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
                   </span>
@@ -63,7 +111,7 @@
               </div>
               <div class="field">
                 <div class="control has-icons-left has-icons-right">
-                  <input class="input is-danger is-large" name="passlogin" type="password" id="password" placeholder="Password">
+                  <input class="input is-large" name="passlogin" type="password" id="passwordlogin" placeholder="Password">
                   <span class="icon is-small is-left">
                     <i class="fas fa-lock"></i>
                   </span>

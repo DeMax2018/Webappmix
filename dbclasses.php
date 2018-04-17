@@ -10,37 +10,25 @@ class classes
     $clean = htmlspecialchars($clean, ENT_QUOTES,"UTF-8");
     return $clean;
   }
-  public function crypting( $string, $action = 'e' )
-  {
-      // you may change these values to your own
-      $secret_key = 'my_simple_secret_key';
-      $secret_iv = 'my_simple_secret_iv';
 
-      $output = false;
-      $encrypt_method = "AES-256-CBC";
-      $key = hash( 'sha256', $secret_key );
-      $iv = substr( hash( 'sha256', $secret_iv ), 0, 16 );
-
-      if( $action == 'e' ) {
-          $output = base64_encode( openssl_encrypt( $string, $encrypt_method, $key, 0, $iv ) );
-      }
-      else if( $action == 'd' ){
-          $output = openssl_decrypt( base64_decode( $string ), $encrypt_method, $key, 0, $iv );
-      }
-
-      return $output;
-  }
   public function qrcode($code){
     include "BarcodeQR.php";
     $qr = new BarcodeQR();
     $qr->url("https://swfactory.be/testingarea?code=".$code);
     $qr->draw(300,"ticket");
   }
-  public function hashish($text){
-    $hash = hash('ripemd160', $text);
-    $hashish = hash('tiger192,3',$hash);
-
-    return $hashish;
+  public function registerhash($text){
+    $size = mcrypt_get_iv_size(MCRYPT_CAST_256, MCRYPT_MODE_CFB);
+    $iv = mcrypt_create_iv($size, MCRYPT_DEV_RANDOM);
+    $text .= $iv;
+    $hash = hash('tiger192,3', $text);
+    $returnarray = array($hash,$iv);
+    return $returnarray;
+  }
+  public function hashish($text,$salt){
+    $text .= $salt;
+    $hash = hash('tiger192,3', $text);
+    return $hash;
   }
   public function changeprofile(){
     $sql = $dbh->prepare("UPDATE user set fldName = ? and fldLastname = ? and fldMail = ?");
@@ -76,6 +64,20 @@ class classes
     , "number" => $rows["fldNumber"]);
     $num++;
     return json_encode($arr);
+  }
+  public function pageauth($name){
+    error_reporting(0);
+    require_once"parameters.php";
+    $auth = new router();
+    switch ($name) {
+      case "admin":
+        if(!assert(array_intersect($_SESSION["auth"], $auth->admin)) and $_SESSION["acces"] != 1){
+          header("location: index.php");
+        }
+        break;
+      default:
+        break;
+    }
   }
 }
 

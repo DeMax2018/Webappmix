@@ -708,6 +708,7 @@ table th {
   .is-hidden-touch {
     display: none !important;
   }
+
 }
 
 @media screen and (min-width: 980px) {

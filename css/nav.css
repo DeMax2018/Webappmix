@@ -152,6 +152,7 @@ a.file:not(.button) {
 @media screen and (max-width: 769px){
   div.column.is-9{
     width: 100% !important;
+    margin-right:  3%;
   }
 }
 .column {

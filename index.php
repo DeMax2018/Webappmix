@@ -2,6 +2,7 @@
 include"conn.php";
 session_start();
 $_SESSION["eventtype"] = "index";
+
  ?>
 <!DOCTYPE html>
 <html>
@@ -83,7 +84,7 @@ z-index: 10000;
           <?php } ?>
         </div>
         <div class="fixit">
-          <?php if(isset($_SESSION["create"]) and $_SESSION["create"] == 1){ ?>
+          <?php if(isset($_SESSION["acces"]) and $_SESSION["acces"] == 1){ ?>
           <div class="sectionfix">
             <a href="admin.php" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
           </div>
@@ -132,7 +133,7 @@ z-index: 10000;
           <a href="middleman.php" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
           <?php } ?>
         </div>
-        <?php if(isset($_SESSION["create"]) and $_SESSION["create"] == 1){ ?>
+        <?php if(isset($_SESSION["acces"]) and $_SESSION["acces"] == 1){ ?>
         <div class="main">
           <div class="title"><i class="fa fa-cog"></i>  Admin</div>
           <a href="admin.php" class="item link1"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>

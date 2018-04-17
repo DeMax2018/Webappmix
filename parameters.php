@@ -20,6 +20,14 @@ class dbparameters
    public $dbpass = "";
    public $charset = "utf8";
 }
-
+class router
+{
+  public $admin = array("admin");
+  public $createroom = array("admin","teacher","user");
+  public $myevents = array("admin","teacher","user");
+  public $mymeetings = array("admin","teacher","user");
+  public $createevent = array("admin","teacher");
+  public $changeuserinfo = array("admin","teacher","user");
+}
 
 ?>
