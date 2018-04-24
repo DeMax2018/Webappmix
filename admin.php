@@ -34,7 +34,7 @@ $pageauth->pageauth("admin");
   }
   .newline{
     text-align: center;
-  }
+}
 </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.js"></script>
@@ -102,13 +102,6 @@ $pageauth->pageauth("admin");
           var realurl = "filterloading.php?createroom=true&variables=" + url ;
 
           $("#testing").load(realurl,function(){});
-        /*  $.ajax({
-            type: "POST",
-            url: "filterloading.php?createroom=true",
-
-            contentType: "application/json",
-            dataType: "json",
-          }); */
         }
         function addfilter(){
           var name = document.getElementById("namefilter").value;
@@ -192,6 +185,12 @@ $pageauth->pageauth("admin");
           $("#testing").load(realurl,function(){});
           changeroomstate();
         }
+        function changefilterstate(){
+          var checked = document.getElementById("filterswitch").checked;
+          $("#addfilterssw").load("phpscripts/filters.php?state=" + checked,function(){
+            $("#body").trigger("create");
+          });
+        }
     </script>
   </head>
   <body id=body>
@@ -199,104 +198,8 @@ $pageauth->pageauth("admin");
 
         <script async type="text/javascript" src="../js/bulma.js"></script>
 
-        <nav class="nav is-dark has-shadow is-hidden-widescreen" id="top">
-          <div class="container">
-            <div class="subcontainer">
-              <span class="nav-toggle" id="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
-            </div>
-            <div class="thirdsubcontainer">
-              <a data-ajax="false" href="logout.php"><i class="fas fa-sign-out-alt"></i></a>
-              <a data-ajax="false" href="<?php if(isset($_SESSION["name"])){echo "changeuserinfo.php";}else{echo "login.php";} ?>"><?php if(isset($_SESSION["name"])){echo $_SESSION["name"];}else{echo "login";} ?></a>
-            </div>
+        <?php include"phpscripts/navbar.php"; ?>
 
-            <div class="nav-right nav-menu is-hidden-widescreen" id="nav-menu">
-              <div class="fixit">
-                <div class="sectionfix">
-                  <a data-ajax="false" href="index.php" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
-                </div>
-                <?php if(isset($_SESSION["userid"])){ ?>
-                <div class="sectionfix">
-                  <a data-ajax="false" href="mymeetings.php" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
-                </div>
-                <?php } ?>
-                <?php if(isset($_SESSION["userid"])){ ?>
-                <div class="sectionfix">
-                  <a data-ajax="false" href="myevents.php" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
-                </div>
-              <?php } ?>
-              <?php if(isset($_SESSION["create"]) and $_SESSION["create"] == 1){ ?>
-                <div class="sectionfix">
-                  <a data-ajax="false" href="middleman.php?request=event" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
-                </div>
-              <?php } ?>
-              <?php if(isset($_SESSION["userid"])){ ?>
-                <div class="sectionfix">
-                  <a data-ajax="false" href="middleman.php" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
-                </div>
-                <?php } ?>
-              </div>
-              <div class="fixit">
-                <?php if(isset($_SESSION["acces"]) and $_SESSION["acces"] == 1){ ?>
-                <div class="sectionfix">
-                  <a data-ajax="false" href="admin.php" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
-                </div>
-                <?php } ?>
-              </div>
-            </div>
-          </div>
-        </nav>
-        <div class="columns columnsaside">
-          <aside class="column is-3 aside hero is-fullheight is-hidden-touch is-hidden-desktop-only">
-            <div class="fixleft">
-              <div class="account has-text-centered">
-                <?php
-                if(isset($_SESSION["userid"])){ ?>
-                  <a data-ajax="false" href="changeuserinfo.php">
-                    <figure class="avatar">
-                      <img src="profilepics/<?php if(is_null($_SESSION["profilepic"])){ echo "avatar.png"; }else{ echo $_SESSION["profilepic"]; }?>">
-            <?php    }
-                else{ ?>
-                  <a data-ajax="false" href="login.php">
-                    <figure class="avatar">
-                      <img src="images/avatar.png">
-              <?php  }
-                ?>
-
-                  </figure>
-                </a>
-                <?php
-                if(isset($_SESSION["userid"])){ ?>
-                  <a href="logout.php" style="float: right; font-size:50px;"><i class="fas fa-sign-out-alt" style="    position: absolute;font-size: 32px; margin-top: -1em; margin-left: -0.5em;"></i></a>
-                <?php } ?>
-              </div>
-              <div class="main">
-                <div class="title"><i class="fas fa-home"></i>   Main</div>
-                <a data-ajax="false" href="index.php" class="item active"><span class="icon"><i class="fa fa-calendar-alt"></i></span><span class="name">Events</span></a>
-                <?php if(isset($_SESSION["userid"])){ ?>
-                <a data-ajax="false" href="mymeetings.php" class="item"><span class="icon"><i class="fa fa-users"></i></span><span class="name">My meetings</span></a>
-                <?php } ?>
-                <?php if(isset($_SESSION["userid"])){ ?>
-                <a data-ajax="false" href="myevents.php" class="item"><span class="icon"><i class="fa fa-calendar-check"></i></span><span class="name">My events</span></a>
-                <?php } ?>
-                <?php if(isset($_SESSION["create"]) and $_SESSION["create"] == 1){ ?>
-                <a data-ajax="false" href="middleman.php?request=event" class="item"><span class="icon"><i class="fa fa-calendar-plus"></i></span><span class="name">Make an event</span></a>
-                <?php } ?>
-                <?php if(isset($_SESSION["userid"])){ ?>
-                <a data-ajax="false" href="middleman.php" class="item"><span class="icon"><i class="fas fa-building"></i></span><span class="name">Book a room</span></a>
-                <?php } ?>
-              </div>
-              <?php if(isset($_SESSION["acces"]) and $_SESSION["acces"] == 1){ ?>
-              <div class="main">
-                <div class="title"><i class="fa fa-cog"></i>  Admin</div>
-                <a data-ajax="false" href="admin.php" class="item link1"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
-              </div>
-              <?php } ?>
-            </div>
-          </aside>
           <div class="content column is-9">
             <div class="content column is-9-nav nav-aside is-hidden-touch is-hidden-desktop-only">
 
@@ -447,7 +350,8 @@ $pageauth->pageauth("admin");
 
 </div>
           </div>
-          <div id="selecting" class="tile is-parent">
+
+          <div id="filtersw" class="tile is-parent">
 
               <article class="tile is-child box">
                 <p class="title">Create a new filter for a room.</p>
@@ -455,13 +359,14 @@ $pageauth->pageauth("admin");
                 <i class="fas fa-plus"></i>
                 <input  id='filterswitch' data-role='flipswitch' onchange='changefilterstate();'  type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'>
                 <i class="fas fa-cogs"></i>
-                <div class="flexing">
+                <div id="addfilterssw">
+                <div id="filterload" class="flexing">
                   <div class="percentage">
-                    <label>Name of the filter</label>
+                    <label>Name</label>
                     <input type="text" class="input" placeholder="give the name of the room" id="namefilter" name="" value="">
                   </div>
                   <div class="percentage">
-                    <label>What kind of filter is this?</label>
+                    <label>type</label>
                     <select id="typeselect"  placeholder="ja" data-native-menu="false">
                         <?php
                         $all = $dbh->prepare("SELECT * FROM sorting;");
@@ -473,10 +378,12 @@ $pageauth->pageauth("admin");
                     </select>
                   </div>
                   <div class="percentage">
-                    <label>Click here when the other 2 fields are done!</label>
+                    <label>add</label>
                     <input type="button" onclick="addfilter();" class="input" id="addfilters" name="" value="Add new filter">
                   </div>
                 </div>
+                </div>
+              </article>
           </div>
           <div id="selecting" class="tile is-parent">
 
