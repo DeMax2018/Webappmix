@@ -1,6 +1,10 @@
-<script type="text/javascript">
-document.getElementById('tt').innerHTML = document.getElementById('try').value;
-</script>
+<?php
 
-<p id="tt"></p>
-  
+include"dbclasses.php";
+/*$image = new classes();
+$name = $image->uploadimage();
+echo "////".$name;
+*/
+echo $_POST["life"];
+
+ ?>

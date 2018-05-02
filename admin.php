@@ -64,13 +64,11 @@ $pageauth->pageauth("admin");
             }
         }
         function addfielts(){
-          /*var sending = document.getElementById("sending");
-          sending.style.display = sending.style.display === 'none' ? '' : ''; */
           var result = [];
           var url = "filterloading.php?fieldcreate=1&get=";
           var options = document.getElementById('filter-menu');
           var opt;
-
+          var finaladd = false;
           for (var i=0, iLen=options.length; i<iLen; i++) {
             opt = options[i];
 
@@ -79,9 +77,14 @@ $pageauth->pageauth("admin");
             }
           }
           for (var i = 0, len = result.length ; i < len; i++) {
+            if(result[i] === "image"){
+              finaladd = true;
+            }
             url += "_" + result[i];
           }
-
+          if(finaladd == true){
+            url += "&reloadpage=true";
+          }
           $("#filterresults").load(url,function(){});
 
           return url;
@@ -190,6 +193,9 @@ $pageauth->pageauth("admin");
           $("#addfilterssw").load("phpscripts/filters.php?state=" + checked,function(){
             $("#body").trigger("create");
           });
+        }
+        function updatetype(){
+          $("#changetype").load()
         }
     </script>
   </head>

@@ -1,10 +1,15 @@
 
 <?php
 include"conn.php";
+include "dbclasses.php";
 session_start();
 
 $_SESSION["ids"] = array();
+if(isset($_GET["reloadpage"])){ ?>
+  <form class="" action="filterloading.php?createroom=true&postrequest=true" method="post">
 
+
+<?php }
 //error_reporting(0);
 if(isset($_GET["fieldcreate"])){
   if($_GET["fieldcreate"] != "all"){
@@ -46,7 +51,22 @@ else{
            $stringposting .= "_".$namefil;
         }
       }
-      if($type["SortingID"] == 1){ ?>
+      if($type["DetailsID"] == 10){
+
+          ?>
+        <div class="percentage">
+          <label>image</label>
+          <input type="file" id="imageupload" name="imageupload" value="">
+        </div>
+      <?php
+      if($stringposting === ""){
+         $stringposting .= $namefil;
+      }
+      else{
+         $stringposting .= "_".$namefil;
+      }
+     }
+      elseif($type["SortingID"] == 1){ ?>
           <div class="percentage">
             <label><?php echo $namefil ?></label>
             <?php if(isset($_SESSION["switch"]) and $_SESSION["switch"] === "on"){
@@ -77,13 +97,13 @@ else{
          ?>
           <div class="percentage">
             <label><?php echo $namefil ?></label>
-            <input class="input" type="number" id="<?php echo $namefil; ?>" value="<?php echo $value["Numberawn"] ?>">
+            <input class="input" type="number" name="<?php echo $namefil; ?>" id="<?php echo $namefil; ?>" value="<?php echo $value["Numberawn"] ?>">
           </div>
         <?php }
         else{ ?>
           <div class="percentage">
             <label><?php echo $namefil ?></label>
-            <input class="input" type="number" id="<?php echo $namefil; ?>" value="">
+            <input class="input" type="number" name="<?php echo $namefil; ?>" id="<?php echo $namefil; ?>" value="">
           </div>
     <?php    } ?>
 
@@ -124,16 +144,31 @@ else{
            $stringposting .= "_".$namefil;
         }
       }
-
-
-
     $per4++;
-  } ?><?php if(isset($_GET["fieldcreate"])){ ?>
+  } ?><?php
+  if(isset($_GET["reloadpage"])){ ?>
+    </div>
+
+    <div class="newline">
+      <?php if(isset($_SESSION["switch"]) and $_SESSION["switch"] === "on"){
+        $_SESSION["postroom"] = $stringposting; ?>
+        <button type="submit"  id="sending" class="button" value="<?php echo $stringposting ?>" name="button">modify room</button>
+    <?php  }
+    else{
+      $_SESSION["postroom"] = $stringposting;?>
+      <button type="submit" id="sending" class="button" value="<?php echo $stringposting ?>"  name="button">Create room</button>
+
+<?php    } ?>
+    </div>
+
+  <?php }
+  elseif(isset($_GET["fieldcreate"])){ ?>
 
     </div>
 
     <div class="newline">
-      <?php if(isset($_SESSION["switch"]) and $_SESSION["switch"] === "on"){ ?>
+      <?php if(isset($_SESSION["switch"]) and $_SESSION["switch"] === "on"){
+        ?>
         <button type="button" onclick="modifyroom('<?php echo $stringposting ?>');" id="sending" class="button"  name="button">modify room</button>
     <?php  }
     else{ ?>
@@ -144,7 +179,29 @@ else{
 
   <?php } ?>
 <?php }
+elseif(isset($_GET["postrequest"])){
+  $valuespost = explode("_",$_SESSION["postroom"]);
+  $preroom = $dbh->prepare("INSERT INTO room () VALUES ()");
+  $preroom->execute();
+  $getroom = $dbh->prepare("SELECT * FROM room order by RoomID desc limit 1");
+  $getroom->execute();
+  $roomnumber = $getroom->fetch(PDO::FETCH_ASSOC);
+  foreach($valuespost as &$value){
+    if($value === "image"){
+      $image = new classes();
+      $name = $image->uploadimage();
+      $insertnameimage = $dbh->prepare("INSERT INTO room_details (Textawn,RoomID,DetailsID) VALUES ('".$name."',".$roomnumber["RoomID"].",10");
+      $insertnameimage->execute();
+    }
+    else{
+      $check = $dbh->prepare("SELECT * FROM details WHERE fldname = '".$value."'");
+      $check->execute();
+      $resultcheck = $check->fetch(PDO::FETCH_ASSOC);
+    }
+  }
+}
 elseif(isset($_GET["createroom"])){
+
   if(isset($_GET["modify"])){
     $prep = $dbh->prepare("SET SQL_SAFE_UPDATES = 0;");
     $prep->execute();
@@ -182,11 +239,11 @@ elseif(isset($_GET["createroom"])){
 
     if($resultcheck["SortingID"] == 1){
 
-      $insert = $dbh->prepare("INSERT INTO room_details (Textawn,RoomID,DetailsID) VALUES ('".$solo[1]."',".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
+      $insert = $dbh->prepare("INSERT INTO room_details (Textawn,RoomID,DetailsID) VALUES ('".$value."',".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
       $insert->execute();
     }
     if($resultcheck["SortingID"] == 2){
-      $insert = $dbh->prepare("INSERT INTO room_details (Numberawn,RoomID,DetailsID) VALUES (".$solo[1].",".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
+      $insert = $dbh->prepare("INSERT INTO room_details (Numberawn,RoomID,DetailsID) VALUES (".$value.",".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
       $insert->execute();
     }
     if($resultcheck["SortingID"] == 3){
@@ -194,12 +251,11 @@ elseif(isset($_GET["createroom"])){
       $insert->execute();
     }
     if($resultcheck["SortingID"] == 4){
-      if($solo[1] === "on"){
+      if(isset($_POST[$value])){
         $insert = $dbh->prepare("INSERT INTO room_details (Boolawn,RoomID,DetailsID) VALUES (1,".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
       }
       else{
         $insert = $dbh->prepare("INSERT INTO room_details (Boolawn,RoomID,DetailsID) VALUES (0,".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
-
       }
       $insert->execute();
     }
