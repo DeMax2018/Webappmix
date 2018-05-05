@@ -82,7 +82,7 @@ class classes
   function uploadimage(){
     $test = "imageupload";
     $target_dir = "upload/";
-    $target_file = $target_dir . trim(basename($_FILES[$test]["name"]));
+    $target_file = $target_dir . basename($_FILES[$test]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
     // Check if image file is a actual image or fake image

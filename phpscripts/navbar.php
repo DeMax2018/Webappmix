@@ -56,7 +56,7 @@
         if(isset($_SESSION["userid"])){ ?>
           <a data-ajax="false" href="changeuserinfo.php">
             <figure class="avatar">
-              <img src="profilepics/<?php if(is_null($_SESSION["profilepic"])){ echo "avatar.png"; }else{ echo $_SESSION["profilepic"]; }?>">
+                <img style="height:6em !important" src="profilepics/<?php if(is_null($_SESSION["profilepic"])){ echo "avatar.png"; }else{ echo $_SESSION["profilepic"]; }?>">
     <?php    }
         else{ ?>
           <a data-ajax="false" href="login.php">

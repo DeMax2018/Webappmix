@@ -141,13 +141,34 @@ elseif(isset($_GET["createevent"])){
   $getuser = $dbh->prepare("SELECT * FROM User WHERE fldName = ? AND fldLastname = ?");
   $getuser->bindValue(1,$user[1], PDO::PARAM_STR);
   $getuser->bindValue(2,$user[2], PDO::PARAM_STR);
-  $getuser.execute();
+  $getuser->execute();
   $userid = $getuser->fetch(PDO::FETCH_ASSOC);
   $sql = $dbh->prepare("UPDATE privaterights SET Create_event = ? WHERE UserID = ?");
   $sql->bindValue(1,$box["checked"],PDO::PARAM_STR);
   $sql->bindValue(2,$userid["UserID"]);
-  $sql.execute();
+  $sql->execute();
   echo" eifnzioeufnzieufnio";
+
+}
+elseif(isset($_GET["addfilterselect"])){ ?>
+
+    <label>type</label>
+    <select id="addtofilterid" placeholder="ja" data-native-menu="false">
+        <?php
+        $all = $dbh->prepare("SELECT * FROM details WHERE SortingID = 3;");
+        $all->execute();
+        while($records = $all->fetch(PDO::FETCH_ASSOC)){ ?>
+          <option value="<?php echo $records["DetailsID"]; ?>"><?php echo $records["fldname"]; ?></option>
+        <?php }
+        ?>
+    </select>
+<?php }
+elseif(isset($_GET["modifyfilter"])){
+  $box = json_decode(file_get_contents('php://input'), true);
+  $deleterelations = $dbh->prepare("DELETE FROM room_details WHERE DetailsID = ".$box["id"]);
+  $deleterelations->execute();
+  $delete = $dbh->prepare("DELETE FROM details WHERE DetailsID = ".$box["id"]);
+  $delete->execute();
 
 }
 ?>

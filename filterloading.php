@@ -6,7 +6,7 @@ session_start();
 
 $_SESSION["ids"] = array();
 if(isset($_GET["reloadpage"])){ ?>
-  <form class="" action="filterloading.php?createroom=true&postrequest=true" method="post">
+  <form action="filterloading.php?createroom=true&postrequest=true" method="post"data-ajax="false" enctype="multipart/form-data">
 
 
 <?php }
@@ -116,10 +116,25 @@ else{
         }
       }
       elseif($type["SortingID"] == 3){ ?>
-          <div class="percentage">
-            <label><?php echo $namefil ?></label>
-            <input type="text" class="input" id="<?php echo $namefil; ?>" value="">
-          </div>
+        <div class="percentage" style="width:100%; text-align:left;">
+          <label for=""><?php echo $namefil; ?></label>
+          <div class="styled-select slate">
+        <select id="<?php echo $namefil; ?>-menu"  placeholder="ja" class="selectpicker"  data-native-menu="false" >
+            <option value="<?php echo $namefil; ?>" disabled><?php echo $namefil; ?></option>
+            <option value="all">all</option>
+            <?php
+              $getoptions = $dbh->prepare("SELECT * FROM details WHERE listoption = ".$type["DetailsID"]);
+              $getoptions->execute();
+              while($options = $getoptions->fetch(PDO::FETCH_ASSOC)){ ?>
+                <option value="<?php echo $options["fldname"] ?>"><?php echo $options["fldname"] ?></option>
+      <?php
+              }
+            ?>
+          </select>
+        </div>
+      </div>
+
+
 <?php
         if($stringposting === ""){
            $stringposting .= $namefil;
@@ -180,6 +195,12 @@ else{
   <?php } ?>
 <?php }
 elseif(isset($_GET["postrequest"])){
+  if(isset($_GET["modify"])){
+    $prep = $dbh->prepare("SET SQL_SAFE_UPDATES = 0;");
+    $prep->execute();
+    $del = $dbh->prepare("DELETE FROM room_details WHERE RoomID = ".$_SESSION["Roomfilter"]);
+    $del->execute();
+  }
   $valuespost = explode("_",$_SESSION["postroom"]);
   $preroom = $dbh->prepare("INSERT INTO room () VALUES ()");
   $preroom->execute();
@@ -190,13 +211,37 @@ elseif(isset($_GET["postrequest"])){
     if($value === "image"){
       $image = new classes();
       $name = $image->uploadimage();
-      $insertnameimage = $dbh->prepare("INSERT INTO room_details (Textawn,RoomID,DetailsID) VALUES ('".$name."',".$roomnumber["RoomID"].",10");
+      $insertnameimage = $dbh->prepare("INSERT INTO room_details (Textawn,RoomID,DetailsID) VALUES ('".$name."',".$roomnumber["RoomID"].",10)");
       $insertnameimage->execute();
+
     }
     else{
+
       $check = $dbh->prepare("SELECT * FROM details WHERE fldname = '".$value."'");
       $check->execute();
       $resultcheck = $check->fetch(PDO::FETCH_ASSOC);
+      if($resultcheck["SortingID"] == 1){
+
+        $insert = $dbh->prepare("INSERT INTO room_details (Textawn,RoomID,DetailsID) VALUES ('".$_POST[$value]."',".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
+        $insert->execute();
+      }
+      if($resultcheck["SortingID"] == 2){
+          $insert = $dbh->prepare("INSERT INTO room_details (Numberawn,RoomID,DetailsID) VALUES (".$_POST[$value].",".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
+        $insert->execute();
+      }
+      if($resultcheck["SortingID"] == 3){
+        $insert = $dbh->prepare("INSERT INTO room_details (Boolawn,RoomID,DetailsID) VALUES (1,".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
+        $insert->execute();
+      }
+      if($resultcheck["SortingID"] == 4){
+        if(isset($_POST[$value])){
+          $insert = $dbh->prepare("INSERT INTO room_details (Boolawn,RoomID,DetailsID) VALUES (1,".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
+        }
+        else{
+          $insert = $dbh->prepare("INSERT INTO room_details (Boolawn,RoomID,DetailsID) VALUES (0,".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
+        }
+        $insert->execute();
+      }
     }
   }
 }
@@ -239,19 +284,19 @@ elseif(isset($_GET["createroom"])){
 
     if($resultcheck["SortingID"] == 1){
 
-      $insert = $dbh->prepare("INSERT INTO room_details (Textawn,RoomID,DetailsID) VALUES ('".$value."',".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
+      $insert = $dbh->prepare("INSERT INTO room_details (Textawn,RoomID,DetailsID) VALUES ('".$solo[1]."',".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
       $insert->execute();
     }
-    if($resultcheck["SortingID"] == 2){
-      $insert = $dbh->prepare("INSERT INTO room_details (Numberawn,RoomID,DetailsID) VALUES (".$value.",".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
+    elseif($resultcheck["SortingID"] == 2){
+      $insert = $dbh->prepare("INSERT INTO room_details (Numberawn,RoomID,DetailsID) VALUES (".$solo[1].",".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
       $insert->execute();
     }
-    if($resultcheck["SortingID"] == 3){
+    elseif($resultcheck["SortingID"] == 3){
       $insert = $dbh->prepare("INSERT INTO room_details (Boolawn,RoomID,DetailsID) VALUES (1,".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
       $insert->execute();
     }
-    if($resultcheck["SortingID"] == 4){
-      if(isset($_POST[$value])){
+    elseif($resultcheck["SortingID"] == 4){
+      if($solo[1] === "on"){
         $insert = $dbh->prepare("INSERT INTO room_details (Boolawn,RoomID,DetailsID) VALUES (1,".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
       }
       else{

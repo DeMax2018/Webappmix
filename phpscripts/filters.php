@@ -6,7 +6,7 @@ if($_GET["state"] === "true"){ ?>
       <label>filter</label>
       <select id="filterselect" onchange="updatetype()" placeholder="ja" data-native-menu="false">
           <?php
-          $all = $dbh->prepare("SELECT fldname FROM details");
+          $all = $dbh->prepare("SELECT * FROM details");
           $all->execute();
           while($records = $all->fetch(PDO::FETCH_ASSOC)){ ?>
             <option value="<?php echo $records["DetailsID"]; ?>"><?php echo $records["fldname"]; ?></option>
@@ -22,19 +22,20 @@ if($_GET["state"] === "true"){ ?>
       <div id="changetype">
 
       <label>type</label>
-      <select id="typeselect"  placeholder="ja" data-native-menu="false">
+      <select id="typeselect" onchange="checkaddfilter();"placeholder="ja" data-native-menu="false">
           <?php
           $all = $dbh->prepare("SELECT * FROM sorting;");
           $all->execute();
           while($records = $all->fetch(PDO::FETCH_ASSOC)){ ?>
             <option value="<?php echo $records["SortingID"]; ?>"><?php echo $records["fldSorting"]; ?></option>
           <?php }
-          ?>
+          ?><option value="addselect">add to filter</option>
       </select>
     </div>
     </div>
     <div class="percentage">
-      <a href=""><i onclick="alert('u clicked u little bitch')"class="fas fa-trash-alt" style="width:3em;height:6em;"></i></a>
+      <a href=""><i class="fas fa-check" onclick="modifyfilter();" style="width:3em;height:6em;"></i></a>
+      <a href=""><i onclick="deletefilter();"class="fas fa-trash-alt" style="width:3em;height:6em;"></i></a>
     </div>
   </div>
 
