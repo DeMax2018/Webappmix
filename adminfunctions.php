@@ -147,13 +147,13 @@ elseif(isset($_GET["createevent"])){
   $sql->bindValue(1,$box["checked"],PDO::PARAM_STR);
   $sql->bindValue(2,$userid["UserID"]);
   $sql->execute();
-  echo" eifnzioeufnzieufnio";
 
 }
 elseif(isset($_GET["addfilterselect"])){ ?>
 
     <label>type</label>
     <select id="addtofilterid" placeholder="ja" data-native-menu="false">
+      <option value="clear"><i class="fas fa-home"></i></option>
         <?php
         $all = $dbh->prepare("SELECT * FROM details WHERE SortingID = 3;");
         $all->execute();
@@ -163,12 +163,24 @@ elseif(isset($_GET["addfilterselect"])){ ?>
         ?>
     </select>
 <?php }
-elseif(isset($_GET["modifyfilter"])){
+elseif(isset($_GET["deletefilter"])){
   $box = json_decode(file_get_contents('php://input'), true);
   $deleterelations = $dbh->prepare("DELETE FROM room_details WHERE DetailsID = ".$box["id"]);
   $deleterelations->execute();
   $delete = $dbh->prepare("DELETE FROM details WHERE DetailsID = ".$box["id"]);
   $delete->execute();
 
+}
+elseif(isset($_GET["modifyfilter"])){
+  $box = json_decode(file_get_contents('php://input'), true);
+  $update = $dbh->prepare("UPDATE details Set fldname = '".$box["nam"]."' , SortingID = ".$box["t"]." WHERE DetailsID = ".$box["ids"]);
+  $update->execute();
+}
+elseif(isset($_GET["deletebuilding"])){
+  $box = json_decode(file_get_contents('php://input'), true);
+  $deletebuilding = $dbh->prepare("DELETE FROM building WHERE BuildingID = ".$box["ids"]);
+  $deletebuilding->execute();
+  $deleteallrooms = $dbh->prepare("DELETE FROM room_details WHERE DetailsID = 5 AND Numberawn = ".$box["ids"]);
+  $deleteallrooms->execute();
 }
 ?>

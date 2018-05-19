@@ -309,8 +309,18 @@ select#soflow-color {
             $("#body").trigger("create");
           });
         }
+        function changebuildingstate(){
+          var checked = document.getElementById('buildingswitch').checked;
+          $("#buildingload").load("phpscripts/filters.php?statebuilding=" + checked, function(){
+            $("#buildingload").trigger("create");
+          })
+        }
         function updatetype(){
-          $("#changetype").load()
+          var id = document.getElementById("filterselect").value;
+          $("#changetype").load("phpscripts/filters.php?loadfiltersetup=" + id,function(){
+              $("#changetype").trigger("create");
+          });
+
         }
         function checkaddfilter(){
           var checkforaddfilter = document.getElementById("typeselect").value;
@@ -332,15 +342,87 @@ select#soflow-color {
           }
           $.ajax({
               type: "POST",
+              url: "adminfunctions.php?deletefilter=true",
+              data: JSON.stringify(data),
+              contentType: "application/json",
+              dataType: "json",
+            });
+            location.reload();
+        }
+        function modifyfilter(){
+          var id = document.getElementById("filterselect").value;
+          var name = document.getElementById("namefilter").value;
+          var type = document.getElementById("typeselect").value;
+          if(type === "addselect"){
+            alert("you can't do this yet!!");
+          }
+          else{
+          var data = {
+            ids:id,
+            nam:name,
+            t:type,
+          }
+          $.ajax({
+              type: "POST",
               url: "adminfunctions.php?modifyfilter=true",
               data: JSON.stringify(data),
               contentType: "application/json",
               dataType: "json",
             });
         }
-        function modifyfilter(){
-          alert();
+        location.reload();
+      }
+      function deletebuilding(){
+        var del = document.getElementById('filterselect').value;
+        var data = {
+          id:del
         }
+        $.ajax({
+            type: "POST",
+            url: "adminfunctions.php?deletefilter=true",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            dataType: "json",
+          });
+          location.reload();
+      }
+      function modifybuilding(){
+        var id = document.getElementById("filterselect").value;
+        var name = document.getElementById("namefilter").value;
+        var type = document.getElementById("typeselect").value;
+        if(type === "addselect"){
+          alert("you can't do this yet!!");
+        }
+        else{
+        var data = {
+          ids:id,
+          nam:name,
+          t:type,
+        }
+        $.ajax({
+            type: "POST",
+            url: "adminfunctions.php?modifyfilter=true",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            dataType: "json",
+          });
+      }
+      location.reload();
+    }
+    function deletefilter(){
+      var id = document.getElementById("buildingselect").value;
+      var data = {
+        ids:id
+      }
+      $.ajax({
+          type: "POST",
+          url: "adminfunctions.php?deletebuilding=true",
+          data: JSON.stringify(data),
+          contentType: "application/json",
+          dataType: "json",
+        });
+
+    }
     </script>
   </head>
   <body id=body>
@@ -544,16 +626,18 @@ select#soflow-color {
                 <i class="fas fa-plus"></i>
                 <input  id='buildingswitch' data-role='flipswitch' onchange='changebuildingstate();'  type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'>
                 <i class="fas fa-cogs"></i>
+                <div id="buildingload">
                 <div class="flexing">
                   <div class="percentage">
-                    <label>Name of the building</label>
+                    <label>Name</label>
                     <input type="text" class="input" placeholder="give the building a name" id="namebuilding" name="" value="">
                   </div>
                   <div class="percentage">
-                    <label>Click here to add a new building</label>
+                    <label>Add</label>
                     <input type="button" onclick="addbuilding();" class="input" id="addbuilding" name="" value="Add new filter">
                   </div>
                 </div>
+              </div>
           </div>
         </div>
     </div>

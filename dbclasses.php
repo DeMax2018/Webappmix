@@ -19,10 +19,10 @@ class classes
   }
   public function registerhash($text){
     $size = mcrypt_get_iv_size(MCRYPT_CAST_256, MCRYPT_MODE_CFB);
-    $iv = mcrypt_create_iv($size, MCRYPT_DEV_RANDOM);
-    $text .= $iv;
+    $salt = mcrypt_create_iv($size, MCRYPT_DEV_RANDOM);
+    $text .= $salt;
     $hash = hash('tiger192,3', $text);
-    $returnarray = array($hash,$iv);
+    $returnarray = array($hash,$salt);
     return $returnarray;
   }
   public function hashish($text,$salt){

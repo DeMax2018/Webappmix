@@ -32,6 +32,7 @@ elseif($_GET["switch"] === "true" and !isset($_GET["right"])){
     <div  onchange="" class="percentage">
       <label>Modify a room</label>
       <select id="room-menu" onchange="showselect()" placeholder="ja" data-native-menu="false" >
+        <option value="clear"><i class="fas fa-home"></i></option>
           <?php
           $all = $dbh->prepare("SELECT * FROM room_details WHERE DetailsID = 4 GROUP BY RoomID;");
           $all->execute();

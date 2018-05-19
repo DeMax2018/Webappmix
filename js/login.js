@@ -53,7 +53,6 @@ function emailcheck(){
                    element = document.getElementById("mailregister");
                    element.classList.add("is-danger");
                    element.classList.remove("is-success");
-                   alert('this email is already used!');
                  }
             }
         });

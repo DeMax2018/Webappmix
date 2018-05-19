@@ -48,19 +48,16 @@ $(document).ready(function () {
           contentType: "application/json",
           dataType: "json",
           success: function (resp) {
-            alert("succes");
             if (resp.success === true){
             element.classList.add("is-success");
             element.classList.remove("is-danger");
           }
             else {
-              alert("danger");
               element.classList.add("is-danger");
               element.classList.remove("is-success");
             }
           },
           error: function () {
-            alert("danger");
             element.classList.add("is-danger");
             element.classList.remove("is-success");
           }
@@ -120,18 +117,10 @@ $(document).ready(function () {
                   </span>
                 </div>
               </div>
-              <div class="field">
-                <label class="checkbox">
-                  <input type="checkbox">
-                  Remember me
-                </label>
-              </div>
               <button type="submit" style="width:100%;" class="button is-block is-info is-large">Login</button>
             </form>
           </div>
           <p>
-            <a href="../">Forgot Password</a> &nbsp;·&nbsp;
-            <a href="../">Need Help?</a>
           </p>
         </div>
 
@@ -167,7 +156,6 @@ $(document).ready(function () {
             </form>
           </div>
           <p>
-            <a href="../">Need Help?</a>
           </p>
         </div>
       </div>
