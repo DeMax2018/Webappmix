@@ -183,4 +183,10 @@ elseif(isset($_GET["deletebuilding"])){
   $deleteallrooms = $dbh->prepare("DELETE FROM room_details WHERE DetailsID = 5 AND Numberawn = ".$box["ids"]);
   $deleteallrooms->execute();
 }
+elseif(isset($_GET["modifybuilding"])){
+  $box = json_decode(file_get_contents('php://input'), true);
+  $unbox = str_replace("£"," ",$box["input"]);
+  $update = $dbh->prepare("UPDATE building SET fldName = '".$unbox."' WHERE BuildingID = ".$_GET["modifybuilding"].";");
+  $update->execute();
+}
 ?>

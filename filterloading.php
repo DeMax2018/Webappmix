@@ -5,11 +5,10 @@ include "dbclasses.php";
 session_start();
 
 $_SESSION["ids"] = array();
-if(isset($_GET["reloadpage"])){ ?>
-  <form action="filterloading.php?createroom=true&postrequest=true" method="post"data-ajax="false" enctype="multipart/form-data">
+?>
 
 
-<?php }
+<?php
 //error_reporting(0);
 if(isset($_GET["fieldcreate"])){
   if($_GET["fieldcreate"] != "all"){
@@ -25,13 +24,16 @@ else{
     array_push($user, $filters["fldname"]);
   }
 }
-
+$_SESSION["overview"] = $_GET["get"];
   $start = 0;
   $check = true;
-  $per4 = 0;
+  $per4 = -1;
+  //filterloading.php?createroom=true&postrequest=true
   ?>
+  <form action="addroom.php" method="post"data-ajax="false" enctype="multipart/form-data">
   <div class="fullsize">
     <?php
+
   foreach($user as &$namefil){
 
 
@@ -40,7 +42,7 @@ else{
       $gettype = $dbh->prepare("SELECT * FROM details WHERE fldname = '".$namefil."'");
       $gettype->execute();
       $type = $gettype->fetch(PDO::FETCH_ASSOC);
-      if($per4 == 4){ ?>
+      if($per4 == 3){ ?>
       </div>
       <div class="fullsize">
 <?php
@@ -50,6 +52,7 @@ else{
         else{
            $stringposting .= "_".$namefil;
         }
+        $per4 = 0;
       }
       if($type["DetailsID"] == 10){
 
@@ -60,10 +63,10 @@ else{
         </div>
       <?php
       if($stringposting === ""){
-         $stringposting .= $namefil;
+         $stringposting .= "imageupload";
       }
       else{
-         $stringposting .= "_".$namefil;
+         $stringposting .= "_"."imageupload";
       }
      }
       elseif($type["SortingID"] == 1){ ?>
@@ -74,11 +77,11 @@ else{
               $getvalue->execute();
               $value = $getvalue->fetch(PDO::FETCH_ASSOC);
              ?>
-            <input class="input" type="text" id="<?php echo $namefil; ?>" value="<?php echo $value["Textawn"]?>">
+            <input class="input" type="text" id="<?php echo $namefil; ?>" name="<?php echo $namefil; ?>" value="<?php echo $value["Textawn"]?>">
             <?php
           }
           else{ ?>
-            <input class="input" type="text" id="<?php echo $namefil; ?>" value="">
+            <input class="input" type="text" id="<?php echo $namefil; ?>" name="<?php echo $namefil; ?>"value="">
           <?php } ?>
           </div>
 <?php
@@ -115,20 +118,38 @@ else{
            $stringposting .= "_".$namefil;
         }
       }
-      elseif($type["SortingID"] == 3){ ?>
+      elseif($type["SortingID"] == 3){
+      $insertexistinginfo = 0;
+      if(isset($_SESSION["Roomfilter"]) and $_SESSION["Roomfilter"] != "givenewvarplease"){
+      $getvalue = $dbh->prepare("SELECT Textawn FROM room_details WHERE DetailsID = ".$type["DetailsID"]." AND RoomID = ".$_SESSION["Roomfilter"]);
+      $getvalue->execute();
+      $value = $getvalue->fetch(PDO::FETCH_ASSOC);
+      $insertexistinginfo = 1;
+    }?>
         <div class="percentage" style="width:100%; text-align:left;">
           <label for=""><?php echo $namefil; ?></label>
-          <div class="styled-select slate">
-        <select id="<?php echo $namefil; ?>-menu"  placeholder="ja" class="selectpicker"  data-native-menu="false" >
+          <div class="styled-select slate" style="width:100%; height:70%;border:none;">
+        <select id="<?php echo $namefil; ?>-menu"name="<?php echo $namefil; ?>" style="width: 100%;height: 70% !important;"  placeholder="ja" class="selectpicker"  data-native-menu="false" >
             <option value="<?php echo $namefil; ?>" disabled><?php echo $namefil; ?></option>
             <option value="all">all</option>
             <?php
               $getoptions = $dbh->prepare("SELECT * FROM details WHERE listoption = ".$type["DetailsID"]);
               $getoptions->execute();
-              while($options = $getoptions->fetch(PDO::FETCH_ASSOC)){ ?>
+              while($options = $getoptions->fetch(PDO::FETCH_ASSOC)){
+                if($insertexistinginfo == 1){
+                  if($value["Textawn"] === $options["fldname"]){ ?>
+                    <option selected value="<?php echo $options["fldname"] ?>"><?php echo $options["fldname"] ?></option>
+                <?php  }
+                else{ ?>
+                  <option value="<?php echo $options["fldname"] ?>"><?php echo $options["fldname"] ?></option>
+
+              <?php   }
+                }
+                else{
+                ?>
                 <option value="<?php echo $options["fldname"] ?>"><?php echo $options["fldname"] ?></option>
       <?php
-              }
+              }}
             ?>
           </select>
         </div>
@@ -143,13 +164,33 @@ else{
            $stringposting .= "_".$namefil;
         }
       }
-      elseif($type["SortingID"] == 4){ ?>
+      elseif($type["SortingID"] == 4){
+        if(isset($_SESSION["Roomfilter"]) and $_SESSION["Roomfilter"] != "givenewvarplease"){
+        $getvalue = $dbh->prepare("SELECT Boolawn FROM room_details WHERE DetailsID = ".$type["DetailsID"]." AND RoomID = ".$_SESSION["Roomfilter"]);
+        $getvalue->execute();
+        $value = $getvalue->fetch(PDO::FETCH_ASSOC);
+      }?>
           <div class="percentage">
             <label><?php echo $namefil;"(Not available/available)" ?> </label><br>
-            <label style="margin-left:0 !important; .ui-mobile label{display:contents}" class="switch">
-              <input type="checkbox" v-model="registration.check" id="<?php echo $namefil; ?>">
-              <span class="slider round"></span>
-            </label>
+
+            <?php
+            if(isset($value["Boolawn"])){
+            switch ($value["Boolawn"]) {
+              case 1: ?>
+                <input checked type="checkbox" data-role='flipswitch' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'name="<?php echo $namefil; ?>" v-model="registration.check" id="<?php echo $namefil; ?>">
+                <?php break;
+                case 0: ?>
+                  <input type="checkbox"  data-role='flipswitch' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'name="<?php echo $namefil; ?>" v-model="registration.check" id="<?php echo $namefil; ?>">
+                <?php  break;
+              default:
+                # code...
+                break;
+            }
+          }
+          else{ ?>
+            <input type="checkbox" data-role='flipswitch' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'name="<?php echo $namefil; ?>" v-model="registration.check" id="<?php echo $namefil; ?>">
+        <?php    }
+            ?>
           </div>
 <?php
         if($stringposting === ""){
@@ -160,6 +201,7 @@ else{
         }
       }
     $per4++;
+    $_SESSION["stringposting"] = $stringposting;
   } ?><?php
   if(isset($_GET["reloadpage"])){ ?>
     </div>
@@ -167,11 +209,11 @@ else{
     <div class="newline">
       <?php if(isset($_SESSION["switch"]) and $_SESSION["switch"] === "on"){
         $_SESSION["postroom"] = $stringposting; ?>
-        <button type="submit"  id="sending" class="button" value="<?php echo $stringposting ?>" name="button">modify room</button>
+        <input type="submit"  id="sending" class="button" value="modify room" name="button">
     <?php  }
     else{
       $_SESSION["postroom"] = $stringposting;?>
-      <button type="submit" id="sending" class="button" value="<?php echo $stringposting ?>"  name="button">Create room</button>
+      <input type="submit" id="sending" class="button" value="modify room"  name="button">
 
 <?php    } ?>
     </div>
@@ -184,12 +226,15 @@ else{
     <div class="newline">
       <?php if(isset($_SESSION["switch"]) and $_SESSION["switch"] === "on"){
         ?>
-        <button type="button" onclick="modifyroom('<?php echo $stringposting ?>');" id="sending" class="button"  name="button">modify room</button>
+        <input type="submit" class="button"  name="button"value="modify room">
     <?php  }
     else{ ?>
-      <button type="button" onclick="createroom('<?php echo $stringposting ?>');" id="sending" class="button"  name="button">Create room</button>
+      <input type="submit"   class="button"  name="button" value="Create room">
 
-<?php    } ?>
+<?php
+//onclick="createroom('echo $stringposting');"
+} ?>
+    </form>
     </div>
 
   <?php } ?>
@@ -209,8 +254,6 @@ elseif(isset($_GET["postrequest"])){
   $roomnumber = $getroom->fetch(PDO::FETCH_ASSOC);
   foreach($valuespost as &$value){
     if($value === "image"){
-      $image = new classes();
-      $name = $image->uploadimage();
       $insertnameimage = $dbh->prepare("INSERT INTO room_details (Textawn,RoomID,DetailsID) VALUES ('".$name."',".$roomnumber["RoomID"].",10)");
       $insertnameimage->execute();
 
@@ -292,7 +335,7 @@ elseif(isset($_GET["createroom"])){
       $insert->execute();
     }
     elseif($resultcheck["SortingID"] == 3){
-      $insert = $dbh->prepare("INSERT INTO room_details (Boolawn,RoomID,DetailsID) VALUES (1,".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
+      $insert = $dbh->prepare("INSERT INTO room_details (Textawn,RoomID,DetailsID) VALUES (1,".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
       $insert->execute();
     }
     elseif($resultcheck["SortingID"] == 4){

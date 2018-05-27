@@ -464,6 +464,12 @@ elseif($_SESSION["eventtype"] === "mymeetings"){
   $numie = $sql->RowCount();
   $first = true;
   while($rows = $sql->fetch(PDO::FETCH_ASSOC)){
+    $getroom = $dbh->prepare("SELECT RoomID FROM roomhours WHERE Room_HoursID = ".$rows["Reservation"]);
+    $getroom->execute();
+    $room = $getroom->fetch(PDO::FETCH_ASSOC);
+    $details = $dbh->prepare("SELECT Textawn FROM room_details WHERE RoomID = ".$room["RoomID"]." AND DetailsID = 10");
+    $details->execute();
+    $detailsroom = $details->fetch(PDO::FETCH_ASSOC);
     if($first === true){ ?>
       <div class="columns columnsaside"> <!--  Max 2 items -->
         <div class="column is-6">
@@ -474,7 +480,7 @@ elseif($_SESSION["eventtype"] === "mymeetings"){
           <div class="panel">
 
               <div class="">
-                <img class="imgA1" src="upload/<?php echo $rows["Mainpicture"] ?>">
+                <img class="imgA1" src="upload/<?php echo $detailsroom["Textawn"] ?>">
 
               </div>
 
@@ -508,7 +514,7 @@ elseif($_SESSION["eventtype"] === "mymeetings"){
       <div class="panel">
 
           <div class="">
-            <img class="imgA1" src="upload/<?php echo $rows["Mainpicture"] ?>">
+            <img class="imgA1" src="upload/<?php echo $detailsroom["Textawn"] ?>">
           </div>
 
         <div class="panel-block">

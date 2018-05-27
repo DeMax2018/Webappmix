@@ -63,7 +63,14 @@ $_SESSION["arrayfilter"] = array();
 
       function loadrooms(){
         //  $("#roomfilters").load("filterloading.php?fieldcreate=all",function(){});
-          $("#roomevent").load("loadrooms.php?load=first",function(){});
+        var time = document.getElementById('firsttime').textContent;
+        var time2 = document.getElementById('secondtime').textContent;
+        var realtime = time.replace(" ","*");
+        var realtime2 = time2.replace(" ","*");
+
+        alert(realtime);
+        alert(realtime2);
+          $("#roomevent").load("loadrooms.php?load=first&starttime=" + realtime + "&endtime=" + realtime2,function(){});
     $("#showinfo").load("loadinfobox.php?number=",function(){});
 
       }
@@ -145,6 +152,54 @@ $_SESSION["arrayfilter"] = array();
         contentType: "application/json",
         dataType: "json",
       });
+      closeshow();
+    }
+    function filterslider(){
+      var filter = document.getElementById("roomfilters").style.display;
+      switch (filter) {
+        case "none":
+          $("#roomfilters").show("fast");
+          break;
+          case "block":
+            $("#roomfilters").hide("fade","fast");
+            break;
+        default:
+      }
+    }
+    function pagingrooms(page,varr){
+    if(page === "no"){
+
+    }
+    else{
+      var txt = varr;
+      var url = "";
+      var res = txt.split("_");
+      for (i = 0; i < res.length; i++) {
+
+        var value = document.getElementById(res[i]).value;
+        if(value === "on"){
+          var value = document.getElementById(res[i]).checked;
+        }
+        if(value === ""){
+
+        }
+        else{
+          if(url === ""){
+            var url = url + res[i] + "-" + value;
+          }
+          else{
+            var url = url + "_" + res[i] + "-" + value;
+          }
+        }
+
+        console.log(url);
+    }
+
+      var url = "loadrooms.php?page=" + page + "&variables=" + url;
+      $("#roomevent").load(url,function(){});
+      $('html, body').animate({ scrollTop: 0 }, 'slow');
+    }
+
     }
   </script>
 
@@ -258,8 +313,7 @@ $_SESSION["arrayfilter"] = array();
         </span>
 
       </div>
-      <div id="events" style="width: 70%;
-    margin: auto;" class="section things is-hidden-event">
+      <div id="events" style="width: 100%;" class="section things is-hidden-event">
           <div id="app">
 
           <v-app>
@@ -313,8 +367,12 @@ $_SESSION["arrayfilter"] = array();
                                      v-model="registration.discription" required></v-text-field>
                                    <?php }
                                    if($_SESSION["bookaroom"] === "event"){ ?>
+
                                          <p>
-                                            <input onchange="test()" type='file' id='_file'>
+                                           <form id="imageupload" action="finalcreateroom.php?imageupload=true" method="post" enctype="multipart/form-data">
+                                            <input type="file" name="mainpic" id="mainpic">
+                                          </form>
+
                                          </p>
                                          <div class='progress_outer'>
                                              <div id='_progress' class='progress'></div>
@@ -338,7 +396,7 @@ $_SESSION["arrayfilter"] = array();
                       </v-stepper-content>
                       <v-stepper-content step="2">
                         <div class="wrapper-room-filter">
-                        <div style="display: block;float: left;min-height: 20em; width: 40%;" id="roomfilters">
+                        <div style="display: block;min-height: 20em;" id="roomfilters">
                           <?php
                             $jscall = "";
                             $prequery = $dbh->prepare("SELECT * FROM details WHERE listoption is null ;");
@@ -350,6 +408,7 @@ $_SESSION["arrayfilter"] = array();
                               else{
                                 $jscall .= "_".$pre["fldname"];
                               }
+                              $_SESSION["jscall"] = $jscall;
                             }
                             $getall = $dbh->prepare("SELECT * FROM details WHERE listoption is null ;");
                             $getall->execute();
@@ -399,7 +458,8 @@ $_SESSION["arrayfilter"] = array();
 
                           ?>
                         </div>
-                        <div style="float: right;width: 60%;min-height: 20em;" id="roomevent">
+                       <a><i onclick="filterslider();" style="width:5em;height:5em;" class="fas fa-chevron-circle-down"></i></a>
+                        <div style="min-height: 20em;" id="roomevent">
 
                         </div>
 
@@ -430,47 +490,7 @@ $_SESSION["arrayfilter"] = array();
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
     <script type="text/javascript">
 
-    function test(){
-    var _submit = document.getElementById('_submit'),
-    _file = document.getElementById('_file'),
-    _progress = document.getElementById('_progress');
 
-    var upload = function(){
-
-        if(_file.files.length === 0){
-            return;
-        }
-
-        var data = new FormData();
-        data.append('SelectedFile', _file.files[0]);
-
-        var request = new XMLHttpRequest();
-        request.onreadystatechange = function(){
-            if(request.readyState == 4){
-                try {
-
-                    var resp = JSON.parse(request.response);
-
-                } catch (e){
-                    var resp = {
-                        status: 'error',
-                        data: 'Unknown error occurred: [' + request.responseText + ']'
-                    };
-                }
-                alert(resp.status + ': ' + resp.data);
-            }
-        };
-
-        request.upload.addEventListener('progress', function(e){
-            _progress.style.width = Math.ceil(e.loaded/e.total) * 100 + '%';
-        }, false);
-
-        request.open('POST', 'receive.php');
-        request.send(data);
-    }
-
-    _submit.addEventListener('click', upload);
-    }
 
     </script>
     <script src="js/sliderdate.js" type="text/javascript"></script>
@@ -520,8 +540,6 @@ $_SESSION["arrayfilter"] = array();
                             contentType: "application/json",
                             dataType: "json",
                           });
-
-
                       },
                       error: function () {
                           var info = {
@@ -537,18 +555,6 @@ $_SESSION["arrayfilter"] = array();
                       }
 
                     });
-
-
-
-
-
-
-
-
-
-
-
-
                   }
                   else{
                     var nameeventget = document.getElementById('namen').value;
@@ -560,70 +566,46 @@ $_SESSION["arrayfilter"] = array();
                     var discription = discriptionget.split(' ').join('+');
                     var Necessitiesget = document.getElementById('Necessities').value;
                     var Necessities = discriptionget.split(' ').join('+');
-                    var imageget = document.getElementById('_file').value;
-                    var image = imageget.replace(/^.*[\\\/]/, '');
                     var info = {
                       name:nameevent,
                       ticket:tickets,
                       starttime:time,
                       endtime:time2,
                       discrip:discription,
-                      imagename:image,
                       nessessit:Necessities
                     }
+                  console.log("jaaaaaaaaaaaa");
                     $.ajax({
                       type: "POST",
                       url: "finalcreateroom.php?createevent=true",
                       data: JSON.stringify(info),
                       contentType: "application/json",
                       dataType: "json",
-                      success: function (info) {
-                        alert("Your event is created!");
-                        var facebook = document.getElementById('facebook').checked;
-                        if(facebook == false){
-                        }
-                        else{
-                          var nameeventget = document.getElementById('namen').value;
-                          var nameevent = nameeventget.split(' ').join('+');
-                          var info = {
-                            name:nameevent
-                          }
-                          console.log('ready');
-                          $.ajax({
-                            type: "POST",
-                            url: "raw.php",
-                            data: JSON.stringify(info),
-                            contentType: "application/json",
-                            dataType: "json",
-                          });
-
-                        }
-                      },
-                      error: function (info) {
-                        alert("Your event is created!");
-                        var facebook = document.getElementById('facebook').checked;
-                        if(facebook == false){
-                        }
-                        else{
-                          var nameeventget = document.getElementById('namen').value;
-                          var nameevent = nameeventget.split(' ').join('+');
-                          var info = {
-                            name:nameevent
-                          }
-                          console.log('ready');
-                          $.ajax({
-                            type: "POST",
-                            url: "raw.php",
-                            data: JSON.stringify(info),
-                            contentType: "application/json",
-                            dataType: "json",
-                          });
-
-                        }
+                    });
+                    var facebook = document.getElementById('facebook').checked;
+                    console.log(facebook);
+                    if(facebook == false){
+                      console.log("hij is niet bij raw");
+                    }
+                    else{
+                      var nameeventget = document.getElementById('namen').value;
+                      var nameevent = nameeventget.split(' ').join('+');
+                      var info = {
+                        name:nameevent
                       }
 
-                    });
+                      console.log('ready');
+                      $.ajax({
+                        type: "POST",
+                        url: "raw.php",
+                        data: JSON.stringify(info),
+                        contentType: "application/json",
+                        dataType: "json",
+                      });
+                      console.log("hij is bij raw");
+                    }
                   }
+                  document.getElementById("imageupload").submit();
 
 
                   console.log('done');

@@ -32,7 +32,7 @@ if(isset($_GET["roommail"])){
 }
 elseif(isset($_GET["event"])){
   $event = new classes();
-  $code = $event->hashish($_SESSION["eventid"]);
+  $code = $event->hashishnosalt($_SESSION["eventid"]);
   $insertintotickets = $dbh->prepare("INSERT INTO ticket (EventID,OwnerID,Special_Number) VALUES (".$_SESSION["eventid"].",".$_SESSION["userid"].",'".$code."') ");
   $insertintotickets->execute();
   $insertintotickets->debugDumpParams();
@@ -58,6 +58,8 @@ elseif(isset($_GET["event"])){
   } else {
     echo 'Message has been sent.';
   }
+  header("location:index.php");
+  
 
 }
 elseif(isset($_GET["eventdel"])){

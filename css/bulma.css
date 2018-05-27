@@ -325,6 +325,8 @@ table th {
   .pagination {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
+        margin:0;
+        
         width: 100%;
   }
 
@@ -6797,5 +6799,5 @@ a.panel-block:hover {
 }
 .mainresults{
   display: grid;
-  float: right;
+
 }

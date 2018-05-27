@@ -163,7 +163,7 @@ elseif(isset($_GET["state"]) and $_GET["state"] === "select"){
         </div>
         <div class="percentage">
           <a href=""><i class="fas fa-check" onclick="modifyfilter();" style="width:3em;height:6em;"></i></a>
-          <a href=""><i onclick="deletefilter();"class="fas fa-trash-alt" style="width:3em;height:6em;"></i></a>
+          <a href=""><i onclick="deletebuilding();"class="fas fa-trash-alt" style="width:3em;height:6em;"></i></a>
         </div> <?php
   }
   elseif(isset($_GET["statebuilding"])){
@@ -171,7 +171,7 @@ elseif(isset($_GET["state"]) and $_GET["state"] === "select"){
       <div class="flexing">
         <div class="percentage">
           <label>house</label>
-          <select id="buildingselect" onchange="checkaddfilter();"placeholder="ja" data-native-menu="false">
+          <select id="buildingselect" onchange="loadbuildingname();"placeholder="ja" data-native-menu="false">
             <option value="house"><i class="fas fa-home"></i></option><?php
             $getbuildings = $dbh->prepare("SELECT * FROM building");
             $getbuildings->execute();
@@ -181,11 +181,12 @@ elseif(isset($_GET["state"]) and $_GET["state"] === "select"){
             ?>
           </select>
         </div>
-        <div class="">
+
         <div class="percentage">
-          <label>Name</label>
-          <input type="text" class="input" placeholder="give the building a name" id="namebuilding" name="" value="">
-        </div>
+          <div id="buildingname">
+            <label>Name</label>
+            <input type="text" class="input" placeholder="give the building a name" id="namebuilding" name="" value="">
+          </div>
         </div>
 
         <div class="percentage">
@@ -207,4 +208,15 @@ elseif(isset($_GET["state"]) and $_GET["state"] === "select"){
       </div>
     </div>
   <?php }}
+  elseif(isset($_GET["buildingnameload"])){
+    $getname = $dbh->prepare("SELECT fldName FROM building WHERE BuildingID = ".$_GET["buildingnameload"]);
+    $getname->execute();
+    $name = $getname->fetch(PDO::FETCH_ASSOC);
+    ?>
+
+      <label>Name</label>
+      <input type="text" class="input" placeholder="give the building a name" id="namebuilding" name="" value="<?php echo $name["fldName"] ?>">
+
+<?php  }
+
 ?>

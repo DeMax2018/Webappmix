@@ -4,6 +4,8 @@ $roomresult = $dbh->prepare("SELECT * FROM room_details WHERE RoomID = ? ");
 $roomresult->bindParam(1,$_GET["number"],PDO::PARAM_INT);
 $roomresult->execute();
 
+
+
 ?>
 <div class="modal-background"></div>
 <div id="closeid" class="modal-card">
@@ -12,6 +14,9 @@ $roomresult->execute();
     $name = $dbh->prepare("SELECT Textawn FROM room_details WHERE RoomID = ".$_GET["number"]." AND detailsID = 4 ;");
     $name->execute();
     $nameroom = $name->fetch(PDO::FETCH_ASSOC);
+    $image = $dbh->prepare("SELECT Textawn FROM room_details WHERE RoomID = ".$_GET["number"]." AND detailsID = 10 ;");
+    $image->execute();
+    $giveimage = $image->fetch(PDO::FETCH_ASSOC);
     ?>
     <p class="modal-card-title"><?php echo $nameroom["Textawn"]; ?></p>
     <button class="delete" onclick="closeshow();" aria-label="close"></button>
@@ -19,7 +24,7 @@ $roomresult->execute();
   <section class="modal-card-body">
     <table>
       <tbody>
-        <img src="upload/car_pass_logo.png" alt="" style=" width:100%;">
+        <img src="<?php echo "upload/".$giveimage["Textawn"] ?>" alt="" style=" width:100%;">
         <h1>Specifications</h1>
         <?php
         while($room = $roomresult->fetch(PDO::FETCH_ASSOC)){

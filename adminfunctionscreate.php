@@ -3,11 +3,12 @@ session_start();
 include"conn.php";
 
 $box = json_decode(file_get_contents('php://input'), true);
+$user = explode(" ",$box["name"]);
+$getid = $dbh->prepare("SELECT UserID FROM user WHERE fldName = '".$user[0]."' and fldLastname = '".$user[1]."'");
+$getid->execute();
+$userid = $getid->fetch(PDO::FETCH_ASSOC);
 if(isset($_GET["group"])){
-  $user = explode(" ",$box["name"]);
-  $getid = $dbh->prepare("SELECT UserID FROM user WHERE fldName = '".$user[0]."' and fldLastname = '".$user[1]."'");
-  $getid->execute();
-  $userid = $getid->fetch(PDO::FETCH_ASSOC);
+
   if($box["type"] == 1){
     $sql = $dbh->prepare("UPDATE user_group SET cifpcm = ".$box["checked"]." WHERE UserID = ".$userid["UserID"]);
     $checkforadmin = $dbh->prepare("SELECT admin FROM user_group WHERE UserID = ".$userid["UserID"]);
@@ -64,13 +65,13 @@ else{
   $getid->execute();
   $userid = $getid->fetch(PDO::FETCH_ASSOC);
   if($box["type"] == 1){
-    $sql = $dbh->prepare("UPDATE privaterights SET Create_events = ".$box["checked"]." WHERE UserID = ".$userid["UserID"]." WHERE UserID = ".$userid["UserID"]);
+    $sql = $dbh->prepare("UPDATE privaterights SET Create_events = ".$box["checked"]." WHERE UserID = ".$userid["UserID"]);
   }
   elseif($box["type"] == 2){
-    $sql = $dbh->prepare("UPDATE privaterights SET Delete_Events = ".$box["checked"]." WHERE UserID = ".$userid["UserID"]." WHERE UserID = ".$userid["UserID"]);
+    $sql = $dbh->prepare("UPDATE privaterights SET Delete_Events = ".$box["checked"]." WHERE UserID = ".$userid["UserID"]);
   }
   elseif($box["type"] == 3){
-    $sql = $dbh->prepare("UPDATE privaterights SET Acces_Rights_System = ".$box["checked"]." WHERE UserID = ".$userid["UserID"]." WHERE UserID = ".$userid["UserID"]);
+    $sql = $dbh->prepare("UPDATE privaterights SET Acces_Rights_System = ".$box["checked"]." WHERE UserID = ".$userid["UserID"]);
   }
 
   $sql->execute();

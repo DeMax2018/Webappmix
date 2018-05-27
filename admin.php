@@ -1,4 +1,4 @@
-<?php
+<?php 
 include"conn.php";
 //include "auth.php";
 session_start();
@@ -200,7 +200,9 @@ select#soflow-color {
           if(finaladd == true){
             url += "&reloadpage=true";
           }
-          $("#filterresults").load(url,function(){});
+          $("#filterresults").load(url,function(){
+            $("#filterresults").trigger("create");
+          });
 
           return url;
         }
@@ -225,7 +227,6 @@ select#soflow-color {
           var name = document.getElementById("namefilter").value;
           var type = document.getElementById("typeselect").value;
           var urluse = "";
-          alert(urluse);
           var parameters = {
             "name": name,
             "type": type
@@ -314,6 +315,7 @@ select#soflow-color {
           $("#buildingload").load("phpscripts/filters.php?statebuilding=" + checked, function(){
             $("#buildingload").trigger("create");
           })
+
         }
         function updatetype(){
           var id = document.getElementById("filterselect").value;
@@ -387,29 +389,23 @@ select#soflow-color {
           location.reload();
       }
       function modifybuilding(){
-        var id = document.getElementById("filterselect").value;
-        var name = document.getElementById("namefilter").value;
-        var type = document.getElementById("typeselect").value;
-        if(type === "addselect"){
-          alert("you can't do this yet!!");
-        }
-        else{
+        var id = document.getElementById('buildingselect').value;
+        var info = document.getElementById("namebuilding").value;
+        var inputs = info.replace(" ","£");
         var data = {
-          ids:id,
-          nam:name,
-          t:type,
+          input:inputs
         }
         $.ajax({
             type: "POST",
-            url: "adminfunctions.php?modifyfilter=true",
+            url: "adminfunctions.php?modifybuilding=" + id,
             data: JSON.stringify(data),
             contentType: "application/json",
             dataType: "json",
           });
-      }
+
       location.reload();
     }
-    function deletefilter(){
+    function deletebuilding(){
       var id = document.getElementById("buildingselect").value;
       var data = {
         ids:id
@@ -422,6 +418,12 @@ select#soflow-color {
           dataType: "json",
         });
 
+    }
+    function loadbuildingname(){
+      var id = document.getElementById('buildingselect').value;
+      $("#buildingname").load("phpscripts/filters.php?buildingnameload=" + id,function(){
+        $("#buildingname").trigger("create");
+      })
     }
     </script>
   </head>

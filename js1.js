@@ -22,6 +22,18 @@ else{
 }
 
 }
+function paging(page){
+  var searching = document.getElementById('search').value;
+if(page === "no"){
+
+}
+else{
+  var url = "indexfunctions.php?page=" + page + "&search=" + searching;
+  $("#events").load(url,function(){});
+  $('html, body').animate({ scrollTop: 0 }, 'slow');
+}
+
+}
 function passwchecker(){
   var first = document.getElementById('password').value;
   var checker = document.getElementById('passchecker').value;

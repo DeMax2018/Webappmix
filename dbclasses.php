@@ -25,6 +25,10 @@ class classes
     $returnarray = array($hash,$salt);
     return $returnarray;
   }
+  public function hashishnosalt($text){
+    $hash = hash('tiger192,3', $text);
+    return $hash;
+  }
   public function hashish($text,$salt){
     $text .= $salt;
     $hash = hash('tiger192,3', $text);
@@ -121,8 +125,39 @@ class classes
           echo "Sorry, there was an error uploading your file.";
       }
     }
-    return basename($filename);
+    return basename( $_FILES[$test]["name"]);
+  }
+  function convertime($input){
+    switch (substr($input,-2)) {
+      case 'AM':
+        if(strlen($input) == 8){
+          if(substr($input,0,2) == 12){
+            $x = 0;
+            $result = $x + (substr($input,3,2) * 60);
+          }
+          else{
+            $result = (substr($input,0,2) * 3600) + (substr($input,3,2) * 60);
+          }
+        }
+        else{
+          $result = (substr($input,0,1) * 3600) + (substr($input,2,2) * 60);
+        }
+        break;
+        case 'PM':
+          if(strlen($input) == 8){
+            if(substr($input,0,2) == 12){
+              $result = (substr($input,0,2) * 3600) + (substr($input,3,2) * 60);
+            }
+            else{
+              $result = (12 * 3600) + (substr($input,0,2) * 3600) + (substr($input,3,2) * 60);
+            }
+          }
+          else{
+            $result = (12 * 3600) + (substr($input,0,1) * 3600) + (substr($input,2,2) * 60);
+          }
+          break;
+    }
+    return $result;
   }
 }
-
 ?>
