@@ -129,7 +129,7 @@ a.file:not(.button) {
 }
 @media screen and (min-width: 769px){
   div.content.column.is-9.is-active{
-    margin-left: 25% !important;
+    margin-left: 21% !important;
     width: 75% !important;
     transition: 0.5s !important;
   }
@@ -172,7 +172,7 @@ a.file:not(.button) {
   width: 100% !important;
 }
 .columns:last-child{
-  display: flex !important;
+  /*display: flex !important;*/
 }
 .columns:not(:last-child){
   margin-bottom: 0 !important;

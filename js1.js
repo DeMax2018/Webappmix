@@ -176,14 +176,20 @@ function mailevent(){
   var parameters = {
     "id": "insession"
   }
+  $( "#loading" ).show();
   $.ajax({
     type: "POST",
     url: "mail.php?event=true",
     data: JSON.stringify(parameters),
     contentType: "application/json",
     dataType: "json",
+    error: function(response){
+      window.location = "myevents.php";
+    }
+
   });
 }
+
 function delmailevent(){
   var parameters = {
     "id": "insession"
@@ -194,6 +200,9 @@ function delmailevent(){
     data: JSON.stringify(parameters),
     contentType: "application/json",
     dataType: "json",
+    error: function(){
+      window.location = "myevents.php";
+    }
   });
 }
 function looking(){

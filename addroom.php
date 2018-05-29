@@ -3,10 +3,11 @@ session_start();
 include "conn.php";
 print_r($_SESSION["overview"]);
 if(isset($_SESSION["Roomfilter"]) and $_SESSION["Roomfilter"] != "givenewvarplease"){
-  $deleteroominfo = $dbh->prepare("DELETE FROM room_details WHERE RoomID = ".$_SESSION["Roomfilter"]);
+  $deleteroominfo = $dbh->prepare("DELETE FROM room_details WHERE RoomID = ".$_SESSION["Roomfilter"]." AND DetailsID != 10");
   $deleteroominfo->execute();
   $delroom = $dbh->prepare("DELETE FROM room WHERE RoomID = ".$_SESSION["Roomfilter"]);
   $delroom->execute();
+  $fordeleting = $_SESSION["Roomfilter"];
   $_SESSION["Roomfilter"] = "givenewvarplease";
 }
 $insertnewroom = $dbh->prepare("INSERT INTO room () VALUES ()");
@@ -25,8 +26,23 @@ foreach($user as &$param){
       $image = new classes;
       $imagename = $image->uploadimage();
       echo "DIT IS HET ".$imagename."JAAAAAAAAAAAAAA";
-      $insertquery = $dbh->prepare("INSERT INTO room_details (RoomID,DetailsID,Textawn) VALUES (".$roomnumber["RoomID"].",10,'".$imagename."')");
-      $insertquery->execute();
+      echo "dit is de id".$_SESSION["Roomfilter"];
+      if($imagename === ""){
+        $getpreviousname = $dbh->prepare("SELECT Textawn FROM room_details WHERE RoomID = ".$fordeleting." AND DetailsID = 10");
+        $getpreviousname->execute();
+        $previousname = $getpreviousname->fetch(PDO::FETCH_ASSOC);
+        $insertquery = $dbh->prepare("INSERT INTO room_details (RoomID,DetailsID,Textawn) VALUES (".$roomnumber["RoomID"].",10,'".$previousname["Textawn"]."')");
+        $insertquery->execute();
+        $deleteroominfo = $dbh->prepare("DELETE FROM room_details WHERE RoomID = ".$fordeleting);
+        $deleteroominfo->execute();
+      }
+      else{
+        $deleteroominfo = $dbh->prepare("DELETE FROM room_details WHERE RoomID = ".$fordeleting);
+        $deleteroominfo->execute();
+        $insertquery = $dbh->prepare("INSERT INTO room_details (RoomID,DetailsID,Textawn) VALUES (".$roomnumber["RoomID"].",10,'".$imagename."')");
+        $insertquery->execute();
+      }
+
       break;
     default:
       switch ($fieldtype["SortingID"]) {

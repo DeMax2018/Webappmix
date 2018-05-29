@@ -51,6 +51,14 @@ elseif(isset($_GET["event"])){
   $mail->Subject  = 'Your ticket has been processed';
   $mail->Body     = '<p>Bring this ticket with you</p>
   <img src="cid:logo_2u">';
+  $geteventspecs = $dbh->prepare("SELECT Sold_Ticket FROM real_tenerife.event WHERE EventID = ".$_SESSION["eventid"]);
+  $geteventspecs->execute();
+  $eventspecs = $geteventspecs->fetch(PDO::FETCH_ASSOC);
+  $newnum = $eventspecs["Sold_Ticket"] + 1;
+  $lowerdefence =  $dbh->prepare("SET SQL_SAFE_UPDATES=0;");
+  $lowerdefence->execute();
+  $addparticipant = $dbh->prepare("UPDATE real_tenerife.event SET Sold_Ticket = ".$newnum." WHERE EventID = ".$_SESSION["eventid"]);
+  $addparticipant->execute();
   $mail->IsHTML(true);
   if(!$mail->send()) {
     echo 'Message was not sent.';
@@ -58,11 +66,23 @@ elseif(isset($_GET["event"])){
   } else {
     echo 'Message has been sent.';
   }
+
+$addparticipant->debugDumpParams();
   header("location:index.php");
-  
+
 
 }
 elseif(isset($_GET["eventdel"])){
+  $geteventspecs = $dbh->prepare("SELECT Sold_Ticket FROM event WHERE EventID = ".$_SESSION["eventid"]);
+  $geteventspecs->execute();
+  $eventspecs = $geteventspecs->fetch(PDO::FETCH_ASSOC);
+  $newnum = $eventspecs["Sold_Ticket"] - 1;
+  $lowerdefence = $dbh->prepare("SET SQL_SAFE_UPDATES=0;");
+  $lowerdefence->execute();
+  $addparticipant = $dbh->prepare("UPDATE real_tenerife.event SET Sold_Ticket = ".$newnum." WHERE EventID = ".$_SESSION["eventid"]);
+
+  $addparticipant->execute();
+
   $delete = $dbh->prepare("DELETE FROM ticket WHERE OwnerID = ".$_SESSION["userid"]." AND EventID = ".$_SESSION["eventid"]);
   $delete->execute();
 }

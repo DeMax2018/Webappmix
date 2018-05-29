@@ -35,12 +35,12 @@ $roomresult->execute();
 
             $gettype->execute();
             $type = $gettype->fetch(PDO::FETCH_ASSOC);
-            if($type["SortingID"] == 1){ ?>
+            if($type["SortingID"] == 1){ if($namedetail["fldname"] === "image"){}else{?>
               <tr>
                 <td class="tdinfo"><?php echo $namedetail["fldname"]; ?></td>
                 <td class="tdinfo"><?php echo $room["Textawn"]; ?></td>
               </tr>
-      <?php }
+      <?php }}
             elseif($type["SortingID"] == 2){ ?>
               <tr>
                 <td class="tdinfo"><?php echo $namedetail["fldname"]; ?></td>

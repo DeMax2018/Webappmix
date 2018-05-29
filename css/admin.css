@@ -54,6 +54,7 @@ table td, table th{
   top: 25% !important;
 }
 .columns, .columns.columnsaside{
+  display: flex;
   margin-top: 0;
 }
 

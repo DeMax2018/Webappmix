@@ -103,7 +103,7 @@ p.subtitle {
   width: 13em;
   opacity: 0;
   height: 12em;
-  margin-top: -12.3em;
+  margin-top: 6.5em;
   margin-left: -6em;
 }
 
@@ -159,7 +159,7 @@ a.title:hover{
   width: 100% !important;
 }
 .columns:last-child{
-  display: flex !important;
+  /*display: flex !important;*/
 }
 .columns:not(:last-child){
   margin-bottom: 0 !important;

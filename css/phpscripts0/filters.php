@@ -3,7 +3,7 @@ include"../conn.php";
 if(isset($_GET["state"]) and $_GET["state"] === "true"){ ?>
   <div id="filterload" class="flexing">
     <div class="percentage">
-      <label>Filter</label>
+      <label>filter</label>
       <select id="filterselect" onchange="updatetype()" placeholder="ja" data-native-menu="false">
         <option value="clear"><i class="fas fa-home"></i></option>
           <?php
@@ -18,12 +18,12 @@ if(isset($_GET["state"]) and $_GET["state"] === "true"){ ?>
     <div id="changetype" style="display:flex; width:100%;">
 
     <div class="percentage">
-      <label>Rename</label>
+      <label>rename</label>
       <input type="text" class="input" placeholder="give the name of the room" id="namefilter" name="" value="">
     </div>
     <div class="percentage">
 
-      <label>Type</label>
+      <label>type</label>
       <select id="typeselect" onchange="checkaddfilter();"placeholder="ja" data-native-menu="false">
         <option value="clear"><i class="fas fa-home"></i></option>
           <?php
@@ -32,7 +32,7 @@ if(isset($_GET["state"]) and $_GET["state"] === "true"){ ?>
           while($records = $all->fetch(PDO::FETCH_ASSOC)){ ?>
             <option value="<?php echo $records["SortingID"]; ?>"><?php echo $records["fldSorting"]; ?></option>
           <?php }
-          ?><option value="addselect">Add to filter</option>
+          ?><option value="addselect">add to filter</option>
       </select>
     </div><div class="percentage" style="display:none" id="invisible">
     <div id="selectselectbox"></div></div>
@@ -52,7 +52,7 @@ elseif(isset($_GET["state"]) and $_GET["state"] === "false"){ ?>
       <input type="text" class="input" placeholder="give the name of the room" id="namefilter" name="" value="">
     </div>
     <div class="percentage">
-      <label>Type</label>
+      <label>type</label>
       <select id="typeselect"  placeholder="ja" data-native-menu="false">
         <option value="house"><i class="fas fa-home"></i></option>
           <?php
@@ -65,7 +65,7 @@ elseif(isset($_GET["state"]) and $_GET["state"] === "false"){ ?>
       </select>
     </div>
     <div class="percentage">
-      <label>Add</label>
+      <label>add</label>
       <input type="button" onclick="addfilter();" class="input" id="addfilters" name="" value="Add new filter">
     </div>
   </div>
@@ -131,12 +131,12 @@ elseif(isset($_GET["state"]) and $_GET["state"] === "select"){
       ?>
 
         <div class="percentage">
-          <label>Rename</label>
+          <label>rename</label>
           <input type="text" class="input" placeholder="give the name of the room" id="namefilter" name="" value="<?php echo $setupdata["fldname"]?>">
         </div>
         <div class="percentage">
 
-          <label>Type</label>
+          <label>type</label>
           <select id="typeselect" onchange="checkaddfilter();"placeholder="ja" data-native-menu="false">
             <option value="house"><i class="fas fa-home"></i></option>
               <?php
@@ -165,14 +165,14 @@ elseif(isset($_GET["state"]) and $_GET["state"] === "select"){
         <div id="selectselectbox"></div></div>
         <div class="percentage">
           <a href=""><i class="fas fa-check" onclick="modifyfilter();" style="width:3em;height:6em;"></i></a>
-          <a href=""><i onclick="deletefilter();"class="fas fa-trash-alt" style="width:3em;height:6em;"></i></a>
+          <a href=""><i onclick="deletebuilding();"class="fas fa-trash-alt" style="width:3em;height:6em;"></i></a>
         </div> <?php
   }
   elseif(isset($_GET["statebuilding"])){
     if($_GET["statebuilding"] === "true"){  ?>
       <div class="flexing">
         <div class="percentage">
-          <label>House</label>
+          <label>house</label>
           <select id="buildingselect" onchange="loadbuildingname();"placeholder="ja" data-native-menu="false">
             <option value="house"><i class="fas fa-home"></i></option><?php
             $getbuildings = $dbh->prepare("SELECT * FROM building");
@@ -193,7 +193,7 @@ elseif(isset($_GET["state"]) and $_GET["state"] === "select"){
 
         <div class="percentage">
           <a href=""><i class="fas fa-check" onclick="modifybuilding();" style="width:3em;height:6em;"></i></a>
-          <a href=""><i onclick="deletebuilding();"class="fas fa-trash-alt" style="width:3em;height:6em;"></i></a>
+          <a href=""><i onclick="deletefilter();"class="fas fa-trash-alt" style="width:3em;height:6em;"></i></a>
         </div>
       </div>
   <?php     }

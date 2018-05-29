@@ -161,6 +161,6 @@ $(document).ready(function () {
       </div>
     </div>
   </section>
-
+<?php include"phpscripts/footer.php"; ?>
 </body>
 </html>

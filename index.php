@@ -18,6 +18,9 @@ $_SESSION["eventtype"] = "index";
   <link rel="stylesheet" type="text/css" href="css/nav.css">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js"></script>
 <style media="screen">
+body{
+  top:0 !important;
+}
 .imageindex{
   width: 50em !important;
   height: 20em !important;
@@ -39,11 +42,18 @@ height: 20em !important;
 margin-top: -20em;
 z-index: 10000;
 }
+.goog-te-gadget{
+  position: absolute;
+
+z-index: 9000;
+}
 </style>
   <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
 </head>
-<body onload="eventsearch();">
+<body onload="eventsearch();" >
+
   <?php include"phpscripts/navbar.php"; ?>
+
     <div class="content column is-9">
       <div class="content column is-9-nav nav-aside is-hidden-touch is-hidden-desktop-only">
 
@@ -73,6 +83,6 @@ z-index: 10000;
   </div>
 
   <script async type="text/javascript" src="../js/bulma.js"></script>
-
+<?php include"phpscripts/footer.php"; ?>
 </body>
 </html>

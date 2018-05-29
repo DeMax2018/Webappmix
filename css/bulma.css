@@ -218,6 +218,7 @@ input,
 select,
 textarea {
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  top:0 !important;
 }
 
 code,
@@ -326,7 +327,7 @@ table th {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
         margin:0;
-        
+
         width: 100%;
   }
 
@@ -3667,7 +3668,7 @@ a.box:active {
     -webkit-flex: none !important;
         -ms-flex: none !important;
             flex: none !important;
-    width: 25% !important;
+    width: 19% !important;
   }
   .column.is-offset-3, .column.is-offset-3-tablet {
     margin-left: 25%;

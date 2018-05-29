@@ -1,4 +1,4 @@
-<?php 
+<?php
 include"conn.php";
 //include "auth.php";
 session_start();
@@ -159,8 +159,7 @@ select#soflow-color {
     <link rel="stylesheet" href="css/admin.css">
     <script>
 
-        //update checkbox styles on change event
-        //add ui-btn-active style to vertical checkbox group
+
         function updatePosts(event, ui) {
             if($("#posts").prop("checked")) {
                 $("#postslbl").addClass("ui-btn-active").trigger("refresh");
@@ -251,6 +250,7 @@ select#soflow-color {
               contentType: "application/json",
               dataType: "json",
             });
+            changebuildingstate();
         }
         function changeroomstate(){
           var stateswitch = document.getElementById('roomswitch').checked;
@@ -299,9 +299,9 @@ select#soflow-color {
               var url = url + "_" + res[i] + "-" + value;
             }
         }
-          var realurl = "filterloading.php?createroom=true&modify=true&variables=" + url ;
+          //var realurl = "filterloading.php?createroom=true&modify=true&variables=" + url ;
 
-          $("#testing").load(realurl,function(){});
+          //$("#testing").load(realurl,function(){});
           changeroomstate();
         }
         function changefilterstate(){
@@ -340,7 +340,7 @@ select#soflow-color {
         function deletefilter(){
           var del = document.getElementById('filterselect').value;
           var data = {
-            id:del
+            ids:del
           }
           $.ajax({
               type: "POST",
@@ -349,44 +349,24 @@ select#soflow-color {
               contentType: "application/json",
               dataType: "json",
             });
-            location.reload();
+            changefilterstate()
         }
         function modifyfilter(){
           var id = document.getElementById("filterselect").value;
           var name = document.getElementById("namefilter").value;
           var type = document.getElementById("typeselect").value;
           if(type === "addselect"){
-            alert("you can't do this yet!!");
+            var addid = document.getElementById("addtofilterid").value;
+            var url = "adminfunctions.php?modifyfilter=true&ids=" + id + "&nam=" + name + "&addidd=" + addid;
           }
           else{
-          var data = {
-            ids:id,
-            nam:name,
-            t:type,
-          }
-          $.ajax({
-              type: "POST",
-              url: "adminfunctions.php?modifyfilter=true",
-              data: JSON.stringify(data),
-              contentType: "application/json",
-              dataType: "json",
-            });
+            var url = "adminfunctions.php?modifyfilter=true&ids=" + id + "&nam=" + name + "&typ=" + type;
+
         }
-        location.reload();
-      }
-      function deletebuilding(){
-        var del = document.getElementById('filterselect').value;
-        var data = {
-          id:del
-        }
-        $.ajax({
-            type: "POST",
-            url: "adminfunctions.php?deletefilter=true",
-            data: JSON.stringify(data),
-            contentType: "application/json",
-            dataType: "json",
-          });
-          location.reload();
+        $("#addfilterssw").load(url,function(){
+          $("#body").trigger("create");
+        });
+
       }
       function modifybuilding(){
         var id = document.getElementById('buildingselect').value;
@@ -403,7 +383,7 @@ select#soflow-color {
             dataType: "json",
           });
 
-      location.reload();
+      changebuildingstate();
     }
     function deletebuilding(){
       var id = document.getElementById("buildingselect").value;
@@ -417,7 +397,7 @@ select#soflow-color {
           contentType: "application/json",
           dataType: "json",
         });
-
+        changebuildingstate();
     }
     function loadbuildingname(){
       var id = document.getElementById('buildingselect').value;
@@ -488,8 +468,10 @@ select#soflow-color {
                      <?php
                      $numright = $dbh->prepare("SELECT * FROM `Right`");
                      $numright->execute();
-                     while($record = $numright->fetch(PDO::FETCH_ASSOC)){ ?>
-                     <th class="is-hidden-touch"><?php echo $record["fldName"] ?></th>
+                     while($record = $numright->fetch(PDO::FETCH_ASSOC)){
+                       $name = str_replace("_"," ",$record["fldName"]);
+                       ?>
+                     <th class="is-hidden-touch"><?php echo $name ?></th>
 
                      <?php
                       if($record["RightID"] == 1){
@@ -600,7 +582,7 @@ select#soflow-color {
                     <input type="text" class="input" placeholder="give the name of the room" id="namefilter" name="" value="">
                   </div>
                   <div class="percentage">
-                    <label>type</label>
+                    <label>Type</label>
                     <select id="typeselect" onchange="checkaddfilter();"placeholder="ja" data-native-menu="false">
                         <?php
                         $all = $dbh->prepare("SELECT * FROM sorting;");
@@ -613,7 +595,7 @@ select#soflow-color {
                   </div><div class="percentage" style="display:none" id="invisible">
                   <div id="selectselectbox"></div></div>
                   <div class="percentage">
-                    <label>add</label>
+                    <label>Add</label>
                     <input type="button" onclick="addfilter();" class="input" id="addfilters" name="" value="Add new filter">
                   </div>
                 </div>
@@ -643,7 +625,7 @@ select#soflow-color {
           </div>
         </div>
     </div>
-
+<?php include"phpscripts/footer.php"; ?>
   </body>
 
 </html>

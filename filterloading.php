@@ -293,7 +293,9 @@ elseif(isset($_GET["createroom"])){
   if(isset($_GET["modify"])){
     $prep = $dbh->prepare("SET SQL_SAFE_UPDATES = 0;");
     $prep->execute();
-    $del = $dbh->prepare("DELETE FROM room_details WHERE RoomID = ".$_SESSION["Roomfilter"]);
+    $del = $dbh->prepare("DELETE FROM room_details WHERE RoomID = ".$_SESSION["Roomfilter"]." AND DetailsID != 10");
+    $del->execute();
+    $del = $dbh->prepare("DELETE FROM room WHERE RoomID = ".$_SESSION["Roomfilter"]);
     $del->execute();
   }
 
@@ -326,7 +328,6 @@ elseif(isset($_GET["createroom"])){
     $resultcheck = $check->fetch(PDO::FETCH_ASSOC);
 
     if($resultcheck["SortingID"] == 1){
-
       $insert = $dbh->prepare("INSERT INTO room_details (Textawn,RoomID,DetailsID) VALUES ('".$solo[1]."',".$roomnumber["RoomID"].",".$resultcheck["DetailsID"].")");
       $insert->execute();
     }
@@ -357,7 +358,9 @@ elseif(isset($_GET["addfilter"])){
 elseif(isset($_GET["addbuilding"])){
   $box = json_decode(file_get_contents('php://input'), true);
   $sql = $dbh->prepare("INSERT INTO building (fldName) VALUES ('".$box["name"]."')");
+  $sql2 = $dbh->prepare("INSERT INTO details (fldName,listoption) VALUES ('".$box["name"]."',5)");
   $sql->execute();
+  $sql2->execute();
 }
 elseif(isset($_GET["showselects"])){
   $arrayinfo = array();

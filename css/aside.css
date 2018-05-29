@@ -70,6 +70,7 @@ a.title:hover{
   padding-right: 0;
   padding-top: 10px;
   padding-bottom: 15px;
+
 }
 .columns.is-mobile > .column.is-narrow {
   width: 100%;
@@ -80,9 +81,10 @@ a.title:hover{
 .columns.columnsaside{
   margin-top: -10px;
   width: 100%;
+
 }
 .columns:last-child{
-  display: flex !important;
+  display: flex !important; 
 }
 .columns:not(:last-child){
   margin-bottom: 0 !important;

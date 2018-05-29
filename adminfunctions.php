@@ -18,8 +18,9 @@ if(isset($_GET["filter"]) === true){
         <?php
         $numright = $dbh->prepare("SELECT * FROM `Right`");
         $numright->execute();
-        while($record = $numright->fetch(PDO::FETCH_ASSOC)){ ?>
-        <th class="is-hidden-touch"><?php echo $record["fldName"] ?></th>
+        while($record = $numright->fetch(PDO::FETCH_ASSOC)){ $name = str_replace("_"," ",$record["fldName"]);
+        ?>
+      <th class="is-hidden-touch"><?php echo $name ?></th>
 
         <?php
          if($record["RightID"] == 1){
@@ -151,7 +152,7 @@ elseif(isset($_GET["createevent"])){
 }
 elseif(isset($_GET["addfilterselect"])){ ?>
 
-    <label>type</label>
+    <label>Type</label>
     <select id="addtofilterid" placeholder="ja" data-native-menu="false">
       <option value="clear"><i class="fas fa-home"></i></option>
         <?php
@@ -164,19 +165,76 @@ elseif(isset($_GET["addfilterselect"])){ ?>
     </select>
 <?php }
 elseif(isset($_GET["deletefilter"])){
+  $lowerdefence = $dbh->prepare("SET SQL_SAFE_UPDATES=0;");
+  $lowerdefence->execute();
   $box = json_decode(file_get_contents('php://input'), true);
-  $deleterelations = $dbh->prepare("DELETE FROM room_details WHERE DetailsID = ".$box["id"]);
+  $deleterelations = $dbh->prepare("DELETE FROM room_details WHERE DetailsID = ".$box["ids"]);
   $deleterelations->execute();
-  $delete = $dbh->prepare("DELETE FROM details WHERE DetailsID = ".$box["id"]);
+  $delete = $dbh->prepare("DELETE FROM details WHERE DetailsID = ".$box["ids"]);
   $delete->execute();
 
 }
 elseif(isset($_GET["modifyfilter"])){
-  $box = json_decode(file_get_contents('php://input'), true);
-  $update = $dbh->prepare("UPDATE details Set fldname = '".$box["nam"]."' , SortingID = ".$box["t"]." WHERE DetailsID = ".$box["ids"]);
+  $lowerdefence = $dbh->prepare("SET SQL_SAFE_UPDATES=0;");
+  $lowerdefence->execute();
+  if(isset($_GET["addidd"])){
+    $update = $dbh->prepare("UPDATE details SET fldname = '".$_GET["nam"]."' , listoption = ".$_GET["addidd"]." , SortingID = null  WHERE DetailsID = ".$_GET["ids"]);
+  }
+  else{
+    $update = $dbh->prepare("UPDATE details SET fldname = '".$_GET["nam"]."' , SortingID = ".$_GET["typ"]." WHERE DetailsID = ".$_GET["ids"]);
+  }
+  ?>
+    <div id="filterload" class="flexing">
+      <div class="percentage">
+        <label>Filter</label>
+        <select id="filterselect" onchange="updatetype()" placeholder="ja" data-native-menu="false">
+          <option value="clear"><i class="fas fa-home"></i></option>
+            <?php
+            $all = $dbh->prepare("SELECT * FROM details");
+            $all->execute();
+            while($records = $all->fetch(PDO::FETCH_ASSOC)){ ?>
+              <option value="<?php echo $records["DetailsID"]; ?>"><?php echo $records["fldname"]; ?></option>
+            <?php }
+            ?>
+        </select>
+      </div>
+      <div id="changetype" style="display:flex; width:100%;">
+
+      <div class="percentage">
+        <label>Rename</label>
+        <input type="text" class="input" placeholder="give the name of the room" id="namefilter" name="" value="">
+      </div>
+      <div class="percentage">
+
+        <label>Type</label>
+        <select id="typeselect" onchange="checkaddfilter();"placeholder="ja" data-native-menu="false">
+          <option value="clear"><i class="fas fa-home"></i></option>
+            <?php
+            $all = $dbh->prepare("SELECT * FROM sorting;");
+            $all->execute();
+            while($records = $all->fetch(PDO::FETCH_ASSOC)){ ?>
+              <option value="<?php echo $records["SortingID"]; ?>"><?php echo $records["fldSorting"]; ?></option>
+            <?php }
+            ?><option value="addselect">Add to filter</option>
+        </select>
+      </div><div class="percentage" style="display:none" id="invisible">
+      <div id="selectselectbox"></div></div>
+      <div class="percentage">
+        <a href=""><i class="fas fa-check" onclick="modifyfilter();" style="width:3em;height:6em;"></i></a>
+        <a href=""><i onclick="deletefilter();"class="fas fa-trash-alt" style="width:3em;height:6em;"></i></a>
+      </div>
+    </div>
+  </div>
+
+
+  <?php
+
+
   $update->execute();
 }
 elseif(isset($_GET["deletebuilding"])){
+  $lowerdefence = $dbh->prepare("SET SQL_SAFE_UPDATES=0;");
+  $lowerdefence->execute();
   $box = json_decode(file_get_contents('php://input'), true);
   $deletebuilding = $dbh->prepare("DELETE FROM building WHERE BuildingID = ".$box["ids"]);
   $deletebuilding->execute();
@@ -186,7 +244,12 @@ elseif(isset($_GET["deletebuilding"])){
 elseif(isset($_GET["modifybuilding"])){
   $box = json_decode(file_get_contents('php://input'), true);
   $unbox = str_replace("£"," ",$box["input"]);
+  $getbuilding = $dbh->prepare("SELECT fldName FROM building WHERE BuildingID = '".$_GET["modifybuilding"]."'");
+  $getbuilding->execute();
+  $building = $getbuilding->fetch(PDO::FETCH_ASSOC);
   $update = $dbh->prepare("UPDATE building SET fldName = '".$unbox."' WHERE BuildingID = ".$_GET["modifybuilding"].";");
+  $update2 = $dbh->prepare("UPDATE details SET fldname = '".$unbox."' WHERE fldname = '".$building["fldName"]."';");
   $update->execute();
+  $update2->execute();
 }
 ?>

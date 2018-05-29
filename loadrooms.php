@@ -9,11 +9,11 @@ if(isset($_GET["starttime"])){
 }
 if(isset($_GET["variables"])){
   $ids = "WHERE Room_DetailsID is not null ";
-  $filter = explode("_",$_GET["variables"]);
+  $filter = explode("£",$_GET["variables"]);
   foreach($filter as &$filterres){
     $type = "";
     $value = "";
-    $all = explode("-",$filterres);
+    $all = explode("~",$filterres);
     $type = $all[0];
     $value = $all[1];
     $resultsrooms = 0;
@@ -101,14 +101,11 @@ if(isset($_GET["variables"])){
     }
     $ids .= ")";
   }
-  echo $ids;
-  //echo $allids;
   $fixtime = new classes();
   $_SESSION["starttime"] = str_replace("*"," ",$_SESSION["starttime"]);
   $_SESSION["endtime"] = str_replace("*"," ",$_SESSION["endtime"]);
-  $newids = $dbh->prepare("SELECT * FROM real_tenerife.roomhours WHERE fldDate = '".$_SESSION["date"]."' and ((".$fixtime->convertime($_SESSION["starttime"])." >= real_tenerife.converting(fldStartTime) and ".$fixtime->convertime($_SESSION["endtime"])." <= real_tenerife.converting(fldEndTime)) or (".$fixtime->convertime($_SESSION["endtime"])." >= real_tenerife.converting(fldStartTime) and ".$fixtime->convertime($_SESSION["starttime"])." <= real_tenerife.converting(fldEndTime))) group by RoomID; ");
+  $newids = $dbh->prepare("SELECT * FROM roomhours WHERE fldDate = '".$_SESSION["date"]."' and ((".$fixtime->convertime($_SESSION["starttime"])." >= real_tenerife.converting(fldStartTime) and ".$fixtime->convertime($_SESSION["endtime"])." <= real_tenerife.converting(fldEndTime)) or (".$fixtime->convertime($_SESSION["endtime"])." >= real_tenerife.converting(fldStartTime) and ".$fixtime->convertime($_SESSION["starttime"])." <= real_tenerife.converting(fldEndTime))) group by RoomID; ");
   $newids->execute();
-  //$newids->debugDumpParams();
   $ids .= " AND RoomID not in (";
   $thereisarecord = 0;
   $startaddtoids = 0;
@@ -133,7 +130,8 @@ else{
   $fixtime = new classes();
   $_SESSION["starttime"] = str_replace("*"," ",$_SESSION["starttime"]);
   $_SESSION["endtime"] = str_replace("*"," ",$_SESSION["endtime"]);
-  $newids = $dbh->prepare("SELECT * FROM real_tenerife.roomhours WHERE fldDate = '".$_SESSION["date"]."' and ((".$fixtime->convertime($_SESSION["starttime"])." >= real_tenerife.converting(fldStartTime) and ".$fixtime->convertime($_SESSION["endtime"])." <= real_tenerife.converting(fldEndTime)) or (".$fixtime->convertime($_SESSION["endtime"])." >= real_tenerife.converting(fldStartTime) and ".$fixtime->convertime($_SESSION["starttime"])." <= real_tenerife.converting(fldEndTime))) group by RoomID; ");
+  $newids = $dbh->prepare("SELECT * FROM roomhours WHERE fldDate = '".$_SESSION["date"]."' and ((".$fixtime->convertime($_SESSION["starttime"])." >= real_tenerife.converting(fldStartTime) and ".$fixtime->convertime($_SESSION["endtime"])." <= real_tenerife.converting(fldEndTime)) or (".$fixtime->convertime($_SESSION["endtime"])." >= real_tenerife.converting(fldStartTime) and ".$fixtime->convertime($_SESSION["starttime"])." <= real_tenerife.converting(fldEndTime))) group by RoomID; ");
+
   $newids->execute();
   $ids .= " WHERE RoomID not in (";
   $thereisarecord = 0;
@@ -161,6 +159,7 @@ else{
   <?php if(isset($_GET["page"])){
     $pag = $_GET["page"] * 6 - 6;
     $sql = $dbh->prepare("SELECT * FROM room ".$ids." LIMIT 6 OFFSET ".$pag);
+    $sql->debugDumpParams();
     $sql->bindParam(2,$pag, PDO::PARAM_INT);
     $count = $dbh->prepare("SELECT count(RoomID) FROM room ".$ids);
     $count->execute();
@@ -175,10 +174,12 @@ else{
   }
 
   $sql->bindValue(1, "%''%", PDO::PARAM_STR);
-  $sql->debugDumpParams();
   $sql->execute();
   $first = true;
   while($rows = $sql->fetch(PDO::FETCH_ASSOC)){
+    $getbuilding = $dbh->prepare("SELECT Textawn FROM room_details WHERE DetailsID = 5 ");
+    $getbuilding->execute();
+    $namebuilding = $getbuilding->fetch(PDO::FETCH_ASSOC);
     $getname = $dbh->prepare("SELECT * FROM room_details WHERE DetailsID = 4 and RoomID = ".$rows["RoomID"]);
     $getname->execute();
     $nameroom = $getname->fetch(PDO::FETCH_ASSOC);
@@ -189,7 +190,7 @@ else{
       $mainpic["Textawn"] = "https://placehold.it/600x300";
     }
     elseif($mainpic["Textawn"] != ""){
-
+$img = str_replace(" ","",$mainpic["Textawn"]);
     }
     else{
       $mainpic["Textawn"] = "https://placehold.it/600x300";
@@ -203,7 +204,7 @@ else{
         <div class="column is-6">
           <div id="show" onclick="show();" style="height:100% !important"  class="panel">
             <p class="is-marginless" style="height:15em;">
-              <img src="<?php echo "upload/".$mainpic["Textawn"]; ?>"style="height:100%;width:100%;">
+              <img src="<?php echo "upload/".$img; ?>"style="height:100%;width:100%;">
             </p>
             <div class="panel-block">
               <div class="columns columnsaside">
@@ -211,8 +212,8 @@ else{
                   <div class="panel-block-item"><?php echo $nameroom["Textawn"]; ?></div>
                 </div>
                 <div class="column has-text-right">
-                  <div class="panel-block-item"><?php echo 1 ?><i class="fa fa-user"></i></div>
-                  <div class="panel-block-item"><?php echo $rows["RoomID"] ?><i class="fa fa-calendar"></i></div>
+                  <div class="panel-block-item"><i class="fas fa-check"></i></div>
+                  <div class="panel-block-item"><?php echo $namebuilding["Textawn"] ?><i class="fas fa-building"></i></div>
 
                 </div>
               </div>
@@ -227,7 +228,7 @@ else{
     <div class="column is-6">
       <div id="show" onclick="show();" style="height:100% !important" class="panel">
         <p class="is-marginless" style="height:15em;">
-          <img src="<?php echo "upload/".$mainpic["Textawn"]; ?>"style="height:100%;width:100%;">
+          <img src="<?php echo "upload/".$img; ?>"style="height:100%;width:100%;">
         </p>
         <div class="panel-block">
           <div class="columns columnsaside">
@@ -235,8 +236,8 @@ else{
               <div class="panel-block-item"><?php echo $nameroom["Textawn"]; ?></div>
             </div>
             <div class="column has-text-right">
-              <div class="panel-block-item"><?php echo 1 ?><i class="fa fa-user"></i></div>
-              <div class="panel-block-item"><?php echo $rows["RoomID"] ?><i class="fa fa-calendar"></i></div>
+              <div class="panel-block-item"><i class="fas fa-check"></i></div>
+              <div class="panel-block-item"><?php echo $namebuilding["Textawn"] ?><i class="fas fa-building"></i></div>
 
             </div>
           </div>
