@@ -10,6 +10,7 @@ $_SESSION["eventtype"] = "myevents";
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Events</title>
+  <link rel="shortcut icon" type="image/png" href="images/flavicon.jpg"/>
   <link rel="stylesheet" type="text/css" href="../css/bulma.css">
   <script type="text/javascript" src="js1.js"></script>
   <link rel="stylesheet" type="text/css" href="../css/aside.css">

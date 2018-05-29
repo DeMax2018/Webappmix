@@ -27,6 +27,7 @@ $_SESSION["arrayfilter"] = array();
   <script defer="" src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'><link rel='stylesheet prefetch' href='css/vuetify.css'>
   <link rel="stylesheet" href="/css/eventcreate.css">
+  <link rel="shortcut icon" type="image/png" href="images/flavicon.jpg"/>
   <link rel="stylesheet" type="text/css" href="css/nav.css">
   <script type="text/javascript" src="js/ajaxjquery.js"></script>
   <link rel="stylesheet" href="/css/bulma.css">
@@ -300,7 +301,7 @@ $_SESSION["arrayfilter"] = array();
                         <div style="display: block;min-height: 20em;" id="roomfilters">
                           <?php
                             $jscall = "";
-                            $prequery = $dbh->prepare("SELECT * FROM details WHERE listoption is null ;");
+                            $prequery = $dbh->prepare("SELECT * FROM details WHERE listoption is null and fldname != 'image' ;");
                             $prequery->execute();
                             while($pre = $prequery->fetch(PDO::FETCH_ASSOC)){
                               if($jscall === ""){
@@ -311,16 +312,16 @@ $_SESSION["arrayfilter"] = array();
                               }
                               $_SESSION["jscall"] = $jscall;
                             }
-                            $getall = $dbh->prepare("SELECT * FROM details WHERE listoption is null ;");
+                            $getall = $dbh->prepare("SELECT * FROM details WHERE listoption is null and fldname != 'image';");
                             $getall->execute();
                             while($all = $getall->fetch(PDO::FETCH_ASSOC)){
                               array_push($_SESSION["arrayfilter"], $all["fldname"]);
                               switch ($all["SortingID"]) {
                                 case 1:
-
+                                if($all["fldname"] === "image"){}else{
                                 ?>
                                   <v-text-field label="Name of <?php echo $all["fldname"]; ?>" id="<?php echo $all["fldname"]; ?>" onchange="query(<?php echo "'".$jscall."'"; ?>);" v-model="registration.<?php echo $all["fldname"] ?>" required></v-text-field>
-                          <?php  break;
+                          <?php }  break;
                                 case 2: ?>
                                 <v-text-field label="how many <?php echo $all["fldname"]; ?>" id="<?php echo $all["fldname"]; ?>" onchange="query(<?php echo "'".$jscall."'"; ?>);" type="number" v-model="registration.<?php echo $all["fldname"]; ?>" required></v-text-field>
                           <?php  break;

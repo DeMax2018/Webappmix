@@ -17,7 +17,7 @@ $pageauth->pageauth("admin");
     <title>Admin</title>
     <link rel="stylesheet" type="text/css" href="../css/bulma.css">
     <link rel="stylesheet" type="text/css" href="css/nav.css">
-
+    <link rel="shortcut icon" type="image/png" href="images/flavicon.jpg"/>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="jquery-ui-1.12.1/jquery-ui.js"></script>
