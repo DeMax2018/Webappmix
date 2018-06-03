@@ -6,15 +6,32 @@ $_SESSION["eventid"] = $_GET["id"];
 $getalldata = $dbh->prepare("SELECT * FROM event WHERE EventID = ".$_GET["id"]);
 $getalldata->execute();
 $alldata = $getalldata->fetch(PDO::FETCH_ASSOC);
+if($alldata["EventOrRent"] == 0){
+  $rent = "true";
+  $getmyevent = $dbh->prepare("SELECT * FROM event WHERE CreatorID = ".$_SESSION["userid"]);
+  $getmyevent->execute();
+  $getout = "true";
+  while($ownevent = $getmyevent->fetch(PDO::FETCH_ASSOC)){
+    if($ownevent["EventID"] == $_GET["id"]){
+      $getout = "false";
+    }
+  }
+  if($getout === "true"){
+    header("location: index.php");
+  }
+}
 $getauthor = $dbh->prepare("SELECT * FROM user WHERE UserID = ".$alldata["CreatorID"]);
 $getauthor->execute();
 $author = $getauthor->fetch(PDO::FETCH_ASSOC);
 $gettimetable = $dbh->prepare("SELECT * FROM roomhours WHERE Room_HoursID = ".$alldata["Reservation"]);
 $gettimetable->execute();
 $timetable = $gettimetable->fetch(PDO::FETCH_ASSOC);
-$getroomname = $dbh->prepare('SELECT Textawn FROM room_details WHERE Details = 4 and RoomID = '.$timetable["RoomID"]);
+$getroomname = $dbh->prepare('SELECT Textawn FROM room_details WHERE DetailsID = 4 and RoomID = '.$timetable["RoomID"]);
 $getroomname->execute();
 $roomname = $getroomname->fetch(PDO::FETCH_ASSOC);
+$getimage= $dbh->prepare('SELECT Textawn FROM room_details WHERE DetailsID = 10 and RoomID = '.$timetable["RoomID"]);
+$getimage->execute();
+$image = $getimage->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,6 +42,7 @@ $roomname = $getroomname->fetch(PDO::FETCH_ASSOC);
       <title>event</title>
       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
       <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+      <link rel="shortcut icon" type="image/png" href="images/flavicon.jpg"/>
       <script type="text/javascript" src="jquery-ui-1.12.1/jquery-ui.js"></script>
       <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
       <script type="text/javascript" src="js1.js"></script>
@@ -48,7 +66,7 @@ function myMap() {
 
   </head>
   <body>
-    <div class="loader" id="loading"style="display:none;z-index: 9000;position: fixed;width: 2em;height: 2em;margin-top: 18%;margin-left: 45%;">Loading...</div>
+    <div class="loader" id="loading"style="display:none;z-index: 9000;position: fixed;width: 2em;height: 2em;margin-top: 18%;margin-left: 45%;"></div>
     <script async type="text/javascript" src="../js/bulma.js"></script>
 
 <?php include"phpscripts/navbar.php"; ?>
@@ -68,7 +86,7 @@ function myMap() {
               <div class="tile is-parent is-vertical">
                 <article class="tile is-child box">
                   <?php
-                  if(!isset($_GET["view"]) and isset($_SESSION["userid"])){ ?>
+                  if(!isset($rent) and isset($_SESSION["userid"])){ ?>
                     <?php
                     $checkforparticipation = $dbh->prepare("SELECT * FROM ticket WHERE EventID = ".$_SESSION["eventid"]." AND OwnerID = ".$_SESSION["userid"]);
                     $checkforparticipation->execute();
@@ -106,19 +124,19 @@ function myMap() {
                                 <td>available tickets</td>
                                 <td><?php $ticketleft = $alldata["Limited_Ticket"] - $alldata["Sold_Ticket"]; echo $ticketleft ?></td>
                               </tr>
-                              <tr>
-                                <td>Room name</td>
-                                <td><?php echo $roomname["Textawn"] ?></td>
-                              </tr>
+                              
                             </tbody>
                           </table>
 
                   <?php }
-                  else{
+                  elseif(isset($rent) and isset($_SESSION["userid"])) {
                     $getroom = $dbh->prepare("SELECT * FROM room WHERE RoomID = ".$timetable["RoomID"]);
                     $getroom->execute();
                     $room = $getroom->fetch(PDO::FETCH_ASSOC);
                     ?>
+                    <div onclick="delmailrent();" class="button right">
+                      Remove reservation
+                    </div>
                     <table style="width: 30%; margin: auto; border: none;">
                       <tbody>
                         <h1 style="text-align:center">Specifications</h1>
@@ -139,8 +157,37 @@ function myMap() {
                                 <td><?php echo $timetable["fldEndTime"] ?></td>
                               </tr>
                               <tr>
-                                <td>available tickets</td>
-                                <td><?php $ticketleft = $alldata["Limited_Ticket"] - $alldata["Sold_Ticket"]; echo $ticketleft ?></td>
+                                <td>Room name</td>
+                                <td><?php echo $roomname["Textawn"] ?></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                <?php        }
+                else{
+
+                    $getroom = $dbh->prepare("SELECT * FROM room WHERE RoomID = ".$timetable["RoomID"]);
+                    $getroom->execute();
+                    $room = $getroom->fetch(PDO::FETCH_ASSOC);
+                    ?>
+
+                    <table style="width: 30%; margin: auto; border: none;">
+                      <tbody>
+                        <h1 style="text-align:center">Specifications</h1>
+                              <tr>
+                                <td>Owner</td>
+                                <td><?php echo $author["fldName"] ?></td>
+                              </tr>
+                              <tr>
+                                <td>Date</td>
+                                <td><?php echo $timetable["fldDate"] ?></td>
+                              </tr>
+                              <tr>
+                                <td>Start hour</td>
+                                <td><?php echo $timetable["fldStartTime"] ?></td>
+                              </tr>
+                              <tr>
+                                <td>End hour</td>
+                                <td><?php echo $timetable["fldEndTime"] ?></td>
                               </tr>
                               <tr>
                                 <td>Room name</td>
@@ -148,13 +195,16 @@ function myMap() {
                               </tr>
                             </tbody>
                           </table>
-                <?php        }
+              <?php  }
                         ?>
 
                 </article>
                 <article class="tile is-child box">
-                  <ul class="rslides">
+                  <ul class="rslides"><?php if(isset($rent)){ ?>
+                    <li style="justify-content:center;"><img src="upload/<?php echo $image["Textawn"] ?>" alt=""></li>
+                <?php  }else{ ?>
                     <li style="justify-content:center;"><img src="upload/<?php echo $alldata["Mainpicture"] ?>" alt=""></li>
+                  <?php } ?>
                   </ul>
                   <script>
                     $(function() {
@@ -231,6 +281,7 @@ function myMap() {
           </div>
 
         </div>
+        <?php if(isset($rent)){}else{ ?>
         <div class="tile is-ancestor">
           <div class="tile is-parent is-6">
             <article class="tile is-child box">
@@ -249,6 +300,7 @@ function myMap() {
             </article>
           </div>
         </div>
+      <?php } ?>
       </div>
     </div>
     <?php include"phpscripts/footer.php"; ?>

@@ -26,8 +26,9 @@ class router
   public $createroom = array("admin","teacher","user");
   public $myevents = array("admin","teacher","user");
   public $mymeetings = array("admin","teacher","user");
-  public $createevent = array("admin","teacher");
   public $changeuserinfo = array("admin","teacher","user");
+  public $event = array("admin","teacher");
+  public $rent = array("admin","teacher","user");
 }
 
 ?>

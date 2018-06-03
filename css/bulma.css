@@ -6802,3 +6802,12 @@ a.panel-block:hover {
   display: grid;
 
 }
+.articletermsofservice{
+  width: 70%;
+      box-shadow: 1px 1px 5px 0px black;
+border: 1px solid #d3d6db;
+
+margin: auto;
+
+min-height: 71%;
+}

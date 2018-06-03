@@ -205,6 +205,21 @@ function delmailevent(){
     }
   });
 }
+function delmailrent(){
+  var parameters = {
+    "id": "insession"
+  }
+  $.ajax({
+    type: "POST",
+    url: "mail.php?rentdel=true",
+    data: JSON.stringify(parameters),
+    contentType: "application/json",
+    dataType: "json",
+    error: function(){
+      window.location = "myevents.php";
+    }
+  });
+}
 function looking(){
   var ids = [];
   var url = "testingfilter.php?filters=";
@@ -217,4 +232,7 @@ function looking(){
     url += "_" + ids[i];
   }
   $("#fill").load(url,function(){});
+}
+function showlang() {
+  $( "#footer" ).show();
 }

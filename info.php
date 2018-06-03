@@ -1,11 +1,6 @@
 <?php
 include"conn.php";
 session_start();
-$_SESSION["eventtype"] = "mymeetings";
-include"dbclasses.php";
-$pageauth = new classes;
-$admin = "admin";
-$pageauth->pageauth("mymeetings");
  ?>
 <!DOCTYPE html>
 <html>
@@ -13,8 +8,8 @@ $pageauth->pageauth("mymeetings");
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Events</title>
   <link rel="shortcut icon" type="image/png" href="images/flavicon.jpg"/>
+  <title>Info</title>
   <link rel="stylesheet" type="text/css" href="../css/bulma.css">
   <script type="text/javascript" src="js1.js"></script>
   <link rel="stylesheet" type="text/css" href="../css/aside.css">
@@ -22,32 +17,16 @@ $pageauth->pageauth("mymeetings");
   <link rel="stylesheet" type="text/css" href="css/nav.css">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js"></script>
 <style media="screen">
-.imageindex{
-  width: 50em !important;
-  height: 20em !important;
-}
-img {
-
-  top: 25px;
-  left: 25px;
-}
-.imgA1 {
-  float: left;
-      z-index: 1;
-      width: 50em !important;
-      height: 20em !important;
-}
-.imgB1 {
-  width: 50em !important;
-height: 20em !important;
-margin-top: -20em;
-z-index: 10000;
+body{
+  top:0 !important;
 }
 </style>
   <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
 </head>
-<body onload="eventsearch();">
-    <?php include"phpscripts/navbar.php"; ?>
+<body>
+
+  <?php include"phpscripts/navbar.php"; ?>
+
     <div class="content column is-9">
       <div class="content column is-9-nav nav-aside is-hidden-touch is-hidden-desktop-only">
 
@@ -56,25 +35,19 @@ z-index: 10000;
           <span></span>
           <span></span>
         </span>
-        <ul style="display:none" class="ulsearch nobullets isflex justify_stuff">
-
-          <div class="search">
-            <span class="fa fa-search"></span>
-            <input id="search" onkeyup='eventsearch();' placeholder="Search term">
-
-          </div>
-        </ul>
-      </div>
-      <div id="events" class="section scroll things">
-
-
-        </div>
-
 
       </div>
+
     </div>
   </div>
-
+  <header style="margin-top: 2em;
+text-align: center;
+font-size: 4em;">
+ Terms of service
+  </header>
+  <article class="articletermsofservice">
+    chapter one
+  </article>
   <script async type="text/javascript" src="../js/bulma.js"></script>
 <?php include"phpscripts/footer.php"; ?>
 </body>

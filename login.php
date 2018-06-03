@@ -15,6 +15,8 @@
   <script src="https://code.jquery.com/color/jquery.color.plus-names-2.1.2.js"></script>
   <script async type="text/javascript" src="../js/bulma.js"></script>
   <script async type="text/javascript" src="../js/login.js"></script>
+  <link href="css/jquerymobile.css" rel="stylesheet" type="text/css" />
+
   <script type="text/javascript">
   $(document).ready(function () {
   $('#checkpass').keyup(function () {
@@ -151,6 +153,10 @@ $(document).ready(function () {
                 </div>
                 <div class="control">
                   <input class="input is-large" type="password" id="checkpass" name="checkpass" placeholder="Confirm Password*" required>
+                </div>
+                <div class="control">
+                    <input  id='rightswitch' data-role='flipswitch' onchange='changerightstate();'  type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch' required>
+                    &nbsp&nbspI accept the<a style="color:cornflowerblue;" href="info.php">&nbsp terms of service</a>
                 </div>
               </div>
               <button style="width:100%;"class="button is-block is-info is-large" type="submit">Register</button>

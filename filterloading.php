@@ -389,5 +389,9 @@ elseif(isset($_GET["showselects"])){
       <?php }
       ?>
   </select>
+  <a href=""><i onclick="deleteroom();"class="fas fa-trash-alt" style="width:3em;height:6em;position: absolute;
+margin-top: -5em;
+margin-left: 19em;"></i></a>
+
 <?php }
 ?>

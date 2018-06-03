@@ -9,11 +9,11 @@ if(isset($_GET["starttime"])){
 }
 if(isset($_GET["variables"])){
   $ids = "WHERE Room_DetailsID is not null ";
-  $filter = explode("£",$_GET["variables"]);
+  $filter = explode(">",$_GET["variables"]);
   foreach($filter as &$filterres){
     $type = "";
     $value = "";
-    $all = explode("~",$filterres);
+    $all = explode("@",$filterres);
     $type = $all[0];
     $value = $all[1];
     $resultsrooms = 0;

@@ -2,6 +2,7 @@
 session_start();
 include"conn.php";
 include"dbclasses.php";
+$loginsucces = false;
 $safetyfirst = new classes;
 $pass = $safetyfirst->secure($_POST["passlogin"]);
 $mail = $safetyfirst->secure($_POST["maillog"]);
@@ -11,6 +12,7 @@ $loginsql->execute();
 while ($rows = $loginsql->fetch(PDO::FETCH_ASSOC)) {
   $securepassword = $safetyfirst->hashish($pass,$rows["salt"]);
   if($rows["fldPassword"] === $securepassword AND $rows["fldMail"] === $mail){
+    $loginsucces = true;
     $_SESSION["userid"] = $rows["UserID"];
     $_SESSION["mail"] = $rows["fldMail"];
     $_SESSION["name"] = $rows["fldName"];
@@ -41,6 +43,9 @@ while ($rows = $loginsql->fetch(PDO::FETCH_ASSOC)) {
       array_push($_SESSION["auth"],"admin");
     }
     header("location: index.php");
+  }
+  if($loginsucces == false){
+    header("location: login.php");
   }
 }
 

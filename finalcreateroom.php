@@ -8,9 +8,9 @@ if(isset($_GET["createevent"])){
   $soldtickets = 0;
   $rent = 1;
   $active = 1;
-  $nameev = str_replace("+"," ",$data["name"]);
-  $discriptionreal = str_replace("+"," ",$data["discrip"]);
-  $Necessitiesreal = str_replace("+"," ",$data["nessessit"]);
+  $nameev = str_replace("@"," ",$data["name"]);
+  $discriptionreal = str_replace("@"," ",$data["discrip"]);
+  $Necessitiesreal = str_replace("@"," ",$data["nessessit"]);
   $inserttimetable = $dbh->prepare("INSERT INTO roomhours (RoomID,fldDate,fldStartTime,fldEndTime) VALUES (?,?,?,?) ;");
   $inserttimetable->bindParam(1,$_SESSION["roomids"],PDO::PARAM_STR);
   $inserttimetable->bindParam(2,$_SESSION["date"],PDO::PARAM_STR);
@@ -22,7 +22,7 @@ if(isset($_GET["createevent"])){
   $timetable = $gettimetable->fetch(PDO::FETCH_ASSOC);
   $inserteventtable = $dbh->prepare("INSERT INTO event (eventname,CreatorID,Limited_Ticket,Discription,EventOrRent,date_event,active,Sold_Ticket,Reservation,Necessities) VALUES (?,?,?,?,?,?,?,?,?,?);");
   $inserteventtable->bindParam(1,$nameev,PDO::PARAM_STR);
-  $inserteventtable->bindParam(2,$_SESSION["userID"],PDO::PARAM_STR);
+  $inserteventtable->bindParam(2,$_SESSION["userid"],PDO::PARAM_STR);
   $inserteventtable->bindParam(3,$data["ticket"],PDO::PARAM_INT);
   $inserteventtable->bindParam(4,$discriptionreal, PDO::PARAM_STR);
   $inserteventtable->bindParam(5,$rent,PDO::PARAM_INT);
@@ -42,6 +42,7 @@ if(isset($_GET["createevent"])){
 elseif(isset($_GET["createbooking"])){
   $rent = 0;
   $active = 1;
+  $empty = "empty";
   $data = json_decode(file_get_contents('php://input'), true);
   $inserttimetable = $dbh->prepare("INSERT INTO roomhours (RoomID,fldDate,fldStartTime,fldEndTime) VALUES (?,?,?,?) ;");
   $inserttimetable->bindParam(1,$_SESSION["roomids"],PDO::PARAM_STR);
@@ -52,14 +53,16 @@ elseif(isset($_GET["createbooking"])){
   $gettimetable = $dbh->prepare("SELECT Room_HoursID FROM roomhours order by Room_HoursID desc limit 1;");
   $gettimetable->execute();
   $timetable = $gettimetable->fetch(PDO::FETCH_ASSOC);
-  $inserteventtable = $dbh->prepare("INSERT INTO event (CreatorID,Reservation,EventOrRent,Active,date_event) VALUES (?,?,?,?,?);");
+  $inserteventtable = $dbh->prepare("INSERT INTO event (CreatorID,Reservation,EventOrRent,Active,date_event,attending,eventname) VALUES (?,?,?,?,?,?,?);");
   $inserteventtable->bindParam(1,$_SESSION["userid"],PDO::PARAM_STR);
   $inserteventtable->bindParam(2,$timetable["Room_HoursID"],PDO::PARAM_INT);
   $inserteventtable->bindParam(3,$rent,PDO::PARAM_INT);
   $inserteventtable->bindParam(4,$active,PDO::PARAM_INT);
   $inserteventtable->bindParam(5,$_SESSION["date"],PDO::PARAM_STR);
+  $inserteventtable->bindParam(6,$data["attendingnum"],PDO::PARAM_INT);
+  $inserteventtable->bindParam(7,$empty,PDO::PARAM_INT);
   $inserteventtable->execute();
-  $inserteventtable->debugDumpParams();
+//  $inserteventtable->debugDumpParams();
   $getevent = $dbh->prepare("SELECT * FROM event ORDER BY EventID DESC LIMIT 1 ; ");
   $getevent->execute();
   $event = $getevent->fetch(PDO::FETCH_ASSOC);

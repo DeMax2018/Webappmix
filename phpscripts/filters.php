@@ -220,5 +220,12 @@ elseif(isset($_GET["state"]) and $_GET["state"] === "select"){
       <input type="text" class="input" placeholder="give the building a name" id="namebuilding" name="" value="<?php echo $name["fldName"] ?>">
 
 <?php  }
+elseif(isset($_GET["deleteroom"])){
+  $box = json_decode(file_get_contents('php://input'), true);
+  $deleteroom = $dbh->prepare("DELETE FROM room WHERE RoomID = ".$box["ids"]);
+  $deleteroomdetails = $dbh->prepare("DELETE FROM room_details WHERE RoomID = ".$box["ids"]);
+  $deleteroom->execute();
+  $deleteroomdetails->execute();
+}
 
 ?>

@@ -488,10 +488,10 @@ elseif($_SESSION["eventtype"] === "mymeetings"){
             <div class="panel-block">
               <div class="columns columnsaside" <?php if($rows["Limited_Ticket"] == $rows["Sold_Ticket"]){ ?>style="margin-top: -2em;"<?php } ?>>
                 <div class="column">
-                  <div class="panel-block-item"><?php echo $rows["eventname"]; ?></div>
+                  <div class="panel-block-item"></div>
                 </div>
                 <div class="column has-text-right">
-                  <div class="panel-block-item"><?php echo $rows["Sold_Ticket"] ?><i class="fa fa-user"></i></div>
+                  <div class="panel-block-item"></div>
                   <div class="panel-block-item"><?php echo $rows["date_event"] ?><i class="fa fa-calendar"></i></div>
                 </div>
               </div>
@@ -520,10 +520,10 @@ elseif($_SESSION["eventtype"] === "mymeetings"){
         <div class="panel-block">
           <div class="columns columnsaside" <?php if($rows["Limited_Ticket"] == $rows["Sold_Ticket"]){ ?>style="margin-top: -2em;"<?php } ?>>
             <div class="column">
-              <div class="panel-block-item"><?php echo $rows["eventname"]; ?></div>
+              <div class="panel-block-item"></div>
             </div>
             <div class="column has-text-right">
-              <div class="panel-block-item"><?php echo $rows["Sold_Ticket"] ?> <i class="fa fa-user"></i></div>
+              <div class="panel-block-item"></div>
               <div class="panel-block-item"><?php echo $rows["date_event"] ?> <i class="fa fa-calendar"></i></div>
             </div>
           </div>

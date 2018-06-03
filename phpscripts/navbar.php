@@ -58,6 +58,9 @@
           <a data-ajax="false" href="admin.php" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
         </div>
         <?php } ?>
+        <div class="sectionfix">
+          <a data-ajax="false" href="info.php" class="item active"><span class="icon"><i class="fas fa-info-circle"></i></span><span class="name">Info</span></a>
+        </div>
       </div>
     </div>
   </div>
@@ -110,6 +113,8 @@
       <div class="main">
         <div class="title"><i class="fa fa-cog"></i>  Admin</div>
         <a data-ajax="false" href="admin.php" class="item link1"><span class="icon"><i class="fa fa-user"></i></span>Account management</a>
+        <a data-ajax="false" href="info.php" class="item link2"><span class="icon"><i class="fas fa-info-circle"></i></span>Info</a>
+
       </div>
       <?php } ?>
     </div>

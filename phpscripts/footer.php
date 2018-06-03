@@ -1,4 +1,5 @@
-<footer>        <div id="google_translate_element" ></div><script type="text/javascript">
+<footer>        <div id="google_translate_element" style="position: fixed;
+    bottom: 2em;z-index:9000"></div><script type="text/javascript">
         function googleTranslateElementInit() {
           new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,es', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
         }

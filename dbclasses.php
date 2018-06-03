@@ -14,7 +14,7 @@ class classes
   public function qrcode($code){
     include "BarcodeQR.php";
     $qr = new BarcodeQR();
-    $qr->url("https://swfactory.be/testingarea?code=".$code);
+    $qr->url("https://cifpcm-reservations.swfactory.be/authcode.php?code=".$code);
     $qr->draw(300,"ticket");
   }
   public function registerhash($text){
@@ -79,6 +79,31 @@ class classes
           header("location: index.php");
         }
         break;
+        case 'myevents':
+          if(!assert(array_intersect($_SESSION["auth"], $auth->myevents))){
+            header("location: index.php");
+          }
+          break;
+          case 'mymeetings':
+            if(!assert(array_intersect($_SESSION["auth"], $auth->mymeetings))){
+              header("location: index.php");
+            }
+            break;
+            case 'changeuserinfo':
+              if(!assert(array_intersect($_SESSION["auth"], $auth->changeuserinfo))){
+                header("location: index.php");
+              }
+              break;
+              case 'rent':
+                if(!assert(array_intersect($_SESSION["auth"], $auth->rent))){
+                  header("location: index.php");
+                }
+                break;
+                case 'event':
+                  if(!assert(array_intersect($_SESSION["auth"], $auth->event))){
+                    header("location: index.php");
+                  }
+                  break;
       default:
         break;
     }

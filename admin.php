@@ -237,6 +237,7 @@ select#soflow-color {
               contentType: "application/json",
               dataType: "json",
             });
+            changefilterstate()
         }
         function addbuilding(){
           var name = document.getElementById('namebuilding').value;
@@ -339,17 +340,23 @@ select#soflow-color {
         }
         function deletefilter(){
           var del = document.getElementById('filterselect').value;
-          var data = {
-            ids:del
+          var nodelallowed = ["4","5","6","10"];
+          if(nodelallowed.indexOf(del) != -1){
+            alert("not allowed to delete");
           }
-          $.ajax({
-              type: "POST",
-              url: "adminfunctions.php?deletefilter=true",
-              data: JSON.stringify(data),
-              contentType: "application/json",
-              dataType: "json",
-            });
-            changefilterstate()
+          else{
+            var data = {
+              ids:del
+            }
+            $.ajax({
+                type: "POST",
+                url: "adminfunctions.php?deletefilter=true",
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                dataType: "json",
+              });
+              changefilterstate()
+          }
         }
         function modifyfilter(){
           var id = document.getElementById("filterselect").value;
@@ -404,6 +411,21 @@ select#soflow-color {
       $("#buildingname").load("phpscripts/filters.php?buildingnameload=" + id,function(){
         $("#buildingname").trigger("create");
       })
+    }
+    function deleteroom(){
+      var id = document.getElementById("room-menu").value;
+      var data = {
+        ids:id
+      }
+      $.ajax({
+          type: "POST",
+          url: "phpscripts/filters.php?deleteroom=true",
+          data: JSON.stringify(data),
+          contentType: "application/json",
+          dataType: "json",
+        });
+      changeroomstate();
+
     }
     </script>
   </head>

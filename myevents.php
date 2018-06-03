@@ -2,6 +2,10 @@
 include"conn.php";
 session_start();
 $_SESSION["eventtype"] = "myevents";
+include"dbclasses.php";
+$pageauth = new classes;
+$admin = "admin";
+$pageauth->pageauth("myevents");
  ?>
 <!DOCTYPE html>
 <html>
