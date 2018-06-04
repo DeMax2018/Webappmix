@@ -252,4 +252,10 @@ elseif(isset($_GET["modifybuilding"])){
   $update->execute();
   $update2->execute();
 }
+elseif(isset($_GET["adddefault"])){ ?>
+  <label>default</label>
+
+<input  id='default' data-role='flipswitch'  type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'>
+<?php
+}
 ?>

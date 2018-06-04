@@ -187,10 +187,14 @@ select#soflow-color {
             opt = options[i];
 
             if (opt.selected) {
-              result.push(opt.value || opt.text);
+              var text = opt.text.replace(" ","^");
+              var value = opt.value.replace(" ","^");
+              result.push(value || text);
+              alert(value);
             }
           }
           for (var i = 0, len = result.length ; i < len; i++) {
+
             if(result[i] === "image"){
               finaladd = true;
             }
@@ -225,10 +229,13 @@ select#soflow-color {
         function addfilter(){
           var name = document.getElementById("namefilter").value;
           var type = document.getElementById("typeselect").value;
+          var defa = document.getElementById("default").checked;
+          alert(defa);
           var urluse = "";
           var parameters = {
             "name": name,
-            "type": type
+            "type": type,
+            "def": defa
           }
           $.ajax({
               type: "POST",
@@ -329,13 +336,26 @@ select#soflow-color {
           var checkforaddfilter = document.getElementById("typeselect").value;
           if(checkforaddfilter === "addselect"){
             $("#invisible").css("display","initial");
+            $("#defau").css("display","none");
+            $("#defau").empty();
             $("#selectselectbox").load("adminfunctions.php?addfilterselect=true",function(){
               $("#selectselectbox").trigger("create");
             });
           }
+          else if (checkforaddfilter == 4) {
+            $("#defau").css("display","initial");
+            $("#defau").load("adminfunctions.php?adddefault=true",function(){
+              $("#defau").trigger("create");
+            });
+            $("#selectselectbox").empty();
+            $("#invisible").css("display","none");
+          }
           else{
             $("#selectselectbox").empty();
             $("#invisible").css("display","none");
+            $("#defau").empty();
+            $("#defau").css("display","none");
+            $("#default").prop("checked", false)
           }
         }
         function deletefilter(){
@@ -614,7 +634,13 @@ select#soflow-color {
                         <?php }
                         ?><option value="addselect">add to filter</option>
                     </select>
-                  </div><div class="percentage" style="display:none" id="invisible">
+                  </div>
+                  <div  id="defau" style="display:none;"class="percentage">
+                    <label>default</label>
+
+                  <input  id='default' data-role='flipswitch'  type='checkbox' data-on-text='' data-off-text='' data-wrapper-class='custom-label-flipswitch'>
+                </div>
+                  <div class="percentage" style="display:none" id="invisible">
                   <div id="selectselectbox"></div></div>
                   <div class="percentage">
                     <label>Add</label>
@@ -638,6 +664,7 @@ select#soflow-color {
                     <label>Name</label>
                     <input type="text" class="input" placeholder="give the building a name" id="namebuilding" name="" value="">
                   </div>
+
                   <div class="percentage">
                     <label>Add</label>
                     <input type="button" onclick="addbuilding();" class="input" id="addbuilding" name="" value="Add new filter">

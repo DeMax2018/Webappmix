@@ -36,7 +36,7 @@ $_SESSION["overview"] = $_GET["get"];
 
   foreach($user as &$namefil){
 
-
+    $namefil = str_replace("^"," ",$namefil);
 
 
       $gettype = $dbh->prepare("SELECT * FROM details WHERE fldname = '".$namefil."'");
@@ -354,6 +354,17 @@ elseif(isset($_GET["addfilter"])){
   $box = json_decode(file_get_contents('php://input'), true);
   $sql = $dbh->prepare("INSERT INTO details (fldname, SortingID) VALUES ('".$box["name"]."',". $box["type"].")");
   $sql->execute();
+  if($box["def"] == 1){
+    $getdetail = $dbh->prepare("SELECT * FROM details WHERE fldname = '".$box["name"]."'");
+    $getdetail->execute();
+    $detail = $getdetail->fetch(PDO::FETCH_ASSOC);
+    $getallid = $dbh->prepare("SELECT RoomID FROM room_details group by RoomID");
+    $getallid->execute();
+    while($allid = $getallid->fetch(PDO::FETCH_ASSOC)){
+      $insertimplementation = $dbh->prepare("INSERT INTO room_details (RoomID,Boolawn,DetailsID) VALUES (".$allid["RoomID"].",1,".$detail["DetailsID"].")");
+      $insertimplementation->execute();
+    }
+  }
 }
 elseif(isset($_GET["addbuilding"])){
   $box = json_decode(file_get_contents('php://input'), true);

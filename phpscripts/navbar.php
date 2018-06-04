@@ -52,15 +52,16 @@
         </div>
         <?php } ?>
       </div>
+      <div class="sectionfix">
+        <a data-ajax="false" href="info.php" class="item active"><span class="icon"><i class="fas fa-info-circle"></i></span><span class="name">Info</span></a>
+      </div>
       <div class="fixit">
         <?php if(isset($_SESSION["acces"]) and $_SESSION["acces"] == 1){ ?>
         <div class="sectionfix">
           <a data-ajax="false" href="admin.php" class="item active"><span class="icon"><i class="fa fa-user"></i></span><span class="name">Account management</span></a>
         </div>
         <?php } ?>
-        <div class="sectionfix">
-          <a data-ajax="false" href="info.php" class="item active"><span class="icon"><i class="fas fa-info-circle"></i></span><span class="name">Info</span></a>
-        </div>
+
       </div>
     </div>
   </div>
@@ -88,7 +89,7 @@
 
         <?php
         if(isset($_SESSION["userid"])){ ?>
-          <a href="logout.php" style="float: right; font-size:50px;"><i class="fas fa-sign-out-alt" style="    position: absolute;font-size: 32px; margin-top: -1em; margin-left: -0.5em;"></i></a>
+          <a data-ajax="false" href="logout.php" style="float: right; font-size:50px;"><i class="fas fa-sign-out-alt" style="    position: absolute;font-size: 32px; margin-top: -1em; margin-left: -0.5em;"></i></a>
         <?php } ?>
       </div>
       <div class="main">
@@ -107,13 +108,14 @@
         <?php if(isset($_SESSION["userid"])){ ?>
         <a data-ajax="false" href="middleman.php" class="item"><span class="icon"><i class="fas fa-building"></i></span>Book a room</a>
         <?php } ?>
+        <a data-ajax="false" href="info.php" class="item link2"><span class="icon"><i class="fas fa-info-circle"></i></span>Info</a>
+
       </div>
 
       <?php if(isset($_SESSION["acces"]) and $_SESSION["acces"] == 1){ ?>
       <div class="main">
         <div class="title"><i class="fa fa-cog"></i>  Admin</div>
         <a data-ajax="false" href="admin.php" class="item link1"><span class="icon"><i class="fa fa-user"></i></span>Account management</a>
-        <a data-ajax="false" href="info.php" class="item link2"><span class="icon"><i class="fas fa-info-circle"></i></span>Info</a>
 
       </div>
       <?php } ?>
